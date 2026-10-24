@@ -32,9 +32,12 @@ idea is fun. It contains:
 Fights are 1v1, top-down and real-time, inspired mechanically by Flash-era
 arena games like Nindou. No code or assets come from them.
 
-- **Move** in 8 directions. **Aim** with the mouse, right stick or touch.
-- **Dash** only in the four cardinal directions. Dash *through* a foe to daze it briefly.
-  - A dazed kith gets a protection window afterwards, so dazes never chain.
+- The arena is a **board of cells**, and creatures never walk: every move is a
+  **dash**. Click (or touch) and drag along a row or column, then release; the
+  longer the drag, the more cells you cross. Every dash costs stamina.
+- Dash *through* a foe to **ram** it: damage, a short daze and a freeze-frame
+  impact. A rammed kith is protected for a moment afterwards, so rams never chain.
+- **Aim** abilities with the mouse, right stick or touch.
 - **Stamina** comes back only while you hold **Focus**. Focusing roots you in place, so every recovery is a gamble.
 - **Basic attack** plus **four specials**, each with readable startup, active and recovery frames, and a telegraph.
 - **Guard** with a perfect-guard window. Guards can be broken, and projectiles clash.
@@ -47,23 +50,27 @@ combat frame data, progression, architecture and roadmap.
 
 | Action | Keyboard + mouse | Gamepad | Touch |
 |---|---|---|---|
-| Move | WASD | Left stick | Left thumb |
+| Dash (the only way to move in battle) | Drag along a row or column and release (longer drag = more cells), or hold W/A/S/D and release | Hold the D-pad / left stick and release | Drag on the arena and release |
+| Cancel a dash | Drag back to the start, or right click | Guard or Focus | Drag back to the start |
 | Aim | Mouse | Right stick | Drag an ability button |
-| Basic attack | Left click (press again to chain) | RT | Attack button |
+| Basic attack | Click (or J) | RT | Tap the arena, or the attack button |
 | Specials | Q / E / R / F | A / B / X / Y | Ability buttons (tap to auto-aim) |
-| Dash | Right click | RB | Dash button |
-| Guard | Hold Space | LB | Guard button |
-| Focus (regain stamina) | Hold Shift | LT | Focus button |
+| Guard | Hold Space or the right mouse button | LB | Guard button |
+| Focus (regain stamina) | Hold Shift | LT | Press and hold still on the arena, or the Focus button |
+| Walk (exploring) | WASD | Left stick | Left thumb |
 | Talk / interact | E or Enter | A | Tap |
 | Sneak (exploring) | Hold Shift | | |
 | Journal | J or Tab | | |
 | Pause / menu | Esc | Start | Pause button |
 | Show hitboxes | F3 | | |
 
+While you drag, the arena shows the lane of cells the dash will cross, where
+you'll land, what it costs, and **RAM!** over a foe you'll dash through.
+
 In Local Versus, player 2 uses:
 
-- arrow keys to move
-- `.` to attack and `/` to dash
+- arrow keys to charge dashes (hold, then release)
+- `.` or `/` to attack
 - `;` `'` `[` `]` for specials
 - Right Ctrl to guard and Right Shift to focus
 

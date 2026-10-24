@@ -32,7 +32,7 @@ func _ready() -> void:
 
 
 ## Plays a sound by name. Looks for `<name>.wav`, or variants `<name>_1..4.wav`.
-func sfx(sound: StringName, volume_db: float = 0.0, pitch_jitter: float = 0.04, min_interval_ms: int = 30) -> void:
+func sfx(sound: StringName, volume_db: float = 0.0, pitch_jitter: float = 0.04, min_interval_ms: int = 30, pitch: float = 1.0) -> void:
 	if sound == &"":
 		return
 	var now := Time.get_ticks_msec()
@@ -46,7 +46,7 @@ func sfx(sound: StringName, volume_db: float = 0.0, pitch_jitter: float = 0.04, 
 	_next = (_next + 1) % _pool.size()
 	p.stream = streams[randi() % streams.size()]
 	p.volume_db = volume_db
-	p.pitch_scale = 1.0 + randf_range(-pitch_jitter, pitch_jitter)
+	p.pitch_scale = pitch * (1.0 + randf_range(-pitch_jitter, pitch_jitter))
 	p.play()
 
 

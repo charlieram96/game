@@ -48,6 +48,14 @@ func set_sheet(s: SpriteSheet) -> void:
 		play(a, current_dir)
 
 
+## Draw with another sprite shader that takes the same sheet parameters
+## (e.g. the translucent ghost used for dash previews and afterimages).
+func use_shader(shader: Shader) -> void:
+	_mat.shader = shader
+	if sheet:
+		set_sheet(sheet)
+
+
 func load_manifest(manifest_path: String) -> void:
 	set_sheet(SpriteSheet.load_sheet(manifest_path))
 

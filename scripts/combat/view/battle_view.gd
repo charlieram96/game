@@ -20,8 +20,16 @@ var volume_views: Dictionary = {}  # volume id -> {"node": Node3D, "kind": Strin
 var telegraphs: Array = []  # [{node, fighter, start, ticks}]
 var trainer_sprites: Array[PixelSprite3D] = []
 var local_team := 0
+## Teams played on this device (both in local versus): their dashes are drawn
+## in team colours, everyone else's as a hazard.
+var friendly_teams: Array[int] = [0]
+var preview: DashPreview
+## Teams with a player on this device (empty in the AI-vs-AI demo): their
+## "blocked" and "out of stamina" feedback is shown.
+var local_input_teams: Array[int] = [0]
 var debug_draw: MeshInstance3D
 var _focus_loops: Dictionary = {}
+var _recent_popups: Array = []
 
 
 func build(p_sim: BattleSim, p_setup: BattleSetup) -> void:
@@ -39,6 +47,9 @@ func build(p_sim: BattleSim, p_setup: BattleSetup) -> void:
 	for f in sim.fighters:
 		_add_fighter_view(f)
 	_add_trainers()
+	preview = DashPreview.new()
+	add_child(preview)
+	preview.setup(self)
 	debug_draw = MeshInstance3D.new()
 	debug_draw.mesh = ImmediateMesh.new()
 	var dm := StandardMaterial3D.new()
@@ -66,6 +77,7 @@ func rebind(p_sim: BattleSim) -> void:
 	telegraphs.clear()
 	for f in sim.fighters:
 		_add_fighter_view(f)
+	preview.rebind()
 	for key in _focus_loops.keys():
 		Audio.loop_stop(key)
 	_focus_loops.clear()
@@ -99,11 +111,24 @@ func view_of(fid: int) -> FighterView:
 	return fighter_views.get(fid)
 
 
+func is_friendly(team: int) -> bool:
+	return team in friendly_teams
+
+
+## Screen position (0..1) of a world point, for screen-space impact effects.
+func screen_uv(p: Vector3) -> Vector2:
+	var vp := get_viewport().get_visible_rect().size
+	if camera == null or vp.x <= 0.0 or vp.y <= 0.0:
+		return Vector2(0.5, 0.5)
+	return camera.unproject_position(p) / vp
+
+
 # --- Per-frame -------------------------------------------------------------------------
 
 func render(alpha: float, delta: float) -> void:
 	for v in fighter_views.values():
 		(v as FighterView).update_view(alpha, delta)
+	preview.update_preview(delta)
 	_update_volume_views(alpha)
 	_update_telegraphs()
 	_update_focus_audio()
@@ -211,33 +236,47 @@ func _handle(e: BattleEvent) -> void:
 			arena.cheer(1.6)
 			Audio.sfx(&"crowd_cheer", -10.0)
 		BattleEvent.DASH_START:
-			var dash_sfx := &"dash_roll" if f and f.stats.dash.dash_type == DashProfile.DashType.ARMORED else &"dash_whoosh"
-			Audio.sfx(dash_sfx, -2.0)
-			Vfx.spawn(self, &"dust_puff", _pos3(e.pos))
+			# The coil: a little dust gathers under the creature.
+			Vfx.spawn(self, &"dust_puff", _pos3(e.pos), Vector2.RIGHT, Color(1, 1, 1, 0.8), 0.6)
+		BattleEvent.DASH_LAND:
+			_on_dash_land(f, e)
 		BattleEvent.DASH_THROUGH:
-			var target := _fv(e.target_id)
-			if bool(e.data.get("stunned", false)):
-				Audio.sfx(&"dash_through_hit")
-				Vfx.spawn(self, &"hit_spark", _pos3(e.pos), Vector2.RIGHT, Color(1.0, 0.95, 0.7))
-				if target:
-					target.flash(1.0)
-				popup(_pos3(e.pos, 1.3), "STUN!", Color(1.0, 0.9, 0.4), 1.15)
-				camera.add_trauma(0.25)
-			else:
-				popup(_pos3(e.pos, 1.3), "Protected", Color(0.75, 0.8, 0.9), 0.75)
+			_on_ram(f, e)
 		BattleEvent.DASH_REPELLED:
-			Audio.sfx(&"stone_guard_block" if sim.fighter_by_id(e.target_id) and sim.fighter_by_id(e.target_id).has_status(&"stoneguard") else &"guard_block")
+			var guard := sim.fighter_by_id(e.target_id)
+			Audio.sfx(&"stone_guard_block" if guard and guard.has_status(&"stoneguard") else &"guard_block")
 			Vfx.spawn(self, &"perfect_flash" if bool(e.data.get("perfect", false)) else &"hit_spark", _pos3(e.pos), Vector2.RIGHT, Color(0.7, 0.95, 1.0))
+			Vfx.spawn(self, &"shockwave", _pos3(e.pos, 0.02), Vector2.RIGHT, Color(0.7, 0.95, 1.0), 0.45)
 			popup(_pos3(e.pos, 1.3), "REPELLED!", Color(0.6, 0.9, 1.0), 1.1)
-			camera.add_trauma(0.2)
+			var rdir: Vector2 = e.data.get("dir", Vector2.ZERO)
+			if f:
+				_fv(f.id).impact(-rdir, 0.7)
+			camera.add_trauma(0.22)
+			_camera_kick(-rdir, 0.1)
 		BattleEvent.DASH_CLASH:
-			Audio.sfx(&"projectile_clash")
-			Vfx.spawn(self, &"hit_spark", _pos3(e.pos), Vector2.RIGHT, Color(1, 1, 1))
-			popup(_pos3(e.pos, 1.2), "CLASH!", Color(1, 1, 1), 1.0)
-			camera.add_trauma(0.2)
+			Audio.sfx(&"dash_clash" if Audio.has_sfx(&"dash_clash") else &"projectile_clash")
+			Vfx.spawn(self, &"hit_heavy", _pos3(e.pos), Vector2.RIGHT, Color(1, 1, 1))
+			Vfx.spawn(self, &"shockwave", _pos3(e.pos, 0.02), Vector2.RIGHT, Color(1, 1, 1), 0.6)
+			Vfx.burst(self, _pos3(e.pos, 0.5), Color(1.0, 0.95, 0.8), 18, 4.0, 0.06, 0.35, -6.0)
+			popup(_pos3(e.pos, 1.2), "CLASH!", Color(1, 1, 1), 1.1)
+			var cdir: Vector2 = e.data.get("dir", Vector2.RIGHT)
+			if f:
+				_fv(f.id).impact(-cdir, 0.8)
+			var other := _fv(e.target_id)
+			if other:
+				other.impact(cdir, 0.8)
+			camera.add_trauma(0.32)
+			_zoom_punch(0.04)
+			feedback.emit(&"impact", {"strength": 0.55, "screen": screen_uv(_pos3(e.pos, 0.5))})
+		BattleEvent.DASH_BLOCKED:
+			if f and is_friendly(f.team) and _is_local_input(f.team):
+				Audio.sfx(&"dash_blocked" if Audio.has_sfx(&"dash_blocked") else &"ui_error", -10.0, 0.0, 200)
+				popup(_pos3(f.pos, f.species.visual_height + 0.3), "Blocked", Color(1.0, 0.55, 0.45), 0.7)
 		BattleEvent.DASH_NO_STAMINA:
-			if f and f.team == local_team:
+			if f and is_friendly(f.team) and _is_local_input(f.team):
 				Audio.sfx(&"stamina_empty", -2.0, 0.0, 250)
+				popup(_pos3(f.pos, f.species.visual_height + 0.3), "Out of stamina", Color(1.0, 0.5, 0.42), 0.72)
+				_fv(f.id).flash(0.6, Color(1.0, 0.4, 0.35))
 				feedback.emit(&"no_stamina", {"team": f.team})
 		BattleEvent.ABILITY_START:
 			var sfx: StringName = e.data.get("sfx", &"")
@@ -351,6 +390,70 @@ func _on_ability_active(f: Fighter, e: BattleEvent) -> void:
 				_swipe_decal(f, m)
 		elif c is SelfStatusComponent:
 			Vfx.spawn(self, &"dust_puff", _pos3(f.pos))
+
+
+## Landing: dust where it touches down; heavy creatures thud.
+func _on_dash_land(f: Fighter, e: BattleEvent) -> void:
+	if f == null:
+		return
+	var heavy := f.stats.dash.dash_type == DashProfile.DashType.ARMORED
+	var dir: Vector2 = e.data.get("dir", Vector2.RIGHT)
+	Vfx.spawn(self, &"dust_puff", _pos3(e.pos), dir, Color(1, 1, 1, 0.85), 0.95 if heavy else 0.7)
+	if Audio.has_sfx(&"dash_land"):
+		Audio.sfx(&"dash_land", -5.0 if heavy else -9.0, 0.06, 40)
+	if heavy:
+		camera.add_trauma(0.08)
+		_camera_kick(dir, 0.05)
+
+
+## A ram (dash through a foe): the signature hit. Freeze frame (the sim's
+## hitstop), a slash along the lane, sparks, a shockwave, a camera punch and
+## an impact frame.
+func _on_ram(f: Fighter, e: BattleEvent) -> void:
+	var target := _fv(e.target_id)
+	var dir: Vector2 = e.data.get("dir", Vector2.RIGHT)
+	var at := _pos3(e.pos)
+	if not bool(e.data.get("stunned", false)):
+		Audio.sfx(&"guard_block", -8.0)
+		Vfx.spawn(self, &"hit_spark", at, dir, Color(0.75, 0.82, 0.95), 0.7)
+		popup(at + Vector3(0, 1.3, 0), "Protected", Color(0.75, 0.8, 0.9), 0.75)
+		return
+	if Audio.has_sfx(&"ram_impact"):
+		Audio.sfx(&"ram_impact", 0.0, 0.05)
+	else:
+		Audio.sfx(&"dash_through_hit")
+		Audio.sfx(&"hit_heavy", -4.0)
+	var gold := Color(1.0, 0.86, 0.45)
+	Vfx.spawn(self, &"hit_heavy", at, dir, Color(1.0, 0.97, 0.85), 1.15)
+	Vfx.spawn(self, &"flash_strike", at + Vector3(0, 0.1, 0), dir, Color(1.0, 0.95, 0.8), 1.25)
+	Vfx.spawn(self, &"shockwave", at + Vector3(0, 0.02, 0), Vector2.RIGHT, gold, 0.75)
+	Vfx.burst(self, at + Vector3(0, 0.55, 0), gold, 22, 5.0, 0.07, 0.4, -7.0)
+	if target:
+		target.impact(dir, 1.0)
+	if f:
+		_fv(f.id).flash(0.65, Color(1.0, 0.98, 0.9))
+	popup(at + Vector3(0, 1.55, 0), "RAM!", gold, 1.35)
+	camera.add_trauma(0.38)
+	_camera_kick(dir, 0.2)
+	_zoom_punch(0.06)
+	arena.cheer(1.0)
+	Audio.sfx(&"crowd_gasp", -12.0, 0.05, 400)
+	feedback.emit(&"impact", {"strength": 1.0, "screen": screen_uv(at + Vector3(0, 0.5, 0))})
+
+
+func _camera_kick(dir: Vector2, amount: float) -> void:
+	if camera.has_method(&"kick"):
+		camera.call(&"kick", dir, amount)
+
+
+func _zoom_punch(amount: float) -> void:
+	if camera.has_method(&"zoom_punch"):
+		camera.call(&"zoom_punch", amount)
+
+
+## True when a player on this device controls `team` (set by the scene).
+func _is_local_input(team: int) -> bool:
+	return team in local_input_teams
 
 
 ## A brief translucent arc showing exactly where a basic attack can hit.
@@ -475,6 +578,11 @@ func _on_hit(e: BattleEvent) -> void:
 	var eff := float(e.data.get("eff", 1.0))
 	var heavy := bool(e.data.get("heavy", false))
 	var p3 := _pos3(e.pos, 0.0)
+	if bool(e.data.get("ram", false)):
+		# The ram's own impact (DASH_THROUGH) sells it; just the number here.
+		popup(p3 + Vector3(0, 1.1, 0), str(int(ceil(dmg))), Color(1.0, 0.92, 0.7), 1.25)
+		feedback.emit(&"hit", {"target": e.target_id, "damage": dmg, "heavy": true})
+		return
 	var vfx_id: StringName = e.data.get("vfx", &"hit_spark")
 	if vfx_id == &"cinder_arc" or vfx_id == &"heat_ring" or vfx_id == &"shockwave" or vfx_id == &"fault_spike":
 		vfx_id = &"hit_heavy" if heavy else &"hit_spark"
@@ -519,8 +627,18 @@ func _on_ko(f: Fighter, e: BattleEvent) -> void:
 		Audio.sfx(&"ko_fall")
 
 
-## Floating combat text (damage numbers, STUN!, PERFECT!, ...).
+## Floating combat text (damage numbers, RAM!, PERFECT!, ...). Texts that
+## would land on top of a recent one stack above it instead.
 func popup(pos: Vector3, text: String, color: Color, size_mult: float = 1.0) -> void:
+	var now := Time.get_ticks_msec()
+	_recent_popups = _recent_popups.filter(func(r: Dictionary) -> bool: return now - int(r["t"]) < 450)
+	var lift := 0.0
+	for r in _recent_popups:
+		var rp: Vector3 = r["pos"]
+		if absf(rp.x - pos.x) < 1.1 and absf(rp.z - pos.z) < 0.9 and absf(rp.y + float(r["lift"]) - (pos.y + lift)) < 0.34:
+			lift = rp.y + float(r["lift"]) - pos.y + 0.36
+	_recent_popups.append({"pos": pos, "lift": lift, "t": now})
+	pos.y += lift
 	var l := Label3D.new()
 	l.text = text
 	l.font = FONT

@@ -60,7 +60,8 @@ func test_touch_controls_fit_and_are_large_enough() -> void:
 				var cj := rects[j].get_center()
 				var min_gap := rects[i].size.x * 0.5 + rects[j].size.x * 0.5
 				assert_ge(ci.distance_to(cj), min_gap - 0.5, "buttons %d/%d don't overlap at %s" % [i, j, size])
-		var joy := Rect2(Vector2(150, size.y - 150) - Vector2(90, 90), Vector2(180, 180))
+		# The left thumb drags dashes on the arena: keep its corner free.
+		var thumb := Rect2(Vector2(150, size.y - 150) - Vector2(90, 90), Vector2(180, 180))
 		for r in rects:
-			assert_false(joy.intersects(r), "joystick zone clear of buttons at %s" % size)
+			assert_false(thumb.intersects(r), "left-thumb drag zone clear of buttons at %s" % size)
 		layer.queue_free()

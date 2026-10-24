@@ -43,68 +43,110 @@ Presentation is in `scripts/combat/view/`.
 6. Volumes age and expire.
 7. Match timer.
 
-## Movement
+## The board and movement
 
-* **8-way:** movement input is an 8-direction index, so a diagonal is
-  exactly unit length and never faster than a straight line.
-* Velocity accelerates toward the target at the species' acceleration and
-  slows at its deceleration. Reversing (angle > 90 deg) uses the turn
-  acceleration, so Stoneback is visibly slow to turn around.
-* Walls slide. Velocity pushed into a wall is removed.
-* **Bodies are solid:** whoever walks into the other takes the correction,
-  so you can't shove an opponent around, with one exception. A heavier
-  creature yields its target up to 40% of the push, scaled by mass ratio
-  (Stoneback on Emberlyn: 24%). If neither creature is moving in, the overlap
-  is split by mass. Dashing (pass-through) creatures skip body collision.
+* The arena floor is a **board of 1-unit cells** (Ringstones is 14 x 9,
+  the training yard 13 x 9). Spawns and standing stones sit on cell
+  centres, and every creature fits inside one cell.
+* **Creatures never walk.** Every move is a **dash**: straight along a row
+  or column (east, south, west or north), a whole number of cells, landing
+  on a cell centre. Knockback is the only other way a creature moves.
+* **Bodies are solid.** Knockback slides along walls and stops at stones; a
+  heavier creature knocked into a lighter one nudges it (scaled by mass),
+  never the other way round.
 
 ## Dash
 
-* **Strictly 4-way (N/S/E/W).** Diagonal dashes are impossible.
-  * The dominant input axis wins.
-  * An exact tie (keyboard diagonals, within 5%) goes to the axis whose key
-    was pressed most recently ("newest key wins").
-  * With no axis hint, ties go horizontal.
-  * With no input, the dash uses the last cardinal facing.
-* Phases are DASH_START (startup, interruptible) -> DASH_ACTIVE (constant
-  speed, committed) -> DASH_RECOVERY. Stamina is paid at the start. Not
-  enough stamina means no dash: the stamina bar pulses and an "empty" sound
-  plays.
-* Walls end a dash early. A safety cap stops any dash after twice its
-  nominal duration.
-* Types: **FAST** (Emberlyn) is long and quick, and projectiles pass through
-  it for the first N active ticks. **ARMORED** (Stoneback) is short, can't be
-  flinched and halves damage while active. Per-species numbers are in kith.md.
+**Input.** Drag from anywhere on the screen (mouse or finger) along a row or
+column and release. The drag direction picks the lane (with a little
+hysteresis, so it doesn't flicker between two lanes near a diagonal) and the
+drag length picks the cells, up to the species' maximum (Emberlyn 5,
+Stoneback 3). Dragging back to the start cancels; so does right-click. A
+quick tap is a basic attack toward the tapped spot, and pressing and holding
+still Focuses. On keys, D-pad or stick, hold a direction to charge (one
+cell, then one more every 7 ticks) and release to dash, so a tap is a
+one-cell step. Settings can flip the drag to "slingshot" (pull back to
+launch the other way).
 
-### Dash-through
+**Plan.** `DashSystem.plan()` works the dash out from the board before it
+starts, and it is pure: the aiming preview draws exactly the plan the
+simulation executes on release.
 
-A dash that sweeps through an opponent's body dazes it, if all of these
-hold:
+* The dash starts from the creature's cell (the nearest open neighbour if
+  knockback left it in a stone's cell).
+* **Walls and stones cut it short**; the cost only counts cells travelled.
+  A dash with nowhere to go doesn't start and costs nothing ("Blocked").
+* **A foe on the landing cell** carries the dash one cell past it (that
+  extra cell is free), or, if the cell beyond is closed, the dash stops on
+  the cell before the foe.
+* **Cost** = base + per cell (Emberlyn 6 + 5/cell, Stoneback 9 + 8/cell),
+  paid when the dash starts. Not enough stamina: no dash, the gauges flash
+  and an "empty" sound plays.
+* **Slows** (Slow, Stone Guard) shorten the maximum and stretch the travel
+  time; Emberlyn's Quickfoot speeds the travel while stamina is low.
+* Requests are validated: the simulation clamps the cells and ignores bad
+  directions (InputCommand carries direction and cells; nothing else).
 
-* the dash is active;
-* the victim isn't already protected (dash-through immunity, Steadfast, a
-  stun-immune status) and isn't mid-dash itself;
-* the attacker hasn't already passed this opponent during the same dash.
+**Phases.**
 
-Results:
+| Phase | What happens |
+| --- | --- |
+| DASH_START (windup) | 3 ticks (Emberlyn) / 5 (Stoneback). The creature gathers onto its cell centre (smoothstep). Readable as a crouch and lean. |
+| DASH_ACTIVE (travel) | `travel_ticks = base + per_cell x cells` (Emberlyn 4 + 1.7/cell, Stoneback 6 + 2.6/cell), eased out: `1 - (1 - u)^ease` (explosive start, braking finish). Committed: only a clash, a repel or a KO ends it early. |
+| DASH_RECOVERY | 7 / 10 ticks. Another dash may **chain** after 3 / 5 ticks (`chain_after_ticks`). |
+
+Traits: **Phase Step** (Emberlyn) is long and quick, and projectiles pass
+through it during the windup and the first 5 travel ticks. **Rolling
+Fortress** (Stoneback) is short, can't be flinched and halves damage while
+it rolls. Per-species numbers are in kith.md.
+
+### Ram (dash through a foe)
+
+Passing through an opponent's body **rams** it, if the victim isn't
+protected (ram immunity, Steadfast, a stun-immune status) and isn't mid-dash
+itself, and the dasher hasn't already passed it this dash:
 
 | Rule | Value |
 | --- | --- |
-| Stun | 15 ticks (250 ms) x the dasher's passive (Stoneback 1.2 -> 18 ticks), then stun diminishing returns |
-| Victim protection | 60 ticks (1 s) of dash-through immunity ("Protected" pops if hit again) |
-| Landing | The dash continues at least max(1 cell, combined radii + 0.1) past the victim's center along the dash axis (or the full dash if longer) |
-| Safe landing | If the end point overlaps a body or wall, candidates are tried around the opponent (0, +-25, +-50 ... 180 deg from the travel direction). A candidate must be free, must not overlap a body and must be reachable in a straight line. Nothing teleports through walls. |
-| No guaranteed follow-up | The dasher's recovery is extended so the victim always regains control at least **3 ticks before** the dasher can act. The stun buys position, not a free combo. |
+| Damage | `ram_power x attack / defense x damage scale` (Emberlyn 6.5, Stoneback 9), no element |
+| Daze | 15 ticks (250 ms) x the dasher's passive (Stoneback 1.2 -> 18 ticks), through the stun rules (diminishing returns) |
+| Impact | both creatures freeze for 5 ticks (shared hitstop) |
+| Protection | 60 ticks (1 s) of ram immunity ("Protected" pops if hit again) |
+| No guaranteed follow-up | The dasher's recovery (and its chain window) is extended so the victim always acts at least **3 ticks before** the dasher can. A ram buys position, not a free combo. |
+| Landing | Always on a free cell centre: if the foe moved onto the landing cell, the nearest free centre (further along, back, then to the sides). Nothing teleports through walls. |
 
 **Counters:**
 
 * **Guard repel:** dashing into a guarding opponent's front arc stops the
-  dash and stuns the dasher for 21 ticks (350 ms; 30 ticks on a perfect
-  guard) and pushes it back 0.5. A non-perfect guard pays 10 stamina.
+  dash, dazes the dasher for 21 ticks (30 on a perfect guard) and bounces
+  it back toward the cell it came from. A non-perfect guard pays 10 stamina.
   Dashing in from behind still works.
-* **Stone Guard** repels dash-throughs from any side.
-* **Head-on clash:** two dashes meeting head-on both stop and each bounces
-  back 0.6, and nobody is stunned.
-* The victim's 1 s immunity prevents dash-through chains.
+* **Stone Guard** repels rams from any side.
+* **Head-on clash:** two dashes meeting head-on both stop, freeze for 4
+  ticks and bounce back to the cells behind them; nobody is dazed.
+
+### Dash presentation
+
+* **Aim preview** (`DashPreview`, `DashLane`): while dragging, the lane of
+  tiles the dash will cross pops in cell by cell from the creature, with
+  runway-light chevrons; the landing cell gets a reticle (brackets snap onto
+  it, a charge ring fills for held keys), a translucent ghost of the
+  creature and the stamina cost. A foe the dash will ram turns its tile
+  gold with **RAM!** over it ("Protected" when it can't be rammed); a wall
+  or stone shows a red stop bar and the out-of-reach cells as dashed
+  outlines; red means not enough stamina, grey means the release will
+  cancel. The stamina bar and the ring under the creature blink the stretch
+  the dash would spend. A tick sound rises in pitch with the cells.
+* **Committed dashes:** every creature's lane flashes on the windup (an
+  opponent's in red with hazard stripes) and the tiles flare and fade as it
+  passes over them.
+* **Motion:** coil (crouch, lean back, glow) on the windup; a stretch along
+  the motion, a hop for light creatures, distance-spaced translucent
+  afterimages and a ground smear on the travel; a springy squash on landing
+  with dust (and a thud for heavy creatures).
+* **Ram impact:** the shared freeze, a slash along the lane, sparks and a
+  gold shockwave, the victim squashed and knocked, a camera kick along the
+  dash plus a zoom punch, and a brief impact frame (radial colour split).
 
 ## Stamina and Focus
 
@@ -231,8 +273,8 @@ Damage still applies while stun-immune; only the flinch is removed.
 | Status | Default duration | Effect | Source |
 | --- | --- | --- | --- |
 | Burn | 180 ticks (set to 120 by Cinder Arc, 150 by Heat Ring) | 1.0 power every 30 ticks, using the attacker's ATK over the target's DEF, with no element. No hitstun, but it interrupts Focus. | Cinder Arc, Heat Ring |
-| Slowed | 90 ticks | Move speed x0.65 | Ground Pound |
-| Stone Guard (buff) | 80 ticks | Damage taken x0.45, knockback x0.3, flinch immune, repels dash-through, move x0.6 | Stone Guard |
+| Slowed | 90 ticks | Dashes x0.65 (fewer cells, slower travel) | Ground Pound |
+| Stone Guard (buff) | 80 ticks | Damage taken x0.45, knockback x0.3, flinch immune, repels rams, dashes x0.6 | Stone Guard |
 
 Reapplying a status refreshes its duration to the longer one. Statuses
 are cleared when a creature switches out (none persist across switches in
@@ -258,20 +300,22 @@ battle-ready kith in v0; the other elements exist in data for future kith.
 
 ## State machine
 
-There are 15 explicit states (`scripts/combat/states/fighter_sm.gd`). The
+There are 15 explicit states (`scripts/combat/states/fighter_sm.gd`;
+MOVING is kept for save/replay compatibility but nothing enters it, since
+nothing walks). The
 sim never assigns a state directly: `BattleSim.set_state()` checks the
 transition table and refuses illegal moves (counted and logged in debug
 builds).
 
 | From | Allowed destinations |
 | --- | --- |
-| IDLE, MOVING | each other, FOCUS_ENTER, DASH_START, ATTACK_START, GUARDING, STUNNED, SWITCHING, KNOCKED_OUT |
+| IDLE | FOCUS_ENTER, DASH_START, ATTACK_START, GUARDING, STUNNED, SWITCHING, KNOCKED_OUT |
 | FOCUS_ENTER | FOCUSING (held), FOCUS_EXIT (released), IDLE (interrupted), STUNNED, KNOCKED_OUT |
 | FOCUSING | FOCUS_EXIT, IDLE (interrupted), STUNNED, KNOCKED_OUT |
 | FOCUS_EXIT | IDLE, STUNNED, KNOCKED_OUT |
 | DASH_START | DASH_ACTIVE, STUNNED, KNOCKED_OUT |
-| DASH_ACTIVE | DASH_RECOVERY, STUNNED, KNOCKED_OUT (committed: only walls, a repel or a clash end it early) |
-| DASH_RECOVERY | IDLE, STUNNED, KNOCKED_OUT |
+| DASH_ACTIVE | DASH_RECOVERY, STUNNED, KNOCKED_OUT (committed: only a repel, a clash or a KO end it early) |
+| DASH_RECOVERY | IDLE, DASH_START (chain window only), STUNNED, KNOCKED_OUT |
 | ATTACK_START | ATTACK_ACTIVE, STUNNED, KNOCKED_OUT |
 | ATTACK_ACTIVE | ATTACK_RECOVERY, STUNNED, KNOCKED_OUT |
 | ATTACK_RECOVERY | IDLE, DASH_START (dash-cancel window only), ATTACK_START (string chain only), STUNNED, KNOCKED_OUT |
@@ -280,17 +324,18 @@ builds).
 | SWITCHING | IDLE, STUNNED (a switch can be interrupted), KNOCKED_OUT |
 | KNOCKED_OUT | none (receives no input) |
 
-New commands are only accepted in IDLE and MOVING. Hitstop is a freeze
+New commands are only accepted in IDLE (plus the dash chain in
+DASH_RECOVERY and the cancels in ATTACK_RECOVERY). Hitstop is a freeze
 counter, not a state.
 
 ## Input
 
 * **InputCommand** is one tick of intent and the only thing a future client
-  would send. It holds an 8-way move index, an aim direction quantized to
-  1/4096 of a turn, an aim distance, held and pressed button masks, and
-  which movement axis was pressed last (for the dash tie-break). It encodes
-  to 16 bytes. Presses between ticks are latched, so a 1-frame tap is never
-  lost.
+  would send. It holds a dash request (direction 0-3 and cells, or none),
+  an aim direction quantized to 1/4096 of a turn, an aim distance, and held
+  and pressed button masks. It encodes to 17 bytes. The simulation clamps
+  the cells and ignores invalid requests. Presses between ticks are latched,
+  so a 1-frame tap is never lost.
 * **Input buffer:** presses are remembered for **8 ticks (133 ms)**, and each
   is consumed once. An input made a little early (in recovery, hitstop or
   stun) comes out on the first legal tick.
@@ -344,9 +389,12 @@ manages stamina with Focus. Each tick it:
    danger).
 4. Continues basic strings.
 5. Picks an offensive option by utility every decision interval.
-6. Holds its preferred range band: Agile 3.2-5.6 u (kite), Heavy 0-1.8 u
-   (brawl), anything else 1.5-4.0 u. It backs off to 5-7.5 u when it needs
-   to Focus.
+6. Holds its preferred range band with planned dashes (it never walks
+   either): Agile 3.2-5.6 u (kite), Heavy 0-1.8 u (brawl), anything else
+   1.5-4.0 u. It backs off to 5-7.5 u when it needs to Focus. Candidate
+   landing cells are scored by the band, lanes the foe could ram, edges and
+   corners, and the stamina the dash costs; it dodges with short dashes and
+   takes rams when a plan shows one.
 
 | Preset | Reaction | Decision | Aim error | Lead | Dodge | Guard | Dash-through | Aggression | Focus below | Mistakes | Combo skill | Patience |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -364,16 +412,19 @@ duel uses Story, or Easy after a loss with "go a little easier".
 `TrainingDirector` shows one tip per step and completes each step from real
 simulation events, so it teaches exactly the rules the game enforces:
 
-1. **Move:** walk onto each glowing mark (8 directions).
-2. **Dash:** dash twice (N/S/E/W only).
-3. **Strike:** land 3 Tail Swipe hits (chain the string).
+1. **Dash to move:** land on three glowing marks (cell centres a straight
+   dash apart: north 3, east 4, south 5 from the start).
+2. **Stamina:** dash 3 more times, watching the cost on the lane and the
+   ring.
+3. **Strike:** land 3 Tail Swipe hits (click or tap toward the totem).
 4. **Specials:** use all four (Q, E, R, F).
-5. **Focus:** hold Shift until stamina is at least 95%.
-6. **Dash-through:** daze the totem by dashing through it.
+5. **Focus:** hold Shift (or press and hold still) until stamina is at
+   least 95%.
+6. **Ram:** daze the totem by dashing through it.
 7. **Guard:** the totem shoots acorns. Block 2 (a perfect guard counts
    double).
 
-Outside the Focus and dash-through steps the director tops up stamina so
+Outside the Focus and ram steps the director tops up stamina so
 nothing stalls. When the last step completes, Hesper says "You're ready for
 the Ringstones."
 
@@ -384,12 +435,13 @@ Everything below is cosmetic and never changes the simulation.
 * **Interpolated rendering** between 60 Hz ticks for smooth motion at any
   frame rate.
 * **Hitstop** is real sim freeze frames (above). During hitstop the sprite
-  jitters 1 px horizontally.
+  jitters (harder when stunned).
 * **Hit flash and squash:** a white flash on the hit sprite (decays quickly)
-  plus a squash (0.86 x 1.1) that springs back. Dash start, active and
-  recovery and attack active frames have their own squash-and-stretch poses.
-* **Dash afterimages:** team-tinted ghost sprites every ~35 ms while
-  dashing.
+  plus a squash (0.86 x 1.1) that springs back on a damped spring, so it
+  overshoots slightly. The dash has its own poses (see Dash presentation).
+* **Camera feel:** besides shake, `kick` nudges the view along a direction
+  and `zoom_punch` briefly tightens it (rams, clashes, heavy landings);
+  all scale with the Screen Shake setting, as does the impact frame.
 * **Camera trauma:** shake is a pure translation (never rotation), with
   amplitude trauma^2 and fast decay, scaled by the Screen Shake setting.
   Trauma per event:
@@ -398,20 +450,21 @@ Everything below is cosmetic and never changes the simulation.
   | --- | --- |
   | Light hit | 0.12 |
   | Heavy hit | 0.32 |
-  | Dash-through stun | 0.25 |
-  | Repel | 0.2 |
-  | Clash | 0.2 |
+  | Ram | 0.38 |
+  | Repel | 0.22 |
+  | Clash | 0.32 |
   | Block | 0.1 |
   | Heat Ring burst | 0.3 |
   | Guard break | 0.45 |
   | Ground Pound | 0.45 |
   | KO | 0.8 |
 
-* **Popups** (pixel-font Label3D that pops in and floats up):
+* **Popups** (pixel-font Label3D that pops in and floats up; a popup that
+  would land on a recent one stacks above it):
   * damage numbers, warm for effective hits and cool grey for resisted;
   * "Effective!" and "Resisted";
-  * STUN!, Protected, REPELLED!, CLASH!, EVADE, BLOCK, PERFECT!, GUARD
-    BREAK!, STEADFAST, ARMOR;
+  * RAM!, Protected, REPELLED!, CLASH!, Blocked, Out of stamina, EVADE,
+    BLOCK, PERFECT!, GUARD BREAK!, STEADFAST, ARMOR;
   * status names and burn tick numbers;
   * "Focus broken!".
 * **Telegraphs:** ground decals with a dedicated shader for Ground Pound's
@@ -450,21 +503,24 @@ Everything below is cosmetic and never changes the simulation.
 
 | Action | Keyboard and mouse | Gamepad | Touch (landscape) |
 | --- | --- | --- | --- |
-| Move (8-way) | WASD / arrows | Left stick / D-pad | Floating left joystick |
+| Dash (move) | Drag with the left button along a row or column, release | Hold a D-pad / stick direction to charge, release | Drag on the arena, release |
+| Cancel a dash | Drag back to the start, or right click | Guard or Focus | Drag back to the start |
 | Aim | Mouse | Right stick | Drag an ability button, or auto-aim on tap |
-| Basic attack | Left click / J | RT | Attack button (hold to repeat) |
-| Dash | Right click / K | RB | Dash button (uses the joystick direction, 4-way rule) |
-| Focus (hold) | Shift | LT | Focus button (hold) |
-| Guard (hold) | Space | LB | Guard button (hold) |
+| Basic attack | Click (quick tap) / J | RT | Tap the arena or the attack button |
+| Focus (hold) | Shift | LT | Press and hold still on the arena, or the Focus button |
+| Guard (hold) | Space / right mouse button | LB | Guard button (hold) |
 | Specials 1-4 | Q / E / R / F | A / B / X / Y | Four buttons, 64 px minimum |
 | Switch 1-3 | 1 / 2 / 3 | - | Planned |
 | Pause | Esc / P | Start | Menu button |
 
-In Local Versus the keyboard is split. Player 1 keeps WASD, the mouse, left
-Shift (Focus), Space (guard), Q/E/R/F and J/K; arrows and the right-hand
-modifiers do nothing for player 1. Player 2 uses arrows to move, `.` attack,
-`/` dash, right Shift Focus, right Ctrl guard, and `;` `'` `[` `]` for
-specials. Gamepads are assigned per player (`InputSetup.assign_versus_pads`):
+Keys also dash: hold W/A/S/D (or the arrows) to charge one cell, then one
+more every 7 ticks, and release.
+
+In Local Versus the keyboard is split. Player 1 keeps the mouse, WASD
+(charge dashes), left Shift (Focus), Space (guard), Q/E/R/F and J; arrows
+and the right-hand modifiers do nothing for player 1. Player 2 charges
+dashes with the arrows and uses `.` or `/` to attack, right Shift Focus,
+right Ctrl guard, and `;` `'` `[` `]` for specials. Gamepads are assigned per player (`InputSetup.assign_versus_pads`):
 with one pad connected it plays player 2, with two the first is player 1's.
 The touch controls can be forced on in Settings (or with F6) to test them with
 a mouse.

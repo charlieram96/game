@@ -5,6 +5,9 @@ extends Node
 ## tutorial teaches exactly the rules the game enforces.
 
 const SM := FighterSM.State
+## The "dash to move" marks: cell centres a few straight dashes apart in the
+## training yard (N 3, E 4, S 5 from the start).
+const MOVE_MARKS: Array[Vector2] = [Vector2(-4, -3), Vector2(0, -3), Vector2(0, 2)]
 
 var scene: Node  # battle_scene.gd
 var sim: BattleSim
@@ -17,13 +20,13 @@ var _advance_at := -1
 var _done := false
 
 const STEPS := [
-	{"id": "move", "tip": "[b]Move[/b] — walk onto each glowing mark with [b]WASD[/b] (or the left stick / left thumb). You can move in 8 directions."},
-	{"id": "dash", "tip": "[b]Dash[/b] — press [b]Right Click[/b]. Dashes only ever go straight [b]N, S, E or W[/b]: hold a direction to choose one. Dash twice."},
-	{"id": "basic", "tip": "[b]Strike[/b] — hit the totem with [b]Left Click[/b] three times. Keep clicking to chain a three-hit string."},
-	{"id": "specials", "tip": "[b]Specials[/b] — use all four: [b]Q[/b] Ember Bolt, [b]E[/b] Cinder Arc, [b]R[/b] Flash Strike, [b]F[/b] Heat Ring. Aim with the mouse."},
-	{"id": "focus", "tip": "[b]Focus[/b] — stamina never refills on its own. Hold [b]Shift[/b] to Focus until the ring under you is full. You can't move or attack while focusing!"},
-	{"id": "dash_through", "tip": "[b]Dash-through[/b] — dash straight [b]through[/b] the totem to daze it. A dazed foe is open, but it can't be dazed again for a moment."},
-	{"id": "guard", "tip": "[b]Guard[/b] — the totem throws acorns now. Hold [b]Space[/b] to guard your front. Guard right before impact for a [b]Perfect Guard[/b]. Block 2 acorns."},
+	{"id": "move", "tip": "[b]Dash to move[/b] — creatures don't walk. [b]Drag[/b] from anywhere along a row or column and let go: the longer the drag, the more cells you cross. Land on all three glowing marks. [color=#6b5134](Keys: hold a direction, release to dash.)[/color]"},
+	{"id": "dash", "tip": "[b]Stamina[/b] — every dash costs stamina, more for longer ones: the lane shows the cost and the ring under you drains. Dash 3 more times. Drag back to where you started to cancel."},
+	{"id": "basic", "tip": "[b]Strike[/b] — dash next to the totem, then [b]click[/b] (or tap) toward it three times to land a three-hit string."},
+	{"id": "specials", "tip": "[b]Specials[/b] — use all four: [b]Q[/b] Ember Bolt, [b]E[/b] Cinder Arc, [b]R[/b] Flash Strike, [b]F[/b] Heat Ring. They aim at the pointer."},
+	{"id": "focus", "tip": "[b]Focus[/b] — stamina never refills on its own. Hold [b]Shift[/b] (or press and hold still on the arena) until the ring under you is full. You're open while you focus!"},
+	{"id": "dash_through", "tip": "[b]Ram[/b] — dash straight [b]through[/b] the totem: its tile turns gold and [b]RAM![/b] shows when you'll hit. A rammed foe is dazed, then protected for a moment."},
+	{"id": "guard", "tip": "[b]Guard[/b] — the totem throws acorns now. Hold [b]Space[/b] or [b]Right Click[/b] to guard your front. Guard right before impact for a [b]Perfect Guard[/b]. Block 2 acorns."},
 ]
 
 
@@ -52,7 +55,7 @@ func _next_step() -> void:
 	totem_ai.mode = TrainingAI.Mode.IDLE
 	match s["id"]:
 		"move":
-			for p in [Vector2(-4.5, -2.6), Vector2(-1.0, 2.4), Vector2(1.6, -2.4)]:
+			for p in MOVE_MARKS:
 				_add_marker(p)
 		"focus":
 			sim.script_set_stamina(_player(), minf(_player().stamina, 12.0))
@@ -93,7 +96,7 @@ func on_tick(events: Array[BattleEvent]) -> void:
 		"move":
 			for m in _markers.duplicate():
 				var p: Vector2 = m.get_meta("pos")
-				if me.pos.distance_to(p) < 0.75:
+				if me.state != SM.DASH_ACTIVE and me.state != SM.DASH_START and me.pos.distance_to(p) < 0.35:
 					Audio.sfx(&"item_pickup")
 					m.queue_free()
 					_markers.erase(m)
@@ -103,7 +106,7 @@ func on_tick(events: Array[BattleEvent]) -> void:
 			for e in events:
 				if e.type == BattleEvent.DASH_START and e.fighter_id == me.id:
 					_counter += 1
-			if _counter >= 2:
+			if _counter >= 3:
 				_complete()
 		"basic":
 			for e in events:

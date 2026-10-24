@@ -24,7 +24,14 @@ var _slowmo_phase := 0
 var _ended := false
 var _end_timer := -1.0
 var _shot_path := ""
+var _shot_tick := 260
 var _demo := false
+## Dev: --aim=<dir 0-3>:<cells> holds a dash aim for screenshots.
+var _dev_aim := Vector2i(-1, 0)
+## Dev: --seq=<dir>:<from tick>:<frames> saves a run of frames for review.
+var _seq_dir := ""
+var _seq_from := 0
+var _seq_left := 0
 
 
 func _ready() -> void:
@@ -77,18 +84,33 @@ func _parse_dev_args() -> void:
 			_shot_path = arg.substr(7)
 		if arg == "--demo":
 			_demo = true
+		if arg.begins_with("--shot-tick="):
+			_shot_tick = int(arg.substr(12))
+		if arg.begins_with("--seq="):
+			var sp := arg.substr(6).split(":")
+			if sp.size() == 3:
+				_seq_dir = sp[0]
+				_seq_from = int(sp[1])
+				_seq_left = int(sp[2])
+		if arg.begins_with("--aim="):
+			var parts := arg.substr(6).split(":")
+			if parts.size() == 2:
+				_dev_aim = Vector2i(int(parts[0]), int(parts[1]))
 
 
 func _setup_inputs() -> void:
 	player_input = LocalInputSource.new()
 	player_input.camera = view.camera
 	player_input.touch = touch
+	view.local_input_teams.clear()
 	if _demo:
 		transport.set_input_source(0, CombatAI.new(AIProfile.preset(&"hard"), 77))
 	elif String(setup.ai[0]) != "":
 		transport.set_input_source(0, CombatAI.new(AIProfile.preset(setup.ai[0]), 17))
 	else:
 		transport.set_input_source(0, player_input)
+		view.local_input_teams.append(0)
+		view.preview.add_source(player_input, 0)
 	match setup.mode:
 		BattleSetup.Mode.VERSUS:
 			player_input.prefix = InputSetup.P1_PREFIX
@@ -96,6 +118,9 @@ func _setup_inputs() -> void:
 			p2_input.prefix = InputSetup.P2_PREFIX
 			p2_input.allow_mouse = false
 			transport.set_input_source(1, p2_input)
+			view.friendly_teams = [0, 1]
+			view.local_input_teams.append(1)
+			view.preview.add_source(p2_input, 1)
 			InputSetup.assign_versus_pads()
 			if not Input.joy_connection_changed.is_connected(_on_joy_changed):
 				Input.joy_connection_changed.connect(_on_joy_changed)
@@ -153,13 +178,25 @@ func _process(delta: float) -> void:
 	var alpha := Engine.get_physics_interpolation_fraction()
 	if _slowmo > 0:
 		alpha = 1.0
+	if _dev_aim.x >= 0 and player_input:
+		player_input.aim_state.active = true
+		player_input.aim_state.dir_index = _dev_aim.x
+		player_input.aim_state.cells = _dev_aim.y
+		player_input.aim_state.device = &"drag"
 	view.render(alpha, delta)
+	for team in view.local_input_teams:
+		hud.set_dash_cost_preview(team, view.preview.cost_preview(team))
 	hud.refresh(delta)
 	if _end_timer >= 0.0:
 		_end_timer -= delta
 		if _end_timer < 0.0:
 			_show_results()
-	if _shot_path != "" and sim.tick > 260:
+	if _seq_dir != "" and sim.tick >= _seq_from and _seq_left > 0:
+		get_viewport().get_texture().get_image().save_png("%s/f%05d.png" % [_seq_dir, Engine.get_process_frames()])
+		_seq_left -= 1
+		if _seq_left == 0:
+			get_tree().quit()
+	if _shot_path != "" and sim.tick > _shot_tick:
 		var img := get_viewport().get_texture().get_image()
 		img.save_png(_shot_path)
 		_shot_path = ""
@@ -196,6 +233,9 @@ func _handle_flow_events(events: Array[BattleEvent]) -> void:
 
 
 func _on_feedback(kind: StringName, data: Dictionary) -> void:
+	if kind == &"impact":
+		post.impact(float(data.get("strength", 0.5)), data.get("screen", Vector2(0.5, 0.5)))
+		return
 	hud.on_feedback(kind, data)
 
 

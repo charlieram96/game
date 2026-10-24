@@ -184,6 +184,15 @@ func refresh(delta: float) -> void:
 		(s as AbilitySlot).update_from(me)
 
 
+## Show on `team`'s stamina bar what the dash being aimed would spend
+## (`preview` = (cost, affordable); cost 0 = nothing aimed).
+func set_dash_cost_preview(team: int, preview: Vector2) -> void:
+	if team >= 0 and team < panels.size():
+		var p := panels[team] as FighterPanel
+		p.cost_preview = preview.x
+		p.cost_ok = preview.y > 0.5
+
+
 func show_message(text: String, color: Color = UiTheme.GOLD, duration: float = 0.9, size: int = 76) -> void:
 	center_label.text = text
 	center_label.add_theme_color_override("font_color", color)
@@ -246,6 +255,8 @@ class FighterPanel:
 	var sim_ref: BattleSim
 	var ghost_hp := 1.0
 	var shown_hp := 1.0
+	var cost_preview := 0.0
+	var cost_ok := true
 	var _stamina_pulse := 0.0
 	var _name_label: Label
 	var _level_label: Label
@@ -361,6 +372,15 @@ class FighterPanel:
 		if _stamina_pulse > 0.0:
 			scol = scol.lerp(Color(1, 0.2, 0.2), _stamina_pulse)
 		_bar(st_rect, ratio, ratio, scol, mirrored)
+		if cost_preview > 0.0:
+			# The aimed dash: the stretch it would spend blinks; if stamina is
+			# short, the missing stretch blinks red.
+			var maxs := maxf(1.0, fighter.max_stamina())
+			var blink := 0.5 + 0.5 * sin(Time.get_ticks_msec() * 0.016)
+			if cost_ok:
+				_span(st_rect, maxf(0.0, fighter.stamina - cost_preview) / maxs, fighter.stamina / maxs, Color(1.0, 0.97, 0.86, 0.45 + 0.4 * blink), mirrored)
+			else:
+				_span(st_rect, fighter.stamina / maxs, minf(1.0, cost_preview / maxs), Color(1.0, 0.3, 0.25, 0.35 + 0.4 * blink), mirrored)
 		if cost > 0.0 and cost < 999.0:
 			var segs := int(floor(fighter.max_stamina() / cost))
 			for i in range(1, segs + 1):
@@ -368,6 +388,14 @@ class FighterPanel:
 				if mirrored:
 					fx = st_rect.end.x - st_rect.size.x * (cost * i / fighter.max_stamina())
 				draw_rect(Rect2(fx - 1, st_rect.position.y, 2, st_rect.size.y), UiTheme.INK)
+
+	func _span(r: Rect2, from: float, to: float, col: Color, from_right: bool) -> void:
+		var a := clampf(from, 0.0, 1.0) * r.size.x
+		var b := clampf(to, 0.0, 1.0) * r.size.x
+		if b <= a:
+			return
+		var x := r.position.x + a if not from_right else r.end.x - b
+		draw_rect(Rect2(x, r.position.y, b - a, r.size.y), col)
 
 	func _bar(r: Rect2, fill: float, ghost: float, col: Color, from_right: bool) -> void:
 		draw_rect(r.grow(3), UiTheme.INK)

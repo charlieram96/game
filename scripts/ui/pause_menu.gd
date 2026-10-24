@@ -6,19 +6,20 @@ signal resumed
 signal quit_requested
 
 const CONTROLS_TEXT := """[b]Battle[/b]
-WASD — move (8 directions)      Mouse — aim
-Left click — basic attack (press again to chain)
-Right click — dash (always N/S/E/W; dash THROUGH a foe to daze it)
+Drag (left button) along a row or column, release — dash: longer drag, more cells
+Drag back to the start or right click — cancel the dash      Click — basic attack
+Hold W/A/S/D, release — dash with keys (hold longer to go farther)
+Dash THROUGH a foe to ram it (damage + daze)      Every dash costs stamina
 Shift (hold) — Focus: recover stamina (you're rooted while focusing)
-Q / E / R / F — special abilities      Space (hold) — guard (tap just before a hit for a Perfect Guard)
+Q / E / R / F — specials (aim with the mouse)      Space or right button (hold) — guard
 F3 — show hitboxes and logical cells
 
 [b]Exploring[/b]
 WASD — walk      Shift — sneak (wild kith notice running)
 E / Enter — talk, inspect      J / Tab — field journal
 
-[b]Gamepad[/b]  L-stick move · R-stick aim · RT attack · RB dash · LT focus · LB guard · A/B/X/Y specials
-[b]Touch[/b]  Left thumb moves · tap an ability to auto-aim, or drag it to aim and release"""
+[b]Gamepad[/b]  hold D-pad/L-stick + release to dash · R-stick aim · RT attack · LT focus · LB guard · A/B/X/Y specials
+[b]Touch[/b]  drag on the arena to dash · tap to strike · press and hold still to Focus · tap an ability to auto-aim, or drag it to aim"""
 
 var panel: PanelContainer
 var body: VBoxContainer

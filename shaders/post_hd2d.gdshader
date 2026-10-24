@@ -1,5 +1,6 @@
 // HD-2D screen pass: tilt-shift depth of field (blur above and below a
-// focus band), warm color grading, gentle bloom lift and vignette.
+// focus band), warm color grading, gentle bloom lift and vignette, plus a
+// brief radial colour split for big impacts.
 shader_type canvas_item;
 
 uniform sampler2D screen : hint_screen_texture, filter_linear_mipmap;
@@ -14,12 +15,21 @@ uniform vec3 shadow_tint = vec3(0.92, 0.95, 1.08);
 uniform vec3 highlight_tint = vec3(1.06, 1.0, 0.92);
 uniform float fade = 0.0;
 uniform vec4 fade_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+// Impact frame: 0..1 strength of a radial RGB split around impact_center.
+uniform float impact = 0.0;
+uniform vec2 impact_center = vec2(0.5, 0.5);
 
 void fragment() {
 	float d = abs(SCREEN_UV.y - focus_center) - focus_width;
 	float amount = clamp(d / max(0.001, 1.0 - focus_width - focus_center * 0.5), 0.0, 1.0);
 	amount = amount * amount * blur_amount;
 	vec3 col = textureLod(screen, SCREEN_UV, amount * max_lod).rgb;
+	if (impact > 0.001) {
+		vec2 dc = SCREEN_UV - impact_center;
+		vec2 off = dc * impact * 0.022;
+		col.r = textureLod(screen, SCREEN_UV + off, amount * max_lod).r;
+		col.b = textureLod(screen, SCREEN_UV - off, amount * max_lod).b;
+	}
 	float l = dot(col, vec3(0.299, 0.587, 0.114));
 	col = mix(vec3(l), col, saturation);
 	col = (col - 0.5) * contrast + 0.5;

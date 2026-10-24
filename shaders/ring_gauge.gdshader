@@ -1,5 +1,7 @@
 // Ground ring under a creature: team colour + an angular stamina gauge,
-// a facing notch (aim direction) and dash-cost tick marks.
+// a facing notch (aim direction) and dash-cost tick marks. While a dash is
+// aimed, the stretch it would spend blinks (or, if stamina is short, the
+// missing stretch blinks red).
 shader_type spatial;
 render_mode unshaded, cull_disabled, depth_draw_never, blend_mix;
 
@@ -12,6 +14,10 @@ uniform float ticks = 0.0;  // number of dash-cost segments
 uniform float opacity = 0.8;
 uniform float pulse = 0.0;
 uniform float pixel_grid = 48.0;
+// Gauge stretch to highlight (0..1, same scale as fill); spend_to < 0 = none.
+uniform float spend_from = 0.0;
+uniform float spend_to = -1.0;
+uniform vec4 spend_color : source_color = vec4(1.0, 0.98, 0.88, 1.0);
 
 void fragment() {
 	vec2 p = (floor((UV - 0.5) * pixel_grid) + 0.5) / pixel_grid * 2.0;
@@ -36,6 +42,10 @@ void fragment() {
 		float a = opacity * (0.75 + 0.25 * pulse);
 		if (gauge > 0.5) {
 			col = t <= fill ? gauge_color.rgb : empty_color.rgb;
+			if (spend_to >= 0.0 && t > spend_from && t <= spend_to) {
+				float blink = 0.5 + 0.5 * sin(TIME * 14.0);
+				col = mix(col, spend_color.rgb, 0.45 + 0.5 * blink);
+			}
 			if (ticks > 0.5) {
 				float seg = fract(t * ticks);
 				if (seg < 0.04 || seg > 0.96) {

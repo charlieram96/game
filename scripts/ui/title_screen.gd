@@ -268,7 +268,7 @@ func _versus_menu() -> void:
 	menu.add_child(UiTheme.label("Local Versus", 26, UiTheme.GOLD, true))
 	var p1 := _option("Player 1", ["Emberlyn", "Stoneback"], 0)
 	var p2 := _option("Player 2", ["Emberlyn", "Stoneback"], 1)
-	var note := UiTheme.label("P1: WASD + mouse, L-Shift focus, Space guard.\nP2: arrows, . attack, / dash, ; ' [ ] specials,\nR-Ctrl guard, R-Shift focus. One gamepad plays P2;\nwith two, pad 1 is P1 and pad 2 is P2.", 13, Color(0.85, 0.8, 0.7))
+	var note := UiTheme.label("P1: drag the mouse (or hold WASD) to dash, click to strike,\nL-Shift focus, Space guard. P2: hold arrows to dash,\n. or / attack, ; ' [ ] specials, R-Ctrl guard, R-Shift focus.\nOne gamepad plays P2; with two, pad 1 is P1, pad 2 is P2.", 13, Color(0.85, 0.8, 0.7))
 	menu.add_child(note)
 	_button("Fight!", func() -> void:
 		Game.start_battle(Game.versus_setup(SPECIES[p1.selected], SPECIES[p2.selected]), Game.TITLE_SCENE)).grab_focus()

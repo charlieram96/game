@@ -2,12 +2,22 @@ class_name FighterView
 extends Node3D
 ## Visual representation of one Fighter. Reads simulation state every frame
 ## (interpolated between ticks) and turns it into animation and feedback:
-## phase-driven attack frames, hit flash + hitstop jitter, squash/stretch,
-## dash afterimages, focus aura, directional guard arc, stun stars,
-## status tints, a ground ring that doubles as the stamina gauge.
+## phase-driven attack frames, hit flash + hitstop jitter, spring
+## squash/stretch, the dash (crouch and lean on the windup, stretch, hop,
+## afterimages and a ground smear on the travel, a springy landing), focus
+## aura, directional guard arc, stun stars, status tints, and a ground ring
+## that doubles as the stamina gauge (and previews what an aimed dash costs).
 
 const SM := FighterSM.State
 const RING_SHADER := preload("res://shaders/ring_gauge.gdshader")
+const SMEAR_SHADER := preload("res://shaders/dash_smear.gdshader")
+const GHOST_SHADER := preload("res://shaders/pixel_ghost.gdshader")
+## Squash spring: stiffness and damping (a little overshoot reads as alive).
+const SPRING_K := 560.0
+const SPRING_C := 27.0
+## Afterimage spacing along a dash, in world units.
+const GHOST_SPACING := 0.34
+const SMEAR_FADE := 0.24
 
 var fighter: Fighter
 var sprite: PixelSprite3D
@@ -21,10 +31,19 @@ var _ring_mat: ShaderMaterial
 var _dir := "e"
 var _flash := 0.0
 var _last_state := -1
-var _ghost_clock := 0.0
 var _burn_fx: CPUParticles3D = null
 var _squash := Vector2.ONE
+var _squash_vel := Vector2.ZERO
 var _ko_time := 0.0
+var _knock := Vector3.ZERO
+var _ghost_travel := 0.0
+var _last_pos := Vector3.ZERO
+var _smear: MeshInstance3D
+var _smear_mat: ShaderMaterial
+var _smear_fade := -1.0
+var _cost_preview := 0.0
+var _cost_ok := true
+var _cost_frame := -10
 
 
 func setup(f: Fighter, color: Color) -> void:
@@ -60,6 +79,19 @@ func setup(f: Fighter, color: Color) -> void:
 	_dir = "e" if f.facing.x >= 0.0 else "w"
 	sprite.play("idle", _dir)
 	position = Vector3(f.pos.x, 0, f.pos.y)
+	_last_pos = position
+	_smear = MeshInstance3D.new()
+	_smear.mesh = PlaneMesh.new()
+	(_smear.mesh as PlaneMesh).size = Vector2.ONE
+	_smear_mat = ShaderMaterial.new()
+	_smear_mat.shader = SMEAR_SHADER
+	_smear_mat.set_shader_parameter("color", color.lightened(0.25))
+	_smear_mat.set_shader_parameter("seed", float(f.id))
+	_smear.material_override = _smear_mat
+	_smear.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	_smear.top_level = true
+	_smear.visible = false
+	add_child(_smear)
 
 
 func flash(amount: float = 1.0, color: Color = Color.WHITE) -> void:
@@ -69,6 +101,21 @@ func flash(amount: float = 1.0, color: Color = Color.WHITE) -> void:
 
 func squash(x: float, y: float) -> void:
 	_squash = Vector2(x, y)
+	_squash_vel = Vector2.ZERO
+
+
+## Rammed or struck hard: squashed, knocked a little along `dir`, flashed.
+func impact(dir: Vector2, strength: float = 1.0) -> void:
+	squash(lerpf(1.0, 0.72, strength), lerpf(1.0, 1.24, strength))
+	_knock = Vector3(dir.x, 0.0, dir.y) * 0.16 * strength
+	flash(1.0)
+
+
+## What the dash being aimed will spend (drawn on the ring for one frame).
+func set_cost_preview(cost: float, affordable: bool) -> void:
+	_cost_preview = cost
+	_cost_ok = affordable
+	_cost_frame = Engine.get_process_frames()
 
 
 func update_view(alpha: float, delta: float) -> void:
@@ -78,23 +125,40 @@ func update_view(alpha: float, delta: float) -> void:
 	position = Vector3(p.x, 0, p.y)
 	_update_direction()
 	_update_animation(delta)
+	_update_dash(delta)
 	_update_effects(delta)
-	# Flash decay, squash recovery, hitstop jitter.
+	# Flash decay, squash spring, knock recovery, hitstop jitter.
 	_flash = maxf(0.0, _flash - delta * 7.0)
 	sprite.set_param("flash", _flash)
-	_squash = _squash.lerp(Vector2.ONE, minf(1.0, delta * 12.0))
+	var dt := minf(delta, 1.0 / 30.0)
+	_squash_vel += ((Vector2.ONE - _squash) * SPRING_K - _squash_vel * SPRING_C) * dt
+	_squash += _squash_vel * dt
 	sprite.scale = Vector3(_squash.x, _squash.y, 1.0)
+	_knock = _knock.lerp(Vector3.ZERO, minf(1.0, delta * 14.0))
 	if f.hitstop > 0 and f.state != SM.ATTACK_ACTIVE:
-		sprite.set_param("jitter", Vector2(randf_range(-1.0, 1.0), 0.0).round())
+		var amp := 2.0 if f.state == SM.STUNNED else 1.0
+		sprite.set_param("jitter", (Vector2(randf_range(-1.0, 1.0), randf_range(-0.4, 0.4)) * amp).round())
 	else:
 		sprite.set_param("jitter", Vector2.ZERO)
 	sprite.speed_scale = 0.0 if f.hitstop > 0 else 1.0
-	# Ground ring = stamina gauge + facing notch.
+	# Ground ring = stamina gauge + facing notch + the aimed dash's cost.
 	_ring_mat.set_shader_parameter("fill", f.stamina_ratio())
 	_ring_mat.set_shader_parameter("facing_angle", atan2(f.facing.y, f.facing.x))
 	var low := f.stamina < f.stats.dash.min_cost()
 	_ring_mat.set_shader_parameter("gauge_color", Color(1.0, 0.45, 0.35) if low else team_color.lightened(0.35))
 	_ring_mat.set_shader_parameter("pulse", 1.0 if f.state == SM.FOCUSING else 0.0)
+	var previewing := Engine.get_process_frames() - _cost_frame <= 1 and _cost_preview > 0.0
+	var max_st := maxf(1.0, f.max_stamina())
+	if previewing and _cost_ok:
+		_ring_mat.set_shader_parameter("spend_from", maxf(0.0, f.stamina - _cost_preview) / max_st)
+		_ring_mat.set_shader_parameter("spend_to", f.stamina / max_st)
+		_ring_mat.set_shader_parameter("spend_color", Color(1.0, 0.98, 0.88))
+	elif previewing:
+		_ring_mat.set_shader_parameter("spend_from", f.stamina / max_st)
+		_ring_mat.set_shader_parameter("spend_to", minf(1.0, _cost_preview / max_st))
+		_ring_mat.set_shader_parameter("spend_color", Color(1.0, 0.3, 0.25))
+	else:
+		_ring_mat.set_shader_parameter("spend_to", -1.0)
 	ring.visible = not f.is_ko()
 
 
@@ -110,7 +174,7 @@ func _update_direction() -> void:
 		_dir = "s" if fv.y > 0.0 else "n"
 
 
-func _update_animation(delta: float) -> void:
+func _update_animation(_delta: float) -> void:
 	var f := fighter
 	var st := f.state
 	if st != _last_state:
@@ -123,18 +187,20 @@ func _update_animation(delta: float) -> void:
 		SM.IDLE:
 			sprite.play("idle", _dir)
 		SM.DASH_START:
-			sprite.show_frame("dash", _dir, 0)
+			if sprite.has_animation("dash_windup"):
+				sprite.play("dash_windup", _dir)
+			else:
+				sprite.show_frame("dash", _dir, 0)
 		SM.DASH_ACTIVE:
 			if sprite.has_animation("roll"):
 				sprite.play("roll", "s")
 			else:
 				sprite.play("dash", _dir)
-			_ghost_clock -= delta
-			if _ghost_clock <= 0.0:
-				_ghost_clock = 0.035
-				_spawn_ghost()
 		SM.DASH_RECOVERY:
-			sprite.play("idle", _dir)
+			if f.state_tick < 8 and sprite.has_animation("dash_land"):
+				sprite.play("dash_land", _dir)
+			else:
+				sprite.play("idle", _dir)
 		SM.ATTACK_START, SM.ATTACK_ACTIVE, SM.ATTACK_RECOVERY:
 			var anim := String(f.current_ability.anim) if f.current_ability else "cast"
 			if not sprite.has_animation(anim):
@@ -162,18 +228,107 @@ func _update_animation(delta: float) -> void:
 
 
 func _on_state_enter(st: int) -> void:
+	var prev := _last_state
 	match st:
 		SM.DASH_START:
-			squash(1.18, 0.82)
+			squash(1.1, 0.9)
+			if Audio.has_sfx(&"dash_windup"):
+				Audio.sfx(&"dash_windup", -9.0, 0.06, 40)
 		SM.DASH_ACTIVE:
-			squash(1.25, 0.8)
+			_launch()
 		SM.DASH_RECOVERY:
-			squash(0.88, 1.12)
+			if prev == SM.DASH_ACTIVE:
+				var heavy := fighter.stats.dash.dash_type == DashProfile.DashType.ARMORED
+				squash(1.28 if heavy else 1.24, 0.78 if heavy else 0.82)
+			else:
+				squash(0.9, 1.1)
 		SM.ATTACK_ACTIVE:
 			squash(1.12, 0.92)
 		SM.KNOCKED_OUT:
 			_ko_time = 0.0
 			flash(1.0)
+
+
+## Travel begins: dust kicked back, an echo left behind, the whoosh.
+func _launch() -> void:
+	var f := fighter
+	var heavy := f.stats.dash.dash_type == DashProfile.DashType.ARMORED
+	var home := Vector3(f.dash_home.x, 0.0, f.dash_home.y)
+	var world := get_parent()
+	Vfx.spawn(world, &"dust_puff", home, -f.dash_dir, Color(1, 1, 1, 0.9), 1.15 if heavy else 0.9)
+	Vfx.spawn(world, &"shockwave", home + Vector3(0, 0.02, 0), Vector2.RIGHT, team_color.lightened(0.4), 0.32 if heavy else 0.26)
+	_spawn_ghost(home, 0.6, 0.3)
+	_ghost_travel = 0.0
+	_last_pos = home
+	var launch := &"dash_launch" if Audio.has_sfx(&"dash_launch") else (&"dash_roll" if heavy else &"dash_whoosh")
+	if heavy and Audio.has_sfx(&"dash_roll"):
+		launch = &"dash_roll"
+	var cells := maxi(1, f.dash_cells)
+	Audio.sfx(launch, -3.0 if heavy else -4.0, 0.05, 30, 1.08 - 0.03 * float(cells))
+	if heavy:
+		squash(0.86, 1.12)
+	elif f.dash_dir.y != 0.0:
+		squash(0.8, 1.26)
+	else:
+		squash(1.32, 0.76)
+
+
+## Dash poses that hold over a state (the spring handles the rest).
+func _update_dash(delta: float) -> void:
+	var f := fighter
+	var heavy := f.stats.dash.dash_type == DashProfile.DashType.ARMORED
+	var offset := Vector3.ZERO
+	if f.state == SM.DASH_START:
+		# Coil: crouch and lean away from the lane, glowing a little.
+		var u := clampf(float(f.state_tick) / maxf(1.0, float(f.state_duration)), 0.0, 1.0)
+		_squash = _squash.lerp(Vector2(1.0 + 0.2 * u, 1.0 - 0.2 * u), 0.45)
+		_squash_vel = Vector2.ZERO
+		offset = -Vector3(f.dash_dir.x, 0.0, f.dash_dir.y) * 0.09 * u
+		_flash = maxf(_flash, 0.35 * u)
+		sprite.set_param("flash_color", team_color.lightened(0.55))
+	elif f.state == SM.DASH_ACTIVE:
+		var u := clampf(float(f.dash_t) / maxf(1.0, float(f.dash_travel_ticks)), 0.0, 1.0)
+		# Stretched along the motion while it's fast, a hop for light creatures.
+		var stretch := Vector2(0.82, 1.24) if f.dash_dir.y != 0.0 else Vector2(1.3, 0.8)
+		if heavy:
+			stretch = Vector2(1.12, 0.9)
+		var k := pow(1.0 - u, 1.4)
+		_squash = Vector2.ONE.lerp(stretch, k)
+		_squash_vel = Vector2.ZERO
+		if not heavy:
+			offset.y = sin(u * PI) * 0.12
+		# Afterimages by distance travelled; the smear follows the creature.
+		_ghost_travel += position.distance_to(_last_pos)
+		while _ghost_travel >= GHOST_SPACING:
+			_ghost_travel -= GHOST_SPACING
+			_spawn_ghost(position, 0.42, 0.2)
+		_layout_smear(Vector3(f.dash_home.x, 0.0, f.dash_home.y), position, 1.0)
+		_smear_fade = 0.0
+	elif _smear_fade >= 0.0:
+		_smear_fade += delta
+		var k2 := clampf(_smear_fade / SMEAR_FADE, 0.0, 1.0)
+		_smear_mat.set_shader_parameter("opacity", 1.0 - k2)
+		if k2 >= 1.0:
+			_smear.visible = false
+			_smear_fade = -1.0
+	_last_pos = position
+	sprite.position = offset + _knock
+
+
+func _layout_smear(from: Vector3, to: Vector3, opacity: float) -> void:
+	var d := to - from
+	var length := Vector2(d.x, d.z).length()
+	if length < 0.08:
+		_smear.visible = false
+		return
+	var dir := Vector2(d.x, d.z) / length
+	_smear.visible = true
+	_smear.global_position = (from + to) * 0.5 + Vector3(0, 0.03, 0)
+	_smear.global_rotation = Vector3(0.0, -atan2(dir.y, dir.x), 0.0)
+	var width := fighter.radius() * 1.7
+	_smear.scale = Vector3(length + fighter.radius(), 1.0, width)
+	_smear_mat.set_shader_parameter("opacity", opacity)
+	_smear_mat.set_shader_parameter("length_units", length)
 
 
 func _update_effects(delta: float) -> void:
@@ -239,21 +394,23 @@ func _loop_fx(key: StringName, vfx_id: StringName, active: bool, offset: Vector3
 		_loops.erase(key)
 
 
-func _spawn_ghost() -> void:
+## A translucent afterimage of the current frame at `at`, fading from
+## `start_opacity` over `life` seconds.
+func _spawn_ghost(at: Vector3, start_opacity: float, life: float) -> void:
 	if sprite.sheet == null or not sprite.sheet.valid:
 		return
 	var g := PixelSprite3D.new()
 	g.set_sheet(sprite.sheet)
+	g.use_shader(GHOST_SHADER)
 	g.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	get_parent().add_child(g)
-	g.global_position = global_position
+	g.global_position = at + sprite.position
+	g.scale = sprite.scale
 	g.set_param("frame", sprite.get_param("frame"))
 	g.set_param("flip_h", sprite.get_param("flip_h"))
 	g.playing = false
-	g.set_param("modulate", team_color.lightened(0.2))
-	g.set_param("flash", 0.55)
-	g.set_param("flash_color", team_color.lightened(0.4))
-	g.set_param("dissolve", 0.35)
+	g.set_param("tint", team_color)
+	g.set_param("opacity", start_opacity)
 	var tw := g.create_tween()
-	tw.tween_method(func(v: float) -> void: g.set_param("dissolve", v), 0.35, 1.0, 0.22)
+	tw.tween_method(func(v: float) -> void: g.set_param("opacity", v), start_opacity, 0.0, life).set_ease(Tween.EASE_IN)
 	tw.tween_callback(g.queue_free)
