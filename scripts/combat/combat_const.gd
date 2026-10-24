@@ -27,7 +27,9 @@ const DASH_THROUGH_LANDING_CELLS: float = 1.0
 ## advantage, never a guaranteed follow-up.
 const DASH_THROUGH_FOLLOWUP_MARGIN_TICKS: int = 3
 const DASH_REPEL_STUN_TICKS: int = 21
-const DASH_CLASH_KNOCKBACK: float = 0.6
+## Shared freeze frame when a ram connects, and when dashes clash or bounce.
+const RAM_HITSTOP_TICKS: int = 5
+const DASH_CLASH_HITSTOP_TICKS: int = 4
 
 # --- Stun / combo protection ------------------------------------------------
 const WAKEUP_GRACE_TICKS: int = 6

@@ -77,7 +77,7 @@ func test_hard_ai_dodges_some_projectiles() -> void:
 		var target := H.place(sim, 1, Vector2(3, 0), Vector2.LEFT)
 		var ai := CombatAI.new(AIProfile.preset(&"hard"), 100 + i)
 		var hp := target.hp
-		sim.step({0: H.cmd(-1, InputCommand.ABILITY_1, InputCommand.ABILITY_1, Vector2.RIGHT, 8.0), 1: ai.get_command(sim, 1)})
+		sim.step({0: H.cmd(InputCommand.ABILITY_1, InputCommand.ABILITY_1, Vector2.RIGHT, 8.0), 1: ai.get_command(sim, 1)})
 		for t in 80:
 			sim.step({1: ai.get_command(sim, 1)})
 		if target.hp >= hp - 0.01:

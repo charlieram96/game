@@ -35,8 +35,6 @@ enum AimMode {
 
 @export_group("Rules")
 @export var can_aim_during_startup: bool = true
-## Fraction of walk speed allowed while the ability runs (0 = rooted).
-@export var move_speed_mult: float = 0.0
 @export var armor_during_startup: bool = false
 @export var armor_during_active: bool = false
 ## Recovery tick from which a dash may cancel the recovery (-1 = never).

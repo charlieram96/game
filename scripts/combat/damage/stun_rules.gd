@@ -32,7 +32,6 @@ static func apply(sim: BattleSim, f: Fighter, base_ticks: int, kind: StringName,
 		f.steadfast_pending = true
 	var was_focusing := FighterSM.is_focusing(f.state)
 	AbilitySystem.interrupt(sim, f)
-	f.dash_remaining = 0.0
 	f.vel = Vector2.ZERO
 	f.stun_kind = kind
 	sim.set_state(f, SM.STUNNED, ticks)

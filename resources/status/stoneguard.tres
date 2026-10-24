@@ -6,7 +6,7 @@
 script = ExtResource("1_7qk4u")
 id = &"stoneguard"
 display_name = "Stone Guard"
-description = "Takes 55% less damage, can't be flinched, and repels dashes. Moves slowly."
+description = "Takes 55% less damage, can't be flinched, and repels dashes. Dashes are short and slow."
 icon_path = "res://assets/ui/icons/status_armor.png"
 default_duration_ticks = 80
 is_debuff = false

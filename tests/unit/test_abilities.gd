@@ -11,10 +11,10 @@ const SM := FighterSM.State
 func _cast(sim: BattleSim, slot: int, aim_dir: Vector2, aim_dist: float, ticks: int = 90) -> Array[BattleEvent]:
 	var bit: int = InputCommand.ATTACK if slot < 0 else InputCommand.ABILITY_BITS[slot]
 	var events: Array[BattleEvent] = []
-	sim.step({0: H.cmd(-1, bit, bit, aim_dir, aim_dist)})
+	sim.step({0: H.cmd(bit, bit, aim_dir, aim_dist)})
 	events.append_array(sim.events)
 	for i in ticks:
-		sim.step({0: H.cmd(-1, 0, 0, aim_dir, aim_dist)})
+		sim.step({0: H.cmd(0, 0, aim_dir, aim_dist)})
 		events.append_array(sim.events)
 	return events
 
@@ -107,7 +107,7 @@ func test_heat_ring_only_hits_after_delay() -> void:
 func test_heat_ring_target_point_clamped_to_range() -> void:
 	var sim := _ember_vs(Vector2(12, 0))
 	var f := sim.active_fighter(0)
-	sim.step({0: H.cmd(-1, InputCommand.ABILITY_4, InputCommand.ABILITY_4, Vector2.RIGHT, 20.0)})
+	sim.step({0: H.cmd(InputCommand.ABILITY_4, InputCommand.ABILITY_4, Vector2.RIGHT, 20.0)})
 	assert_near(f.ability_point.distance_to(f.pos), 7.0, 0.01, "clamped to max range")
 
 
@@ -119,10 +119,10 @@ func test_boulder_toss_hits_and_beats_ember_bolt() -> void:
 	H.place(duel, 0, Vector2(-4, 0), Vector2.RIGHT)
 	H.place(duel, 1, Vector2(4, 0), Vector2.LEFT)
 	var events: Array[BattleEvent] = []
-	duel.step({0: H.cmd(-1, InputCommand.ABILITY_1, InputCommand.ABILITY_1, Vector2.RIGHT, 8.0)})
+	duel.step({0: H.cmd(InputCommand.ABILITY_1, InputCommand.ABILITY_1, Vector2.RIGHT, 8.0)})
 	events.append_array(duel.events)
 	H.run(duel, 6, H.idle())
-	duel.step({1: H.cmd(-1, InputCommand.ABILITY_1, InputCommand.ABILITY_1, Vector2.LEFT, 8.0)})
+	duel.step({1: H.cmd(InputCommand.ABILITY_1, InputCommand.ABILITY_1, Vector2.LEFT, 8.0)})
 	events.append_array(duel.events)
 	events.append_array(H.run(duel, 90, H.idle(), H.idle()))
 	assert_eq(H.events_of(events, BattleEvent.PROJECTILE_CLASH).size(), 1, "projectiles clashed")
@@ -152,11 +152,11 @@ func test_ground_pound_has_startup_armor() -> void:
 	var sim := H.make_sim(H.STONEBACK, H.EMBERLYN)
 	var s := H.place(sim, 0, Vector2(0, 0), Vector2.RIGHT)
 	H.place(sim, 1, Vector2(1.4, 0), Vector2.LEFT)
-	sim.step({0: H.cmd(-1, InputCommand.ABILITY_2, InputCommand.ABILITY_2, Vector2.RIGHT, 1.0)})
+	sim.step({0: H.cmd(InputCommand.ABILITY_2, InputCommand.ABILITY_2, Vector2.RIGHT, 1.0)})
 	H.run(sim, 2, H.idle())
 	# Emberlyn swipes during the windup: Stoneback takes damage but keeps going.
 	var events: Array[BattleEvent] = []
-	sim.step({1: H.cmd(-1, InputCommand.ATTACK, InputCommand.ATTACK, Vector2.LEFT, 1.4)})
+	sim.step({1: H.cmd(InputCommand.ATTACK, InputCommand.ATTACK, Vector2.LEFT, 1.4)})
 	events.append_array(sim.events)
 	for i in 30:
 		sim.step({})
@@ -173,7 +173,7 @@ func test_stone_guard_reduces_damage_and_repels_dash() -> void:
 	var plain_damage := hp0 - target.hp
 	var guarded := _ember_vs(Vector2(6, 0))
 	var s := guarded.active_fighter(1)
-	guarded.step({1: H.cmd(-1, InputCommand.ABILITY_3, InputCommand.ABILITY_3, Vector2.LEFT, 1.0)})
+	guarded.step({1: H.cmd(InputCommand.ABILITY_3, InputCommand.ABILITY_3, Vector2.LEFT, 1.0)})
 	H.run(guarded, 8, H.idle())
 	assert_true(s.has_status(&"stoneguard"), "stone guard active")
 	var hp1 := s.hp
@@ -182,9 +182,9 @@ func test_stone_guard_reduces_damage_and_repels_dash() -> void:
 	assert_lt(reduced_damage, plain_damage * 0.5, "much less damage")
 	# Dash into Stone Guard bounces off.
 	var dash_sim := _ember_vs(Vector2(2.0, 0))
-	dash_sim.step({1: H.cmd(-1, InputCommand.ABILITY_3, InputCommand.ABILITY_3, Vector2.LEFT, 1.0)})
+	dash_sim.step({1: H.cmd(InputCommand.ABILITY_3, InputCommand.ABILITY_3, Vector2.LEFT, 1.0)})
 	H.run(dash_sim, 8, H.idle())
-	var ev := H.tap(dash_sim, 0, InputCommand.DASH, 0)
+	var ev := H.dash(dash_sim, 0, H.E, 3)
 	ev.append_array(H.run(dash_sim, 15, H.idle()))
 	assert_eq(H.events_of(ev, BattleEvent.DASH_REPELLED).size(), 1, "dash repelled")
 
@@ -206,7 +206,7 @@ func test_basic_attack_string_chains() -> void:
 	var sim := _ember_vs(Vector2(1.2, 0))
 	var events: Array[BattleEvent] = []
 	for i in 70:
-		sim.step({0: H.cmd(-1, InputCommand.ATTACK, InputCommand.ATTACK if i % 4 == 0 else 0, Vector2.RIGHT, 1.2)})
+		sim.step({0: H.cmd(InputCommand.ATTACK, InputCommand.ATTACK if i % 4 == 0 else 0, Vector2.RIGHT, 1.2)})
 		events.append_array(sim.events)
 	var ids: Array = []
 	for e in H.events_of(events, BattleEvent.ABILITY_START):
@@ -229,7 +229,7 @@ func test_fast_dash_evades_projectiles() -> void:
 	var sim := H.make_sim(H.STONEBACK, H.EMBERLYN)
 	H.place(sim, 0, Vector2(-3, 0), Vector2.RIGHT)
 	var e := H.place(sim, 1, Vector2(1.0, 0), Vector2.LEFT)
-	sim.step({0: H.cmd(-1, InputCommand.ABILITY_1, InputCommand.ABILITY_1, Vector2.RIGHT, 4.0)})
+	sim.step({0: H.cmd(InputCommand.ABILITY_1, InputCommand.ABILITY_1, Vector2.RIGHT, 4.0)})
 	var events: Array[BattleEvent] = []
 	# Wait until the boulder is close, then phase-step through it (dash west).
 	for i in 40:
@@ -238,7 +238,7 @@ func test_fast_dash_evades_projectiles() -> void:
 			if v.is_projectile() and v.pos.distance_to(e.pos) < 1.4:
 				close = true
 		if close and e.state == SM.IDLE:
-			sim.step({1: H.cmd(4, InputCommand.DASH, InputCommand.DASH)})
+			sim.step({1: H.dash_cmd(H.W, 2)})
 		else:
 			sim.step({})
 		events.append_array(sim.events)

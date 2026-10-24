@@ -12,7 +12,7 @@ func test_knockout_ends_battle_with_winner() -> void:
 	var s := H.place(sim, 1, Vector2(1.2, 0))
 	s.hp = 1.0
 	var events: Array[BattleEvent] = []
-	sim.step({0: H.cmd(-1, InputCommand.ATTACK, InputCommand.ATTACK, Vector2.RIGHT, 1.2)})
+	sim.step({0: H.cmd(InputCommand.ATTACK, InputCommand.ATTACK, Vector2.RIGHT, 1.2)})
 	events.append_array(sim.events)
 	for i in 200:
 		sim.step({})
@@ -31,7 +31,7 @@ func test_knocked_out_creature_ignores_input() -> void:
 	var f := H.place(sim, 0, Vector2(0, 0))
 	sim.knock_out(f, null)
 	var pos := f.pos
-	H.run(sim, 30, H.cmd(0, InputCommand.DASH | InputCommand.ATTACK, InputCommand.DASH | InputCommand.ATTACK))
+	H.run(sim, 30, H.dash_cmd(H.E, 2, InputCommand.ATTACK, InputCommand.ATTACK))
 	assert_eq(f.state, SM.KNOCKED_OUT, "stays KO")
 	assert_true(f.pos.distance_to(pos) < 1.0, "doesn't walk or dash")
 
@@ -63,7 +63,7 @@ func test_countdown_blocks_actions() -> void:
 	var sim := BattleSim.new(setup)
 	var f := sim.active_fighter(0)
 	var pos := f.pos
-	H.run(sim, 60, H.cmd(0, InputCommand.DASH, InputCommand.DASH))
+	H.run(sim, 60, H.dash_cmd(H.E, 2))
 	assert_eq(f.pos, pos, "frozen during countdown")
 	var events := H.run(sim, CombatConst.COUNTDOWN_TICKS, H.idle())
 	assert_eq(H.events_of(events, BattleEvent.FIGHT_START).size(), 1, "fight starts")
@@ -73,7 +73,7 @@ func test_reset_restores_starting_state_for_rematch() -> void:
 	var sim := H.make_sim(H.EMBERLYN, H.STONEBACK, false)
 	var f0 := sim.active_fighter(0)
 	var start0 := f0.pos
-	H.run(sim, 60, H.cmd(0, InputCommand.DASH, InputCommand.DASH))
+	H.run(sim, 60, H.dash_cmd(H.E, 2))
 	sim.active_fighter(1).hp = 3.0
 	sim.knock_out(sim.active_fighter(1), f0)
 	H.run(sim, 200, H.idle())
@@ -98,8 +98,8 @@ func test_same_inputs_same_result() -> void:
 		var rng := RandomNumberGenerator.new()
 		rng.seed = 99
 		for i in 600:
-			var c0 := H.cmd(rng.randi_range(-1, 7), 0, 0, Vector2.from_angle(rng.randf() * TAU), rng.randf_range(1, 8))
-			var c1 := H.cmd(rng.randi_range(-1, 7), 0, 0, Vector2.from_angle(rng.randf() * TAU), rng.randf_range(1, 8))
+			var c0 := H.cmd(0, 0, Vector2.from_angle(rng.randf() * TAU), rng.randf_range(1, 8))
+			var c1 := H.cmd(0, 0, Vector2.from_angle(rng.randf() * TAU), rng.randf_range(1, 8))
 			var bits := [InputCommand.ATTACK, InputCommand.DASH, InputCommand.ABILITY_1, InputCommand.ABILITY_2, InputCommand.ABILITY_3, InputCommand.ABILITY_4, InputCommand.FOCUS, InputCommand.GUARD, 0, 0]
 			var b0: int = bits[rng.randi() % bits.size()]
 			var b1: int = bits[rng.randi() % bits.size()]
@@ -107,6 +107,10 @@ func test_same_inputs_same_result() -> void:
 			c0.pressed = b0
 			c1.held = b1
 			c1.pressed = b1
+			if b0 == InputCommand.DASH:
+				c0.set_dash(rng.randi_range(0, 3), rng.randi_range(1, 5))
+			if b1 == InputCommand.DASH:
+				c1.set_dash(rng.randi_range(0, 3), rng.randi_range(1, 5))
 			sim.step({0: c0, 1: c1})
 		hashes.append(sim.state_hash())
 	assert_eq(hashes[0], hashes[1], "deterministic replay")
@@ -129,7 +133,7 @@ func test_team_switching_rules() -> void:
 	first.cooldowns[&"ember_bolt"] = 100
 	# Can't switch while stunned.
 	StunRules.apply(sim, first, 20, &"hit")
-	H.run(sim, 2, H.cmd(-1, InputCommand.SWITCH_2, InputCommand.SWITCH_2))
+	H.run(sim, 2, H.cmd(InputCommand.SWITCH_2, InputCommand.SWITCH_2))
 	assert_eq(sim.active_fighter(0), first, "no switch while stunned")
 	H.run(sim, 30, H.idle())
 	var events := H.tap(sim, 0, InputCommand.SWITCH_2)

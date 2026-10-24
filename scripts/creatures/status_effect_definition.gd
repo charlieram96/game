@@ -15,6 +15,7 @@ enum Stacking { REFRESH, EXTEND, IGNORE }
 @export var tick_interval_ticks: int = 0  ## 0 = no periodic effect.
 @export var tick_power: float = 0.0  ## Power per tick (uses the damage formula, no hitstun).
 @export_group("Modifiers")
+## Below 1 shortens dashes (max cells) and stretches their travel time.
 @export var move_speed_mult: float = 1.0
 @export var damage_taken_mult: float = 1.0
 @export var knockback_taken_mult: float = 1.0

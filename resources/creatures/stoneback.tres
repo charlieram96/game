@@ -15,22 +15,24 @@
 [sub_resource type="Resource" id="Resource_jpdcf"]
 script = ExtResource("2_4i312")
 dash_type = 2
-distance = 2.0
-duration_ticks = 13
-startup_ticks = 3
+max_cells = 3
+stamina_base = 9.0
+stamina_per_cell = 8.0
+startup_ticks = 5
+travel_ticks_base = 6.0
+travel_ticks_per_cell = 2.6
+ease_power = 2.0
 recovery_ticks = 10
-stamina_cost = 40.0
+chain_after_ticks = 5
+ram_power = 9.0
 armor_damage_mult = 0.5
 flinch_immune_while_active = true
 trait_name = "Rolling Fortress"
-trait_description = "Short rolling dash that can't be flinched and halves damage taken."
+trait_description = "Short rolling charge that can't be flinched and halves damage taken."
 
 [sub_resource type="Resource" id="Resource_ik5w7"]
 script = ExtResource("8_fvxki")
-speed = 4.2
-acceleration = 25.0
 deceleration = 32.0
-turn_acceleration = 30.0
 collision_radius = 0.47
 mass = 2.2
 
@@ -45,8 +47,8 @@ dash_through_stun_mult = 1.2
 
 [sub_resource type="Resource" id="Resource_wup8l"]
 script = ExtResource("11_24jg2")
-max_stamina = 140.0
-focus_rate = 15.0
+max_stamina = 130.0
+focus_rate = 40.0
 guard_stamina_factor = 0.8
 
 [resource]

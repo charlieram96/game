@@ -15,31 +15,37 @@
 [sub_resource type="Resource" id="Resource_nkjmw"]
 script = ExtResource("2_val0t")
 dash_type = 1
-distance = 4.0
+max_cells = 5
+stamina_base = 6.0
+stamina_per_cell = 5.0
+startup_ticks = 3
+travel_ticks_base = 4.0
+travel_ticks_per_cell = 1.7
+ease_power = 2.4
+recovery_ticks = 7
+chain_after_ticks = 3
+ram_power = 6.5
 projectile_intangible_ticks = 5
 trait_name = "Phase Step"
-trait_description = "Long, quick dash. Projectiles pass through Emberlyn during the first frames."
+trait_description = "Long, quick dashes. Projectiles pass through Emberlyn during the first frames of travel."
 
 [sub_resource type="Resource" id="Resource_tkur1"]
 script = ExtResource("8_g2jdj")
-speed = 7.0
-acceleration = 45.0
 deceleration = 60.0
-turn_acceleration = 95.0
 collision_radius = 0.42
 
 [sub_resource type="Resource" id="Resource_33l04"]
 script = ExtResource("9_68w2u")
 id = &"quickfoot"
 display_name = "Quickfoot"
-description = "Enters and leaves Focus 45% faster, and moves 10% faster while low on stamina."
+description = "Enters and leaves Focus 45% faster, and dashes 10% faster while low on stamina."
 focus_transition_mult = 0.55
 low_stamina_speed_bonus = 0.1
 
 [sub_resource type="Resource" id="Resource_o8o6x"]
 script = ExtResource("11_hobkm")
-max_stamina = 80.0
-focus_rate = 28.0
+max_stamina = 100.0
+focus_rate = 50.0
 guard_stamina_factor = 1.25
 
 [resource]

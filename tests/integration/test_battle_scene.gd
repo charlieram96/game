@@ -14,19 +14,17 @@ func test_keyboard_input_drives_the_player_creature() -> void:
 	var sim: BattleSim = scene.sim
 	var me := sim.active_fighter(0)
 	var start := me.pos
-	Input.action_press(&"move_up")
-	for i in 30:
-		await tree.physics_frame
-	Input.action_release(&"move_up")
-	assert_lt(me.pos.y, start.y - 1.0, "walked north with W")
 	var stamina := me.stamina
-	Input.action_press(&"dash")
-	await tree.physics_frame
-	await tree.physics_frame
-	Input.action_release(&"dash")
-	assert_lt(me.stamina, stamina, "right-click dash spent stamina")
-	for i in 30:
+	# Hold W to charge a dash north, release to go.
+	Input.action_press(&"move_up")
+	for i in 20:
 		await tree.physics_frame
+	assert_eq(me.pos, start, "holding a direction doesn't walk")
+	Input.action_release(&"move_up")
+	for i in 40:
+		await tree.physics_frame
+	assert_lt(me.pos.y, start.y - 1.0, "dashed north on release")
+	assert_lt(me.stamina, stamina, "the dash spent stamina")
 	scene._rematch()
 	assert_eq(scene.sim.tick, 0, "rematch reset the simulation")
 	assert_near(scene.sim.active_fighter(0).hp, scene.sim.active_fighter(0).max_hp(), 0.001, "full HP after rematch")

@@ -1,68 +1,55 @@
 extends WBTestCase
-## Spec tests 1, 2, 11: eight-direction walking, normalized diagonals,
-## arena boundaries and obstacles.
+## Bodies on the board: nothing walks, every creature fits one cell,
+## knockback respects walls and stones, and overlapping bodies separate
+## (only heavy creatures shove).
 
 const H := preload("res://tests/sim_helpers.gd")
 
 
-func test_walks_in_all_eight_directions() -> void:
-	for d in 8:
-		var sim := H.make_sim()
-		var f := H.place(sim, 0, Vector2(0, 0))
-		H.place(sim, 1, Vector2(12, 8))
-		H.run(sim, 40, H.cmd(d))
-		var moved := f.pos - Vector2.ZERO
-		var expected := CombatConst.dir8_to_vec(d)
-		assert_gt(moved.length(), 1.0, "dir %d moved" % d)
-		assert_near(rad_to_deg(absf(moved.normalized().angle_to(expected))), 0.0, 0.5, "dir %d heading" % d)
-		assert_eq(f.state, FighterSM.State.MOVING, "dir %d state" % d)
+func test_every_creature_fits_inside_one_cell() -> void:
+	for path in [H.EMBERLYN, H.STONEBACK, H.TOTEM]:
+		var sp := H.species(path)
+		assert_lt(sp.movement.collision_radius, CombatConst.CELL_SIZE * 0.5, "%s fits a cell" % path.get_file())
 
 
-func test_diagonal_speed_is_normalized() -> void:
-	var speeds: Array[float] = []
-	for d in [0, 1, 2, 3]:
-		var sim := H.make_sim()
-		var f := H.place(sim, 0, Vector2(0, 0))
-		H.place(sim, 1, Vector2(12, 8))
-		H.run(sim, 60, H.cmd(d))
-		speeds.append(f.vel.length())
-		assert_le(f.vel.length(), f.stats.movement.speed + 0.001, "never exceeds top speed (dir %d)" % d)
-	assert_near(speeds[1], speeds[0], 0.001, "SE equals E")
-	assert_near(speeds[3], speeds[2], 0.001, "SW equals S")
-	assert_near(speeds[0], 7.0, 0.001, "Emberlyn top speed")
+func test_arenas_put_spawns_and_stones_on_cell_centres() -> void:
+	for def: ArenaDefinition in [ArenaDefinition.ringstones(), ArenaDefinition.training_yard()]:
+		for p in [def.spawn_team0, def.spawn_team1]:
+			var c := def.cell_center(def.cell_of(p))
+			assert_near(p.distance_to(c), 0.0, 0.0001, "%s spawn on a centre" % def.id)
+		for circle in def.circles:
+			var at := Vector2(circle.x, circle.y)
+			assert_near(at.distance_to(def.cell_center(def.cell_of(at))), 0.0, 0.0001, "%s stone on a centre" % def.id)
+			assert_lt(circle.z, 0.5, "stone fits its cell")
 
 
-func test_heavy_creature_turns_slower() -> void:
-	# Run east at full speed, then reverse: count ticks until moving west.
-	var results := {}
-	for path in [H.EMBERLYN, H.STONEBACK]:
-		var sim := H.make_sim(path, H.TOTEM)
-		var f := H.place(sim, 0, Vector2(-6, 0))
-		H.place(sim, 1, Vector2(12, 8))
-		H.run(sim, 60, H.cmd(0))
-		var ticks := 0
-		while f.vel.x > -0.5 * f.stats.movement.speed and ticks < 200:
-			sim.step({0: H.cmd(4)})
-			ticks += 1
-		results[path] = ticks
-	assert_lt(results[H.EMBERLYN], results[H.STONEBACK], "Emberlyn reverses faster than Stoneback")
+func test_cell_helpers_round_trip() -> void:
+	var def := ArenaDefinition.ringstones()
+	var n := def.cell_count()
+	assert_eq(n, Vector2i(14, 9), "14 x 9 board")
+	for y in n.y:
+		for x in n.x:
+			var c := Vector2i(x, y)
+			assert_eq(def.cell_of(def.cell_center(c)), c, "cell %s" % c)
+	assert_false(def.has_cell(Vector2i(14, 0)), "off the board")
 
 
-func test_cannot_leave_arena_bounds() -> void:
+func test_knockback_never_leaves_the_arena() -> void:
 	var sim := H.make_sim()
-	var f := sim.active_fighter(0)
-	for d in 8:
-		H.run(sim, 240, H.cmd(d))
-		assert_true(sim.geometry.is_inside_bounds(f.pos, f.radius()), "inside bounds after walking dir %d" % d)
+	var f := H.place(sim, 0, Vector2(sim.geometry.bounds.end.x - 1.0, 0))
+	MovementSystem.push(f, Vector2.RIGHT, 5.0)
+	H.run(sim, 30)
+	assert_true(sim.geometry.is_inside_bounds(f.pos, f.radius()), "inside bounds")
 
 
-func test_obstacles_block_walking() -> void:
+func test_knockback_stops_at_stones() -> void:
 	var sim := H.make_sim()
-	sim.geometry.add_circle(Vector2(0, 0), 1.0)
-	var f := H.place(sim, 0, Vector2(-4, 0))
+	sim.geometry.add_circle(Vector2(0, 0), 0.45)
+	var f := H.place(sim, 0, Vector2(-2, 0))
 	H.place(sim, 1, Vector2(12, 8))
-	H.run(sim, 120, H.cmd(0))
-	assert_ge(f.pos.distance_to(Vector2.ZERO), 1.0 + f.radius() - 0.01, "stopped at the stone")
+	MovementSystem.push(f, Vector2.RIGHT, 4.0)
+	H.run(sim, 30)
+	assert_ge(f.pos.distance_to(Vector2.ZERO), 0.45 + f.radius() - 0.01, "stopped at the stone")
 	assert_lt(f.pos.x, 0.0, "did not pass through the stone")
 
 
@@ -83,20 +70,20 @@ func test_box_obstacle_sweep_is_exact() -> void:
 	assert_true(corner.hit, "corner hit")
 
 
-func test_bodies_are_solid_and_only_heavy_creatures_shove() -> void:
-	# Light Emberlyn walking into Stoneback: Stoneback doesn't budge.
+func test_bodies_separate_and_only_heavy_creatures_shove() -> void:
+	# Light Emberlyn knocked into Stoneback: Stoneback doesn't budge.
 	var sim := H.make_sim(H.EMBERLYN, H.STONEBACK)
-	var e := H.place(sim, 0, Vector2(-3, 0))
+	var e := H.place(sim, 0, Vector2(-2, 0))
 	var s := H.place(sim, 1, Vector2(0, 0))
-	var start_s := s.pos
-	H.run(sim, 90, H.cmd(0))
+	MovementSystem.push(e, Vector2.RIGHT, 3.0)
+	H.run(sim, 40)
 	assert_ge(e.pos.distance_to(s.pos), e.radius() + s.radius() - 0.01, "no overlap")
-	assert_lt(s.pos.distance_to(start_s), 0.05, "Stoneback can't be shoved by a light creature")
-	# Heavy Stoneback walking into Emberlyn nudges her slowly.
+	assert_lt(s.pos.distance_to(Vector2.ZERO), 0.15, "Stoneback barely moves when a light creature is knocked into it")
+	# Heavy Stoneback knocked into Emberlyn nudges her.
 	var sim2 := H.make_sim(H.STONEBACK, H.EMBERLYN)
-	var s2 := H.place(sim2, 0, Vector2(-3, 0))
+	var s2 := H.place(sim2, 0, Vector2(-2, 0))
 	var e2 := H.place(sim2, 1, Vector2(0, 0))
-	H.run(sim2, 90, H.cmd(0))
+	MovementSystem.push(s2, Vector2.RIGHT, 3.0)
+	H.run(sim2, 40)
 	assert_ge(s2.pos.distance_to(e2.pos), s2.radius() + e2.radius() - 0.01, "no overlap")
-	assert_gt(e2.pos.x, 0.2, "heavy creature nudges a light one")
-	assert_lt(e2.pos.x, 2.0, "but only slowly")
+	assert_gt(e2.pos.x, 0.1, "heavy creature nudges a light one")

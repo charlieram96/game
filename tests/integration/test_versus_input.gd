@@ -61,13 +61,18 @@ func test_player_one_command_ignores_player_two_keys() -> void:
 	src.prefix = InputSetup.P1_PREFIX
 	src.allow_mouse = false
 	_key(KEY_RIGHT, true)
-	var c := src.get_command(sim, 0)
-	assert_eq(c.move_dir, -1, "player 1 stands still while player 2 holds an arrow")
+	for i in 4:
+		var held := src.get_command(sim, 0)
+		assert_false(src.aim_state.active, "player 2's arrow doesn't aim a dash for player 1")
+		assert_false(held.has_dash(), "nor dash")
 	_key(KEY_RIGHT, false)
+	assert_false(src.get_command(sim, 0).has_dash(), "releasing it doesn't either")
 	_key(KEY_D, true)
-	c = src.get_command(sim, 0)
-	assert_eq(c.move_dir, CombatConst.vec_to_dir8(Vector2.RIGHT), "D moves player 1 east")
+	src.get_command(sim, 0)
+	assert_true(src.aim_state.active and src.aim_state.dir_index == H.E, "D aims player 1 east")
 	_key(KEY_D, false)
+	var c := src.get_command(sim, 0)
+	assert_true(c.has_dash() and c.dash_dir == H.E and c.dash_cells == 1, "a tap is a one-cell step east")
 
 
 func test_each_gamepad_drives_one_player() -> void:
@@ -78,10 +83,10 @@ func test_each_gamepad_drives_one_player() -> void:
 	assert_true(_pressed("p2_ability_1"), "pad 2 drives player 2")
 	assert_false(_pressed("p1_ability_1"), "pad 2 does not drive player 1")
 	_pad_button(1, JOY_BUTTON_A, false)
-	_pad_button(0, JOY_BUTTON_RIGHT_SHOULDER, true)
-	assert_true(_pressed("p1_dash"), "pad 1 drives player 1")
-	assert_false(_pressed("p2_dash"), "pad 1 does not drive player 2")
-	_pad_button(0, JOY_BUTTON_RIGHT_SHOULDER, false)
+	_pad_button(0, JOY_BUTTON_LEFT_SHOULDER, true)
+	assert_true(_pressed("p1_guard"), "pad 1 drives player 1")
+	assert_false(_pressed("p2_guard"), "pad 1 does not drive player 2")
+	_pad_button(0, JOY_BUTTON_LEFT_SHOULDER, false)
 	# One pad only: it belongs to player 2, player 1 keeps keyboard + mouse.
 	InputSetup.bind_player_pad(InputSetup.P1_PREFIX, -1)
 	InputSetup.bind_player_pad(InputSetup.P2_PREFIX, 0)

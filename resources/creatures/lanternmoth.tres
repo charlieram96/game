@@ -11,7 +11,6 @@ script = ExtResource("1_yjdii")
 
 [sub_resource type="Resource" id="Resource_dgpe4"]
 script = ExtResource("3_vv812")
-speed = 4.0
 
 [sub_resource type="Resource" id="Resource_lnwds"]
 script = ExtResource("5_clfv2")

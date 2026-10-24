@@ -6,7 +6,7 @@
 script = ExtResource("1_wulia")
 id = &"slow"
 display_name = "Slowed"
-description = "Movement speed reduced."
+description = "Dashes are shorter and slower."
 icon_path = "res://assets/ui/icons/status_slow.png"
 default_duration_ticks = 90
 move_speed_mult = 0.65

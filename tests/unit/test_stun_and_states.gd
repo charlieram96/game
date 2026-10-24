@@ -31,7 +31,7 @@ func test_stunned_creature_cannot_dash_or_attack() -> void:
 	H.place(sim, 1, Vector2(12, 8))
 	StunRules.apply(sim, f, 30, &"hit")
 	var stamina := f.stamina
-	H.run(sim, 10, H.cmd(0, InputCommand.DASH | InputCommand.ATTACK, InputCommand.DASH | InputCommand.ATTACK))
+	H.run(sim, 10, H.dash_cmd(H.E, 2, InputCommand.ATTACK, InputCommand.ATTACK))
 	assert_eq(f.state, SM.STUNNED, "still stunned")
 	assert_near(f.stamina, stamina, 0.0001, "no dash paid")
 
@@ -84,7 +84,7 @@ func test_buffered_input_comes_out_on_first_free_tick() -> void:
 	StunRules.apply(sim, f, 12, &"hit")
 	H.run(sim, 8, H.idle())
 	# Press dash 4 ticks before the stun ends.
-	sim.step({0: H.cmd(0, InputCommand.DASH, InputCommand.DASH)})
+	sim.step({0: H.dash_cmd(H.E, 2)})
 	var waited := 0
 	while f.state == SM.STUNNED and waited < 20:
 		sim.step({0: H.idle()})
@@ -97,14 +97,14 @@ func test_guard_break_on_empty_stamina() -> void:
 	var e := H.place(sim, 0, Vector2(0, 0), Vector2.RIGHT)
 	H.place(sim, 1, Vector2(1.6, 0), Vector2.LEFT)
 	e.stamina = 3.0
-	var guard := H.cmd(-1, InputCommand.GUARD, InputCommand.GUARD, Vector2.RIGHT, 2.0)
+	var guard := H.cmd(InputCommand.GUARD, InputCommand.GUARD, Vector2.RIGHT, 2.0)
 	sim.step({0: guard})
-	H.run(sim, 12, H.cmd(-1, InputCommand.GUARD, 0, Vector2.RIGHT, 2.0))
+	H.run(sim, 12, H.cmd(InputCommand.GUARD, 0, Vector2.RIGHT, 2.0))
 	var events: Array[BattleEvent] = []
-	sim.step({0: H.cmd(-1, InputCommand.GUARD, 0, Vector2.RIGHT, 2.0), 1: H.cmd(-1, InputCommand.ATTACK, InputCommand.ATTACK, Vector2.LEFT, 1.6)})
+	sim.step({0: H.cmd(InputCommand.GUARD, 0, Vector2.RIGHT, 2.0), 1: H.cmd(InputCommand.ATTACK, InputCommand.ATTACK, Vector2.LEFT, 1.6)})
 	events.append_array(sim.events)
 	for i in 30:
-		sim.step({0: H.cmd(-1, InputCommand.GUARD, 0, Vector2.RIGHT, 2.0)})
+		sim.step({0: H.cmd(InputCommand.GUARD, 0, Vector2.RIGHT, 2.0)})
 		events.append_array(sim.events)
 	assert_eq(H.events_of(events, BattleEvent.GUARD_BREAK).size(), 1, "guard broke")
 	assert_eq(e.state, SM.STUNNED, "long stun")
@@ -115,14 +115,14 @@ func test_perfect_guard_negates_and_staggers_melee() -> void:
 	var e := H.place(sim, 0, Vector2(0, 0), Vector2.RIGHT)
 	var s := H.place(sim, 1, Vector2(1.6, 0), Vector2.LEFT)
 	# Stoneback starts its 8-tick shell bash; Emberlyn guards 3 ticks before impact.
-	sim.step({1: H.cmd(-1, InputCommand.ATTACK, InputCommand.ATTACK, Vector2.LEFT, 1.6)})
+	sim.step({1: H.cmd(InputCommand.ATTACK, InputCommand.ATTACK, Vector2.LEFT, 1.6)})
 	H.run(sim, 5, H.idle())
 	var hp := e.hp
 	var events: Array[BattleEvent] = []
-	sim.step({0: H.cmd(-1, InputCommand.GUARD, InputCommand.GUARD, Vector2.RIGHT, 2.0)})
+	sim.step({0: H.cmd(InputCommand.GUARD, InputCommand.GUARD, Vector2.RIGHT, 2.0)})
 	events.append_array(sim.events)
 	for i in 10:
-		sim.step({0: H.cmd(-1, InputCommand.GUARD, 0, Vector2.RIGHT, 2.0)})
+		sim.step({0: H.cmd(InputCommand.GUARD, 0, Vector2.RIGHT, 2.0)})
 		events.append_array(sim.events)
 	assert_eq(H.events_of(events, BattleEvent.PERFECT_GUARD).size(), 1, "perfect guard")
 	assert_near(e.hp, hp, 0.0001, "no chip")

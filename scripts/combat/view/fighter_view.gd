@@ -40,7 +40,7 @@ func setup(f: Fighter, color: Color) -> void:
 	_ring_mat.shader = RING_SHADER
 	_ring_mat.set_shader_parameter("team_color", color)
 	_ring_mat.set_shader_parameter("gauge_color", color.lightened(0.35))
-	var dash_cost := f.stats.dash.stamina_cost
+	var dash_cost := f.stats.dash.min_cost()
 	_ring_mat.set_shader_parameter("ticks", floor(f.max_stamina() / dash_cost) if dash_cost > 0.0 and dash_cost < 999.0 else 0.0)
 	ring.material_override = _ring_mat
 	ring.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
@@ -92,7 +92,7 @@ func update_view(alpha: float, delta: float) -> void:
 	# Ground ring = stamina gauge + facing notch.
 	_ring_mat.set_shader_parameter("fill", f.stamina_ratio())
 	_ring_mat.set_shader_parameter("facing_angle", atan2(f.facing.y, f.facing.x))
-	var low := f.stamina < f.stats.dash.stamina_cost
+	var low := f.stamina < f.stats.dash.min_cost()
 	_ring_mat.set_shader_parameter("gauge_color", Color(1.0, 0.45, 0.35) if low else team_color.lightened(0.35))
 	_ring_mat.set_shader_parameter("pulse", 1.0 if f.state == SM.FOCUSING else 0.0)
 	ring.visible = not f.is_ko()
@@ -122,8 +122,6 @@ func _update_animation(delta: float) -> void:
 	match st:
 		SM.IDLE:
 			sprite.play("idle", _dir)
-		SM.MOVING:
-			sprite.play("move", _dir)
 		SM.DASH_START:
 			sprite.show_frame("dash", _dir, 0)
 		SM.DASH_ACTIVE:

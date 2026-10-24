@@ -1,37 +1,13 @@
 class_name MovementSystem
 extends RefCounted
-## Eight-direction walking with acceleration, turning responsiveness,
-## collision against the arena, body pushing and knockback.
+## Leftover velocity, collision against the arena, body separation and
+## knockback. Creatures never walk in battle (see DashSystem): they stand
+## their ground unless a dash, a lunge or a hit moves them.
 
 const SM := FighterSM.State
 
 ## Geometric decay used for knockback velocity each tick.
 const KNOCKBACK_DECAY := 0.85
-
-
-static func walk_speed(f: Fighter) -> float:
-	var prof := f.stats.movement
-	var speed := prof.speed * f.status_mult("move_speed_mult")
-	var bonus := f.stats.passive.low_stamina_speed_bonus if f.stats.passive else 0.0
-	if bonus > 0.0 and f.stamina_ratio() < 0.3:
-		speed *= 1.0 + bonus
-	return speed
-
-
-## Accelerate toward `move` (unit 8-way vector or ZERO) and integrate.
-static func walk(sim: BattleSim, f: Fighter, move: Vector2, speed_mult: float = 1.0) -> void:
-	var prof := f.stats.movement
-	var target := move * walk_speed(f) * speed_mult
-	var accel: float
-	if move == Vector2.ZERO:
-		accel = prof.deceleration
-	elif f.vel.length_squared() > 0.01 and f.vel.dot(target) < 0.0:
-		# Reversing: heavy creatures take noticeably longer to turn around.
-		accel = prof.turn_acceleration
-	else:
-		accel = prof.acceleration
-	f.vel = f.vel.move_toward(target, accel * CombatConst.TICK_DT)
-	integrate(sim, f)
 
 
 static func decelerate(sim: BattleSim, f: Fighter, rate: float = -1.0) -> void:

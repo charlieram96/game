@@ -3,18 +3,19 @@ extends RefCounted
 ## Registers every input action in code (keyboard, mouse and gamepad), so
 ## bindings are typed, reviewable and easy to persist/rebind later.
 ##
-## Desktop defaults (spec):
-##   WASD move · Mouse aim · LMB basic · RMB dash · Shift (hold) focus
-##   Q/E/R/F specials · Space guard · 1/2/3 switch
+## Battle (no walking — movement is drag-to-dash, see LocalInputSource):
+##   Mouse drag = dash (release to go) · click = basic attack · mouse aims
+##   Hold WASD / arrows = charge a dash, release to go · J = basic attack
+##   Q/E/R/F specials · Space or right mouse (hold) guard · Shift (hold) focus
 ## Exploration: WASD move · Shift sneak · E / Space / Enter interact
-## Gamepad: L-stick move · R-stick aim · RT basic · RB dash · LT focus ·
-##   LB guard · A/B/X/Y specials · D-pad switch · Start pause
+## Gamepad: hold L-stick / D-pad = charge a dash · R-stick aim · RT basic ·
+##   LT focus · LB guard · A/B/X/Y specials · Start pause
 
 const P1_PREFIX := "p1_"
 const P2_PREFIX := "p2_"
 ## Gamepad-driven actions each versus player gets on their assigned pad.
 const PAD_BUTTONS := {
-	"dash": JOY_BUTTON_RIGHT_SHOULDER, "guard": JOY_BUTTON_LEFT_SHOULDER,
+	"guard": JOY_BUTTON_LEFT_SHOULDER,
 	"ability_1": JOY_BUTTON_A, "ability_2": JOY_BUTTON_B,
 	"ability_3": JOY_BUTTON_X, "ability_4": JOY_BUTTON_Y,
 	"move_up": JOY_BUTTON_DPAD_UP, "move_down": JOY_BUTTON_DPAD_DOWN,
@@ -50,16 +51,13 @@ static func ensure_actions() -> void:
 	_axis(&"aim_down", JOY_AXIS_RIGHT_Y, 1.0)
 	_axis(&"aim_left", JOY_AXIS_RIGHT_X, -1.0)
 	_axis(&"aim_right", JOY_AXIS_RIGHT_X, 1.0)
-	# Combat
-	_mouse(&"attack", MOUSE_BUTTON_LEFT)
+	# Combat (a mouse click attacks through the drag gesture, not an action)
 	_axis(&"attack", JOY_AXIS_TRIGGER_RIGHT, 1.0)
 	_key(&"attack", [KEY_J])
-	_mouse(&"dash", MOUSE_BUTTON_RIGHT)
-	_joy(&"dash", JOY_BUTTON_RIGHT_SHOULDER)
-	_key(&"dash", [KEY_K])
 	_key(&"focus", [KEY_SHIFT])
 	_axis(&"focus", JOY_AXIS_TRIGGER_LEFT, 1.0)
 	_key(&"guard", [KEY_SPACE])
+	_mouse(&"guard", MOUSE_BUTTON_RIGHT)
 	_joy(&"guard", JOY_BUTTON_LEFT_SHOULDER)
 	_key(&"ability_1", [KEY_Q])
 	_joy(&"ability_1", JOY_BUTTON_A)
@@ -93,12 +91,10 @@ static func ensure_actions() -> void:
 	_key(&"p1_move_down", [KEY_S])
 	_key(&"p1_move_left", [KEY_A])
 	_key(&"p1_move_right", [KEY_D])
-	_mouse(&"p1_attack", MOUSE_BUTTON_LEFT)
 	_key(&"p1_attack", [KEY_J])
-	_mouse(&"p1_dash", MOUSE_BUTTON_RIGHT)
-	_key(&"p1_dash", [KEY_K])
 	_key_at(&"p1_focus", KEY_SHIFT, KEY_LOCATION_LEFT)
 	_key(&"p1_guard", [KEY_SPACE])
+	_mouse(&"p1_guard", MOUSE_BUTTON_RIGHT)
 	_key(&"p1_ability_1", [KEY_Q])
 	_key(&"p1_ability_2", [KEY_E])
 	_key(&"p1_ability_3", [KEY_R])
@@ -111,8 +107,7 @@ static func ensure_actions() -> void:
 	_key(&"p2_move_down", [KEY_DOWN])
 	_key(&"p2_move_left", [KEY_LEFT])
 	_key(&"p2_move_right", [KEY_RIGHT])
-	_key(&"p2_attack", [KEY_PERIOD])
-	_key(&"p2_dash", [KEY_SLASH])
+	_key(&"p2_attack", [KEY_PERIOD, KEY_SLASH])
 	_key_at(&"p2_focus", KEY_SHIFT, KEY_LOCATION_RIGHT)
 	_key_at(&"p2_guard", KEY_CTRL, KEY_LOCATION_RIGHT)
 	_key(&"p2_ability_1", [KEY_SEMICOLON])

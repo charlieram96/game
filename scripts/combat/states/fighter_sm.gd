@@ -9,7 +9,7 @@ extends RefCounted
 
 enum State {
 	IDLE,
-	MOVING,
+	MOVING,  ## Unused since movement became dash-only; kept so state ids stay stable.
 	FOCUS_ENTER,
 	FOCUSING,
 	FOCUS_EXIT,
@@ -29,8 +29,8 @@ const S := State
 
 ## from -> list of allowed destinations. Anything not listed is illegal.
 static var _allowed: Dictionary = {
-	S.IDLE: [S.MOVING, S.FOCUS_ENTER, S.DASH_START, S.ATTACK_START, S.GUARDING, S.STUNNED, S.SWITCHING, S.KNOCKED_OUT],
-	S.MOVING: [S.IDLE, S.FOCUS_ENTER, S.DASH_START, S.ATTACK_START, S.GUARDING, S.STUNNED, S.SWITCHING, S.KNOCKED_OUT],
+	S.IDLE: [S.FOCUS_ENTER, S.DASH_START, S.ATTACK_START, S.GUARDING, S.STUNNED, S.SWITCHING, S.KNOCKED_OUT],
+	S.MOVING: [S.IDLE, S.STUNNED, S.KNOCKED_OUT],
 	# Focus can only be left through its exit commitment, or by being hit.
 	S.FOCUS_ENTER: [S.FOCUSING, S.FOCUS_EXIT, S.IDLE, S.STUNNED, S.KNOCKED_OUT],
 	S.FOCUSING: [S.FOCUS_EXIT, S.IDLE, S.STUNNED, S.KNOCKED_OUT],
@@ -39,7 +39,8 @@ static var _allowed: Dictionary = {
 	# (only a guard repel or a dash clash stops it).
 	S.DASH_START: [S.DASH_ACTIVE, S.STUNNED, S.KNOCKED_OUT],
 	S.DASH_ACTIVE: [S.DASH_RECOVERY, S.STUNNED, S.KNOCKED_OUT],
-	S.DASH_RECOVERY: [S.IDLE, S.STUNNED, S.KNOCKED_OUT],
+	# Landing recovery can chain straight into the next dash.
+	S.DASH_RECOVERY: [S.IDLE, S.DASH_START, S.STUNNED, S.KNOCKED_OUT],
 	S.ATTACK_START: [S.ATTACK_ACTIVE, S.STUNNED, S.KNOCKED_OUT],
 	S.ATTACK_ACTIVE: [S.ATTACK_RECOVERY, S.STUNNED, S.KNOCKED_OUT],
 	# Recovery is only cancellable when the ability explicitly allows it
@@ -62,9 +63,9 @@ static func state_name(s: State) -> String:
 	return State.keys()[s]
 
 
-## States in which a creature accepts new commands (walk, dash, attack, ...).
+## States in which a creature accepts new commands (dash, attack, ...).
 static func is_actionable(s: State) -> bool:
-	return s == S.IDLE or s == S.MOVING
+	return s == S.IDLE
 
 
 static func is_attacking(s: State) -> bool:

@@ -2,11 +2,14 @@ class_name CombatAI
 extends InputSource
 ## Opponent AI. It plays by the same rules as a human: it only emits
 ## InputCommands, sees its opponent through a reaction-time delay, aims with
-## error, and must manage stamina with Focus.
+## error, and must manage stamina with Focus. Like the player it cannot
+## walk: every move is a planned dash along a board lane.
 ##
-## Each tick: perceive (delayed) -> react to threats (dodge / guard / step
-## out) -> manage stamina -> pick an offensive option by utility -> move to
-## keep its preferred range (kite vs brawl, by archetype).
+## Each tick: perceive (delayed) -> react to threats (sidestep dash / guard)
+## -> manage stamina -> pick an offensive option by utility (abilities or a
+## ram through the foe) -> now and then reposition with a dash scored by
+## preferred range (kite vs brawl, by archetype), lane danger (cells the foe
+## can ram from where it stands), walls and stamina cost.
 
 const SM := FighterSM.State
 
@@ -16,17 +19,12 @@ var rng := RandomNumberGenerator.new()
 var _seed := 7
 var _history: Array[Dictionary] = []
 var _next_decision := 0
-var _strafe_sign := 1.0
-var _strafe_flip_tick := 0
+var _next_move := 0
 var _focusing := false
 var _guard_until := -1
 var _guard_aim := Vector2.ZERO
 var _reactions: Dictionary = {}  # threat id -> chosen reaction
 var _prev_held := 0
-var _pending_press := 0
-var _pending_move := -1
-var _pending_aim := Vector2.ZERO
-var _pending_aim_dist := 0.0
 var _hold_attack_until := -1
 
 
@@ -40,11 +38,11 @@ func reset() -> void:
 	rng.seed = _seed
 	_history.clear()
 	_next_decision = 0
+	_next_move = 0
 	_focusing = false
 	_guard_until = -1
 	_reactions.clear()
 	_prev_held = 0
-	_pending_press = 0
 	_hold_attack_until = -1
 
 
@@ -59,7 +57,6 @@ func get_command(sim: BattleSim, team: int) -> InputCommand:
 	var seen := _perceived(foe)
 	var held := 0
 	var press := 0
-	var move := Vector2.ZERO
 	var aim := (seen["pos"] - me.pos) as Vector2
 	var aim_dist := aim.length()
 	aim = aim.normalized() if aim_dist > 0.01 else me.facing
@@ -71,53 +68,50 @@ func get_command(sim: BattleSim, team: int) -> InputCommand:
 		if left <= 5 and not threat.is_empty() and rng.randf() < profile.guard_chance:
 			press |= InputCommand.GUARD
 			held |= InputCommand.GUARD
-		return _finish(cmd, -1, aim, aim_dist, held, press)
+		return _finish(cmd, aim, aim_dist, held, press)
 
 	# --- Guard currently held ---------------------------------------------------
 	if sim.tick < _guard_until:
 		held |= InputCommand.GUARD
 		var g_aim := _guard_aim if _guard_aim != Vector2.ZERO else aim
-		return _finish(cmd, -1, g_aim, 2.0, held, 0)
+		return _finish(cmd, g_aim, 2.0, held, 0)
 
 	# --- Threat reaction ----------------------------------------------------------
-	if not threat.is_empty() and (FighterSM.is_actionable(me.state) or FighterSM.is_focusing(me.state)):
+	if not threat.is_empty() and (FighterSM.is_actionable(me.state) or FighterSM.is_focusing(me.state) or DashSystem.can_chain(me)):
 		var tid: int = threat["id"]
 		if not _reactions.has(tid):
-			_reactions[tid] = _choose_reaction(me, threat)
+			_reactions[tid] = _choose_reaction(sim, me, threat)
 		var reaction: StringName = _reactions[tid]
 		match reaction:
 			&"dash":
-				_focusing = false
-				var d := _escape_cardinal(sim, me, threat)
+				var dodge := _dodge(sim, me, seen, threat)
 				_reactions[tid] = &"done"
-				return _finish(cmd, CombatConst.vec_to_dir8(d, 0.1), aim, aim_dist, InputCommand.DASH, InputCommand.DASH)
+				if dodge.x >= 0:
+					_focusing = false
+					_next_move = sim.tick + _move_gap()
+					return _finish(cmd, aim, aim_dist, 0, 0, dodge)
 			&"guard":
 				_focusing = false
 				_guard_until = sim.tick + clampi(int(threat["ticks"]) + 10, 8, 40)
 				_guard_aim = ((threat["source"] as Vector2) - me.pos).normalized()
 				_reactions[tid] = &"done"
-				return _finish(cmd, -1, _guard_aim, 2.0, InputCommand.GUARD, InputCommand.GUARD)
-			&"walk":
-				_focusing = false
-				move = _escape_walk(sim, me, threat)
-				return _finish(cmd, CombatConst.vec_to_dir8(move, 0.1), aim, aim_dist, 0, 0)
-			_:
-				pass
+				return _finish(cmd, _guard_aim, 2.0, InputCommand.GUARD, InputCommand.GUARD)
 
 	# --- Focus / stamina management ------------------------------------------------
 	var dist := me.pos.distance_to(seen["pos"])
 	var vulnerable := _is_vulnerable(seen["state"])
 	if _focusing:
-		var done := me.stamina >= me.max_stamina() * 0.88
-		var danger := not threat.is_empty() or dist < 2.6
+		var done := me.stamina >= me.max_stamina() * 0.9
+		var danger := not threat.is_empty() or dist < 2.2 or _in_ram_lane(sim, me.pos, foe, seen)
 		if done or danger:
 			_focusing = false
 		else:
-			return _finish(cmd, -1, aim, aim_dist, InputCommand.FOCUS, 0)
+			return _finish(cmd, aim, aim_dist, InputCommand.FOCUS, 0)
 	elif FighterSM.is_actionable(me.state) and me.stamina_ratio() < profile.focus_threshold and threat.is_empty():
-		if dist > 4.5 or (vulnerable and seen["state"] != SM.FOCUSING):
+		var safe := not _in_ram_lane(sim, me.pos, foe, seen)
+		if (dist > 3.5 and safe) or (vulnerable and seen["state"] != SM.FOCUSING):
 			_focusing = true
-			return _finish(cmd, -1, aim, aim_dist, InputCommand.FOCUS, InputCommand.FOCUS)
+			return _finish(cmd, aim, aim_dist, InputCommand.FOCUS, InputCommand.FOCUS)
 
 	# --- Continue a basic string -------------------------------------------------
 	if sim.tick < _hold_attack_until and FighterSM.is_attacking(me.state):
@@ -128,30 +122,39 @@ func get_command(sim: BattleSim, team: int) -> InputCommand:
 		_next_decision = sim.tick + maxi(1, profile.decision_interval + rng.randi_range(-1, 2))
 		var choice := _choose_offense(sim, me, foe, seen, dist, vulnerable)
 		if not choice.is_empty():
-			var kind: StringName = choice["kind"]
-			if kind == &"dash_through":
-				return _finish(cmd, CombatConst.vec_to_dir8(choice["dir"], 0.1), aim, aim_dist, InputCommand.DASH, InputCommand.DASH)
+			if choice["kind"] == &"ram":
+				_next_move = sim.tick + _move_gap()
+				return _finish(cmd, aim, aim_dist, held, 0, choice["dash"])
 			var bit: int = choice["bit"]
 			var a: Array = choice["aim"]
 			if bit == InputCommand.ATTACK and rng.randf() < profile.combo_skill:
 				_hold_attack_until = sim.tick + 50
-			return _finish(cmd, -1, a[0], a[1], held | bit, bit)
+			return _finish(cmd, a[0], a[1], held | bit, bit)
 
-	# --- Movement --------------------------------------------------------------------
-	if FighterSM.is_actionable(me.state) or me.state == SM.ATTACK_RECOVERY:
-		move = _movement(sim, me, seen, dist)
-	return _finish(cmd, CombatConst.vec_to_dir8(move, 0.15), aim, aim_dist, held, press)
+	# --- Repositioning (a dash, never a walk) ----------------------------------------
+	if (FighterSM.is_actionable(me.state) or DashSystem.can_chain(me)) and sim.tick >= _next_move:
+		var move := _reposition(sim, me, foe, seen, dist)
+		_next_move = sim.tick + _move_gap()
+		if move.x >= 0:
+			return _finish(cmd, aim, aim_dist, held, press, move)
+	return _finish(cmd, aim, aim_dist, held, press)
 
 
-func _finish(cmd: InputCommand, move_dir: int, aim: Vector2, aim_dist: float, held: int, press: int) -> InputCommand:
-	cmd.move_dir = move_dir
+func _finish(cmd: InputCommand, aim: Vector2, aim_dist: float, held: int, press: int, dash := Vector2i(-1, 0)) -> InputCommand:
 	if aim != Vector2.ZERO:
 		var err := deg_to_rad(rng.randfn(0.0, profile.aim_error_deg * 0.35))
 		cmd.set_aim(aim.rotated(err), aim_dist)
 	cmd.held = held
 	cmd.pressed = InputCommand.edges(_prev_held, held) | press
 	_prev_held = held
+	if dash.x >= 0:
+		cmd.set_dash(dash.x, dash.y)
 	return cmd
+
+
+## Ticks between voluntary repositioning dashes.
+func _move_gap() -> int:
+	return int(round((14.0 + profile.decision_interval * 2.5) * profile.patience)) + rng.randi_range(0, 18)
 
 
 # --- Perception -----------------------------------------------------------------
@@ -160,10 +163,11 @@ func _remember(sim: BattleSim, foe: Fighter) -> void:
 	_history.append({
 		"tick": sim.tick,
 		"pos": foe.pos,
-		"vel": foe.vel,
+		"vel": (foe.pos - foe.prev_pos) * CombatConst.TICK_RATE,
 		"state": foe.state,
 		"guarding": foe.state == SM.GUARDING,
 		"facing": foe.facing,
+		"stamina": foe.stamina,
 	})
 	var keep := profile.reaction_ticks + 2
 	while _history.size() > keep:
@@ -172,13 +176,27 @@ func _remember(sim: BattleSim, foe: Fighter) -> void:
 
 func _perceived(foe: Fighter) -> Dictionary:
 	if _history.is_empty():
-		return {"pos": foe.pos, "vel": foe.vel, "state": foe.state, "guarding": false, "facing": foe.facing}
+		return {"pos": foe.pos, "vel": Vector2.ZERO, "state": foe.state, "guarding": false, "facing": foe.facing, "stamina": foe.stamina}
 	var idx := maxi(0, _history.size() - 1 - profile.reaction_ticks)
 	return _history[idx]
 
 
 func _is_vulnerable(state: int) -> bool:
 	return state in [SM.FOCUS_ENTER, SM.FOCUSING, SM.FOCUS_EXIT, SM.STUNNED, SM.ATTACK_RECOVERY, SM.DASH_RECOVERY]
+
+
+## True when the foe could ram `p` from where it is seen: same row or column,
+## within its dash reach, with stamina for it.
+func _in_ram_lane(sim: BattleSim, p: Vector2, foe: Fighter, seen: Dictionary) -> bool:
+	var fp: Vector2 = seen["pos"]
+	var d := p - fp
+	var aligned := absf(d.x) < 0.5 or absf(d.y) < 0.5
+	if not aligned:
+		return false
+	var reach := float(DashSystem.max_cells(foe)) + 0.5
+	if d.length() > reach or float(seen["stamina"]) < foe.stats.dash.cost_for(maxi(1, int(round(d.length())))):
+		return false
+	return not sim.geometry.sweep(fp, d, 0.3).hit
 
 
 func _assess_threat(sim: BattleSim, me: Fighter, foe: Fighter) -> Dictionary:
@@ -237,57 +255,59 @@ func _assess_threat(sim: BattleSim, me: Fighter, foe: Fighter) -> Dictionary:
 				if ticks < best_ticks:
 					best = {"kind": &"melee", "ticks": ticks, "center": foe.pos, "radius": reach, "source": foe.pos, "guardable": true, "id": -1000000 - foe.id * 1000 - (sim.tick - foe.state_tick) % 1000}
 					best_ticks = ticks
+	# An incoming ram: the foe is winding up a dash down our lane.
+	if foe.state == SM.DASH_START and foe.state_tick >= react / 3:
+		var lane := ArenaGeometry.segment_circle_t(foe.dash_home, foe.dash_to, me.pos, foe.radius() + me.radius())
+		if lane >= 0.0:
+			var ticks2 := float(foe.state_duration - foe.state_tick) + 3.0
+			if ticks2 < best_ticks:
+				best = {"kind": &"ram", "ticks": ticks2, "dir": foe.dash_dir, "source": foe.pos, "guardable": true, "id": -2000000 - foe.id * 1000 - (sim.tick - foe.state_tick) % 1000}
 	return best
 
 
 # --- Reactions --------------------------------------------------------------------
 
-func _choose_reaction(me: Fighter, threat: Dictionary) -> StringName:
+func _choose_reaction(sim: BattleSim, me: Fighter, threat: Dictionary) -> StringName:
 	if rng.randf() < profile.mistake_chance:
 		return &"none"
-	var can_dash := StaminaSystem.can_afford(me, me.stats.dash.stamina_cost) and me.stats.dash.distance > 0.0
+	var can_dash := StaminaSystem.can_afford(me, me.stats.dash.min_cost()) and me.stats.dash.max_cells > 0
 	if can_dash and rng.randf() < profile.dodge_chance:
 		return &"dash"
 	if bool(threat.get("guardable", true)) and rng.randf() < profile.guard_chance and me.stamina > 8.0:
 		return &"guard"
-	if float(threat["ticks"]) > 14.0:
-		return &"walk"
+	if can_dash and float(threat["ticks"]) > 16.0 and rng.randf() < 0.5:
+		return &"dash"
 	return &"none"
 
 
-func _escape_cardinal(sim: BattleSim, me: Fighter, threat: Dictionary) -> Vector2:
-	var options: Array[Vector2] = []
+## The best short dash out of a threat's path (projectile, line, area or ram).
+func _dodge(sim: BattleSim, me: Fighter, seen: Dictionary, threat: Dictionary) -> Vector2i:
+	var best := Vector2i(-1, 0)
+	var best_score := -INF
+	for dir in 4:
+		for cells in range(1, mini(3, DashSystem.max_cells(me)) + 1):
+			var p := DashSystem.plan(sim, me, dir, cells)
+			if not p.ok():
+				continue
+			var score := _escape_score(p.target, me, threat) - p.cost * 0.01 - cells * 0.05
+			score += _band_score(me, p.target, seen) * 0.5
+			if score > best_score:
+				best_score = score
+				best = Vector2i(dir, cells)
+	return best
+
+
+func _escape_score(p: Vector2, me: Fighter, threat: Dictionary) -> float:
 	match threat["kind"]:
-		&"projectile", &"line":
+		&"projectile", &"line", &"ram":
 			var d: Vector2 = threat["dir"]
-			var p := Cardinal.snap(CombatConst.perpendicular(d))
-			options = [p, -p]
-			if threat.has("side"):
-				options = [p * float(threat["side"]), -p * float(threat["side"])]
+			var src: Vector2 = threat["source"]
+			var off := absf((p - src).dot(CombatConst.perpendicular(d)))
+			return clampf(off / (me.hurt_radius() + 0.8), 0.0, 1.5)
 		_:
-			var away: Vector2 = me.pos - (threat.get("center", me.pos) as Vector2)
-			if away.length_squared() < 0.01:
-				away = -me.facing
-			var a := Cardinal.snap(away)
-			options = [a, Cardinal.snap(CombatConst.perpendicular(a)), -Cardinal.snap(CombatConst.perpendicular(a))]
-	var dist := me.stats.dash.distance
-	for o in options:
-		var target := me.pos + o * dist
-		if sim.geometry.is_circle_free(target, me.radius()):
-			return o
-	return options[0]
-
-
-func _escape_walk(sim: BattleSim, me: Fighter, threat: Dictionary) -> Vector2:
-	var dir: Vector2
-	match threat["kind"]:
-		&"projectile", &"line":
-			dir = CombatConst.perpendicular(threat["dir"])
-			if threat.has("side"):
-				dir *= float(threat["side"])
-		_:
-			dir = (me.pos - (threat.get("center", me.pos) as Vector2)).normalized()
-	return _avoid_walls(sim, me, dir)
+			var c: Vector2 = threat.get("center", me.pos)
+			var r := float(threat.get("radius", 1.5))
+			return clampf((p.distance_to(c) - r) / 1.5 + 1.0, 0.0, 1.5)
 
 
 # --- Offense -------------------------------------------------------------------------
@@ -309,14 +329,14 @@ func _choose_offense(sim: BattleSim, me: Fighter, foe: Fighter, seen: Dictionary
 			best_score = score
 			var bit: int = InputCommand.ATTACK if slot < 0 else InputCommand.ABILITY_BITS[slot]
 			best = {"kind": &"ability", "bit": bit, "aim": _aim_for(me, seen, ability)}
-	# Dash-through opportunity
-	var dt := _dash_through_option(sim, me, foe, seen)
-	if not dt.is_empty():
+	# Ram opportunity
+	var ram := _ram_option(sim, me, foe, seen)
+	if ram.x >= 0:
 		var s := 0.55 + profile.dash_through_chance * 0.5 + rng.randf_range(-0.1, 0.1)
 		if vulnerable:
-			s += 0.15
+			s += 0.2
 		if s > best_score and rng.randf() < profile.dash_through_chance + 0.2:
-			best = dt
+			best = {"kind": &"ram", "dash": ram}
 	return best
 
 
@@ -374,77 +394,93 @@ func _aim_for(me: Fighter, seen: Dictionary, ability: AbilityDefinition) -> Arra
 		elif c is LineWaveComponent:
 			var w := c as LineWaveComponent
 			lead_t = float(ability.startup_ticks + w.telegraph_ticks) / 60.0 * 0.4
-	target += vel * lead_t * profile.lead_accuracy
+	# Dashes are short bursts: only lead a little, or we aim past the landing.
+	target += vel * minf(lead_t, 0.15) * profile.lead_accuracy
 	var to := target - me.pos
 	if to.length() < 0.01:
 		to = me.facing
 	return [to.normalized(), to.length()]
 
 
-func _dash_through_option(sim: BattleSim, me: Fighter, foe: Fighter, seen: Dictionary) -> Dictionary:
-	var prof := me.stats.dash
-	if prof.distance <= 0.0 or not StaminaSystem.can_afford(me, prof.stamina_cost + 10.0):
-		return {}
-	if foe.dash_through_immunity > 0 or foe.steadfast > 0:
-		return {}
+## A dash whose path runs through the foe (it must be rammable and not
+## guarding toward us), with stamina left over.
+func _ram_option(sim: BattleSim, me: Fighter, foe: Fighter, seen: Dictionary) -> Vector2i:
+	if me.stats.dash.max_cells <= 0 or foe.dash_through_immunity > 0 or foe.steadfast > 0:
+		return Vector2i(-1, 0)
 	var to: Vector2 = (seen["pos"] as Vector2) - me.pos
-	var card := Cardinal.snap(to)
-	var along := to.dot(card)
-	var side := absf(to.dot(CombatConst.perpendicular(card)))
-	if along < 0.5 or along > prof.distance + 0.4:
-		return {}
-	if side > me.radius() + foe.radius() - 0.15:
-		return {}
+	var dir := Cardinal.index_of(to)
+	var card := Cardinal.from_index(dir)
+	if absf(to.dot(CombatConst.perpendicular(card))) > me.radius() + foe.radius() - 0.2:
+		return Vector2i(-1, 0)
+	var cells := int(ceil(to.dot(card) - 0.25))
+	if cells < 1 or cells > DashSystem.max_cells(me):
+		return Vector2i(-1, 0)
 	# Don't dash into a guard facing us.
 	if bool(seen["guarding"]) and (seen["facing"] as Vector2).dot(-card) > 0.0:
-		return {}
-	return {"kind": &"dash_through", "dir": card}
+		return Vector2i(-1, 0)
+	var p := DashSystem.plan(sim, me, dir, cells)
+	if not p.ok() or not p.rams.has(foe.id) or me.stamina - p.cost < 6.0:
+		return Vector2i(-1, 0)
+	return Vector2i(dir, cells)
 
 
-# --- Movement --------------------------------------------------------------------------
+# --- Repositioning ----------------------------------------------------------------------
 
 func _style(me: Fighter) -> Vector2:
 	if me.stamina_ratio() < profile.focus_threshold:
-		return Vector2(5.0, 7.5)  # back off to make room to Focus
+		return Vector2(4.5, 7.5)  # back off to make room to Focus
 	match me.species.archetype:
 		"Agile":
-			return Vector2(3.2, 5.6)
+			return Vector2(3.0, 5.5)
 		"Heavy":
-			return Vector2(0.0, 1.8)
+			return Vector2(0.9, 2.1)
 	return Vector2(1.5, 4.0)
 
 
-func _movement(sim: BattleSim, me: Fighter, seen: Dictionary, dist: float) -> Vector2:
-	if sim.tick >= _strafe_flip_tick:
-		_strafe_sign = -_strafe_sign if rng.randf() < 0.6 else _strafe_sign
-		_strafe_flip_tick = sim.tick + rng.randi_range(45, 120)
+## 0 inside the preferred range band, falling linearly with every unit
+## outside it (so a far-off creature always wants to close in).
+func _band_score(me: Fighter, p: Vector2, seen: Dictionary) -> float:
 	var band := _style(me)
-	var to: Vector2 = (seen["pos"] as Vector2) - me.pos
-	var n := to.normalized() if to.length() > 0.01 else me.facing
-	var perp := CombatConst.perpendicular(n) * _strafe_sign
-	var desired: Vector2
-	if dist > band.y:
-		desired = n + perp * 0.35
-	elif dist < band.x:
-		desired = -n + perp * 0.5
-	else:
-		desired = perp + n * 0.2 * signf(dist - (band.x + band.y) * 0.5)
-	return _avoid_walls(sim, me, desired.normalized())
+	var d := p.distance_to(seen["pos"])
+	var outside := maxf(0.0, maxf(band.x - d, d - band.y))
+	return -outside * 0.18
 
 
-func _avoid_walls(sim: BattleSim, me: Fighter, dir: Vector2) -> Vector2:
-	if dir == Vector2.ZERO:
-		return dir
-	var probe := 1.2
-	for step in [0, 45, -45, 90, -90, 135, -135]:
-		var d: Vector2 = dir.rotated(deg_to_rad(step))
-		var s := sim.geometry.sweep(me.pos, d * probe, me.radius())
-		if not s.hit:
-			if step != 0 and absf(step) >= 90:
-				_strafe_sign = -_strafe_sign
-			return d
-	# Cornered: head for the arena center.
-	return (sim.geometry.bounds.get_center() - me.pos).normalized()
+## Scores standing still against every legal dash and returns the best dash
+## if it beats staying put by a margin.
+func _reposition(sim: BattleSim, me: Fighter, foe: Fighter, seen: Dictionary, dist: float) -> Vector2i:
+	var reserve := me.max_stamina() * (0.25 if me.stamina_ratio() > profile.focus_threshold else 0.05)
+	var stay := _spot_score(sim, me, foe, seen, me.pos)
+	var best := Vector2i(-1, 0)
+	var best_score := stay + 0.06 + 0.06 * profile.patience
+	for dir in 4:
+		for cells in range(1, DashSystem.max_cells(me) + 1):
+			var p := DashSystem.plan(sim, me, dir, cells)
+			if not p.ok() or p.cells != cells:
+				continue
+			if me.stamina - p.cost < reserve and dist > 2.0:
+				continue
+			var score := _spot_score(sim, me, foe, seen, p.target)
+			score -= p.cost / me.max_stamina() * 0.3
+			score += rng.randf_range(-0.08, 0.08) * (1.0 + profile.mistake_chance * 3.0)
+			if score > best_score:
+				best_score = score
+				best = Vector2i(dir, cells)
+	return best
+
+
+func _spot_score(sim: BattleSim, me: Fighter, foe: Fighter, seen: Dictionary, p: Vector2) -> float:
+	var score := _band_score(me, p, seen)
+	if _in_ram_lane(sim, p, foe, seen):
+		score -= 0.45 * (1.15 - profile.aggression * 0.5)
+	# Room to manoeuvre: edges and corners are traps.
+	var b := sim.geometry.bounds
+	var edge := minf(minf(p.x - b.position.x, b.end.x - p.x), minf(p.y - b.position.y, b.end.y - p.y))
+	if edge < 1.0:
+		score -= 0.18
+	if edge < 1.0 and minf(p.x - b.position.x, b.end.x - p.x) < 1.0 and minf(p.y - b.position.y, b.end.y - p.y) < 1.0:
+		score -= 0.2
+	return score
 
 
 func _line_clear(sim: BattleSim, from: Vector2, to: Vector2, radius: float) -> bool:

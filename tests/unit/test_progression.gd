@@ -36,7 +36,7 @@ func test_identity_preserved_under_normalization() -> void:
 	var ranked := BattleRuleset.make(BattleRuleset.Kind.RANKED)
 	var e := StatCalculator.compute(H.species(H.EMBERLYN), CreatureInstance.create(H.species(H.EMBERLYN), 50, 1), ranked)
 	var s := StatCalculator.compute(H.species(H.STONEBACK), CreatureInstance.create(H.species(H.STONEBACK), 50, 1), ranked)
-	assert_gt(e.movement.speed, s.movement.speed, "Emberlyn stays faster")
+	assert_gt(float(e.dash.max_cells), float(s.dash.max_cells), "Emberlyn still dashes farther")
 	assert_gt(s.max_hp, e.max_hp, "Stoneback stays tankier")
 	assert_gt(s.stamina.max_stamina, e.stamina.max_stamina, "different stamina pools")
 

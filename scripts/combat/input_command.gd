@@ -3,9 +3,11 @@ extends RefCounted
 ## One tick of player intent — the only thing a client will ever send to an
 ## authoritative battle server. The simulation never reads Godot's Input.
 ##
-## Encoded size is 16 bytes (see encode()). Movement is an eight-way index so
-## diagonal speed normalization is guaranteed by construction; aim is
-## quantized so client prediction and server simulation see identical values.
+## There is no walking: a DASH press carries the dash itself (a board
+## direction and a number of cells), which the simulation validates and
+## clamps like any other untrusted input. Aim is quantized so client
+## prediction and server simulation see identical values. Encoded size is
+## 17 bytes (see encode()).
 
 const ATTACK := 1 << 0
 const DASH := 1 << 1
@@ -21,11 +23,13 @@ const SWITCH_3 := 1 << 10
 
 const ABILITY_BITS: Array[int] = [ABILITY_1, ABILITY_2, ABILITY_3, ABILITY_4]
 const SWITCH_BITS: Array[int] = [SWITCH_1, SWITCH_2, SWITCH_3]
+const MAX_DASH_CELLS := 63
 
 var tick: int = 0
 var sequence: int = 0
-## Eight-way movement index (CombatConst.DIR8_NAMES) or -1 for none.
-var move_dir: int = -1
+## Dash direction (Cardinal.DIRS index: 0 E, 1 S, 2 W, 3 N) or -1, and cells.
+var dash_dir: int = -1
+var dash_cells: int = 0
 ## Unit aim direction on the ground plane, or ZERO when the device has no aim
 ## (the creature then aims along its facing / auto-target).
 var aim: Vector2 = Vector2.ZERO
@@ -33,12 +37,6 @@ var aim: Vector2 = Vector2.ZERO
 var aim_distance: float = 0.0
 var held: int = 0
 var pressed: int = 0
-## Which movement axis was pressed most recently (Cardinal.AXIS_*).
-var axis_hint: int = Cardinal.AXIS_UNKNOWN
-
-
-func move_vector() -> Vector2:
-	return CombatConst.dir8_to_vec(move_dir)
 
 
 func is_held(bit: int) -> bool:
@@ -54,16 +52,28 @@ func set_aim(dir: Vector2, distance: float) -> void:
 	aim_distance = snappedf(clampf(distance, 0.0, 600.0), 0.01)
 
 
+## Requests a dash this tick.
+func set_dash(dir_index: int, cells: int) -> void:
+	dash_dir = dir_index
+	dash_cells = cells
+	held |= DASH
+	pressed |= DASH
+
+
+func has_dash() -> bool:
+	return was_pressed(DASH) and dash_dir >= 0 and dash_dir < 4 and dash_cells > 0
+
+
 func copy() -> InputCommand:
 	var c := InputCommand.new()
 	c.tick = tick
 	c.sequence = sequence
-	c.move_dir = move_dir
+	c.dash_dir = dash_dir
+	c.dash_cells = dash_cells
 	c.aim = aim
 	c.aim_distance = aim_distance
 	c.held = held
 	c.pressed = pressed
-	c.axis_hint = axis_hint
 	return c
 
 
@@ -71,16 +81,18 @@ func encode() -> PackedByteArray:
 	var buf := StreamPeerBuffer.new()
 	buf.put_u32(tick)
 	buf.put_u32(sequence)
-	buf.put_8(move_dir)
-	var has_aim := aim != Vector2.ZERO
+	# Dash: 0xFF = none, else cells (6 bits) << 2 | direction (2 bits).
+	var dash := 0xFF
+	if dash_dir >= 0 and dash_dir < 4 and dash_cells > 0:
+		dash = (mini(dash_cells, MAX_DASH_CELLS) << 2) | dash_dir
+	buf.put_u8(dash)
 	var aim_q := 0xFFFF
-	if has_aim:
+	if aim != Vector2.ZERO:
 		aim_q = int(round(fposmod(aim.angle(), TAU) / TAU * 4096.0)) % 4096
 	buf.put_u16(aim_q)
 	buf.put_u16(int(round(aim_distance * 100.0)))
 	buf.put_u16(held)
 	buf.put_u16(pressed)
-	buf.put_8(axis_hint)
 	return buf.data_array
 
 
@@ -90,7 +102,10 @@ static func decode(bytes: PackedByteArray) -> InputCommand:
 	var c := InputCommand.new()
 	c.tick = buf.get_u32()
 	c.sequence = buf.get_u32()
-	c.move_dir = buf.get_8()
+	var dash := buf.get_u8()
+	if dash != 0xFF:
+		c.dash_dir = dash & 3
+		c.dash_cells = dash >> 2
 	var aim_q := buf.get_u16()
 	if aim_q != 0xFFFF:
 		var a := float(aim_q) / 4096.0 * TAU
@@ -98,7 +113,6 @@ static func decode(bytes: PackedByteArray) -> InputCommand:
 	c.aim_distance = float(buf.get_u16()) / 100.0
 	c.held = buf.get_u16()
 	c.pressed = buf.get_u16()
-	c.axis_hint = buf.get_8()
 	return c
 
 
@@ -108,4 +122,4 @@ static func edges(prev_held: int, now_held: int) -> int:
 
 
 func _to_string() -> String:
-	return "Cmd(t=%d move=%d aim=%s held=%x pressed=%x)" % [tick, move_dir, aim, held, pressed]
+	return "Cmd(t=%d dash=%d×%d aim=%s held=%x pressed=%x)" % [tick, dash_dir, dash_cells, aim, held, pressed]

@@ -11,5 +11,5 @@ extends Resource
 @export var hitstun_taken_mult: float = 1.0
 ## Multiplies the dash-through stun this creature inflicts.
 @export var dash_through_stun_mult: float = 1.0
-## Extra walk speed (fraction) while stamina is below 30%.
+## Extra dash speed (fraction) while stamina is below 30%.
 @export var low_stamina_speed_bonus: float = 0.0

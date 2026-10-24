@@ -23,11 +23,10 @@ var pos: Vector2 = Vector2.ZERO
 var prev_pos: Vector2 = Vector2.ZERO
 var vel: Vector2 = Vector2.ZERO
 var facing: Vector2 = Vector2.RIGHT
-## Last valid cardinal facing (dash fallback direction).
+## Board direction of the last dash (or the cardinal nearest the facing).
 var cardinal_facing: Vector2 = Cardinal.EAST
 var aim: Vector2 = Vector2.RIGHT
 var aim_point: Vector2 = Vector2.ZERO
-var move_input: Vector2 = Vector2.ZERO
 
 # --- State machine ---------------------------------------------------------------
 var state: FighterSM.State = SM.IDLE
@@ -52,9 +51,17 @@ var lunge_ticks: int = 0
 var lunge_stop_on_hit: bool = true
 
 # --- Dash -----------------------------------------------------------------------
+## The latest requested dash (direction index + cells), kept with the
+## buffered DASH press so a dash queued during recovery still knows where to go.
+var dash_req_dir: int = -1
+var dash_req_cells: int = 0
 var dash_dir: Vector2 = Vector2.ZERO
-var dash_remaining: float = 0.0
-var dash_speed_tick: float = 0.0
+var dash_from: Vector2 = Vector2.ZERO  # where the windup started
+var dash_home: Vector2 = Vector2.ZERO  # cell centre the travel starts from
+var dash_to: Vector2 = Vector2.ZERO  # landing cell centre
+var dash_cells: int = 0
+var dash_travel_ticks: int = 0
+var dash_t: int = 0
 var dash_passed: Dictionary = {}  # fighter id -> true (already passed this dash)
 var dash_through_immunity: int = 0
 var dash_extra_recovery: int = 0

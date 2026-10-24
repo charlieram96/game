@@ -136,7 +136,7 @@ func on_tick(events: Array[BattleEvent]) -> void:
 			if _counter >= 2:
 				_complete()
 	# Keep the player topped up outside the stamina lesson so nothing stalls.
-	if id != "focus" and id != "dash_through" and me.stamina < me.stats.dash.stamina_cost and not FighterSM.is_focusing(me.state):
+	if id != "focus" and id != "dash_through" and me.stamina < me.stats.dash.min_cost() and not FighterSM.is_focusing(me.state):
 		sim.script_set_stamina(me, me.stamina + 0.6)
 
 

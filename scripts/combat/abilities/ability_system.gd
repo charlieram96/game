@@ -40,7 +40,7 @@ static func start(sim: BattleSim, f: Fighter, ability: AbilityDefinition, slot: 
 	f.ability_hit_landed = false
 	f.lunge_ticks = 0
 	capture_aim(f, ability)
-	f.vel *= ability.move_speed_mult
+	f.vel = Vector2.ZERO
 	sim.set_state(f, SM.ATTACK_START, ability.startup_ticks)
 	f.usage_for(ability.id)["uses"] += 1
 	sim.emit(BattleEvent.ABILITY_START, f, -1, f.pos, {
@@ -87,9 +87,7 @@ static func step(sim: BattleSim, f: Fighter, cmd: InputCommand) -> void:
 		SM.ATTACK_ACTIVE:
 			_run(sim, f, ability, Trigger.ACTIVE_TICK, f.state_tick)
 			_step_lunge(sim, f)
-	if ability.move_speed_mult > 0.0 and f.lunge_ticks <= 0:
-		MovementSystem.walk(sim, f, cmd.move_vector(), ability.move_speed_mult)
-	else:
+	if f.lunge_ticks <= 0:
 		MovementSystem.decelerate(sim, f, 80.0)
 
 
@@ -127,7 +125,9 @@ static func try_cancel_recovery(sim: BattleSim, f: Fighter, cmd: InputCommand) -
 	if ability.dash_cancel_from_recovery_tick >= 0 and f.state_tick >= ability.dash_cancel_from_recovery_tick:
 		if f.buffer.has(InputCommand.DASH, sim.tick):
 			f.buffer.consume(InputCommand.DASH)
-			if DashSystem.try_start(sim, f, cmd):
+			if DashSystem.try_start(sim, f, f.dash_req_dir, f.dash_req_cells):
+				f.dash_req_dir = -1
+				f.dash_req_cells = 0
 				f.current_ability = null
 				f.current_slot = -1
 				return true

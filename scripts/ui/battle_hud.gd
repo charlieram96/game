@@ -126,7 +126,7 @@ func _build_ability_bar() -> void:
 	if f == null:
 		return
 	var defs := [
-		[-1, f.stats.basic, "LMB"],
+		[-1, f.stats.basic, "Click"],
 		[0, f.stats.abilities[0], "Q"],
 		[1, f.stats.abilities[1], "E"],
 		[2, f.stats.abilities[2], "R"],
@@ -139,7 +139,7 @@ func _build_ability_bar() -> void:
 		s.key_hint = d[2]
 		ability_bar.add_child(s)
 		slots.append(s)
-	for extra in [["dash", "RMB", "Dash"], ["focus", "Shift", "Focus"], ["guard", "Space", "Guard"]]:
+	for extra in [["dash", "Drag", "Dash"], ["focus", "Shift", "Focus"], ["guard", "Space", "Guard"]]:
 		var u := AbilitySlot.new()
 		u.utility = extra[0]
 		u.key_hint = extra[1]
@@ -353,7 +353,7 @@ class FighterPanel:
 		if mirrored:
 			st_rect.position.x = bar_x + bar_w * 0.18
 		var ratio := fighter.stamina_ratio()
-		var cost := fighter.stats.dash.stamina_cost
+		var cost := fighter.stats.dash.min_cost()
 		var can_dash := fighter.stamina >= cost
 		var scol := Color(0.45, 0.85, 1.0) if can_dash else Color(1.0, 0.5, 0.4)
 		if fighter.state == SM.FOCUSING:
@@ -425,7 +425,7 @@ class AbilitySlot:
 			_cd_ratio = 0.0
 			match utility:
 				"dash":
-					_no_cost = f.stamina < f.stats.dash.stamina_cost
+					_no_cost = f.stamina < f.stats.dash.min_cost()
 					_active = FighterSM.is_dashing(f.state)
 				"focus":
 					_no_cost = false

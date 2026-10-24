@@ -293,10 +293,7 @@ func _step_settle(inputs: Dictionary) -> void:
 				continue
 			_tick_timers(f)
 			_advance_state(f)
-			if FighterSM.is_actionable(f.state):
-				MovementSystem.walk(self, f, cmd.move_vector())
-			else:
-				_state_logic(f, _empty_cmd)
+			_state_logic(f, _empty_cmd)
 		MovementSystem.apply_knockback(self, f)
 	AbilitySystem.update_volumes(self)
 	for v in volumes:
@@ -365,7 +362,9 @@ func _step_fighter(f: Fighter, cmd: InputCommand) -> void:
 		return
 	f.held = cmd.held
 	f.buffer.record(cmd.pressed, tick)
-	f.move_input = cmd.move_vector()
+	if cmd.has_dash():
+		f.dash_req_dir = cmd.dash_dir
+		f.dash_req_cells = cmd.dash_cells
 	_update_aim(f, cmd)
 	if f.hitstop > 0:
 		f.hitstop -= 1
@@ -426,11 +425,7 @@ func _update_aim(f: Fighter, cmd: InputCommand) -> void:
 			f.aim_point = f.pos + f.facing * 3.0
 	# Facing follows the aim while able to turn; otherwise the action's direction.
 	if FighterSM.is_actionable(f.state) or f.state == SM.GUARDING or FighterSM.is_focusing(f.state):
-		if cmd.aim != Vector2.ZERO or f.move_input == Vector2.ZERO:
-			f.facing = f.aim
-		else:
-			f.facing = f.move_input
-		f.cardinal_facing = Cardinal.snap(f.facing)
+		f.facing = f.aim
 
 
 ## Time-driven phase transitions.
@@ -493,6 +488,12 @@ func _handle_actions(f: Fighter, cmd: InputCommand) -> void:
 				GuardSystem.release(self, f)
 			else:
 				return
+		SM.DASH_RECOVERY:
+			# Dash chaining: a buffered dash may cut the landing short.
+			if DashSystem.can_chain(f) and f.buffer.has(InputCommand.DASH, tick):
+				f.buffer.consume(InputCommand.DASH)
+				_try_dash(f)
+			return
 	if not FighterSM.is_actionable(f.state):
 		return
 	var b := f.buffer
@@ -506,7 +507,7 @@ func _handle_actions(f: Fighter, cmd: InputCommand) -> void:
 	# 2) Dash
 	if b.has(InputCommand.DASH, tick):
 		b.consume(InputCommand.DASH)
-		if DashSystem.try_start(self, f, cmd):
+		if _try_dash(f):
 			return
 	# 3) Guard (hold)
 	if cmd.is_held(InputCommand.GUARD) or b.has(InputCommand.GUARD, tick):
@@ -530,27 +531,27 @@ func _handle_actions(f: Fighter, cmd: InputCommand) -> void:
 		StaminaSystem.try_enter(self, f)
 
 
-## Per-tick behaviour of the current state.
+func _try_dash(f: Fighter) -> bool:
+	var started := DashSystem.try_start(self, f, f.dash_req_dir, f.dash_req_cells)
+	f.dash_req_dir = -1
+	f.dash_req_cells = 0
+	return started
+
+
+## Per-tick behaviour of the current state. Nothing walks: creatures stand
+## their ground unless a dash, a lunge or knockback moves them.
 func _state_logic(f: Fighter, cmd: InputCommand) -> void:
 	match f.state:
-		SM.IDLE, SM.MOVING:
-			var move := cmd.move_vector()
-			MovementSystem.walk(self, f, move)
-			var want := SM.MOVING if move != Vector2.ZERO else SM.IDLE
-			if want != f.state:
-				set_state(f, want)
 		SM.FOCUSING:
 			StaminaSystem.regen(self, f)
+		SM.DASH_START:
+			DashSystem.step_windup(self, f)
 		SM.DASH_ACTIVE:
 			DashSystem.step_active(self, f)
 		SM.ATTACK_START, SM.ATTACK_ACTIVE, SM.ATTACK_RECOVERY:
 			AbilitySystem.step(self, f, cmd)
 		SM.GUARDING:
-			var gm := f.stats.movement.guard_move_mult
-			if gm > 0.0:
-				MovementSystem.walk(self, f, cmd.move_vector(), gm)
-			else:
-				MovementSystem.decelerate(self, f, 60.0)
+			MovementSystem.decelerate(self, f, 60.0)
 		_:
 			MovementSystem.decelerate(self, f, 40.0)
 
