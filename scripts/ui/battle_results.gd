@@ -94,7 +94,7 @@ func show_results(result: Dictionary, setup: BattleSetup) -> void:
 	var rows := [
 		["Damage dealt", str(int(round(float(rec.get("damage_dealt", 0.0)))))],
 		["Hits landed", str(int(rec.get("hits", 0)))],
-		["Dash-through stuns", str(int(rec.get("dash_throughs", 0)))],
+		["Rams", str(int(rec.get("dash_throughs", 0)))],
 		["Perfect guards", str(int(rec.get("perfect_guards", 0)))],
 		["Blocks", str(int(rec.get("blocks", 0)))],
 		["Battle time", "%.1f s" % float(result.get("duration_sec", 0.0))],

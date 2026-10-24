@@ -163,8 +163,11 @@ rewards. It never trusts client-provided inventory, XP, damage or results.
   lighting presets (morning, day, golden, dusk, night) with fog and glow.
 * **Post:** tilt-shift depth of field, grading and vignette (tilt-shift can
   be turned off in Settings).
-* **Cameras:** battle is orthographic at a 44 deg pitch, fixed, reframed to
-  fit the arena at any aspect ratio, and shakes by translation only. The
+* **Cameras:** battle is orthographic at a 54 deg pitch, fixed, framed so
+  the board fills the screen between the HUD bands at any aspect ratio (side
+  insets keep it clear of the touch buttons). Shake is a translation; kicks
+  and zoom punches are added on top of the rest pose and never move the
+  aimed cell. The
   overworld is a perspective follow camera at a 32 deg pitch, distance 23,
   FOV 30, with cutscene focus points.
 

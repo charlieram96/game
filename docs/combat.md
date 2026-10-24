@@ -24,7 +24,7 @@ Presentation is in `scripts/combat/view/`.
   interpolates between ticks.
 * The arena is a **flat plane**. Positions are `Vector2(x = east, y =
   south)` in world units (1 unit = 1 logical cell = 24 sprite pixels). The
-  orthographic camera is pitched 44 deg and never rotates. Sprites are
+  orthographic camera is pitched 54 deg and never rotates. Sprites are
   stretched by 1/cos(pitch) so they keep their proportions. The camera can't
   affect ranges, distances or hits.
 * **Collision is exact:** circles move through a rectangle with circle and
@@ -529,5 +529,9 @@ a mouse.
 
 | Arena | Size | Obstacles | Spawns |
 | --- | --- | --- | --- |
-| The Ringstones | 14 x 9 | Two standing stones (radius 0.55) at (-2.3, -1.9) and (2.3, 1.9), point-symmetric so neither side is favored | (-4.8, 0) and (4.8, 0) |
-| Mossford Training Yard | 13 x 8 | None | (-4, 0) and (3, 0) |
+| The Ringstones | 14 x 9 cells | Two standing stones (radius 0.45) on the cell centres (-2.5, -2) and (2.5, 2), point-symmetric so neither side is favored | (-4.5, 0) and (4.5, 0) |
+| Mossford Training Yard | 13 x 9 cells | None | (-4, 0) and (3, 0) |
+
+The Ringstones floor is laid with one flagstone per cell, so the board's
+lanes are visible at a glance; the training yard is packed sand on the same
+grid.
