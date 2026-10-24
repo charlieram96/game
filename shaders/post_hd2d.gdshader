@@ -26,7 +26,7 @@ void fragment() {
 	vec3 col = textureLod(screen, SCREEN_UV, amount * max_lod).rgb;
 	if (impact > 0.001) {
 		vec2 dc = SCREEN_UV - impact_center;
-		vec2 off = dc * impact * 0.022;
+		vec2 off = dc * impact * 0.014;
 		col.r = textureLod(screen, SCREEN_UV + off, amount * max_lod).r;
 		col.b = textureLod(screen, SCREEN_UV - off, amount * max_lod).b;
 	}
