@@ -20,6 +20,7 @@ idea is fun. It contains:
   - Duel Corin's Stoneback at the Ringstones.
   - Follow the tremor to the Dawn Shrine.
 - **Free Battle**: any kith against an AI at four difficulty levels, with normalized ranked stats.
+- **Dash Training**: the training-yard tutorial on its own, to learn drag-to-dash.
 - **Local Versus**: two players on one keyboard, or with gamepads.
 
 | | |

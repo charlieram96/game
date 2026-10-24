@@ -36,8 +36,8 @@ tutorial, the first story chapter and an arena.
 **Playable now**
 
 * Title screen: Continue, New Journey, Free Battle (Emberlyn or Stoneback vs
-  an AI on Easy / Normal / Hard), Local Versus (two players on one keyboard),
-  Settings, How to Play.
+  an AI on Easy / Normal / Hard), Dash Training (the training-yard tutorial on
+  its own), Local Versus (two players on one keyboard), Settings, How to Play.
 * Chapter 1, "The Kindling": the Mossford region (village, stream and bridge,
   the Glimmerwood, north meadow and pond, training yard, the Ringstones, the
   Dawn Shrine) with a morning-to-night progression.
