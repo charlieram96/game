@@ -178,6 +178,12 @@ func _pick(i: int) -> void:
 
 
 func _process(delta: float) -> void:
+	if Game.autoplay and active:
+		if _waiting_choice:
+			_pick(0)
+		else:
+			_advance()
+		return
 	if not active or not _typing:
 		return
 	var total := text_label.get_total_character_count()

@@ -178,6 +178,8 @@ func _quit_to_title() -> void:
 
 ## Simple name prompt. Awaitable; returns the entered (or default) name.
 func ask_name(title: String, default_name: String) -> String:
+	if Game.autoplay:
+		return default_name
 	var layer := CanvasLayer.new()
 	layer.layer = 40
 	add_child(layer)
@@ -218,6 +220,8 @@ func ask_name(title: String, default_name: String) -> String:
 
 ## The end-of-chapter card. Awaitable.
 func chapter_card() -> void:
+	if Game.autoplay:
+		return
 	var layer := CanvasLayer.new()
 	layer.layer = 60
 	add_child(layer)

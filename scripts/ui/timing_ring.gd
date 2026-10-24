@@ -38,6 +38,8 @@ func _ready() -> void:
 
 ## Runs one attempt. Awaitable: returns true on success.
 func run() -> bool:
+	if Game.autoplay:
+		return true
 	visible = true
 	_ring = START
 	_t = 0.0

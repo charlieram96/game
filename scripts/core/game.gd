@@ -7,6 +7,10 @@ const WORLD_SCENE := "res://scenes/world/mossford.tscn"
 const BATTLE_SCENE := "res://scenes/combat/battle.tscn"
 
 var last_result: Dictionary = {}
+## Test/demo hook: dialogue auto-advances, prompts take defaults, mini-games
+## succeed and scene changes for battles are recorded instead of performed.
+var autoplay := false
+var autoplay_requests: Array = []
 var _pending_battle: BattleSetup = null
 var _battle_return := ""
 var _fade_layer: CanvasLayer
@@ -34,6 +38,9 @@ func _process(delta: float) -> void:
 # --- Scene routing --------------------------------------------------------------------
 
 func goto_scene(path: String, fade_time: float = 0.35) -> void:
+	if autoplay:
+		autoplay_requests.append(path)
+		return
 	if _busy:
 		return
 	_busy = true
@@ -59,6 +66,9 @@ func flash_white(duration: float = 0.25) -> void:
 # --- Battles -------------------------------------------------------------------------------
 
 func start_battle(setup: BattleSetup, return_scene: String = "") -> void:
+	if autoplay:
+		autoplay_requests.append(setup)
+		return
 	_pending_battle = setup
 	_battle_return = return_scene
 	Audio.sfx(&"fight_start", -6.0)
