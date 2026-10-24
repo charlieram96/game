@@ -383,7 +383,8 @@ class AimMarker:
 		ghost.position = _marker_pos + Vector3(0, 0.0, 0.001)
 		var c := team_color if affordable else NO_STAMINA_COLOR
 		ghost.set_param("tint", c)
-		ghost.set_param("opacity", (0.42 + 0.08 * sin(Time.get_ticks_msec() * 0.009)) * opacity)
+		ghost.set_param("opacity", (0.56 + 0.08 * sin(Time.get_ticks_msec() * 0.009)) * opacity)
+		ghost.set_param("energy", 1.7)
 
 	func _sounds(plan: DashPlan, aim: DashAim) -> void:
 		var key := Vector3i(plan.dir_index, plan.cells, 1 if aim.cancelled else 0)

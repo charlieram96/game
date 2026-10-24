@@ -128,13 +128,15 @@ void fragment() {
 		}
 		// A sheen sweeping from the creature to the landing cell.
 		float head = fract(TIME * 0.85) * (min(reveal, cell_span) + 1.6) - 0.8;
-		float sheen = exp(-pow((s - head) * 2.4, 2.0));
+		float sd = (s - head) * 2.4;
+		float sheen = exp(-sd * sd);
 		o = over(o, light, sheen * inside * 0.35);
 		o = over(o, light, border);
 		if (!landing) {
 			// One chevron per tile, lit in sequence like runway lights.
 			float wave_head = fract(TIME * scroll_speed * 0.5) * (min(reveal, cell_span) + 2.0) - 1.0;
-			float lit = exp(-pow((float(k) + 0.5 - wave_head) * 1.3, 2.0));
+			float wd = (float(k) + 0.5 - wave_head) * 1.3;
+			float lit = exp(-wd * wd);
 			float nudge = 0.05 * lit;
 			float cd = sd_chevron(q - vec2(nudge, 0.0), 0.36 * pop, 0.042 * pop);
 			if (ram) {

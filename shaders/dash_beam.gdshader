@@ -12,6 +12,6 @@ void fragment() {
 	float fade = pow(1.0 - h, 2.2);
 	float bands = 0.75 + 0.25 * sin((h * 9.0 - TIME * 3.0) * 6.2831853 * 0.5);
 	// Edges of the column (seen side-on) glow a little more than its middle.
-	float rim = 0.6 + 0.4 * pow(abs(UV.x * 2.0 - 1.0), 0.5);
+	float rim = 0.6 + 0.4 * (1.0 - abs(dot(normalize(NORMAL), normalize(VIEW))));
 	ALBEDO = color.rgb * fade * bands * rim * 0.55 * opacity;
 }
