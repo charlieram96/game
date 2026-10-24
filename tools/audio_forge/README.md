@@ -21,11 +21,12 @@ check in the report fails.
 
 | | folder | format | levels |
 |---|---|---|---|
-| SFX (75) | `assets/audio/sfx/` | 44.1 kHz mono 16-bit PCM | peak-normalised per category: impacts -1 dBFS, most hits/spells -2..-5, creatures -3..-9, UI -8..-13, footsteps -9, ambient loops -7..-14 |
+| SFX (87) | `assets/audio/sfx/` | 44.1 kHz mono 16-bit PCM | peak-normalised per category: impacts -1 dBFS, most hits/spells -2..-5, creatures -3..-9, UI -8..-13, footsteps -9, ambient loops -7..-14 |
 | Music (6) | `assets/audio/music/` | 32 kHz mono 16-bit PCM | peaks ≈ -3..-5 dBFS, integrated loudness capped at -20 LUFS so music sits under the SFX |
 
 Non-looping SFX are DC-free, trimmed of silence and have 5 ms / 10 ms
-raised-cosine fades (first and last samples are exactly 0).
+raised-cosine fades (first and last samples are exactly 0). Hits whose snap
+has to survive (the dash family) use a 1 ms fade-in instead.
 
 **Loops** (`fire_crackle_loop`, `focus_loop`, `stun_chime`, `crowd_ambience_loop`
 and the five music loops) are rendered *circularly*: note tails, echoes and
@@ -44,6 +45,12 @@ chunk with one forward loop over the whole file.
   2-3 characters. `step_<surface>_1..3` are random variations for each surface.
 * `focus_start` -> `focus_loop` (while focusing) -> `focus_full`, and
   `heat_ring_charge` -> `heat_ring_burst`, are designed to chain.
+* Drag-to-dash: `dash_aim_tick` (pitch it up one step per aimed cell) ->
+  `dash_windup` -> `dash_launch` -> `ram_impact` / `ram_whiff` / `dash_clash`
+  / `dash_blocked` -> `dash_land`. `dash_launch_1..3` and `dash_land_1..3` are
+  round-robin variants (`Audio.sfx` picks one at random), with per-variant
+  peaks trimmed so they are equally loud. The launches are low-passed at
+  12.5 kHz so they can be pitched up for long dashes.
 
 ## Files
 
@@ -51,7 +58,7 @@ chunk with one forward loop over the whole file.
 |---|---|
 | `synth.py` | DSP toolkit: oscillators (polyBLEP saw/pulse with PWM, triangle, additive with per-harmonic swept lowpass / formants), coloured noise, envelopes, RBJ biquads, time-varying SVF, FFT filters, modal resonators, FM, Karplus-Strong, convolution reverb with synthetic IRs, circular delay/chorus, mastering and WAV I/O |
 | `instruments.py` | instrument voices shared by music and jingles: harp, pluck, lead, chip, bass, pad, choir, glock, bell, celesta, twinkle, brass, soft_sine, plus drums |
-| `sfx.py` | the 75 SFX recipes, registered with `@sfx(name, peak_dbfs, category, loop=...)` |
+| `sfx.py` | the 87 SFX recipes, registered with `@sfx(name, peak_dbfs, category, loop=...)` |
 | `music.py` | step sequencer, melody notation, voice leading, and the six cues |
 | `analyze.py` | levels, approximate BS.1770 loudness, DC/NaN/clip/edge checks, loop-seam metrics, spectrogram PNGs |
 | `build.py` | entry point (parallel, deterministic) |

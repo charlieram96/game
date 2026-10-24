@@ -268,7 +268,7 @@ asset name), and each forge validates its own output.
 | --- | --- | --- |
 | `tools/sprite_forge` | Characters, kith, props and portraits (shaded volumetric parts, rigs per character family, 1 px material outlines, binary alpha) | `python3 tools/sprite_forge/build.py` |
 | `tools/env_forge` | 48x48 seamless textures, foliage, props, the Dawncrane mural, VFX sheets, UI icons and 9-slice panels | `python3 tools/env_forge/build.py` |
-| `tools/audio_forge` | 75 SFX (44.1 kHz mono) and 6 music cues (32 kHz mono; loops carry `smpl` loop points and are rendered circularly) | `python3 tools/audio_forge/build.py` |
+| `tools/audio_forge` | 87 SFX (44.1 kHz mono) and 6 music cues (32 kHz mono; loops carry `smpl` loop points and are rendered circularly) | `python3 tools/audio_forge/build.py` |
 
 `tools/art_forge` adds generated art through the OpenRouter Image API. It
 writes prompts from the briefs in `briefs.json`, checks each request against

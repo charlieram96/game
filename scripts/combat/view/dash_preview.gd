@@ -399,12 +399,11 @@ class AimMarker:
 			return
 		if aim.cancelled:
 			return
-		var tick := &"dash_aim_tick" if Audio.has_sfx(&"dash_aim_tick") else &"ui_move"
 		if plan.cells <= 0:
-			Audio.sfx(&"dash_blocked" if Audio.has_sfx(&"dash_blocked") else &"ui_error", -14.0, 0.0, 80)
+			Audio.sfx(&"dash_blocked", -12.0, 0.0, 80)
 			return
-		var pitch := 0.92 + 0.07 * float(plan.cells)
-		Audio.sfx(tick, -11.0 if not first else -13.0, 0.0, 25, pitch)
+		# A semitone per cell, so the length can be felt as well as seen.
+		Audio.sfx(&"dash_aim_tick", -6.0 if not first else -8.0, 0.0, 0, pow(2.0, float(plan.cells - 1) / 12.0))
 
 	## Tile states along the lane: the path, then (if the dash was cut short)
 	## a wall marker and the cells that were out of reach.

@@ -232,8 +232,8 @@ func _on_state_enter(st: int) -> void:
 	match st:
 		SM.DASH_START:
 			squash(1.1, 0.9)
-			if Audio.has_sfx(&"dash_windup"):
-				Audio.sfx(&"dash_windup", -9.0, 0.06, 40)
+			var heavy_windup := fighter.stats.dash.dash_type == DashProfile.DashType.ARMORED
+			Audio.sfx(&"dash_windup", -4.0, 0.05, 40, 0.8 if heavy_windup else 1.0)
 		SM.DASH_ACTIVE:
 			_launch()
 		SM.DASH_RECOVERY:
@@ -260,11 +260,13 @@ func _launch() -> void:
 	_spawn_ghost(home, 0.6, 0.3)
 	_ghost_travel = 0.0
 	_last_pos = home
-	var launch := &"dash_launch" if Audio.has_sfx(&"dash_launch") else (&"dash_roll" if heavy else &"dash_whoosh")
-	if heavy and Audio.has_sfx(&"dash_roll"):
-		launch = &"dash_roll"
+	# Longer dashes travel faster: the tear pitches up (up to ~1.2x).
 	var cells := maxi(1, f.dash_cells)
-	Audio.sfx(launch, -3.0 if heavy else -4.0, 0.05, 30, 1.08 - 0.03 * float(cells))
+	if heavy:
+		Audio.sfx(&"dash_roll", -4.0, 0.05, 30)
+		Audio.sfx(&"dash_launch", -7.0, 0.03, 30, 0.82)
+	else:
+		Audio.sfx(&"dash_launch", -1.0, 0.03, 30, 1.0 + 0.05 * float(cells - 1))
 	if heavy:
 		squash(0.86, 1.12)
 	elif f.dash_dir.y != 0.0:

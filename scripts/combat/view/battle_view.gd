@@ -254,7 +254,7 @@ func _handle(e: BattleEvent) -> void:
 			camera.add_trauma(0.22)
 			_camera_kick(-rdir, 0.1)
 		BattleEvent.DASH_CLASH:
-			Audio.sfx(&"dash_clash" if Audio.has_sfx(&"dash_clash") else &"projectile_clash")
+			Audio.sfx(&"dash_clash", -2.0, 0.03)
 			Vfx.spawn(self, &"hit_heavy", _pos3(e.pos), Vector2.RIGHT, Color(1, 1, 1))
 			Vfx.spawn(self, &"shockwave", _pos3(e.pos, 0.02), Vector2.RIGHT, Color(1, 1, 1), 0.6)
 			Vfx.burst(self, _pos3(e.pos, 0.5), Color(1.0, 0.95, 0.8), 18, 4.0, 0.06, 0.35, -6.0)
@@ -270,7 +270,7 @@ func _handle(e: BattleEvent) -> void:
 			feedback.emit(&"impact", {"strength": 0.55, "screen": screen_uv(_pos3(e.pos, 0.5))})
 		BattleEvent.DASH_BLOCKED:
 			if f and is_friendly(f.team) and _is_local_input(f.team):
-				Audio.sfx(&"dash_blocked" if Audio.has_sfx(&"dash_blocked") else &"ui_error", -10.0, 0.0, 200)
+				Audio.sfx(&"dash_blocked", -6.0, 0.0, 200)
 				popup(_pos3(f.pos, f.species.visual_height + 0.3), "Blocked", Color(1.0, 0.55, 0.45), 0.7)
 		BattleEvent.DASH_NO_STAMINA:
 			if f and is_friendly(f.team) and _is_local_input(f.team):
@@ -399,8 +399,7 @@ func _on_dash_land(f: Fighter, e: BattleEvent) -> void:
 	var heavy := f.stats.dash.dash_type == DashProfile.DashType.ARMORED
 	var dir: Vector2 = e.data.get("dir", Vector2.RIGHT)
 	Vfx.spawn(self, &"dust_puff", _pos3(e.pos), dir, Color(1, 1, 1, 0.85), 0.95 if heavy else 0.7)
-	if Audio.has_sfx(&"dash_land"):
-		Audio.sfx(&"dash_land", -5.0 if heavy else -9.0, 0.06, 40)
+	Audio.sfx(&"dash_land", -2.0 if heavy else -5.0, 0.04, 40, 0.84 if heavy else 1.0)
 	if heavy:
 		camera.add_trauma(0.08)
 		_camera_kick(dir, 0.05)
@@ -414,15 +413,11 @@ func _on_ram(f: Fighter, e: BattleEvent) -> void:
 	var dir: Vector2 = e.data.get("dir", Vector2.RIGHT)
 	var at := _pos3(e.pos)
 	if not bool(e.data.get("stunned", false)):
-		Audio.sfx(&"guard_block", -8.0)
+		Audio.sfx(&"ram_whiff", -3.0)
 		Vfx.spawn(self, &"hit_spark", at, dir, Color(0.75, 0.82, 0.95), 0.7)
 		popup(at + Vector3(0, 1.3, 0), "Protected", Color(0.75, 0.8, 0.9), 0.75)
 		return
-	if Audio.has_sfx(&"ram_impact"):
-		Audio.sfx(&"ram_impact", 0.0, 0.05)
-	else:
-		Audio.sfx(&"dash_through_hit")
-		Audio.sfx(&"hit_heavy", -4.0)
+	Audio.sfx(&"ram_impact", 0.0, 0.04)
 	var gold := Color(1.0, 0.86, 0.45)
 	Vfx.spawn(self, &"hit_heavy", at, dir, Color(1.0, 0.97, 0.85), 1.15)
 	Vfx.spawn(self, &"flash_strike", at + Vector3(0, 0.1, 0), dir, Color(1.0, 0.95, 0.8), 1.25)

@@ -49,6 +49,18 @@ dash_whoosh.wav                      0.187     -5.00    -20.16   -20.9   -20.9 +
 dash_roll.wav                        0.270     -4.00    -13.73   -18.1   -18.1 -0.00000    0  
 dash_through_hit.wav                 0.427     -3.00    -23.48   -23.2   -23.2 +0.00000    0  
 stun_chime.wav                       0.500    -14.00    -24.82   -20.8   -21.9 +0.00000    0  loop seam: jump 0.00247 (x0.18 of local step), 20ms level step -1.9 dB (elsewhere p99 27.0, max 28.4)
+dash_aim_tick.wav                    0.039    -13.00    -27.50   -37.5   -37.5 +0.00000    0  
+dash_windup.wav                      0.072    -11.00    -25.53   -30.5   -30.5 -0.00000    0  
+dash_launch_1.wav                    0.212     -4.30    -20.55   -21.1   -21.1 +0.00000    0  
+dash_land_1.wav                      0.180     -4.10    -18.82   -22.2   -22.2 -0.00000    0  
+dash_launch_2.wav                    0.236     -3.20    -20.98   -21.1   -21.1 -0.00000    0  
+dash_land_2.wav                      0.210     -6.00    -19.35   -22.0   -22.0 +0.00000    0  
+dash_launch_3.wav                    0.191     -3.00    -20.14   -21.1   -21.1 -0.00000    0  
+dash_land_3.wav                      0.160     -5.00    -18.39   -22.2   -22.2 -0.00000    0  
+ram_impact.wav                       0.379     -1.00    -13.00   -14.8   -14.8 -0.00000    0  
+ram_whiff.wav                        0.196     -6.00    -20.90   -22.7   -22.7 -0.00000    0  
+dash_clash.wav                       0.601     -2.00    -21.62   -19.5   -19.5 -0.00000    0  
+dash_blocked.wav                     0.123     -4.00    -15.90   -21.9   -21.9 -0.00000    0  
 hit_light.wav                        0.088     -3.00    -17.29   -24.4   -24.4 +0.00000    0  
 hit_heavy.wav                        0.402     -1.00    -14.14   -16.6   -16.6 +0.00000    0  
 hit_effective.wav                    0.311     -2.00    -17.90   -20.0   -20.0 +0.00000    0  
@@ -97,16 +109,16 @@ Checks: all passed (NaN, clipping, DC > 0.002, peak > -1 dBFS, edge samples > 0.
 
 SFX loudness by category (min / median / max LUFS-M; peak range dBFS)
 ----------------------------------------------------------------------
-combat     n=20   LUFS-M  -28.1 /  -20.0 /  -16.6   peak  -14.0 ..   -1.0
+combat     n=30   LUFS-M  -30.5 /  -21.1 /  -16.6   peak  -14.0 ..   -1.0
 creature   n= 5   LUFS-M  -25.1 /  -18.7 /  -17.6   peak   -9.0 ..   -3.0
 crowd      n= 2   LUFS-M  -18.5 /  -17.4 /  -17.4   peak   -7.0 ..   -5.0
 explore    n= 7   LUFS-M  -27.8 /  -18.2 /  -15.7   peak   -8.0 ..   -3.0
-impact     n= 6   LUFS-M  -21.1 /  -17.1 /  -15.3   peak   -3.0 ..   -1.0
+impact     n= 7   LUFS-M  -21.1 /  -17.1 /  -14.8   peak   -3.0 ..   -1.0
 jingle     n= 2   LUFS-M  -17.8 /  -17.7 /  -17.7   peak   -7.0 ..   -3.0
 loop       n= 3   LUFS-M  -28.6 /  -26.4 /  -23.9   peak  -14.0 ..   -7.0
 magic      n= 1   LUFS-M  -15.7 /  -15.7 /  -15.7   peak   -5.0 ..   -5.0
 spell      n= 8   LUFS-M  -30.2 /  -17.6 /  -16.4   peak   -8.0 ..   -1.0
 step       n=12   LUFS-M  -32.7 /  -31.4 /  -29.6   peak   -9.0 ..   -9.0
-ui         n= 9   LUFS-M  -34.5 /  -27.9 /  -20.4   peak  -13.0 ..   -8.0
+ui         n=10   LUFS-M  -37.5 /  -27.9 /  -20.4   peak  -13.0 ..   -8.0
 
-Totals: 75 SFX (58.1 s), 6 music files (227.2 s).
+Totals: 87 SFX (60.7 s), 6 music files (227.2 s).

@@ -92,6 +92,10 @@ func _parse_dev_args() -> void:
 				_seq_dir = sp[0]
 				_seq_from = int(sp[1])
 				_seq_left = int(sp[2])
+		if arg == "--drag-demo":
+			var demo: Node = load("res://scenes/dev/drag_demo.gd").new()
+			demo.set("scene", self)
+			add_child(demo)
 		if arg.begins_with("--aim="):
 			var parts := arg.substr(6).split(":")
 			if parts.size() == 2:

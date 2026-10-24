@@ -268,6 +268,26 @@ def gated_ramp(n: int, points) -> np.ndarray:
     return S.curve(points, n, SR, "cos")
 
 
+def comb(x: np.ndarray, delay, g: float) -> np.ndarray:
+    """Feedback comb y[i] = x[i] + g*y[i - D(i)]; D in seconds, may be a curve (>= 2 samples).
+
+    Peaks at multiples of 1/D: a hollow, pipe-like resonance; sweeping D glides it.
+    """
+    n = len(x)
+    d = np.maximum(S.as_curve(delay, n) * SR, 2.0).tolist()
+    xs = np.asarray(x, dtype=float).tolist()
+    y = [0.0] * n
+    for i in range(n):
+        p = i - d[i]
+        if p >= 0.0:
+            i0 = int(p)
+            fr = p - i0
+            y[i] = xs[i] + g * (y[i0] + fr * (y[i0 + 1] - y[i0]))
+        else:
+            y[i] = xs[i]
+    return np.array(y)
+
+
 # ===========================================================================
 # UI
 # ===========================================================================
@@ -763,6 +783,210 @@ def stun_chime(rng):
         S.place_circ(out, tw, N(t0), 1.0)
         S.place_circ(out, I.glock(S.hz(["E7", "C#7", "A6"][i]), 0.2, 0.5, SR, rng, t60=0.35), N(t0 + 0.04), 0.35)
     return out + 0.18 * S.convolve_circular(out, _ir(0.5, 0.005, 0.5))
+
+
+# ===========================================================================
+# combat: drag-to-dash
+#   aim ticks while dragging -> windup (coil) -> launch -> ram / whiff / clash /
+#   blocked -> land.  Sounds with a sharp onset use a 1 ms fade-in so that
+#   finalize() keeps their transient.
+# ===========================================================================
+
+@sfx("dash_aim_tick", -13.0, "ui", fade_in=0.001)
+def dash_aim_tick(rng):
+    n = N(0.05)
+    f = 1175.0  # D6; the engine pitches it up one step per aimed cell
+    bar = S.modal([f, f * 3.93, f * 5.6], [0.04, 0.014, 0.007], [1.0, 0.16, 0.05], n, SR, rng, attack=0.0007)
+    return S.onepole_lp(lay((0.0, bar, 1.0), (0.0, click(rng, 0.002, 2500.0, 8000.0, 0.0008), 0.12)), SR, 6000.0)
+
+
+@sfx("dash_windup", -11.0, "combat")
+def dash_windup(rng):
+    dur = 0.072
+    n = N(dur)
+    t = T(n)
+    tp = 0.054  # the inhale peaks here and is gone by the time the launch fires
+    fc = S.curve([(0.0, 650.0), (tp, 2700.0), (dur, 3100.0)], n, SR, "exp")
+    breath = nz(S.svf(bn(n, rng, 200.0, 12000.0, 0.6), SR, fc, 2.2, "bp"))
+    env = np.where(t < tp, (t / tp) ** 2.2, np.clip(1.0 - (t - tp) / (dur - tp), 0.0, 1.0) ** 1.5)
+    tension = bn(n, rng, 3000.0, 9000.0) * flutter(n, rng, 300.0) ** 2 * env  # fur / muscle creak
+    tuck = thump(250.0, 180.0, 0.01, 0.03, attack=0.002)  # the crouch
+    return lay((0.0, breath * env, 1.0), (0.0, nz(tension), 0.2), (0.0, tuck, 0.1))
+
+
+def _dash_launch(rng, v: int):
+    dur = (0.22, 0.25, 0.2)[v - 1]
+    k = (1.0, 0.9, 1.1)[v - 1]  # each variant tears a little brighter or darker
+    n = N(dur)
+    t = T(n)
+    u = t / dur
+    att = np.sin(0.5 * np.pi * np.clip(t / 0.0025, 0.0, 1.0))
+    # air tear: a resonant band that starts high and falls away (something leaving fast) ...
+    fc = S.curve([(0.0, 7500.0 * k), (0.02, 4800.0 * k), (dur, 1100.0 * k)], n, SR, "exp")
+    tear = nz(S.svf(bn(n, rng, 300.0, 15000.0, 0.3), SR, fc, 2.6, "bp"))
+    rag = 0.25 + 0.75 * flutter(n, rng, 700.0 + 150.0 * v)   # ... with a ragged, ripping grain
+    rag = rag + (1.0 - rag) * np.clip(t / 0.07, 0.0, 1.0)     # that smooths into a clean tail
+    tenv = att * (0.55 * np.exp(-t / 0.025) + 0.45 * np.exp(-t / 0.09)) * (1.0 - u) ** 1.3
+    # wind: a broad, darker band under it
+    wind = nz(S.svf(bn(n, rng, 100.0, 12000.0, 1.0), SR, S.curve([(0.0, 2600.0 * k), (dur, 600.0 * k)], n, SR, "exp"),
+                    0.7, "bp"))
+    wenv = np.clip(t / 0.008, 0.0, 1.0) * np.exp(-t / 0.06) * (1.0 - u) ** 1.2
+    # push-off: a short, sharp kick, a scuff of dirt and a little sand spray
+    push = thump(200.0 * (1.0 + 0.04 * (v - 2)), 105.0, 0.008, 0.05, h2=0.3)
+    m = N(0.05)
+    scuff = bn(m, rng, 150.0, 2000.0, 1.0) * S.perc(m, SR, 0.0008, 0.03)
+    spray = crackle(N(0.08), rng, lambda tt: 2000.0 * math.exp(-tt / 0.02), bright=0.8, size=0.5, pop=0.0, hp=2000.0)
+    y = lay((0.0, tear * rag * tenv, 1.0), (0.0, wind * wenv, 0.4), (0.0, push, 0.3), (0.0, nz(scuff), 0.25),
+            (0.0, nz(spray), 0.12), (0.0, click(rng, 0.003, 2500.0, 12000.0, 0.0015), 0.4))
+    y = S.softclip(nz(y) * 1.2, 1.2)
+    return S.fft_filter(y, SR, S.mag_lp(12500.0, 3.0))  # headroom for the engine's pitch-up on long dashes
+
+
+def _dash_land(rng, v: int):
+    dur = (0.18, 0.21, 0.16)[v - 1]
+    k = (1.0, 0.93, 1.07)[v - 1]
+    n = N(dur)
+    t = T(n)
+    u = t / dur
+    # the skid builds just behind the footfall and fades as the creature slows
+    senv = np.clip(t / 0.012, 0.0, 1.0) ** 1.5 * (1.0 - u)
+    # stick-slip: the grit catches and releases ever more slowly as the creature brakes ("skrrrt" -> "k-k-k")
+    rate = S.curve([(0.0, 150.0 * k), (dur, 32.0 * k)], n, SR, "exp") * (1.0 + 0.35 * S.lfo_noise(n, SR, 120.0, rng))
+    ph = S.phase_cycles(rate, n, SR)
+    idx = np.nonzero(np.diff(np.floor(ph)) > 0)[0]
+    imp = np.zeros(n)
+    imp[idx] = rng.uniform(0.3, 1.0, len(idx))
+    slips = S.convolve(imp, np.exp(-T(N(0.01)) / 0.0016))[:n]
+    # a lower, narrower band than the launch's air tear: claws and grit, not wind
+    fc = S.curve([(0.0, 2400.0 * k), (dur, 900.0 * k)], n, SR, "exp")
+    scrape = S.svf(bn(n, rng, 300.0, 9000.0, 0.3), SR, fc, 1.2, "bp") * (0.12 + slips) * senv
+    # level the scrape by its energy and soft-limit its random loudest grains, so the (deterministic) thump
+    # sets the peak and every variant comes out equally loud
+    scrape = 0.5 * np.tanh(0.25 * scrape / np.sqrt(np.mean(scrape ** 2)))
+    sand = crackle(n, rng, lambda tt: 1400.0 * max(0.0, 1.0 - tt / dur), bright=0.6, size=0.5, pop=0.0, hp=1500.0)
+    # weight settling: a soft low thump, a dull puff of packed sand and a pebble or two
+    body = thump(105.0 * k, 52.0, 0.018, 0.12, attack=0.003, h2=0.3)
+    m = N(0.09)
+    puff = bn(m, rng, 80.0, 800.0, 1.5) * S.perc(m, SR, 0.003, 0.06)
+    pebbles = debris(rng, dur, 4, 0.05, 1500.0, 5500.0, 0.5, 0.03, (0.005, 0.018))
+    y = lay((0.0, scrape, 1.0), (0.0, nz(sand), 0.1), (0.0, body, 0.65), (0.0, nz(puff), 0.35),
+            (0.0, nz(pebbles), 0.15))
+    return S.softclip(nz(y) * 1.1, 1.1)
+
+
+# the engine picks a variant at random, so each one's peak is trimmed to make them equally loud
+for _v, _launch_pk, _land_pk in [(1, -4.3, -4.1), (2, -3.2, -6.0), (3, -3.0, -5.0)]:
+    REGISTRY[f"dash_launch_{_v}"] = Recipe(f"dash_launch_{_v}", partial(_dash_launch, v=_v), _launch_pk, False,
+                                           "combat", fade_in=0.001)
+    REGISTRY[f"dash_land_{_v}"] = Recipe(f"dash_land_{_v}", partial(_dash_land, v=_v), _land_pk, False, "combat",
+                                         fade_in=0.001)
+
+
+@sfx("ram_impact", -1.0, "impact", fade_in=0.001)
+def ram_impact(rng):
+    dur = 0.55
+    n = N(dur)
+    t = T(n)
+    # body and sub drop in ONE oscillator (nothing to beat against): a punch that falls 260 -> ~100 Hz within
+    # ~30 ms, then a slow glide down to 46 Hz.  The punch is saturated on its own -- its harmonics are what
+    # laptop and phone speakers reproduce -- while a quieter sub tail keeps going underneath for headphones.
+    ph = S.TAU * S.phase_cycles(46.0 + 62.0 * np.exp(-t / 0.12) + 152.0 * np.exp(-t / 0.012), n, SR)
+    punch = (np.sin(ph) + 0.3 * np.sin(2 * ph)) * S.perc(n, SR, 0.0008, 0.2, curve_pow=1.5)
+    punch = S.fft_filter(S.softclip(punch * 2.0, 2.2), SR, S.mag_lp(2500.0, 2.0))
+    tail = np.sin(ph) * S.perc(n, SR, 0.004, 0.45) * np.clip(t / 0.03, 0.0, 1.0)
+    knock = thump(720.0, 330.0, 0.005, 0.05)  # the mid "pok"
+    # whack: resonant low-mid noise (the "wha" of thwack) ...
+    m = N(0.15)
+    meat = bn(m, rng, 150.0, 2500.0, 1.0)
+    whack = S.fft_filter(meat, SR, S.mag_sum((0.8, S.mag_reso(420.0, 300.0)), (1.0, S.mag_reso(1100.0, 700.0)))) * \
+        S.perc(m, SR, 0.0006, 0.15, curve_pow=1.8)
+    # ... and a crunchy crack on top (the "th")
+    m = N(0.12)
+    crack = S.softclip(bn(m, rng, 1500.0, 9000.0, 0.3), 2.5) * (0.45 + 0.55 * flutter(m, rng, 700.0)) * \
+        S.perc(m, SR, 0.0003, 0.09, curve_pow=1.2)
+    core = lay((0.0, nz(punch), 1.0), (0.0, tail, 0.4), (0.0, knock, 0.3), (0.0, nz(whack), 1.0))
+    # shimmer tail: sparkling fizz, pings and two slowly beating pairs that grow out of the crack, kept above
+    # the harsh 2-4 kHz band
+    d = N(0.45)
+    tt = T(d)
+    fizz = bn(d, rng, 5000.0, 11000.0) * (0.35 + 0.65 * flutter(d, rng, 90.0)) * S.perc(d, SR, 0.006, 0.28)
+    ring = np.zeros(d)
+    for a, b in [(5310.0, 5318.0), (6730.0, 6741.0)]:
+        ring += np.sin(S.TAU * a * tt + rng.uniform(0, S.TAU)) + np.sin(S.TAU * b * tt + rng.uniform(0, S.TAU))
+    ring *= S.perc(d, SR, 0.004, 0.32) / 4.0
+    pings = np.zeros(d)  # a sparkle cloud that thins out (and quietens) as it goes, so no late ping sticks out
+    for _ in range(18):
+        t0 = 0.004 + rng.exponential(0.05)
+        if t0 > 0.3:
+            continue
+        dd = rng.uniform(0.04, 0.12)
+        mm = N(dd * 1.05)
+        ping = S.fm(math.exp(rng.uniform(math.log(5000.0), math.log(9000.0))), mm, SR, 2.0,
+                    0.6 * np.exp(-T(mm) / 0.02)) * S.perc(mm, SR, 0.001, dd)
+        S.place(pings, ping, N(t0), rng.uniform(0.5, 1.0) * math.exp(-t0 / 0.1))
+    shimmer = verb(lay((0.0, nz(fizz), 1.0), (0.0, ring, 0.25), (0.0, nz(pings), 0.4)), 0.6, 0.25)
+    y = lay((0.0, core, 1.0), (0.0, crack, 0.9), (0.0, click(rng, 0.004, 1500.0, 12000.0, 0.0025), 0.55),
+            (0.006, nz(shimmer), 0.45))
+    return S.softclip(nz(y) * 1.3, 1.3)  # round off the transient peak so the body can sit louder
+
+
+@sfx("ram_whiff", -6.0, "combat")
+def ram_whiff(rng):
+    dur = 0.2
+    n = N(dur)
+    t = T(n)
+    # noise through a feedback comb whose pipe grows longer: a hollow, ghostly "hwoo" that deflates
+    src = bn(n, rng, 200.0, 9000.0, 0.7)
+    hollow = comb(src, S.curve([(0.0, 0.0021), (dur, 0.0034)], n, SR, "exp"), 0.72)
+    hollow = S.fft_filter(hollow, SR, S.mag_bp(250.0, 4000.0, 1.5))
+    tp = 0.075
+    env = np.where(t < tp, (t / tp) ** 1.6, np.clip(1.0 - (t - tp) / (dur - tp), 0.0, 1.0) ** 1.8)
+    air = whoosh(rng, dur, 3000.0, 6500.0, 2500.0, peak=0.38, q=1.0, color=0.3, air=0.3)
+    return lay((0.0, nz(hollow) * env, 1.0), (0.0, nz(air), 0.25))
+
+
+@sfx("dash_clash", -2.0, "combat", fade_in=0.001)
+def dash_clash(rng):
+    dur = 0.55
+    n = N(dur)
+    t = T(n)
+    # the clang: bright struck-plate modes with an impact bend.  Pairs beat slowly (a shimmer, not a rasp);
+    # the bright 3-4 kHz modes flash and die fast so no edge lingers, while E6 over a warm E5 (the battle
+    # theme's dominant) carries the ring.
+    f0 = S.hz("E6")
+    ratios = [0.5, 1.0, 1.0045, 2.32, 2.97, 4.13, 5.4, 5.406]
+    t60s = [0.36, 0.42, 0.38, 0.16, 0.12, 0.2, 0.24, 0.24]
+    amps = [0.55, 1.0, 0.25, 0.55, 0.4, 0.35, 0.2, 0.18]
+    clang = S.modal([f0 * r for r in ratios], t60s, amps, n, SR, rng, pitch_env=1.0 + 0.03 * np.exp(-t / 0.01),
+                    attack=0.0005)
+    # the air burst: a puff of displaced air whose brightness collapses fast
+    m = N(0.3)
+    burst = S.svf(bn(m, rng, 400.0, 14000.0, 0.5), SR,
+                  S.curve([(0.0, 9000.0), (0.12, 1500.0), (0.3, 1000.0)], m, SR, "exp"), 0.8, "lp") * \
+        S.perc(m, SR, 0.001, 0.18)
+    # both bodies knocked back: a short receding swish
+    back = whoosh(rng, 0.16, 2600.0, 3000.0, 900.0, peak=0.15, q=1.2, color=0.5, rise=1.5, fall=1.8, air=0.1)
+    th = thump(260.0, 120.0, 0.01, 0.11, h2=0.25)
+    sub = thump(95.0, 55.0, 0.04, 0.22, attack=0.002)
+    y = lay((0.0, nz(clang), 0.7), (0.0, nz(burst), 0.55), (0.05, nz(back), 0.18), (0.0, th, 0.5), (0.0, sub, 0.3),
+            (0.0, click(rng, 0.004, 1500.0, 12000.0, 0.002), 0.4))
+    return verb(S.softclip(nz(y) * 1.2, 1.2), 0.7, 0.18)
+
+
+@sfx("dash_blocked", -4.0, "combat", fade_in=0.001)
+def dash_blocked(rng):
+    n = N(0.13)
+    # a dull knock whose pitch sags: "bonk" -- physical, but clearly a "no".  Pitched high enough (with
+    # harmonics) that phone speakers still carry it.
+    ph = S.TAU * S.phase_cycles(S.curve([(0.0, 340.0), (0.016, 235.0), (0.13, 200.0)], n, SR, "exp"), n, SR)
+    bonk = (np.sin(ph) + 0.55 * np.sin(2 * ph) + 0.25 * np.sin(3 * ph) + 0.1 * np.sin(4 * ph)) * \
+        S.perc(n, SR, 0.001, 0.11, curve_pow=1.2)
+    wood = S.modal([290.0, 700.0, 1240.0], [0.06, 0.035, 0.018], [1.0, 0.6, 0.3], n, SR, rng, attack=0.0005)
+    th = thump(150.0, 85.0, 0.01, 0.07)
+    m = N(0.04)
+    dull = bn(m, rng, 150.0, 1500.0, 1.0) * S.perc(m, SR, 0.0008, 0.03)
+    y = lay((0.0, bonk, 1.0), (0.0, wood, 0.45), (0.0, th, 0.35), (0.0, nz(dull), 0.3))
+    return S.onepole_lp(S.softclip(nz(y) * 1.4, 1.5), SR, 2200.0)
 
 
 # ===========================================================================
