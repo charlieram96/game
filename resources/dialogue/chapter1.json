@@ -1,0 +1,174 @@
+{
+	"intro_card": [
+		{"speaker": "", "text": "Long ago, people and kith lived side by side, bound by a promise called the Accord."},
+		{"speaker": "", "text": "Then came the Sundering. The Accord broke, the kith fled into the wild places, and trust turned to fear."},
+		{"speaker": "", "text": "Now only the Wardens keep the old ways — earning a kith's trust, one bond at a time."},
+		{"speaker": "", "text": "In the village of Mossford, at the edge of the Glimmerwood, an apprentice wakes on the morning of the Kindling..."}
+	],
+	"player_house": [
+		{"speaker": "", "text": "Your home. The kettle's still warm. No time for tea today — it's the Kindling!"}
+	],
+	"notice_board": [
+		{"speaker": "", "text": "THE KINDLING — today, at the Ringstones."},
+		{"speaker": "", "text": "Apprentices: earn the trust of a wild kith before sundown, then prove your bond in the duel. By order of the Wardens of Mossford."}
+	],
+	"well": [
+		{"speaker": "", "text": "The old village well. Someone has carved \"C + BISCUIT\" into the stone. The scratches look very fresh."}
+	],
+	"signpost": [
+		{"speaker": "", "text": "West: the Glimmerwood.  North: the Dawn Shrine.  East: the training grounds.  North-east: the Ringstones."}
+	],
+	"hesper_intro": [
+		{"speaker": "Hesper", "portrait": "hesper:smile", "text": "There you are, {player}! I was about to send Lumen to drag you out of bed by your ear."},
+		{"speaker": "Hesper", "portrait": "hesper:neutral", "text": "Today is the Kindling. Every apprentice must earn the trust of a wild kith — and prove that bond at the Ringstones before sundown."},
+		{"speaker": "Hesper", "portrait": "hesper:stern", "text": "Trust, mind you. Not nets, not cages, not bribes. A kith that follows you out of fear isn't bound to you. It's just waiting to leave."},
+		{"speaker": "Hesper", "portrait": "hesper:neutral", "text": "Something has the forest kith spooked lately. Folk have found iron snares in the Glimmerwood, marked with strange burnt-in signs.", "choices": [
+			{"text": "Snares? Who would do that?", "reply": [{"speaker": "Hesper", "portrait": "hesper:stern", "text": "Someone who's forgotten what the Accord was for. Keep your eyes open out there."}]},
+			{"text": "I'll be careful.", "reply": [{"speaker": "Hesper", "portrait": "hesper:smile", "text": "Careful and curious. That's the Warden way."}]}
+		]},
+		{"speaker": "Hesper", "portrait": "hesper:smile", "text": "Ah. And here comes trouble."}
+	],
+	"corin_intro": [
+		{"speaker": "Corin", "portrait": "corin:grin", "text": "{player}! You're up! Look — LOOK — who followed me home!"},
+		{"speaker": "Corin", "portrait": "corin:grin", "text": "Found this big lump asleep in the riverbed at dawn. I sat with him for an hour, he yawned at me, and now he won't leave me alone. His name's Biscuit."},
+		{"speaker": "Hesper", "portrait": "hesper:smile", "text": "A Stoneback. Stubborn, sleepy and loyal to the bone. You two deserve each other."},
+		{"speaker": "Corin", "portrait": "corin:determined", "text": "We're going to win the Kindling duel. No offense, {player}, but you haven't even got a kith yet!"},
+		{"speaker": "Corin", "portrait": "corin:grin", "text": "I'll be waiting at the Ringstones. Don't take so long that Biscuit falls asleep again!"}
+	],
+	"hesper_send_off": [
+		{"speaker": "Hesper", "portrait": "hesper:neutral", "text": "Go on, then. Try the Glimmerwood — west, across the bridge."},
+		{"speaker": "Hesper", "portrait": "hesper:neutral", "text": "Move softly near wild kith. They hear running feet from across a meadow. Hold [b]Shift[/b] to sneak."},
+		{"speaker": "Hesper", "portrait": "hesper:smile", "text": "And take this. Every Warden carries a flame — you'll know when you need it."},
+		{"speaker": "", "text": "You received the Warden's Lantern."}
+	],
+	"hesper_idle_find": [
+		{"speaker": "Hesper", "portrait": "hesper:neutral", "text": "The Glimmerwood is west, over the bridge. Softly, now."}
+	],
+	"baker": [
+		{"speaker": "Wynn", "text": "Morning, {player}! Big day! Here's a baker's secret about the little fire-tailed kith in the woods..."},
+		{"speaker": "Wynn", "text": "A cold Emberlyn is a scared Emberlyn. Warm one up and it'll purr like my oven."}
+	],
+	"baker_after": [
+		{"speaker": "Wynn", "text": "Oh, look at its little tail glow! Go on, show it off at the Ringstones!"}
+	],
+	"farmer": [
+		{"speaker": "Bram", "text": "Hmph. Something's been nibbling my clover again. Mosslings, out in the north meadow."},
+		{"speaker": "Bram", "text": "You'll never get near one. They bolt if you so much as stomp. Unless you creep like a cat — ha! As if apprentices know how to creep."}
+	],
+	"forest_arrival": [
+		{"speaker": "", "text": "A small kith peers out of a hollow log. Its tail ember sputters, barely alive."},
+		{"speaker": "", "text": "It sees you — and shrinks back into the dark, trembling."}
+	],
+	"emberlyn_spooked": [
+		{"speaker": "", "text": "It ducks back into the log. Too loud. Try approaching softly (hold [b]Shift[/b])."}
+	],
+	"observe_emberlyn": [
+		{"speaker": "", "text": "You kneel and keep still, and watch."},
+		{"speaker": "", "text": "It's shivering. The forest floor is soaked from last night's rain, and its ember is guttering in the cold."},
+		{"speaker": "", "text": "It needs warmth. Dry kindlemoss grows on old stumps and stones around the clearing — and there's an old fire ring nearby."}
+	],
+	"snare": [
+		{"speaker": "", "text": "A broken iron snare, its jaws snapped shut on nothing. A sigil is scorched into the metal."},
+		{"speaker": "", "text": "It's still faintly warm. Whatever it caught got away... leaving a few singed russet hairs behind."}
+	],
+	"fire_ring_empty": [
+		{"speaker": "", "text": "An old ring of fire-blackened stones. You'll need something dry to burn."}
+	],
+	"fire_lit": [
+		{"speaker": "", "text": "You pile the kindlemoss in the stone ring and touch it with your Warden's Lantern..."},
+		{"speaker": "", "text": "Warm light spills across the clearing."}
+	],
+	"sit_down": [
+		{"speaker": "", "text": "You sit by the fire and keep very, very still..."}
+	],
+	"sit_moved": [
+		{"speaker": "", "text": "It skitters back to the log. Patience — stay still and let it come to you."}
+	],
+	"emberlyn_close": [
+		{"speaker": "", "text": "It creeps out, step by step, and curls up beside the fire. Its ember is brightening."},
+		{"speaker": "", "text": "Slowly, offer your hand. (Press when the rings meet.)"}
+	],
+	"offer_fail": [
+		{"speaker": "", "text": "It flinches at the sudden movement. Breathe, and try again."}
+	],
+	"befriended": [
+		{"speaker": "", "text": "Emberlyn sniffs your fingers... then presses its warm little head into your palm."},
+		{"speaker": "", "text": "Emberlyn trusts you!"}
+	],
+	"hesper_training_intro": [
+		{"speaker": "Hesper", "portrait": "hesper:smile", "text": "Well, look at that. An Emberlyn! And it chose you — I can tell by the way that ember's burning."},
+		{"speaker": "Hesper", "portrait": "hesper:neutral", "text": "Bonding is half the work. The other half is learning to fight beside it. Beside it, mind — never as if it were a sword."},
+		{"speaker": "Hesper", "portrait": "hesper:neutral", "text": "In a duel, you guide your kith directly. Into the yard with you. Lumen will mind the training totem."}
+	],
+	"hesper_training_snare": [
+		{"speaker": "Hesper", "portrait": "hesper:stern", "text": "A sigil burnt into a snare, you say? ...I'll look into it. Focus on today."}
+	],
+	"hesper_after_training": [
+		{"speaker": "Hesper", "portrait": "hesper:smile", "text": "Not bad at all, Sprout. Emberlyn is quick, but fragile. Don't trade blows with heavy hitters — dash through them, strike, slip away."},
+		{"speaker": "Hesper", "portrait": "hesper:neutral", "text": "And when you're winded, find a safe moment to Focus. A Warden who runs dry is a Warden who gets flattened."},
+		{"speaker": "Hesper", "portrait": "hesper:smile", "text": "Corin's waiting at the Ringstones — north-east of the meadow. The whole village is heading over. Go on, I'll be right behind you."}
+	],
+	"corin_duel": [
+		{"speaker": "Corin", "portrait": "corin:grin", "text": "There you are! And you've got an EMBERLYN! Okay. Okay okay okay. This is going to be good."},
+		{"speaker": "Corin", "portrait": "corin:determined", "text": "Biscuit's slow, but he hits like a landslide. And he's basically a wall. Don't say I didn't warn you!"},
+		{"speaker": "Hesper", "portrait": "hesper:neutral", "text": "Apprentices! The Kindling duel is to the first knockout. Wardens fight with their kith's trust, not their own pride."},
+		{"speaker": "Hesper", "portrait": "hesper:smile", "text": "Begin!"}
+	],
+	"corin_waiting": [
+		{"speaker": "Corin", "portrait": "corin:grin", "text": "Ready for a rematch? Biscuit's been practising his scowl."}
+	],
+	"duel_won": [
+		{"speaker": "Corin", "portrait": "corin:sulk", "text": "Augh! You were everywhere! Biscuit, did you see that? ...He's asleep."},
+		{"speaker": "Corin", "portrait": "corin:grin", "text": "Fine. FINE! Good duel, {player}. Next time I'm winning."},
+		{"speaker": "Hesper", "portrait": "hesper:smile", "text": "By the old Accord, I name you both Wardens of Mossford. Wear the ember with pride."}
+	],
+	"duel_lost": [
+		{"speaker": "Corin", "portrait": "corin:grin", "text": "Ha! Biscuit, we did it! ...Hey, don't look so glum, {player}. That was close."},
+		{"speaker": "Hesper", "portrait": "hesper:neutral", "text": "The bond isn't measured by one fall. Catch your breath and try again when you're ready.", "choices": [
+			{"text": "Again!", "id": "retry"},
+			{"text": "Again — but go a little easier on me.", "id": "relaxed"},
+			{"text": "In a moment.", "id": "later"}
+		]}
+	],
+	"tremor": [
+		{"speaker": "Hesper", "portrait": "hesper:stern", "text": "...Did you all feel that?"},
+		{"speaker": "Corin", "portrait": "corin:determined", "text": "The ground — it's coming from the north. From the old shrine!"},
+		{"speaker": "Hesper", "portrait": "hesper:stern", "text": "Everyone stay here. {player}, Corin — with me. Now."}
+	],
+	"shrine_arrival": [
+		{"speaker": "Hesper", "portrait": "hesper:neutral", "text": "The Dawn Shrine... I haven't seen the mural glow since I was younger than you."},
+		{"speaker": "Hesper", "portrait": "hesper:neutral", "text": "That's Aurelune, the Dawncrane. The old songs say it sealed the Accord between people and kith — and vanished the day the Accord broke."}
+	],
+	"shrine_ember": [
+		{"speaker": "Corin", "portrait": "corin:determined", "text": "{player}, your Emberlyn's ember is glowing just like the mural! What does that mean?"},
+		{"speaker": "Hesper", "portrait": "hesper:neutral", "text": "It means it's answering something. Something old."}
+	],
+	"sigilbinder_seen": [
+		{"speaker": "Corin", "portrait": "corin:determined", "text": "Hey! Who's up there?!"},
+		{"speaker": "Hesper", "portrait": "hesper:stern", "text": "A sigil-chain... Sigilbinders. I'd hoped they were only a story we told to frighten apprentices."},
+		{"speaker": "Hesper", "portrait": "hesper:stern", "text": "Those snares in the forest weren't catching kith at random. They were hunting for this. For Aurelune."},
+		{"speaker": "Hesper", "portrait": "hesper:neutral", "text": "Get some rest, Wardens. Tomorrow, we have a long road ahead."}
+	],
+	"chapter_end": [
+		{"speaker": "", "text": "WILDBOUND — Chapter 1: The Kindling — complete."},
+		{"speaker": "", "text": "Thank you for playing this early prototype! Free Battle and Local Versus are now on the title screen. Tell the developer what you thought!"}
+	],
+	"mossling_observed": [
+		{"speaker": "", "text": "The Mossling's ears twitch. It sniffs the air in your direction... and goes back to nibbling clover. It isn't afraid of you."},
+		{"speaker": "", "text": "Field Journal updated: Mossling."}
+	],
+	"lanternmoth": [
+		{"speaker": "", "text": "Lumen, Hesper's Lanternmoth, flutters a lazy circle around your head. Its glow is warm, like a lamp left on for you."}
+	],
+	"arena_gate_early": [
+		{"speaker": "", "text": "The Ringstones — an old circle of standing stones where Wardens have dueled for generations. Corin is pacing inside."},
+		{"speaker": "Corin", "portrait": "corin:grin", "text": "Not yet! You need a kith first, {player}! And Hesper says you have to train!"}
+	],
+	"training_gate_early": [
+		{"speaker": "", "text": "The training yard. Straw totems stand in a neat row, waiting to be whacked."}
+	],
+	"shrine_early": [
+		{"speaker": "", "text": "The Dawn Shrine: crumbling walls, and an ancient mural of a great crane-like kith spreading its wings before a rising sun."},
+		{"speaker": "", "text": "Hesper says the shrine is older than Mossford itself."}
+	]
+}

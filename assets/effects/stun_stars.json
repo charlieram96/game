@@ -1,0 +1,33 @@
+{
+ "version": 1,
+ "image": "stun_stars.png",
+ "frame_size": [
+  32,
+  16
+ ],
+ "columns": 6,
+ "frame_count": 6,
+ "pivot": [
+  16,
+  8
+ ],
+ "pixels_per_unit": 24,
+ "animations": {
+  "loop_s": {
+   "frames": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "fps": 10,
+   "loop": true
+  }
+ },
+ "meta": {
+  "kind": "billboard",
+  "pivot": "center (sits above the head)"
+ }
+}

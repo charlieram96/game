@@ -78,6 +78,18 @@ sprite_stretch={
 "type": "float",
 "value": 1.0
 }
+occluder_uv={
+"type": "vec2",
+"value": Vector2(0.5, 0.5)
+}
+occluder_z={
+"type": "float",
+"value": 0.0
+}
+occluder_active={
+"type": "float",
+"value": 0.0
+}
 
 [rendering]
 

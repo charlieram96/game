@@ -200,7 +200,7 @@ static func atlas(names: Array, dir: String = FOLIAGE_DIR) -> Dictionary:
 
 ## Scatters many small billboard sprites in one draw call. `items` is an
 ## array of [Vector3 position, int atlas_index, float scale].
-static func scatter(parent: Node, atlas_info: Dictionary, items: Array, shadows: bool = false, sway: float = 0.6) -> MultiMeshInstance3D:
+static func scatter(parent: Node, atlas_info: Dictionary, items: Array, shadows: bool = false, sway: float = 0.6, can_occlude: bool = false) -> MultiMeshInstance3D:
 	var mm := MultiMesh.new()
 	mm.transform_format = MultiMesh.TRANSFORM_3D
 	mm.use_custom_data = true
@@ -225,6 +225,7 @@ static func scatter(parent: Node, atlas_info: Dictionary, items: Array, shadows:
 	m.set_shader_parameter("pixel_size", 1.0 / 24.0)
 	m.set_shader_parameter("instance_frame", true)
 	m.set_shader_parameter("sway", sway)
+	m.set_shader_parameter("can_occlude", can_occlude)
 	mmi.material_override = m
 	mmi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON if shadows else GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	parent.add_child(mmi)

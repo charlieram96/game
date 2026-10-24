@@ -1,0 +1,34 @@
+{
+ "version": 1,
+ "image": "cinder_arc.png",
+ "frame_size": [
+  96,
+  96
+ ],
+ "columns": 5,
+ "frame_count": 5,
+ "pivot": [
+  48,
+  48
+ ],
+ "pixels_per_unit": 24,
+ "animations": {
+  "play_s": {
+   "frames": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "fps": 20,
+   "loop": false
+  }
+ },
+ "meta": {
+  "kind": "ground (top-down)",
+  "pivot": "center",
+  "forward": "+X",
+  "arc_degrees": 110
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "version": 1,
+ "image": "portrait_emberlyn.png",
+ "frame_size": [
+  64,
+  64
+ ],
+ "columns": 2,
+ "frame_count": 2,
+ "pivot": [
+  32,
+  63
+ ],
+ "pixels_per_unit": 24,
+ "animations": {
+  "happy_s": {
+   "frames": [
+    1
+   ],
+   "fps": 1,
+   "loop": false
+  },
+  "scared_s": {
+   "frames": [
+    0
+   ],
+   "fps": 1,
+   "loop": false
+  }
+ },
+ "meta": {
+  "kind": "portrait",
+  "generator": "tools/sprite_forge/portraits.py"
+ }
+}

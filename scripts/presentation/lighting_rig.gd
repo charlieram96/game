@@ -9,8 +9,8 @@ var env: Environment
 var preset_name: StringName = &""
 
 const PRESETS := {
-	&"morning": {"sun_color": Color(1.0, 0.86, 0.7), "energy": 1.15, "pitch": -28.0, "yaw": -35.0, "ambient": Color(0.62, 0.68, 0.8), "ambient_energy": 0.62, "fog": Color(0.86, 0.85, 0.82), "fog_density": 0.012, "bg": Color(0.55, 0.66, 0.74), "glow": 0.55, "exposure": 1.0},
-	&"day": {"sun_color": Color(1.0, 0.95, 0.85), "energy": 1.25, "pitch": -52.0, "yaw": -30.0, "ambient": Color(0.6, 0.7, 0.85), "ambient_energy": 0.6, "fog": Color(0.75, 0.83, 0.9), "fog_density": 0.006, "bg": Color(0.5, 0.65, 0.8), "glow": 0.45, "exposure": 1.0},
+	&"morning": {"sun_color": Color(1.0, 0.86, 0.7), "energy": 1.15, "pitch": -28.0, "yaw": -35.0, "ambient": Color(0.62, 0.68, 0.8), "ambient_energy": 0.62, "fog": Color(0.86, 0.85, 0.82), "fog_density": 0.005, "bg": Color(0.55, 0.66, 0.74), "glow": 0.55, "exposure": 1.0},
+	&"day": {"sun_color": Color(1.0, 0.95, 0.85), "energy": 1.25, "pitch": -52.0, "yaw": -30.0, "ambient": Color(0.6, 0.7, 0.85), "ambient_energy": 0.6, "fog": Color(0.75, 0.83, 0.9), "fog_density": 0.004, "bg": Color(0.5, 0.65, 0.8), "glow": 0.45, "exposure": 1.0},
 	&"golden": {"sun_color": Color(1.0, 0.78, 0.52), "energy": 1.3, "pitch": -34.0, "yaw": -40.0, "ambient": Color(0.5, 0.56, 0.78), "ambient_energy": 0.52, "fog": Color(0.95, 0.78, 0.6), "fog_density": 0.004, "bg": Color(0.86, 0.66, 0.5), "glow": 0.7, "exposure": 1.0},
 	&"dusk": {"sun_color": Color(1.0, 0.55, 0.45), "energy": 0.85, "pitch": -14.0, "yaw": -60.0, "ambient": Color(0.48, 0.42, 0.66), "ambient_energy": 0.62, "fog": Color(0.55, 0.38, 0.5), "fog_density": 0.014, "bg": Color(0.35, 0.25, 0.4), "glow": 0.85, "exposure": 1.05},
 	&"night": {"sun_color": Color(0.55, 0.65, 1.0), "energy": 0.5, "pitch": -48.0, "yaw": 25.0, "ambient": Color(0.25, 0.32, 0.55), "ambient_energy": 0.7, "fog": Color(0.08, 0.1, 0.2), "fog_density": 0.02, "bg": Color(0.04, 0.05, 0.1), "glow": 1.0, "exposure": 1.1},

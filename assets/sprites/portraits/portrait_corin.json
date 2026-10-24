@@ -1,0 +1,42 @@
+{
+ "version": 1,
+ "image": "portrait_corin.png",
+ "frame_size": [
+  64,
+  64
+ ],
+ "columns": 3,
+ "frame_count": 3,
+ "pivot": [
+  32,
+  63
+ ],
+ "pixels_per_unit": 24,
+ "animations": {
+  "determined_s": {
+   "frames": [
+    1
+   ],
+   "fps": 1,
+   "loop": false
+  },
+  "grin_s": {
+   "frames": [
+    0
+   ],
+   "fps": 1,
+   "loop": false
+  },
+  "sulk_s": {
+   "frames": [
+    2
+   ],
+   "fps": 1,
+   "loop": false
+  }
+ },
+ "meta": {
+  "kind": "portrait",
+  "generator": "tools/sprite_forge/portraits.py"
+ }
+}

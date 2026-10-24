@@ -1,0 +1,33 @@
+{
+ "version": 1,
+ "image": "dust_puff.png",
+ "frame_size": [
+  24,
+  24
+ ],
+ "columns": 6,
+ "frame_count": 6,
+ "pivot": [
+  12,
+  23
+ ],
+ "pixels_per_unit": 24,
+ "animations": {
+  "play_s": {
+   "frames": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "fps": 16,
+   "loop": false
+  }
+ },
+ "meta": {
+  "kind": "billboard",
+  "pivot": "bottom-center"
+ }
+}

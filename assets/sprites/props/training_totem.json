@@ -1,0 +1,37 @@
+{
+ "version": 1,
+ "image": "training_totem.png",
+ "frame_size": [
+  32,
+  48
+ ],
+ "columns": 4,
+ "frame_count": 4,
+ "pivot": [
+  16,
+  45
+ ],
+ "pixels_per_unit": 24,
+ "animations": {
+  "hit_s": {
+   "frames": [
+    1,
+    2,
+    3
+   ],
+   "fps": 12,
+   "loop": false
+  },
+  "idle_s": {
+   "frames": [
+    0
+   ],
+   "fps": 1,
+   "loop": true
+  }
+ },
+ "meta": {
+  "kind": "prop",
+  "generator": "tools/sprite_forge/props.py"
+ }
+}

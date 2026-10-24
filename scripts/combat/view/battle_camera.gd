@@ -25,6 +25,7 @@ func _ready() -> void:
 	get_viewport().size_changed.connect(_reframe)
 	_reframe()
 	RenderingServer.global_shader_parameter_set("sprite_stretch", 1.0 / cos(deg_to_rad(PITCH_DEG)))
+	RenderingServer.global_shader_parameter_set("occluder_active", 0.0)
 
 
 func setup(p_arena_size: Vector2, p_focus: Vector3 = Vector3.ZERO) -> void:

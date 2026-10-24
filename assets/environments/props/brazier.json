@@ -1,0 +1,31 @@
+{
+ "version": 1,
+ "image": "brazier.png",
+ "frame_size": [
+  24,
+  32
+ ],
+ "columns": 4,
+ "frame_count": 4,
+ "pivot": [
+  12,
+  30
+ ],
+ "pixels_per_unit": 24,
+ "animations": {
+  "lit_s": {
+   "frames": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "fps": 10,
+   "loop": true
+  }
+ },
+ "meta": {
+  "kind": "prop",
+  "pivot": "between the tripod feet"
+ }
+}

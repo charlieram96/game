@@ -1,0 +1,31 @@
+{
+ "version": 1,
+ "image": "sigil_glow.png",
+ "frame_size": [
+  32,
+  32
+ ],
+ "columns": 4,
+ "frame_count": 4,
+ "pivot": [
+  16,
+  16
+ ],
+ "pixels_per_unit": 24,
+ "animations": {
+  "loop_s": {
+   "frames": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "fps": 8,
+   "loop": true
+  }
+ },
+ "meta": {
+  "kind": "billboard",
+  "pivot": "center"
+ }
+}

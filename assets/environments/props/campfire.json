@@ -1,0 +1,38 @@
+{
+ "version": 1,
+ "image": "campfire.png",
+ "frame_size": [
+  32,
+  32
+ ],
+ "columns": 5,
+ "frame_count": 5,
+ "pivot": [
+  16,
+  29
+ ],
+ "pixels_per_unit": 24,
+ "animations": {
+  "lit_s": {
+   "frames": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "fps": 10,
+   "loop": true
+  },
+  "unlit_s": {
+   "frames": [
+    0
+   ],
+   "fps": 1,
+   "loop": false
+  }
+ },
+ "meta": {
+  "kind": "prop",
+  "pivot": "ground under the fire ring"
+ }
+}

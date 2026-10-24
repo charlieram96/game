@@ -1,0 +1,91 @@
+{
+ "version": 1,
+ "image": "hesper.png",
+ "frame_size": [
+  32,
+  48
+ ],
+ "columns": 8,
+ "frame_count": 21,
+ "pivot": [
+  16,
+  45
+ ],
+ "pixels_per_unit": 24,
+ "animations": {
+  "idle_e": {
+   "frames": [
+    4,
+    5
+   ],
+   "fps": 2,
+   "loop": true
+  },
+  "idle_n": {
+   "frames": [
+    2,
+    3
+   ],
+   "fps": 2,
+   "loop": true
+  },
+  "idle_s": {
+   "frames": [
+    0,
+    1
+   ],
+   "fps": 2,
+   "loop": true
+  },
+  "point_e": {
+   "frames": [
+    20
+   ],
+   "fps": 4,
+   "loop": false
+  },
+  "talk_s": {
+   "frames": [
+    18,
+    19
+   ],
+   "fps": 4,
+   "loop": true
+  },
+  "walk_e": {
+   "frames": [
+    14,
+    15,
+    16,
+    17
+   ],
+   "fps": 6,
+   "loop": true
+  },
+  "walk_n": {
+   "frames": [
+    10,
+    11,
+    12,
+    13
+   ],
+   "fps": 6,
+   "loop": true
+  },
+  "walk_s": {
+   "frames": [
+    6,
+    7,
+    8,
+    9
+   ],
+   "fps": 6,
+   "loop": true
+  }
+ },
+ "meta": {
+  "kind": "character",
+  "role": "mentor",
+  "generator": "tools/sprite_forge/hesper.py"
+ }
+}

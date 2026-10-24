@@ -1,0 +1,84 @@
+{
+ "version": 1,
+ "image": "mossling.png",
+ "frame_size": [
+  32,
+  32
+ ],
+ "columns": 8,
+ "frame_count": 20,
+ "pivot": [
+  16,
+  29
+ ],
+ "pixels_per_unit": 24,
+ "animations": {
+  "alert_s": {
+   "frames": [
+    16,
+    17
+   ],
+   "fps": 6,
+   "loop": true
+  },
+  "hop_e": {
+   "frames": [
+    12,
+    13,
+    14,
+    15
+   ],
+   "fps": 10,
+   "loop": true
+  },
+  "hop_n": {
+   "frames": [
+    8,
+    9,
+    10,
+    11
+   ],
+   "fps": 10,
+   "loop": true
+  },
+  "hop_s": {
+   "frames": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "fps": 10,
+   "loop": true
+  },
+  "idle_e": {
+   "frames": [
+    2,
+    3
+   ],
+   "fps": 3,
+   "loop": true
+  },
+  "idle_s": {
+   "frames": [
+    0,
+    1
+   ],
+   "fps": 3,
+   "loop": true
+  },
+  "sleep_s": {
+   "frames": [
+    18,
+    19
+   ],
+   "fps": 2,
+   "loop": true
+  }
+ },
+ "meta": {
+  "kind": "kith",
+  "element": "grove",
+  "generator": "tools/sprite_forge/mossling.py"
+ }
+}

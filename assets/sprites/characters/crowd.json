@@ -1,0 +1,150 @@
+{
+ "version": 1,
+ "image": "crowd.png",
+ "frame_size": [
+  24,
+  32
+ ],
+ "columns": 8,
+ "frame_count": 32,
+ "pivot": [
+  12,
+  30
+ ],
+ "pixels_per_unit": 24,
+ "animations": {
+  "cheer_v0": {
+   "frames": [
+    2,
+    3
+   ],
+   "fps": 6,
+   "loop": true
+  },
+  "cheer_v1": {
+   "frames": [
+    6,
+    7
+   ],
+   "fps": 6,
+   "loop": true
+  },
+  "cheer_v2": {
+   "frames": [
+    10,
+    11
+   ],
+   "fps": 6,
+   "loop": true
+  },
+  "cheer_v3": {
+   "frames": [
+    14,
+    15
+   ],
+   "fps": 6,
+   "loop": true
+  },
+  "cheer_v4": {
+   "frames": [
+    18,
+    19
+   ],
+   "fps": 6,
+   "loop": true
+  },
+  "cheer_v5": {
+   "frames": [
+    22,
+    23
+   ],
+   "fps": 6,
+   "loop": true
+  },
+  "cheer_v6": {
+   "frames": [
+    26,
+    27
+   ],
+   "fps": 6,
+   "loop": true
+  },
+  "cheer_v7": {
+   "frames": [
+    30,
+    31
+   ],
+   "fps": 6,
+   "loop": true
+  },
+  "idle_v0": {
+   "frames": [
+    0,
+    1
+   ],
+   "fps": 2,
+   "loop": true
+  },
+  "idle_v1": {
+   "frames": [
+    4,
+    5
+   ],
+   "fps": 2,
+   "loop": true
+  },
+  "idle_v2": {
+   "frames": [
+    8,
+    9
+   ],
+   "fps": 2,
+   "loop": true
+  },
+  "idle_v3": {
+   "frames": [
+    12,
+    13
+   ],
+   "fps": 2,
+   "loop": true
+  },
+  "idle_v4": {
+   "frames": [
+    16,
+    17
+   ],
+   "fps": 2,
+   "loop": true
+  },
+  "idle_v5": {
+   "frames": [
+    20,
+    21
+   ],
+   "fps": 2,
+   "loop": true
+  },
+  "idle_v6": {
+   "frames": [
+    24,
+    25
+   ],
+   "fps": 2,
+   "loop": true
+  },
+  "idle_v7": {
+   "frames": [
+    28,
+    29
+   ],
+   "fps": 2,
+   "loop": true
+  }
+ },
+ "meta": {
+  "kind": "crowd",
+  "view": "front",
+  "generator": "tools/sprite_forge/crowd.py"
+ }
+}

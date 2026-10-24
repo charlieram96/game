@@ -1,0 +1,31 @@
+{
+ "version": 1,
+ "image": "trust_motes.png",
+ "frame_size": [
+  16,
+  16
+ ],
+ "columns": 4,
+ "frame_count": 4,
+ "pivot": [
+  8,
+  8
+ ],
+ "pixels_per_unit": 24,
+ "animations": {
+  "loop_s": {
+   "frames": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "fps": 8,
+   "loop": true
+  }
+ },
+ "meta": {
+  "kind": "billboard",
+  "pivot": "center"
+ }
+}

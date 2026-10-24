@@ -12,6 +12,9 @@ shader_type spatial;
 render_mode cull_disabled, depth_draw_opaque;
 
 global uniform float sprite_stretch;
+global uniform vec2 occluder_uv;
+global uniform float occluder_z;
+global uniform float occluder_active;
 
 uniform sampler2D sheet : source_color, filter_linear, repeat_disable;
 uniform vec2 sheet_size = vec2(48.0, 48.0);
@@ -34,10 +37,15 @@ uniform float shade_floor = 0.62;
 uniform float sway = 0.0;  // foliage wind sway amplitude (pixels at the top)
 uniform vec2 jitter = vec2(0.0);  // hitstop shake, in pixels
 uniform bool instance_frame = false;  // MultiMesh: frame comes from INSTANCE_CUSTOM.r
+uniform bool can_occlude = false;  // dither away when standing between camera and player
 
 varying float v_height;
+varying float v_origin_z;
+varying float v_perspective;
 
 void vertex() {
+	v_origin_z = MODEL_MATRIX[3].z;
+	v_perspective = PROJECTION_MATRIX[3][3] < 0.5 ? 1.0 : 0.0;
 	vec2 px = (VERTEX.xy + vec2(0.5)) * frame_size;
 	vec2 local = vec2(px.x - pivot.x, px.y - (frame_size.y - pivot.y)) + jitter;
 	v_height = clamp(px.y / frame_size.y, 0.0, 1.0);
@@ -97,6 +105,19 @@ void fragment() {
 		vec2 cellp = floor(UV * sheet_size);
 		if (hash(cellp) < dissolve) {
 			a = 0.0;
+		}
+	}
+	// See-through foliage: only in the main (perspective) pass, so shadows stay intact.
+	if (can_occlude && occluder_active > 0.5 && v_perspective > 0.5 && v_origin_z > occluder_z + 0.35) {
+		vec2 d = (SCREEN_UV - occluder_uv) * vec2(VIEWPORT_SIZE.x / VIEWPORT_SIZE.y, 1.0);
+		float r = length(d);
+		if (r < 0.17) {
+			float keep = smoothstep(0.08, 0.17, r);
+			vec2 cell = floor(FRAGCOORD.xy / 2.0);
+			float pattern = mod(cell.x + cell.y, 2.0) * 0.5 + 0.25;
+			if (keep < pattern) {
+				a = 0.0;
+			}
 		}
 	}
 	ALPHA = a;
