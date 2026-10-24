@@ -140,6 +140,8 @@ func _input(event: InputEvent) -> void:
 		idx = event.index
 		pos = event.position
 		is_drag = true
+	elif event is InputEventMouse and event.device == InputEvent.DEVICE_ID_EMULATION:
+		return  # the engine's mouse copy of a touch handled above
 	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and Settings.touch_mode == Settings.TouchMode.ALWAYS:
 		idx = _mouse_touch_id
 		pos = event.position

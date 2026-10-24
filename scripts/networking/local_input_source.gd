@@ -74,6 +74,10 @@ func reset() -> void:
 func handle_input(event: InputEvent) -> void:
 	if not enabled:
 		return
+	# On touch screens the engine also sends each touch as an emulated mouse
+	# event; the touch controls already handle the real one.
+	if event is InputEventMouse and event.device == InputEvent.DEVICE_ID_EMULATION and touch and touch.is_active():
+		return
 	if event is InputEventMouseMotion and allow_mouse:
 		_device = &"kbm"
 		if _gesture.is_down():
