@@ -37,7 +37,8 @@ var _seq_left := 0
 func _ready() -> void:
 	setup = Game.take_pending_battle()
 	if setup == null:
-		setup = Game.quick_battle_setup(&"emberlyn", &"stoneback", Settings.ai_difficulty)
+		# Run directly (dev): a quick battle, or the training yard with --training.
+		setup = Game.training_setup() if "--training" in OS.get_cmdline_user_args() else Game.quick_battle_setup(&"emberlyn", &"stoneback", Settings.ai_difficulty)
 	_parse_dev_args()
 	transport = LocalBattleTransport.new()
 	transport.start(setup)
@@ -190,6 +191,8 @@ func _process(delta: float) -> void:
 	view.render(alpha, delta)
 	for team in view.local_input_teams:
 		hud.set_dash_cost_preview(team, view.preview.cost_preview(team))
+	if training and player_input.aim_state.active:
+		hud.collapse_tip()  # the player is trying it: get the tip off the board
 	hud.refresh(delta)
 	if _end_timer >= 0.0:
 		_end_timer -= delta

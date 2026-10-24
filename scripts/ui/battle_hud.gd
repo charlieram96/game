@@ -24,6 +24,10 @@ var tip_panel: PanelContainer
 var tip_label: RichTextLabel
 var pause_button: Button
 var touch_mode := false
+## Seconds the full tip stays up before it shrinks to its one-line summary.
+const TIP_FULL_SECONDS := 5.0
+var _tip_summary := ""
+var _tip_full_left := 0.0
 var _msg_tween: Tween
 
 
@@ -182,6 +186,10 @@ func refresh(delta: float) -> void:
 	var me := sim.active_fighter(local_team)
 	for s in slots:
 		(s as AbilitySlot).update_from(me)
+	if _tip_full_left > 0.0:
+		_tip_full_left -= delta
+		if _tip_full_left <= 0.0:
+			collapse_tip()
 
 
 ## Show on `team`'s stamina bar what the dash being aimed would spend
@@ -216,9 +224,36 @@ func show_sub(text: String, duration: float = 2.0) -> void:
 	tw.tween_property(sub_label, "modulate:a", 0.0, 0.4)
 
 
-func show_tip(bbcode: String) -> void:
+## A tutorial tip. With a `summary`, the full text shows for a few seconds
+## and then shrinks to that one line at the top edge, so it stops covering
+## the board.
+func show_tip(bbcode: String, summary: String = "") -> void:
 	tip_panel.visible = bbcode != ""
 	tip_label.text = bbcode
+	_tip_summary = summary
+	_tip_full_left = TIP_FULL_SECONDS if summary != "" else 0.0
+	_layout_tip(false)
+
+
+## Shrink the current tip to its summary now (e.g. once the player acts).
+func collapse_tip() -> void:
+	_tip_full_left = 0.0
+	if _tip_summary == "" or not tip_panel.visible:
+		return
+	tip_label.text = _tip_summary
+	_tip_summary = ""
+	_layout_tip(true)
+
+
+func _layout_tip(compact: bool) -> void:
+	var w := 560.0 if compact else 600.0
+	var font := 16 if compact else 20
+	tip_label.add_theme_font_size_override("normal_font_size", font)
+	tip_label.add_theme_font_size_override("bold_font_size", font)
+	tip_panel.custom_minimum_size = Vector2(w, 0)
+	tip_panel.size = Vector2(w, 0)
+	UiTheme.place(tip_panel, Vector2(0.5, 0), Vector2(-w * 0.5, 82 if compact else 84), Vector2(w, 0))
+	tip_panel.modulate.a = 0.88 if compact else 1.0
 
 
 func on_feedback(kind: StringName, data: Dictionary) -> void:

@@ -152,6 +152,8 @@ func _build_ui() -> void:
 	ui.add_child(tag)
 	panel = PanelContainer.new()
 	UiTheme.place(panel, Vector2(0, 1), Vector2(48, -420), Vector2(380, 380))
+	# Extra entries (Continue) grow the menu upward, never off the bottom.
+	panel.grow_vertical = Control.GROW_DIRECTION_BEGIN
 	ui.add_child(panel)
 	menu = VBoxContainer.new()
 	menu.add_theme_constant_override("separation", 8)
@@ -194,6 +196,7 @@ func _main_menu() -> void:
 	if first == null:
 		first = nb
 	_button("Free Battle", _free_battle_menu)
+	_button("Dash Training", _dash_training)
 	_button("Local Versus", _versus_menu)
 	_button("Settings", _settings)
 	_button("How to Play", _how_to_play)
@@ -300,6 +303,12 @@ func _settings() -> void:
 		panel.offset_top = -420
 		panel.offset_right = 48 + 380
 		_main_menu()).grab_focus()
+
+
+## Hesper's training yard on its own: learn drag-to-dash, strikes, Focus,
+## rams and guard against the totem, then come back here.
+func _dash_training() -> void:
+	Game.start_battle(Game.training_setup(), Game.TITLE_SCENE)
 
 
 func _how_to_play() -> void:
