@@ -15,6 +15,7 @@ const TEAL := Color(0.35, 0.9, 0.95)
 const DANGER := Color(1.0, 0.45, 0.38)
 
 static var _theme: Theme = null
+static var _icons: Dictionary = {}
 
 
 static func get_theme() -> Theme:
@@ -127,9 +128,15 @@ static func focus_box() -> StyleBox:
 	return f
 
 
+## Cached: a texture loaded inside _draw() and dropped right away is freed
+## before the frame renders, which draws a white square instead of the icon.
 static func icon(name: String) -> Texture2D:
+	if _icons.has(name):
+		return _icons[name]
 	var path := ICON_DIR + name + ".png"
-	return load(path) if ResourceLoader.exists(path) else null
+	var tex: Texture2D = load(path) if ResourceLoader.exists(path) else null
+	_icons[name] = tex
+	return tex
 
 
 static func label(text: String, size: int = 20, color: Color = PARCHMENT, bold: bool = false, outline: int = 6) -> Label:
