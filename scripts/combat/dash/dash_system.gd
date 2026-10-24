@@ -22,7 +22,9 @@ const NO_CELL := Vector2i(-9999, -9999)
 
 # --- Planning ----------------------------------------------------------------------
 
-static func plan(sim: BattleSim, f: Fighter, dir_index: int, cells: int) -> DashPlan:
+## `from` overrides where the dash starts (the preview plans a dash queued
+## mid-dash from the landing point); by default it is the creature's position.
+static func plan(sim: BattleSim, f: Fighter, dir_index: int, cells: int, from: Vector2 = Vector2.INF) -> DashPlan:
 	var p := DashPlan.new()
 	var prof := f.stats.dash
 	if dir_index < 0 or dir_index >= Cardinal.DIRS.size() or prof.max_cells <= 0 or cells <= 0:
@@ -31,7 +33,7 @@ static func plan(sim: BattleSim, f: Fighter, dir_index: int, cells: int) -> Dash
 	p.dir_index = dir_index
 	p.dir = Cardinal.from_index(dir_index)
 	p.cells_requested = clampi(cells, 1, max_cells(f))
-	p.home_cell = home_cell(sim, f)
+	p.home_cell = home_cell(sim, f, f.pos if from == Vector2.INF else from)
 	p.home = arena.cell_center(p.home_cell)
 	var step := Vector2i(int(p.dir.x), int(p.dir.y))
 	var prev := p.home
@@ -95,23 +97,23 @@ static func speed_mult(f: Fighter) -> float:
 	return mult
 
 
-## The cell a dash starts from: the one the creature stands in, or the
-## nearest open neighbour when knockback left it in a stone's cell.
-static func home_cell(sim: BattleSim, f: Fighter) -> Vector2i:
+## The cell a dash from `at` starts from: the one containing it, or the
+## nearest open neighbour when knockback left the creature in a stone's cell.
+static func home_cell(sim: BattleSim, f: Fighter, at: Vector2) -> Vector2i:
 	var arena := sim.setup.arena
 	var n := arena.cell_count()
-	var c := arena.cell_of(f.pos)
+	var c := arena.cell_of(at)
 	c = Vector2i(clampi(c.x, 0, n.x - 1), clampi(c.y, 0, n.y - 1))
-	if _reachable(sim, f, f.pos, c):
+	if _reachable(sim, f, at, c):
 		return c
 	var best := c
 	var best_d := INF
 	for dy in [-1, 0, 1]:
 		for dx in [-1, 0, 1]:
 			var cc := c + Vector2i(dx, dy)
-			if cc == c or not arena.has_cell(cc) or not _reachable(sim, f, f.pos, cc):
+			if cc == c or not arena.has_cell(cc) or not _reachable(sim, f, at, cc):
 				continue
-			var d := f.pos.distance_squared_to(arena.cell_center(cc))
+			var d := at.distance_squared_to(arena.cell_center(cc))
 			if d < best_d:
 				best_d = d
 				best = cc

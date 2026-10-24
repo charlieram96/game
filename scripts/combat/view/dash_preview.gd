@@ -254,12 +254,9 @@ class AimMarker:
 				_hide_all()
 			_last_key = Vector3i(-1, -1, -1)
 			return
-		# While the creature is mid-dash its committed lane is on screen; the
-		# next aim appears once it lands.
-		if f.state == SM.DASH_START or f.state == SM.DASH_ACTIVE:
-			_hide_all()
-			return
-		var plan := DashSystem.plan(sim, f, aim.dir_index, aim.cells)
+		# Aimed mid-dash, the next dash waits for the landing: plan it from there.
+		var mid_dash := f.state == SM.DASH_START or f.state == SM.DASH_ACTIVE
+		var plan := DashSystem.plan(sim, f, aim.dir_index, aim.cells, f.dash_to if mid_dash else Vector2.INF)
 		var arena := sim.setup.arena
 		showing = true
 		cancelled = aim.cancelled
@@ -277,8 +274,9 @@ class AimMarker:
 			opacity = 0.4
 		elif not affordable:
 			main = NO_STAMINA_COLOR
-		# Aiming while the creature can't dash yet (stunned, mid-attack): dimmed.
-		var busy := f.state == SM.STUNNED or f.state == SM.SWITCHING or f.state == SM.ATTACK_START or f.state == SM.ATTACK_ACTIVE
+		# Aiming while the creature can't dash yet (mid-dash, stunned,
+		# mid-attack): dimmed.
+		var busy := mid_dash or f.state == SM.STUNNED or f.state == SM.SWITCHING or f.state == SM.ATTACK_START or f.state == SM.ATTACK_ACTIVE
 		if busy:
 			opacity *= 0.55
 		lane.set_colors(main.lightened(0.12), Color(1.0, 1.0, 0.96))

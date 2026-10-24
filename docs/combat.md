@@ -401,7 +401,7 @@ manages stamina with Focus. Each tick it:
 | Easy | 26 | 12 | 16 deg | 0.3 | 0.20 | 0.15 | 0.15 | 0.40 | 45% | 0.25 | 0.3 | 1.6 |
 | Normal | 14 | 6 | 7 deg | 0.8 | 0.55 | 0.35 | 0.35 | 0.60 | 35% | 0.08 | 0.6 | 1.0 |
 | Hard | 9 | 4 | 3 deg | 1.0 | 0.80 | 0.55 | 0.55 | 0.75 | 30% | 0.03 | 0.9 | 0.8 |
-| Story (Corin) | 26 | 10 | 13 deg | 0.45 | 0.22 | 0.18 | 0.20 | 0.50 | 44% | 0.22 | 0.4 | 1.25 |
+| Story (Corin) | 28 | 12 | 15 deg | 0.38 | 0.20 | 0.16 | 0.18 | 0.44 | 44% | 0.27 | 0.34 | 1.35 |
 
 Reaction and decision are in ticks. The AI has a seeded RNG, so AI-vs-AI
 runs are reproducible. Free Battle offers Easy, Normal and Hard. The story
