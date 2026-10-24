@@ -44,6 +44,9 @@ var _smear_fade := -1.0
 var _cost_preview := 0.0
 var _cost_ok := true
 var _cost_frame := -10
+var _ram_pose := false
+## The landing skid plays to its end, even into IDLE.
+var _landing := false
 
 
 func setup(f: Fighter, color: Color) -> void:
@@ -78,6 +81,11 @@ func setup(f: Fighter, color: Color) -> void:
 	add_child(sprite)
 	_dir = "e" if f.facing.x >= 0.0 else "w"
 	sprite.play("idle", _dir)
+	sprite.animation_finished.connect(func(anim: String) -> void:
+		if anim == "ram":
+			_ram_pose = false
+		elif anim == "dash_land":
+			_landing = false)
 	position = Vector3(f.pos.x, 0, f.pos.y)
 	_last_pos = position
 	_smear = MeshInstance3D.new()
@@ -102,6 +110,13 @@ func flash(amount: float = 1.0, color: Color = Color.WHITE) -> void:
 func squash(x: float, y: float) -> void:
 	_squash = Vector2(x, y)
 	_squash_vel = Vector2.ZERO
+
+
+## This creature's dash just rammed a foe: the impact pose plays once.
+func ram_pose() -> void:
+	if sprite.has_animation("ram"):
+		_ram_pose = true
+		sprite.play("ram", _dir, true)
 
 
 ## Rammed or struck hard: squashed, knocked a little along `dir`, flashed.
@@ -137,7 +152,9 @@ func update_view(alpha: float, delta: float) -> void:
 	_knock = _knock.lerp(Vector3.ZERO, minf(1.0, delta * 14.0))
 	if f.hitstop > 0 and f.state != SM.ATTACK_ACTIVE:
 		var amp := 2.0 if f.state == SM.STUNNED else 1.0
-		sprite.set_param("jitter", (Vector2(randf_range(-1.0, 1.0), randf_range(-0.4, 0.4)) * amp).round())
+		# In 24-px/unit sprite pixels, so 2x sheets shake as far.
+		var px_scale := sprite.sheet.pixels_per_unit / 24.0 if sprite.sheet else 1.0
+		sprite.set_param("jitter", (Vector2(randf_range(-1.0, 1.0), randf_range(-0.4, 0.4)) * amp).round() * px_scale)
 	else:
 		sprite.set_param("jitter", Vector2.ZERO)
 	sprite.speed_scale = 0.0 if f.hitstop > 0 else 1.0
@@ -185,22 +202,25 @@ func _update_animation(_delta: float) -> void:
 		return
 	match st:
 		SM.IDLE:
-			sprite.play("idle", _dir)
+			# Battle stance; the calm idle stays for the overworld and switching.
+			if _landing:
+				sprite.play("dash_land", _dir)
+			else:
+				sprite.play("ready" if sprite.has_animation("ready") else "idle", _dir)
 		SM.DASH_START:
 			if sprite.has_animation("dash_windup"):
 				sprite.play("dash_windup", _dir)
 			else:
 				sprite.show_frame("dash", _dir, 0)
 		SM.DASH_ACTIVE:
-			if sprite.has_animation("roll"):
-				sprite.play("roll", "s")
-			else:
-				sprite.play("dash", _dir)
+			sprite.play("ram" if _ram_pose else "dash", _dir)
 		SM.DASH_RECOVERY:
-			if f.state_tick < 8 and sprite.has_animation("dash_land"):
+			if _ram_pose:
+				sprite.play("ram", _dir)
+			elif _landing:
 				sprite.play("dash_land", _dir)
 			else:
-				sprite.play("idle", _dir)
+				sprite.play("ready" if sprite.has_animation("ready") else "idle", _dir)
 		SM.ATTACK_START, SM.ATTACK_ACTIVE, SM.ATTACK_RECOVERY:
 			var anim := String(f.current_ability.anim) if f.current_ability else "cast"
 			if not sprite.has_animation(anim):
@@ -229,6 +249,8 @@ func _update_animation(_delta: float) -> void:
 
 func _on_state_enter(st: int) -> void:
 	var prev := _last_state
+	if st != SM.IDLE and st != SM.DASH_RECOVERY:
+		_landing = false
 	match st:
 		SM.DASH_START:
 			squash(1.1, 0.9)
@@ -240,6 +262,9 @@ func _on_state_enter(st: int) -> void:
 			if prev == SM.DASH_ACTIVE:
 				var heavy := fighter.stats.dash.dash_type == DashProfile.DashType.ARMORED
 				squash(1.28 if heavy else 1.24, 0.78 if heavy else 0.82)
+				if sprite.has_animation("dash_land") and not _ram_pose:
+					_landing = true
+					sprite.play("dash_land", _dir, true)
 			else:
 				squash(0.9, 1.1)
 		SM.ATTACK_ACTIVE:

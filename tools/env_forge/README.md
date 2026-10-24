@@ -10,6 +10,7 @@ python3 tools/env_forge/build.py fx ui        # only some groups (textures, foli
 python3 tools/env_forge/build.py --clean      # delete our known outputs first, then rebuild
 python3 tools/env_forge/build.py --check      # validate the files on disk only
 python3 tools/env_forge/textures.py grass_a   # any module can rebuild single assets by name
+python3 tools/env_forge/arena.py              # battle-arena art (+ board mock-ups); --check validates
 ```
 
 Requires Python 3 + Pillow + numpy. Output is deterministic (seeded per asset name).
@@ -25,6 +26,7 @@ Requires Python 3 + Pillow + numpy. Output is deterministic (seeded per asset na
 | `mural.py` | C: `mural_dawncrane` + `_glow`, a carved relief built from an integer height field |
 | `fx.py` | D: VFX sheets -> `assets/effects/` |
 | `ui.py` | E: icons -> `assets/ui/icons/`, 9-slice panels, reticle, cursor -> `assets/ui/panels/` |
+| `arena.py` | battle board: floor tile atlases (stone, training yard; one 24x24 tile per cell, rows of plain / worn / mossy-or-sandy grout / special variants), rim slabs, sun-crane inlay, scorch decals, wall bay, ashlar, coping, paving, menhir, cloth banners -> `assets/environments/textures/arena_*` (writes next to its own checkout) |
 | `build.py` | runs everything and validates sizes, palette membership, alpha rules, borders, manifests |
 
 ## Conventions

@@ -41,6 +41,7 @@ func set_sheet(s: SpriteSheet) -> void:
 	_mat.set_shader_parameter("columns", float(s.columns))
 	_mat.set_shader_parameter("pivot", s.pivot)
 	_mat.set_shader_parameter("pixel_size", 1.0 / s.pixels_per_unit)
+	_mat.set_shader_parameter("outline_texels", s.pixels_per_unit / 24.0)
 	_update_aabb()
 	if current_anim != "":
 		var a := current_anim

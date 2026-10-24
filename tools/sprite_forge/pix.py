@@ -22,12 +22,13 @@ pixels gives an identical raster, so volumes stay constant between frames.
 from __future__ import annotations
 
 import math
+import os
 import sys
 
 import numpy as np
 from PIL import Image
 
-sys.path.insert(0, "/home/user/game/tools")
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 from common.palette import RAMPS  # noqa: E402
 
 # --------------------------------------------------------------------------
@@ -356,13 +357,22 @@ def despike(mask: np.ndarray) -> np.ndarray:
 
 
 class Part:
-    """A shape painted with one material ramp."""
+    """A shape painted with one material ramp.
+
+    HD parts (k=2) use a half-step ramp (`<ramp>_hd`, see common/palette.py): every
+    original shade i sits at index 2*i, with an in-between shade at the odd indices.
+    `levels` then quantises the light into half steps (softer, multi-shade ramps);
+    `tex` is an additive perturbation of the light term (fur clumps, stone grain)
+    that makes band borders follow a texture instead of a smooth curve.
+    """
 
     def __init__(self, shape: Shape, ramp: str, base: int = 3, z: float = 0.0, *, name: str = "",
                  lo: int = 1, hi: int | None = None, idx: np.ndarray | None = None,
                  outline: bool = True, oc=None, contour: int | None = None, contour_col=None,
                  cast: int = 1, recv: bool = True, group=None, bands=None, spec: bool = False,
-                 light: float = 1.0, offset: int = 0, cast_dirs=None, glow: bool = True):
+                 light: float = 1.0, offset: int = 0, cast_dirs=None, glow: bool = True,
+                 levels=None, tex: np.ndarray | None = None, k: int = 1, spec_cap: int | None = None,
+                 contour_dirs=None):
         self.shape = shape
         self.ramp = ramp
         self.base = base
@@ -385,13 +395,39 @@ class Part:
         self.offset = offset
         self.cast_dirs = cast_dirs
         self.glow = glow
+        # half-step quantisation: (edges, offsets) with len(offsets) == len(edges) + 1
+        self.levels = levels
+        self.tex = tex
+        self.k = k                  # shade-index units per original ramp step (1, or 2 for HD ramps)
+        self.spec_cap = spec_cap    # max positive offset without `spec` (HD); None = derive from levels
+        # selective interior contour: only on these sides of the part, e.g. ("r", "b") = the
+        # shadow side (light comes from the upper left); None = all around
+        self.contour_dirs = contour_dirs
+
+    def light_term(self) -> np.ndarray:
+        s = self.shape
+        lit = s.nx * LIGHT[0] + s.ny * LIGHT[1] + s.nz * LIGHT[2]
+        t = (lit - FLAT_S) * self.light
+        if self.tex is not None:
+            t = t + self.tex
+        return t
 
     def indices(self) -> np.ndarray:
         if self.idx is not None:
             return self.idx.astype(int)
         s = self.shape
+        if self.levels is not None:
+            t = self.light_term()
+            edges, offs = self.levels
+            off = np.asarray(offs, int)[np.searchsorted(np.asarray(edges, float), t)]
+            cap = self.spec_cap if self.spec_cap is not None else (max(offs) if self.spec else self.k)
+            off = np.minimum(off, cap)
+            out = self.base + off + self.offset
+            return np.clip(out, self.lo, self.hi)
         lit = s.nx * LIGHT[0] + s.ny * LIGHT[1] + s.nz * LIGHT[2]
         t = (lit - FLAT_S) * self.light
+        if self.tex is not None:
+            t = t + self.tex
         hi1, hi2, lo1, lo2 = self.bands
         off = np.zeros(s.shape, int)
         off[t > hi1] = 1
@@ -403,13 +439,54 @@ class Part:
         return np.clip(out, self.lo, self.hi)
 
 
+# Half-step light levels for HD ramps: t = N.L - flat, offsets in HD indices
+# (2 = one original ramp step). Without `spec` the top is capped at +2.
+HD_LEVELS = ((-0.57, -0.36, -0.21, -0.08, 0.06, 0.14, 0.21, 0.28), (-4, -3, -2, -1, 0, 1, 2, 3, 4))
+
+
+def tube_coords(w, h, pts):
+    """Arc length s along a polyline and signed distance r from it (pixel units), per pixel.
+
+    Used to make textures (fur strands, plate grain) follow a curved limb or tail.
+    """
+    X, Y = _grid(w, h)
+    best_d = np.full((h, w), 1e9)
+    S = np.zeros((h, w))
+    R = np.zeros((h, w))
+    acc = 0.0
+    for i in range(len(pts) - 1):
+        (x0, y0), (x1, y1) = pts[i], pts[i + 1]
+        ox, oy, t = _seg_dist(X, Y, x0, y0, x1, y1)
+        L = math.hypot(x1 - x0, y1 - y0)
+        d = np.sqrt(ox * ox + oy * oy)
+        better = d < best_d
+        best_d = np.where(better, d, best_d)
+        side = np.sign((x1 - x0) * (Y - y0) - (y1 - y0) * (X - x0))
+        S = np.where(better, acc + t * L, S)
+        R = np.where(better, d * np.where(side == 0, 1.0, side), R)
+        acc += L
+    return S, R
+
+
 # --------------------------------------------------------------------------
 # figure / renderer
 
 
+# Cast-shadow sample offsets per `cast` level: a pixel is shaded when the pixel at
+# (x+dx, y+dy) belongs to a part in front. Scale 1 = the original 48px look;
+# scale 2 doubles the reach (same world size on a 2x sheet).
+_CAST_OFFSETS = {
+    1: ((-1, -1, 1), (0, -1, 1), (-1, 0, 1), (0, -2, 2), (-1, -2, 2), (-2, -2, 3), (0, -3, 3), (-1, -3, 3)),
+    2: ((-1, -1, 1), (0, -1, 1), (-1, 0, 1), (-2, -2, 1), (0, -2, 1), (-1, -2, 1), (-2, -1, 1),
+        (0, -3, 2), (-1, -3, 2), (0, -4, 2), (-1, -4, 2), (-2, -3, 2), (-2, -4, 2),
+        (-3, -3, 3), (-4, -4, 3), (0, -5, 3), (-1, -5, 3), (0, -6, 3), (-1, -6, 3), (-2, -5, 3), (-2, -6, 3)),
+}
+
+
 class Figure:
-    def __init__(self, w: int, h: int):
+    def __init__(self, w: int, h: int, scale: int = 1):
         self.w, self.h = w, h
+        self.scale = scale
         self.parts: list[Part] = []
         self.decals: list = []      # (x, y, rgba) drawn over fills, before outline
         self.post: list = []        # (x, y, rgba) drawn after everything
@@ -417,6 +494,15 @@ class Figure:
         self.outline_on = True
         self.selout = False
         self.glows: list = []       # (x, y, radius, steps): warm point light from a glowing object
+        self.glow_unit = 1          # glow steps per original ramp step (2 on HD canvases)
+        self.outline_fn = None      # optional hook(out, owner) -> out, run after the outline
+        self.post_margin = 0        # post-pass effects (sparks, rays) never land within this many px of the edge
+        self.floor = None           # ground row: no part fills it or anything below (the outline lands on it)
+        # shadow-side rim: fill pixels whose right/lower neighbour is outside the silhouette get one
+        # shade darker, so the silhouette carries weight on its shadow side (light comes from the upper left)
+        self.rim_dark = 0
+        self.outline_shadow = 0     # extra outline pixels on the shadow (right/bottom) side
+        self.outline_all = False    # ... or on every side (2x sheets: same world-space weight as a 1x outline)
 
     # convenience -----------------------------------------------------------
     def add(self, shape: Shape, ramp: str, base: int = 3, z: float = 0.0, **kw) -> Part:
@@ -435,6 +521,11 @@ class Figure:
     def render(self) -> Image.Image:
         W, H = self.w, self.h
         parts = self.parts
+        if self.floor is not None:
+            for p in parts:
+                if p.shape.mask[self.floor:].any():
+                    p.shape = p.shape.copy()
+                    p.shape.mask[self.floor:] = False
         order = sorted(range(len(parts)), key=lambda i: (parts[i].z, i))
         rank = np.full(len(parts) + 1, -1)
         owner = np.full((H, W), -1, int)
@@ -460,6 +551,10 @@ class Figure:
             hi_arr = np.array([p.hi for p in parts] + [0])
             gl_arr = np.array([p.glow and p.idx is None for p in parts] + [False])
             ok = (owner >= 0) & gl_arr[np.maximum(owner, 0)]
+            if self.glow_unit != 1:
+                k_arr = np.array([p.k for p in parts] + [1])
+                kk = k_arr[np.maximum(owner, 0)]
+                boost = -((-boost * kk) // self.glow_unit)     # ceil: HD parts get every step
             idx = np.where(ok, np.minimum(idx + boost, hi_arr[np.maximum(owner, 0)]), idx)
 
         # 3. orphan cleanup inside each part (a lone shade pixel surrounded by one other shade)
@@ -488,7 +583,7 @@ class Figure:
         grp = [p.group for p in parts]
         grp_id = {}
         gid_arr = np.array([grp_id.setdefault(g, len(grp_id)) for g in grp] + [-5])
-        for (dx, dy, need) in ((-1, -1, 1), (0, -1, 1), (-1, 0, 1), (0, -2, 2), (-1, -2, 2), (-2, -2, 3), (0, -3, 3), (-1, -3, 3)):
+        for (dx, dy, need) in _CAST_OFFSETS[self.scale]:
             o2 = nb(owner, dx, dy, -1)
             r2 = np.where(o2 >= 0, rank[o2], -1)
             cond = (owner >= 0) & (o2 >= 0) & (r2 > rank_map)
@@ -496,7 +591,18 @@ class Figure:
             cond &= recv_arr[owner]
             cond &= gid_arr[o2] != gid_arr[np.maximum(owner, 0)]
             shadow |= cond
-        idx = np.where(shadow, np.maximum(idx - 1, lo_arr[np.maximum(owner, 0)]), idx)
+        step = np.array([p.k for p in parts] + [1])[np.maximum(owner, 0)]
+        idx = np.where(shadow, np.maximum(idx - step, lo_arr[np.maximum(owner, 0)]), idx)
+
+        if self.rim_dark:
+            inside = owner >= 0
+            edge = np.zeros((H, W), bool)
+            for dx, dy in ((1, 0), (0, 1), (1, 1)):
+                edge |= inside & ~nb(inside, dx, dy, False)
+            ok_arr = np.array([p.idx is None and p.glow for p in parts] + [False])
+            edge &= ok_arr[np.maximum(owner, 0)]
+            dk = np.array([p.k for p in parts] + [1])[np.maximum(owner, 0)] * self.rim_dark
+            idx = np.where(edge, np.maximum(idx - dk, lo_arr[np.maximum(owner, 0)]), idx)
 
         # compose colours
         out = np.zeros((H, W, 4), np.uint8)
@@ -516,7 +622,11 @@ class Figure:
                 continue
             cc = p.contour_col if p.contour_col is not None else col(p.ramp, p.contour)
             touch = np.zeros((H, W), bool)
-            for dx, dy in N4:
+            dirs = N4
+            if p.contour_dirs is not None:
+                side = {"r": (-1, 0), "l": (1, 0), "b": (0, -1), "t": (0, 1)}
+                dirs = [side[d] for d in p.contour_dirs]
+            for dx, dy in dirs:
                 touch |= nb(m, dx, dy, False)
             behind = touch & (owner >= 0) & (owner != i) & (rank_map < rank[i])
             behind &= gid_arr[np.maximum(owner, 0)] != gid_arr[i]
@@ -552,9 +662,36 @@ class Figure:
                 best_c[better] = oc_arr[np.maximum(o2, 0)][better]
             edge = best_l < 1e8
             out[edge] = best_c[edge]
+            if self.outline_shadow:
+                # second outline pixel on the shadow side (right / below), or all round with
+                # outline_all, same colour as the outline it extends: silhouettes keep their
+                # weight when drawn at 2x density (never onto the 1px border or below the floor)
+                dirs = ((-1, 0), (0, -1)) if not self.outline_all else ((-1, 0), (0, -1), (1, 0), (0, 1))
+                for _ in range(self.outline_shadow):
+                    filled = out[:, :, 3] > 0
+                    grow = np.zeros((H, W), bool)
+                    src = np.zeros((H, W, 4), np.uint8)
+                    for dx, dy in dirs:
+                        e2 = nb(edge, dx, dy, False)
+                        c2 = nb(out, dx, dy, 0)
+                        g = (~filled) & e2 & ~grow
+                        src[g] = c2[g]
+                        grow |= g
+                    grow[:, -1] = False
+                    grow[-1, :] = False
+                    grow[:, 0] = False
+                    grow[0, :] = False
+                    if self.floor is not None:
+                        grow[self.floor + 1:] = False
+                    out[grow] = src[grow]
+                    edge = grow
 
+        if self.outline_fn is not None:
+            out = self.outline_fn(out, owner)
+
+        m = self.post_margin
         for (x, y, c) in self.post:
-            if 0 <= x < W and 0 <= y < H:
+            if m <= x < W - m and m <= y < H - m:
                 out[y, x] = c
         out[out[:, :, 3] < 128] = 0
         out[:, :, 3] = np.where(out[:, :, 3] > 0, 255, 0)

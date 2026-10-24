@@ -4,6 +4,8 @@ extends Node3D
 ## physics tick (60 Hz); rendering interpolates between ticks.
 
 const SM := FighterSM.State
+## Canvas width the touch buttons cover on the right (see TouchControls).
+const TOUCH_BUTTONS_WIDTH := 300.0
 
 var setup: BattleSetup
 var transport: LocalBattleTransport
@@ -45,8 +47,7 @@ func _ready() -> void:
 	sim = transport.sim
 	post = PostFX.new()
 	add_child(post)
-	post.set_focus(0.5, 0.33)
-	post.set_param("vignette", 0.28)
+	ArenaBuilder.apply_post(post, setup.arena)
 	view = BattleView.new()
 	add_child(view)
 	view.local_team = local_team
@@ -145,6 +146,8 @@ func _apply_touch_setting() -> void:
 	touch.visible = on
 	hud.set_touch_mode(on)
 	Input.emulate_touch_from_mouse = false
+	# Keep the board clear of the touch button cluster (bottom right).
+	view.camera.set_side_insets(0.0, TOUCH_BUTTONS_WIDTH if on else 0.0)
 
 
 func _input(event: InputEvent) -> void:

@@ -3,6 +3,7 @@
 
     python3 tools/sprite_forge/build.py              # sheets only
     python3 tools/sprite_forge/build.py --previews   # + review previews in tools/sprite_forge/previews/
+                                                     #   (2x sheets also get 4x review pages on grey + sand)
 
 Outputs (PNG + JSON manifest per sheet, via tools/common/sheet.py):
     assets/sprites/characters/  explorer, hesper, corin, villager_farmer, villager_baker, sigilbinder, crowd, crowd_back
@@ -68,6 +69,7 @@ def main() -> int:
     args = ap.parse_args()
     t0 = time.time()
     built = []
+    reviews = []
     for folder, fn in JOBS:
         res = fn(OUT[folder])
         sheets = res if isinstance(res, list) else [res]
@@ -79,9 +81,14 @@ def main() -> int:
             if args.previews:
                 preview.contact(png, scale=4)
                 preview.strips(sb, scale=4)
+                if sb.meta.get("scale", 1) > 1:
+                    # 2x sheets: per-animation review pages at 4x on mid-grey and sand
+                    reviews.extend(preview.review(sb, scale=4))
     for folder, name, n, a in built:
         print(f"  {folder:11s} {name:20s} {n:4d} frames  {a:3d} animations")
     print(f"built {len(built)} sheets in {time.time() - t0:.1f}s")
+    for path in reviews:
+        print(f"  review: {path}")
     return validate.main()
 
 

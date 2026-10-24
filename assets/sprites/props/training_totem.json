@@ -2,16 +2,16 @@
  "version": 1,
  "image": "training_totem.png",
  "frame_size": [
-  32,
-  48
+  64,
+  96
  ],
  "columns": 4,
  "frame_count": 4,
  "pivot": [
-  16,
-  45
+  32,
+  90
  ],
- "pixels_per_unit": 24,
+ "pixels_per_unit": 48,
  "animations": {
   "hit_s": {
    "frames": [
@@ -32,6 +32,7 @@
  },
  "meta": {
   "kind": "prop",
-  "generator": "tools/sprite_forge/props.py"
+  "generator": "tools/sprite_forge/props.py",
+  "scale": 2
  }
 }

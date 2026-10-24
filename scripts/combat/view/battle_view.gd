@@ -427,6 +427,7 @@ func _on_ram(f: Fighter, e: BattleEvent) -> void:
 		target.impact(dir, 1.0)
 	if f:
 		_fv(f.id).flash(0.65, Color(1.0, 0.98, 0.9))
+		_fv(f.id).ram_pose()
 	popup(at + Vector3(0, 1.8, 0), "RAM!", gold, 1.3)
 	camera.add_trauma(0.38)
 	_camera_kick(dir, 0.2)

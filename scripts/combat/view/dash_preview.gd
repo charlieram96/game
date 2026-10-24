@@ -378,7 +378,7 @@ class AimMarker:
 		if not landed:
 			return
 		var dir_name: String = ["e", "s", "w", "n"][plan.dir_index]
-		ghost.play("idle", dir_name)
+		ghost.play("ready" if ghost.has_animation("ready") else "idle", dir_name)
 		ghost.position = _marker_pos + Vector3(0, 0.0, 0.001)
 		var c := team_color if affordable else NO_STAMINA_COLOR
 		ghost.set_param("tint", c)

@@ -16,6 +16,8 @@ uniform bool flip_h = false;
 uniform vec2 pivot = vec2(24.0, 44.0);
 uniform float pixel_size = 0.0416667;
 uniform bool upright = true;
+// Rim thickness in sheet texels (2 on 48 px/unit sheets, like the outline).
+uniform float outline_texels = 1.0;
 uniform vec4 tint : source_color = vec4(0.4, 0.95, 1.0, 1.0);
 uniform vec4 rim_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
 uniform float opacity = 0.5;
@@ -53,7 +55,7 @@ void fragment() {
 	if (c.a < 0.5) {
 		discard;
 	}
-	vec2 t = 1.0 / sheet_size;
+	vec2 t = outline_texels / sheet_size;
 	float n = min(min(texture(sheet, UV + vec2(t.x, 0.0)).a, texture(sheet, UV - vec2(t.x, 0.0)).a),
 		min(texture(sheet, UV + vec2(0.0, t.y)).a, texture(sheet, UV - vec2(0.0, t.y)).a));
 	float rim = 1.0 - step(0.5, n);

@@ -30,6 +30,9 @@ uniform vec4 flash_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
 uniform float flash : hint_range(0.0, 1.0) = 0.0;
 uniform vec4 outline_color : source_color = vec4(1.0, 0.95, 0.7, 1.0);
 uniform float outline : hint_range(0.0, 1.0) = 0.0;
+// Outline and dissolve grain in sheet texels per 24-px/unit sprite pixel, so
+// 2x sheets (48 px/unit) keep the same world-space thickness.
+uniform float outline_texels = 1.0;
 uniform float dissolve : hint_range(0.0, 1.0) = 0.0;
 uniform float emission_threshold = 0.84;
 uniform float emission_strength = 0.0;
@@ -92,7 +95,7 @@ void fragment() {
 	vec3 col = c.rgb * modulate.rgb;
 	float a = c.a * modulate.a;
 	if (outline > 0.0 && a < 0.5) {
-		vec2 t = 1.0 / sheet_size;
+		vec2 t = outline_texels / sheet_size;
 		float n = texture(sheet, UV + vec2(t.x, 0.0)).a + texture(sheet, UV - vec2(t.x, 0.0)).a
 			+ texture(sheet, UV + vec2(0.0, t.y)).a + texture(sheet, UV - vec2(0.0, t.y)).a;
 		if (n > 0.5) {
@@ -102,7 +105,7 @@ void fragment() {
 		}
 	}
 	if (dissolve > 0.0) {
-		vec2 cellp = floor(UV * sheet_size);
+		vec2 cellp = floor(UV * sheet_size / outline_texels);
 		if (hash(cellp) < dissolve) {
 			a = 0.0;
 		}

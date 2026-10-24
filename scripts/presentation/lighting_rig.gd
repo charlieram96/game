@@ -1,7 +1,9 @@
 class_name LightingRig
 extends Node3D
 ## Sun, ambient, fog, glow and tonemapping presets for the HD-2D look.
-## Presets: morning, day, golden, dusk, night.
+## Presets: morning, day, golden, dusk, night; arena_golden and arena_day are
+## the battle-arena variants (higher sun for short, crisp shadows, a shadow
+## range fitted to the battle camera, a touch more glow for the braziers).
 
 var sun: DirectionalLight3D
 var world_env: WorldEnvironment
@@ -14,6 +16,8 @@ const PRESETS := {
 	&"golden": {"sun_color": Color(1.0, 0.78, 0.52), "energy": 1.3, "pitch": -34.0, "yaw": -40.0, "ambient": Color(0.5, 0.56, 0.78), "ambient_energy": 0.52, "fog": Color(0.95, 0.78, 0.6), "fog_density": 0.004, "bg": Color(0.86, 0.66, 0.5), "glow": 0.7, "exposure": 1.0},
 	&"dusk": {"sun_color": Color(1.0, 0.55, 0.45), "energy": 0.85, "pitch": -14.0, "yaw": -60.0, "ambient": Color(0.48, 0.42, 0.66), "ambient_energy": 0.62, "fog": Color(0.55, 0.38, 0.5), "fog_density": 0.014, "bg": Color(0.35, 0.25, 0.4), "glow": 0.85, "exposure": 1.05},
 	&"night": {"sun_color": Color(0.55, 0.65, 1.0), "energy": 0.5, "pitch": -48.0, "yaw": 25.0, "ambient": Color(0.25, 0.32, 0.55), "ambient_energy": 0.7, "fog": Color(0.08, 0.1, 0.2), "fog_density": 0.02, "bg": Color(0.04, 0.05, 0.1), "glow": 1.0, "exposure": 1.1},
+	&"arena_golden": {"sun_color": Color(1.0, 0.88, 0.72), "energy": 1.05, "pitch": -52.0, "yaw": -32.0, "ambient": Color(0.4, 0.48, 0.78), "ambient_energy": 0.56, "fog": Color(0.9, 0.78, 0.66), "fog_density": 0.002, "bg": Color(0.3, 0.26, 0.3), "glow": 0.8, "exposure": 1.0, "shadow_distance": 40.0},
+	&"arena_day": {"sun_color": Color(1.0, 0.95, 0.86), "energy": 1.1, "pitch": -55.0, "yaw": -32.0, "ambient": Color(0.58, 0.68, 0.86), "ambient_energy": 0.6, "fog": Color(0.75, 0.83, 0.9), "fog_density": 0.003, "bg": Color(0.5, 0.65, 0.8), "glow": 0.55, "exposure": 1.0, "shadow_distance": 40.0},
 }
 
 
@@ -65,6 +69,7 @@ func apply(p_name: StringName, duration: float = 0.0) -> void:
 	preset_name = p_name
 	var p: Dictionary = PRESETS.get(p_name, PRESETS[&"day"])
 	var target_rot := Vector3(deg_to_rad(p["pitch"]), deg_to_rad(p["yaw"]), 0.0)
+	sun.directional_shadow_max_distance = float(p.get("shadow_distance", 60.0))
 	if duration <= 0.0:
 		sun.rotation = target_rot
 		sun.light_color = p["sun_color"]

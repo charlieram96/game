@@ -7,10 +7,13 @@ import sys
 
 from PIL import Image, ImageDraw
 
-sys.path.insert(0, "/home/user/game/tools")
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 from common.sheet import SheetBuilder, contact_sheet  # noqa: E402
 
 PREVIEW_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "previews")
+
+# review backgrounds: neutral mid-grey and the arena's sand floor
+BACKGROUNDS = {"grey": (128, 128, 128, 255), "sand": (214, 190, 140, 255)}
 
 
 def _checker(w, h, cell=4):
@@ -61,6 +64,45 @@ def strips(sb: SheetBuilder, anims: list[str] | None = None, scale: int = 4, tag
                 dd.line([xx, yy - 6, xx, yy + 3], fill=(255, 80, 80, 200), width=1)
     out = os.path.join(PREVIEW_DIR, f"{sb.name}_{tag}.png")
     img.save(out)
+    return out
+
+
+def review(sb: SheetBuilder, scale: int = 4, rows_per_page: int = 12, order: list[str] | None = None) -> list[str]:
+    """Contact sheets of every animation for critical review: one row per animation, frames left
+    to right at `scale`x on each review background (mid-grey and sand), the pivot row marked by a
+    thin red line under every frame. Long sheets are split into pages.
+
+    Writes previews/<name>_review_<bg>_p<N>.png and returns the paths.
+    """
+    os.makedirs(PREVIEW_DIR, exist_ok=True)
+    names = order or list(sb._anims.keys())
+    fw, fh = sb.frame_w, sb.frame_h
+    cw, ch = fw * scale, fh * scale
+    label_w = 150
+    gap = 6
+    ncols = max(len(sb._anims[n].frames) for n in names)
+    pages = [names[i:i + rows_per_page] for i in range(0, len(names), rows_per_page)]
+    out = []
+    for bg_name, bg_col in BACKGROUNDS.items():
+        for pi, page in enumerate(pages):
+            img = Image.new("RGBA", (label_w + ncols * (cw + gap) + gap, len(page) * (ch + gap) + gap), (26, 28, 34, 255))
+            d = ImageDraw.Draw(img)
+            for r, n in enumerate(page):
+                a = sb._anims[n]
+                y0 = gap + r * (ch + gap)
+                d.text((8, y0 + 6), n, fill=(235, 235, 235, 255))
+                d.text((8, y0 + 22), f"{len(a.frames)} frames  {a.fps:g} fps", fill=(170, 170, 180, 255))
+                d.text((8, y0 + 38), "loop" if a.loop else "once", fill=(170, 170, 180, 255))
+                for c, fi in enumerate(a.frames):
+                    x0 = label_w + c * (cw + gap)
+                    tile = Image.new("RGBA", (fw, fh), bg_col)
+                    tile.alpha_composite(sb._frames[fi])
+                    img.paste(tile.resize((cw, ch), Image.NEAREST), (x0, y0))
+                    yy = y0 + sb.pivot[1] * scale
+                    d.line([x0, yy, x0 + cw - 1, yy], fill=(220, 60, 60, 255), width=1)
+            path = os.path.join(PREVIEW_DIR, f"{sb.name}_review_{bg_name}_p{pi + 1}.png")
+            img.save(path)
+            out.append(path)
     return out
 
 
