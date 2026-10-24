@@ -31,7 +31,7 @@ speed = 4.2
 acceleration = 25.0
 deceleration = 32.0
 turn_acceleration = 30.0
-collision_radius = 0.55
+collision_radius = 0.47
 mass = 2.2
 
 [sub_resource type="Resource" id="Resource_7r0x4"]
