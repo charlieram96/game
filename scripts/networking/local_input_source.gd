@@ -20,10 +20,11 @@ const ACTIONS := {
 
 var camera: BattleCamera
 var touch: TouchControls
-var prefix := ""  # "p2_" for the second local player
+## "" in single player; "p1_" / "p2_" in local versus, whose actions keep the
+## two players' keys and gamepads apart (see InputSetup).
+var prefix := ""
 var allow_mouse := true
 var allow_gamepad := true
-var gamepad_device := -1  # -1 = any
 var enabled := true
 
 var _prev_held := 0
@@ -44,7 +45,7 @@ func handle_input(event: InputEvent) -> void:
 		return
 	if event is InputEventMouseMotion and allow_mouse:
 		_device = &"kbm"
-	elif (event is InputEventJoypadButton or event is InputEventJoypadMotion) and allow_gamepad:
+	elif (event is InputEventJoypadButton or event is InputEventJoypadMotion) and allow_gamepad and _owns_pad_event(event):
 		if absf(event.get("axis_value") if event is InputEventJoypadMotion else 1.0) > 0.4:
 			_device = &"pad"
 	elif event is InputEventScreenTouch:
@@ -91,12 +92,12 @@ func get_command(sim: BattleSim, team: int) -> InputCommand:
 		if touch.joystick_axis_hint() != Cardinal.AXIS_UNKNOWN:
 			_axis_hint = touch.joystick_axis_hint()
 	if aim == Vector2.ZERO and allow_gamepad:
-		var stick := Input.get_vector(&"aim_left", &"aim_right", &"aim_up", &"aim_down", 0.35)
-		if stick != Vector2.ZERO and prefix == "":
+		var stick := Input.get_vector(StringName(prefix + "aim_left"), StringName(prefix + "aim_right"), StringName(prefix + "aim_up"), StringName(prefix + "aim_down"), 0.35)
+		if stick != Vector2.ZERO:
 			aim = stick.normalized()
 			aim_dist = 4.0 + stick.length() * 3.0
 			_device = &"pad"
-	if aim == Vector2.ZERO and allow_mouse and _device == &"kbm" and camera and me and prefix == "":
+	if aim == Vector2.ZERO and allow_mouse and _device == &"kbm" and camera and me:
 		var vp := camera.get_viewport()
 		var g := camera.ground_point(vp.get_mouse_position())
 		var to := Vector2(g.x, g.z) - me.pos
@@ -117,3 +118,15 @@ func get_command(sim: BattleSim, team: int) -> InputCommand:
 
 func device() -> StringName:
 	return _device
+
+
+## In versus each player has their own pad; the other player's stick must not
+## switch this player away from mouse aiming.
+func _owns_pad_event(event: InputEvent) -> bool:
+	if prefix == "":
+		return true
+	for a in InputSetup.PAD_BUTTONS.keys() + InputSetup.PAD_AXES.keys():
+		var action := StringName(prefix + String(a))
+		if InputMap.has_action(action) and InputMap.event_is_action(event, action):
+			return true
+	return false

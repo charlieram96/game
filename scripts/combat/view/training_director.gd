@@ -55,7 +55,7 @@ func _next_step() -> void:
 			for p in [Vector2(-4.5, -2.6), Vector2(-1.0, 2.4), Vector2(1.6, -2.4)]:
 				_add_marker(p)
 		"focus":
-			_player().stamina = minf(_player().stamina, 12.0)
+			sim.script_set_stamina(_player(), minf(_player().stamina, 12.0))
 		"guard":
 			totem_ai.mode = TrainingAI.Mode.SHOOT
 			totem_ai.shoot_interval_ticks = 110
@@ -137,9 +137,7 @@ func on_tick(events: Array[BattleEvent]) -> void:
 				_complete()
 	# Keep the player topped up outside the stamina lesson so nothing stalls.
 	if id != "focus" and id != "dash_through" and me.stamina < me.stats.dash.stamina_cost and not FighterSM.is_focusing(me.state):
-		if id != "dash":
-			pass
-		me.stamina = minf(me.max_stamina(), me.stamina + 0.6)
+		sim.script_set_stamina(me, me.stamina + 0.6)
 
 
 func _complete() -> void:

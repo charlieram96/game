@@ -1,0 +1,477 @@
+# Arena combat
+
+Rules live in the pure simulation under `scripts/combat/`. Tunables are in
+`scripts/combat/combat_const.gd` and in the species and ability resources.
+Presentation is in `scripts/combat/view/`.
+
+## Pillars
+
+1. **Readable and fair.** Every danger is visible before it hits
+   (telegraphs, wind-ups, projectiles in flight). Hit detection is pure 2D
+   math, independent of the camera.
+2. **Positioning and resource decisions win**, not button mashing. Dashes
+   are strong but cost stamina, and the only way to recover stamina is to
+   stand still and Focus.
+3. **No unavoidable loops.** Every stun goes through one set of rules with
+   diminishing returns, immunity and a wake-up guarantee.
+4. **Species identity.** An agile glass cannon and a slow fortress play
+   differently even under normalized ranked stats.
+
+## Simulation model
+
+* A fixed **60 Hz** tick (1 tick = 16.7 ms). `BattleSim.step(inputs)`
+  advances exactly one tick from one `InputCommand` per team. Rendering
+  interpolates between ticks.
+* The arena is a **flat plane**. Positions are `Vector2(x = east, y =
+  south)` in world units (1 unit = 1 logical cell = 24 sprite pixels). The
+  orthographic camera is pitched 44 deg and never rotates. Sprites are
+  stretched by 1/cos(pitch) so they keep their proportions. The camera can't
+  affect ranges, distances or hits.
+* **Collision is exact:** circles move through a rectangle with circle and
+  box obstacles using swept Minkowski tests. Fast dashes and projectiles
+  can't tunnel.
+
+**Tick order** (deterministic):
+
+1. Inputs -> buffers and aim.
+2. Each on-field fighter: timers, statuses, phase advance, new actions,
+   state logic, knockback. Benched fighters tick cooldowns and regenerate
+   stamina.
+3. Body separation.
+4. Hit volumes move, then projectile clashes.
+5. Hits are collected, then applied (two-phase).
+6. Volumes age and expire.
+7. Match timer.
+
+## Movement
+
+* **8-way:** movement input is an 8-direction index, so a diagonal is
+  exactly unit length and never faster than a straight line.
+* Velocity accelerates toward the target at the species' acceleration and
+  slows at its deceleration. Reversing (angle > 90 deg) uses the turn
+  acceleration, so Stoneback is visibly slow to turn around.
+* Walls slide. Velocity pushed into a wall is removed.
+* **Bodies are solid:** whoever walks into the other takes the correction,
+  so you can't shove an opponent around, with one exception. A heavier
+  creature yields its target up to 40% of the push, scaled by mass ratio
+  (Stoneback on Emberlyn: 24%). If neither creature is moving in, the overlap
+  is split by mass. Dashing (pass-through) creatures skip body collision.
+
+## Dash
+
+* **Strictly 4-way (N/S/E/W).** Diagonal dashes are impossible.
+  * The dominant input axis wins.
+  * An exact tie (keyboard diagonals, within 5%) goes to the axis whose key
+    was pressed most recently ("newest key wins").
+  * With no axis hint, ties go horizontal.
+  * With no input, the dash uses the last cardinal facing.
+* Phases are DASH_START (startup, interruptible) -> DASH_ACTIVE (constant
+  speed, committed) -> DASH_RECOVERY. Stamina is paid at the start. Not
+  enough stamina means no dash: the stamina bar pulses and an "empty" sound
+  plays.
+* Walls end a dash early. A safety cap stops any dash after twice its
+  nominal duration.
+* Types: **FAST** (Emberlyn) is long and quick, and projectiles pass through
+  it for the first N active ticks. **ARMORED** (Stoneback) is short, can't be
+  flinched and halves damage while active. Per-species numbers are in kith.md.
+
+### Dash-through
+
+A dash that sweeps through an opponent's body dazes it, if all of these
+hold:
+
+* the dash is active;
+* the victim isn't already protected (dash-through immunity, Steadfast, a
+  stun-immune status) and isn't mid-dash itself;
+* the attacker hasn't already passed this opponent during the same dash.
+
+Results:
+
+| Rule | Value |
+| --- | --- |
+| Stun | 15 ticks (250 ms) x the dasher's passive (Stoneback 1.2 -> 18 ticks), then stun diminishing returns |
+| Victim protection | 60 ticks (1 s) of dash-through immunity ("Protected" pops if hit again) |
+| Landing | The dash continues at least max(1 cell, combined radii + 0.1) past the victim's center along the dash axis (or the full dash if longer) |
+| Safe landing | If the end point overlaps a body or wall, candidates are tried around the opponent (0, +-25, +-50 ... 180 deg from the travel direction). A candidate must be free, must not overlap a body and must be reachable in a straight line. Nothing teleports through walls. |
+| No guaranteed follow-up | The dasher's recovery is extended so the victim always regains control at least **3 ticks before** the dasher can act. The stun buys position, not a free combo. |
+
+**Counters:**
+
+* **Guard repel:** dashing into a guarding opponent's front arc stops the
+  dash and stuns the dasher for 21 ticks (350 ms; 30 ticks on a perfect
+  guard) and pushes it back 0.5. A non-perfect guard pays 10 stamina.
+  Dashing in from behind still works.
+* **Stone Guard** repels dash-throughs from any side.
+* **Head-on clash:** two dashes meeting head-on both stop and each bounces
+  back 0.6, and nobody is stunned.
+* The victim's 1 s immunity prevents dash-through chains.
+
+## Stamina and Focus
+
+* Stamina **never regenerates on its own**. It can't go below 0 or above
+  the maximum. Uses: dashes, some specials, and guard (blocked damage drains
+  it).
+* **Focus** (hold): FOCUS_ENTER (7 ticks / ~117 ms of commitment, no regen)
+  -> FOCUSING (regen at the species rate) -> FOCUS_EXIT (7 ticks). The
+  creature is rooted and can't attack, dash or guard. Releasing during the
+  enter phase still plays the whole enter and exit.
+* **Any damage interrupts Focus**, including burn ticks. A hit that stuns
+  sends the creature to STUNNED; otherwise it returns to IDLE.
+* Benched teammates (team battles) regenerate at 25% of their Focus rate.
+* Emberlyn's Quickfoot shortens the enter and exit to 4 ticks.
+
+## Guard
+
+* Hold Guard to block guardable hits arriving within a **200 deg frontal
+  arc**. The creature is rooted (guard move multiplier 0 for both species).
+* **Blocked hit:** 15% chip damage, which can't knock out (HP floors at 1).
+  Stamina loss = raw damage x the species' guard factor (Emberlyn 1.25,
+  Stoneback 0.8). Blockstun (guard can't be released) lasts hitstun x 0.5.
+  Push-back is knockback x 0.5. Blocked projectiles are destroyed.
+* **Guard break:** if the stamina hits 0 while blocking, a forced 54-tick
+  (900 ms) stun that bypasses diminishing returns.
+* **Perfect guard:** the first 8 ticks (133 ms) of a guard negate the hit
+  entirely. A projectile is destroyed. A melee attacker (attached hitbox)
+  takes 5 ticks of hitstop and a 24-tick (400 ms) stagger. The defender takes
+  5 ticks of hitstop.
+* After releasing guard there is a 6-tick lockout before guarding again, so
+  you can't mash perfect guards.
+
+## Attacks and abilities
+
+* Each creature has a basic attack string, four equipped specials, a
+  passive, a dash, Focus and guard.
+* Shared phase model: **startup** (wind-up, telegraphed for big moves) ->
+  **active** (hitbox live) -> **recovery** (vulnerable). The **cooldown**
+  starts when the ability is activated, and stamina is paid then too. If the
+  ability isn't ready it is denied (cooldown, stamina or status) and its HUD
+  slot shakes.
+* **Aim modes:** direction (projectiles, cones, lines), target point (Heat
+  Ring; clamped to max range) and self (Ground Pound, Stone Guard). Aim keeps
+  updating during startup and is fixed from the active frame on.
+* **Components:** abilities are built from reusable parts rather than
+  bespoke code: projectile, melee (circle, cone or box attached to the
+  caster), lunge, targeted area (delayed circle or ring), self area, line
+  wave (telegraphed travelling line) and self status. All eight specials are
+  compositions of these.
+* **Cancel rules:** recovery can only be cancelled where the data allows
+  it. Basic strings chain if attack is pressed or held in the first N ticks
+  of recovery, and a dash can cancel recovery from a given tick. Specials
+  have no cancels in v0.
+* **Armor:** an ability can be unflinchable during startup or active (Ground
+  Pound's wind-up). Armored creatures still take damage, and their knockback
+  is cut to 30%.
+* **Telegraphs:** Ground Pound shows its radius during startup. Heat Ring
+  marks its circle for 40 ticks, and Fault Line marks its line for 30 ticks,
+  before they become dangerous.
+
+## Hit resolution
+
+**Two-phase:** every overlap between live hit volumes and hurt circles is
+collected first, then applied, so update order never decides a trade. Each
+target can be hit once per volume unless a re-hit interval is set.
+Non-piercing projectiles die on their first hit.
+
+**Damage:**
+
+```
+damage = power x mastery_mult x (ATK / DEF) x element_mult x ruleset.damage_scale
+         (x ruleset.enemy_damage_mult if the attacker is the PvE enemy side)
+         x target status damage_taken_mult (Stone Guard 0.45)
+         x dash armor (ARMORED dash while active: 0.5)
+         -> snapped to 0.1, minimum 1
+```
+
+**Order of checks on contact:**
+
+1. FAST-dash evade (projectiles only).
+2. Guard (if the target is guarding and the source is in its arc).
+3. Damage.
+4. Hitstop.
+5. KO check.
+6. Focus interrupt.
+7. Hitstun (unless flinch-immune).
+8. Knockback.
+9. Statuses.
+
+| Effect | Rule |
+| --- | --- |
+| Hitstop | Freezes the target for the hit's hitstop ticks (max 10). It also freezes the attacker for attached melee, which gives melee its weight. Frozen fighters' timers and cooldowns pause, and an attached hitbox doesn't age while its owner is frozen. Hits with hitstop >= 5 count as "heavy" for feedback. |
+| Hitstun | The hit's hitstun x the target's passive (Bedrock 0.8), applied as a stun through the stun rules below. Skipped if the target is flinch-immune (Stone Guard, ARMORED dash, ability armor). |
+| Knockback | Distance = knockback x status mult x passive mult (x0.3 if flinch-immune). It is spread over 8 ticks with geometric decay 0.85 per tick (the first tick covers ~21% of the distance) and stops at walls. Directional along the hitbox, or radial from its center (static circles are always radial). A KO blow pushes at least 0.8. |
+| Chip | Blocked hits only: 15% of raw damage, can't KO. |
+
+**Projectiles:**
+
+* Swept circle tests from the previous to the current position each tick,
+  so a fast bolt can't skip a target.
+* Walls and standing stones stop projectiles.
+* Range is limited by travel distance.
+* **Clash:** opposing projectiles whose paths cross collide. Equal weights
+  destroy each other. Otherwise the heavier one survives, losing the
+  lighter one's weight. Ember Bolt is 1, Blaze Bolt 2, Boulder 3, Acorn 1.
+
+## Stun and combo protection
+
+Every stun (hit flinch, dash-through, repel, perfect-guard stagger, guard
+break) goes through `StunRules`:
+
+| Rule | Value |
+| --- | --- |
+| Chain window | A stun that starts while already stunned, or within 90 ticks (1.5 s) of the last stun ending, chains |
+| Diminishing returns | 1st 100%, 2nd 75%, 3rd and later 50% (minimum 4 ticks) |
+| Steadfast | When the 3rd chained stun ends, the creature gets 75 ticks (1.25 s) of stun immunity and the chain resets. It shows an outline glow, and resisted stuns pop "STEADFAST". |
+| Wake-up grace | For 6 ticks (100 ms) after any stun ends, new stuns are ignored, so the victim always gets one buffered action out |
+| Forced stuns | Guard break ignores all of the above |
+
+Damage still applies while stun-immune; only the flinch is removed.
+
+## Status effects
+
+| Status | Default duration | Effect | Source |
+| --- | --- | --- | --- |
+| Burn | 180 ticks (set to 120 by Cinder Arc, 150 by Heat Ring) | 1.0 power every 30 ticks, using the attacker's ATK over the target's DEF, with no element. No hitstun, but it interrupts Focus. | Cinder Arc, Heat Ring |
+| Slowed | 90 ticks | Move speed x0.65 | Ground Pound |
+| Stone Guard (buff) | 80 ticks | Damage taken x0.45, knockback x0.3, flinch immune, repels dash-through, move x0.6 | Stone Guard |
+
+Reapplying a status refreshes its duration to the longer one. Statuses
+are cleared when a creature switches out (none persist across switches in
+v0).
+
+## Elements
+
+The multiplier is attacker element > defender element. Missing pairs are
+1.0. The values are deliberately mild so matchups shape play without
+deciding it.
+
+| Attacker \ Defender | Ember | Grove | Stone | Tide | Gale |
+| --- | --- | --- | --- | --- | --- |
+| Ember | 0.9 | 1.25 | 0.9 | 0.8 | 1.0 |
+| Grove | 0.8 | 1.0 | 1.2 | 1.25 | 0.85 |
+| Stone | 1.1 | 0.85 | 1.0 | 1.0 | 1.25 |
+| Tide | 1.25 | 0.8 | 1.1 | 1.0 | 1.0 |
+| Gale | 1.0 | 1.25 | 0.8 | 1.1 | 1.0 |
+
+Aether and Neutral have no entries (always 1.0). At 1.05 or above the hit
+shows "Effective!", at 0.95 or below "Resisted". Only Ember and Stone have
+battle-ready kith in v0; the other elements exist in data for future kith.
+
+## State machine
+
+There are 15 explicit states (`scripts/combat/states/fighter_sm.gd`). The
+sim never assigns a state directly: `BattleSim.set_state()` checks the
+transition table and refuses illegal moves (counted and logged in debug
+builds).
+
+| From | Allowed destinations |
+| --- | --- |
+| IDLE, MOVING | each other, FOCUS_ENTER, DASH_START, ATTACK_START, GUARDING, STUNNED, SWITCHING, KNOCKED_OUT |
+| FOCUS_ENTER | FOCUSING (held), FOCUS_EXIT (released), IDLE (interrupted), STUNNED, KNOCKED_OUT |
+| FOCUSING | FOCUS_EXIT, IDLE (interrupted), STUNNED, KNOCKED_OUT |
+| FOCUS_EXIT | IDLE, STUNNED, KNOCKED_OUT |
+| DASH_START | DASH_ACTIVE, STUNNED, KNOCKED_OUT |
+| DASH_ACTIVE | DASH_RECOVERY, STUNNED, KNOCKED_OUT (committed: only walls, a repel or a clash end it early) |
+| DASH_RECOVERY | IDLE, STUNNED, KNOCKED_OUT |
+| ATTACK_START | ATTACK_ACTIVE, STUNNED, KNOCKED_OUT |
+| ATTACK_ACTIVE | ATTACK_RECOVERY, STUNNED, KNOCKED_OUT |
+| ATTACK_RECOVERY | IDLE, DASH_START (dash-cancel window only), ATTACK_START (string chain only), STUNNED, KNOCKED_OUT |
+| GUARDING | IDLE, STUNNED, KNOCKED_OUT |
+| STUNNED | IDLE, STUNNED (re-stun with diminishing returns), KNOCKED_OUT |
+| SWITCHING | IDLE, STUNNED (a switch can be interrupted), KNOCKED_OUT |
+| KNOCKED_OUT | none (receives no input) |
+
+New commands are only accepted in IDLE and MOVING. Hitstop is a freeze
+counter, not a state.
+
+## Input
+
+* **InputCommand** is one tick of intent and the only thing a future client
+  would send. It holds an 8-way move index, an aim direction quantized to
+  1/4096 of a turn, an aim distance, held and pressed button masks, and
+  which movement axis was pressed last (for the dash tie-break). It encodes
+  to 16 bytes. Presses between ticks are latched, so a 1-frame tap is never
+  lost.
+* **Input buffer:** presses are remembered for **8 ticks (133 ms)**, and each
+  is consumed once. An input made a little early (in recovery, hitstop or
+  stun) comes out on the first legal tick.
+* **Priority** when actionable: switch > dash > guard > specials (slots 1-4)
+  > basic attack (press, or hold to repeat) > Focus (hold). In recovery only
+  the string chain and the dash-cancel are checked. In Focus, releasing the
+  button starts the exit. In guard, releasing returns to IDLE after
+  blockstun.
+* **Aim:** mouse or right-stick aim when present. Otherwise the creature
+  soft-locks onto the opponent. Facing follows the aim while actionable,
+  guarding or focusing.
+
+## Match flow
+
+| Phase | Rules |
+| --- | --- |
+| Countdown | 180 ticks (3, 2, 1). Only aim updates, and buffers clear at "FIGHT!". Training skips it. |
+| Fight | Timer from the ruleset: 120 s for Free Battle and Versus, 150 s for the story duel, none in training |
+| KO settle | 90 ticks (1.5 s) after a KO. Nobody can be hurt, and live volumes are removed. Then the next healthy teammate is sent in (with 18 ticks of stun grace) or the battle ends. |
+| Timeout | The team with the higher total HP ratio wins. Within 0.001 it is a draw. |
+| Rematch | `BattleSim.reset()` rebuilds the identical starting state |
+
+In training the totem can't be knocked out: its HP refills.
+
+## Teams and switching (data model; no v0 mode enables it)
+
+`BattleSetup` holds up to three creatures per team. With `allow_switching`
+on (tests only in v0):
+
+* Switch keys 1, 2 and 3 are honored only when actionable, so you can't
+  switch while stunned, attacking, dashing, focusing or guarding.
+* A switch takes 30 ticks (500 ms) and can be interrupted by a hit.
+* The incoming creature can't switch again for 300 ticks (5 s).
+* The outgoing creature loses its statuses and dash immunity.
+* Cooldowns persist and keep ticking on the bench, and benched creatures
+  regenerate stamina at 25% of their Focus rate.
+* Victory requires knocking out the whole opposing team.
+
+The brief targets 3-5 minute matches once full teams exist (Planned).
+
+## AI
+
+`CombatAI` plays by the same rules as a human: it only emits InputCommands,
+sees the opponent through a reaction-time delay, aims with error and
+manages stamina with Focus. Each tick it:
+
+1. Perceives the delayed opponent state.
+2. Reacts to threats (dodge-dash, guard, step away, or nothing). The
+   reaction is chosen once per threat.
+3. Manages Focus (it focuses when low and safe, and stops near 88% or on
+   danger).
+4. Continues basic strings.
+5. Picks an offensive option by utility every decision interval.
+6. Holds its preferred range band: Agile 3.2-5.6 u (kite), Heavy 0-1.8 u
+   (brawl), anything else 1.5-4.0 u. It backs off to 5-7.5 u when it needs
+   to Focus.
+
+| Preset | Reaction | Decision | Aim error | Lead | Dodge | Guard | Dash-through | Aggression | Focus below | Mistakes | Combo skill | Patience |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Easy | 26 | 12 | 16 deg | 0.3 | 0.20 | 0.15 | 0.15 | 0.40 | 45% | 0.25 | 0.3 | 1.6 |
+| Normal | 14 | 6 | 7 deg | 0.8 | 0.55 | 0.35 | 0.35 | 0.60 | 35% | 0.08 | 0.6 | 1.0 |
+| Hard | 9 | 4 | 3 deg | 1.0 | 0.80 | 0.55 | 0.55 | 0.75 | 30% | 0.03 | 0.9 | 0.8 |
+| Story (Corin) | 26 | 10 | 13 deg | 0.45 | 0.22 | 0.18 | 0.20 | 0.50 | 44% | 0.22 | 0.4 | 1.25 |
+
+Reaction and decision are in ticks. The AI has a seeded RNG, so AI-vs-AI
+runs are reproducible. Free Battle offers Easy, Normal and Hard. The story
+duel uses Story, or Easy after a loss with "go a little easier".
+
+## Tutorial (training yard)
+
+`TrainingDirector` shows one tip per step and completes each step from real
+simulation events, so it teaches exactly the rules the game enforces:
+
+1. **Move:** walk onto each glowing mark (8 directions).
+2. **Dash:** dash twice (N/S/E/W only).
+3. **Strike:** land 3 Tail Swipe hits (chain the string).
+4. **Specials:** use all four (Q, E, R, F).
+5. **Focus:** hold Shift until stamina is at least 95%.
+6. **Dash-through:** daze the totem by dashing through it.
+7. **Guard:** the totem shoots acorns. Block 2 (a perfect guard counts
+   double).
+
+Outside the Focus and dash-through steps the director tops up stamina so
+nothing stalls. When the last step completes, Hesper says "You're ready for
+the Ringstones."
+
+## Game feel (as implemented)
+
+Everything below is cosmetic and never changes the simulation.
+
+* **Interpolated rendering** between 60 Hz ticks for smooth motion at any
+  frame rate.
+* **Hitstop** is real sim freeze frames (above). During hitstop the sprite
+  jitters 1 px horizontally.
+* **Hit flash and squash:** a white flash on the hit sprite (decays quickly)
+  plus a squash (0.86 x 1.1) that springs back. Dash start, active and
+  recovery and attack active frames have their own squash-and-stretch poses.
+* **Dash afterimages:** team-tinted ghost sprites every ~35 ms while
+  dashing.
+* **Camera trauma:** shake is a pure translation (never rotation), with
+  amplitude trauma^2 and fast decay, scaled by the Screen Shake setting.
+  Trauma per event:
+
+  | Event | Trauma |
+  | --- | --- |
+  | Light hit | 0.12 |
+  | Heavy hit | 0.32 |
+  | Dash-through stun | 0.25 |
+  | Repel | 0.2 |
+  | Clash | 0.2 |
+  | Block | 0.1 |
+  | Heat Ring burst | 0.3 |
+  | Guard break | 0.45 |
+  | Ground Pound | 0.45 |
+  | KO | 0.8 |
+
+* **Popups** (pixel-font Label3D that pops in and floats up):
+  * damage numbers, warm for effective hits and cool grey for resisted;
+  * "Effective!" and "Resisted";
+  * STUN!, Protected, REPELLED!, CLASH!, EVADE, BLOCK, PERFECT!, GUARD
+    BREAK!, STEADFAST, ARMOR;
+  * status names and burn tick numbers;
+  * "Focus broken!".
+* **Telegraphs:** ground decals with a dedicated shader for Ground Pound's
+  radius, Heat Ring's target circle and Fault Line's line, timed to the
+  sim's delay. Spikes erupt along the Fault Line as the wave front passes.
+* **Status visuals:**
+  * burn embers trail;
+  * slow tint;
+  * Stone Guard dome;
+  * Focus aura and shimmer;
+  * stun stars (hidden for short flinches under 16 ticks);
+  * Steadfast outline;
+  * a guard arc decal that brightens during the perfect-guard window;
+  * a ground ring under each creature that doubles as its stamina gauge.
+* **KO:**
+  * the sim runs at 1/3 speed for 54 frames;
+  * a "K.O.!" banner, a KO burst and a crowd cheer;
+  * a delayed body-fall sound;
+  * after 1.6 s the body dithers out until it is 55% dissolved.
+* **Audio layering:**
+  * every ability has a cast sound and every hit spec an impact sound;
+  * "effective" and "resisted" stingers layer on top;
+  * Focus start -> loop -> full chains;
+  * countdown ticks, the fight start and crowd reactions;
+  * random variants and pitch jitter, with a per-sound minimum interval
+    against stacking.
+* **HUD:**
+  * HP bars with delayed "ghost" damage;
+  * stamina bars segmented by dash cost;
+  * status icons and the match timer;
+  * an ability bar with cooldown sweeps and key hints;
+  * big centre messages (3-2-1, FIGHT!, K.O.!, VICTORY/DEFEAT).
+* **Debug:** F3 draws hurtboxes, hitboxes and the logical cell grid.
+
+## Controls
+
+| Action | Keyboard and mouse | Gamepad | Touch (landscape) |
+| --- | --- | --- | --- |
+| Move (8-way) | WASD / arrows | Left stick / D-pad | Floating left joystick |
+| Aim | Mouse | Right stick | Drag an ability button, or auto-aim on tap |
+| Basic attack | Left click / J | RT | Attack button (hold to repeat) |
+| Dash | Right click / K | RB | Dash button (uses the joystick direction, 4-way rule) |
+| Focus (hold) | Shift | LT | Focus button (hold) |
+| Guard (hold) | Space | LB | Guard button (hold) |
+| Specials 1-4 | Q / E / R / F | A / B / X / Y | Four buttons, 64 px minimum |
+| Switch 1-3 | 1 / 2 / 3 | - | Planned |
+| Pause | Esc / P | Start | Menu button |
+
+In Local Versus the keyboard is split. Player 1 keeps WASD, the mouse, left
+Shift (Focus), Space (guard), Q/E/R/F and J/K; arrows and the right-hand
+modifiers do nothing for player 1. Player 2 uses arrows to move, `.` attack,
+`/` dash, right Shift Focus, right Ctrl guard, and `;` `'` `[` `]` for
+specials. Gamepads are assigned per player (`InputSetup.assign_versus_pads`):
+with one pad connected it plays player 2, with two the first is player 1's.
+The touch controls can be forced on in Settings (or with F6) to test them with
+a mouse.
+
+## Arenas
+
+| Arena | Size | Obstacles | Spawns |
+| --- | --- | --- | --- |
+| The Ringstones | 14 x 9 | Two standing stones (radius 0.55) at (-2.3, -1.9) and (2.3, 1.9), point-symmetric so neither side is favored | (-4.8, 0) and (4.8, 0) |
+| Mossford Training Yard | 13 x 8 | None | (-4, 0) and (3, 0) |

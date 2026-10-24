@@ -9,8 +9,13 @@ func _ready() -> void:
 	_slider("Screen shake", Settings.screen_shake, func(v: float) -> void: Settings.screen_shake = v)
 	_option("Touch controls", ["Auto", "Always (simulate on desktop)", "Never"], int(Settings.touch_mode), func(i: int) -> void: Settings.touch_mode = i as Settings.TouchMode)
 	_option("AI difficulty", ["Easy", "Normal", "Hard"], ["easy", "normal", "hard"].find(String(Settings.ai_difficulty)), func(i: int) -> void: Settings.ai_difficulty = StringName(["easy", "normal", "hard"][i]))
-	_check("Tilt-shift depth of field", Settings.tilt_shift, func(b: bool) -> void: Settings.tilt_shift = b)
-	_check("Show hitboxes (F3)", Settings.show_hitboxes, func(b: bool) -> void: Settings.show_hitboxes = b)
+	_option("Graphics", ["High", "Low (faster)"], 1 if Settings.graphics_low else 0, func(i: int) -> void: Settings.graphics_low = i == 1)
+	var checks := HBoxContainer.new()
+	checks.add_theme_constant_override("separation", 8)
+	add_child(checks)
+	_check("Tilt-shift", Settings.tilt_shift, func(b: bool) -> void: Settings.tilt_shift = b, checks)
+	_check("Show FPS", Settings.show_fps, func(b: bool) -> void: Settings.show_fps = b, checks)
+	_check("Hitboxes (F3)", Settings.show_hitboxes, func(b: bool) -> void: Settings.show_hitboxes = b, checks)
 
 
 func _row(text: String) -> HBoxContainer:
@@ -50,11 +55,12 @@ func _option(text: String, items: Array, selected: int, setter: Callable) -> voi
 	hb.add_child(o)
 
 
-func _check(text: String, value: bool, setter: Callable) -> void:
+func _check(text: String, value: bool, setter: Callable, parent: Control) -> void:
 	var c := CheckBox.new()
 	c.text = text
 	c.button_pressed = value
+	c.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	c.toggled.connect(func(b: bool) -> void:
 		setter.call(b)
 		Settings.save_settings())
-	add_child(c)
+	parent.add_child(c)

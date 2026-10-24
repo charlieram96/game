@@ -15,6 +15,7 @@ var _pending_battle: BattleSetup = null
 var _battle_return := ""
 var _fade_layer: CanvasLayer
 var _fade_rect: ColorRect
+var _fps_label: Label
 var _busy := false
 
 
@@ -28,11 +29,18 @@ func _ready() -> void:
 	_fade_rect.set_anchors_preset(Control.PRESET_FULL_RECT)
 	_fade_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_fade_layer.add_child(_fade_rect)
+	_fps_label = UiTheme.label("", 14, UiTheme.PARCHMENT, true, 4)
+	_fps_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	UiTheme.place(_fps_label, Vector2(1, 0), Vector2(-120, -2), Vector2(116, 20))
+	_fade_layer.add_child(_fps_label)
 
 
 func _process(delta: float) -> void:
 	if SaveService.profile and not get_tree().paused:
 		SaveService.profile.play_time_sec += delta
+	_fps_label.visible = Settings.show_fps
+	if Settings.show_fps:
+		_fps_label.text = "%d FPS" % Engine.get_frames_per_second()
 
 
 # --- Scene routing --------------------------------------------------------------------

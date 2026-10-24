@@ -1,7 +1,7 @@
 class_name PlayerProfile
 extends RefCounted
 ## Everything persisted about a player. Local JSON for v0; the same
-## dictionary shape is what a backend would store (see docs/NETWORKING.md).
+## dictionary shape is what a backend would store (see docs/architecture.md).
 ## Never trust these values from a client in online play — the server owns them.
 
 const VERSION := 1

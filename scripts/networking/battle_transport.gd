@@ -6,7 +6,7 @@ extends RefCounted
 ## NetworkBattleTransport will send this client's InputCommands (with
 ## sequence numbers) to a headless Godot battle server over ENet, receive
 ## authoritative snapshots + events, predict the local creature and
-## reconcile — without the presentation layer changing. See docs/NETWORKING.md.
+## reconcile — without the presentation layer changing. See docs/architecture.md.
 
 signal tick_completed(events: Array[BattleEvent])
 

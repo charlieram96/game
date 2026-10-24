@@ -208,6 +208,13 @@ func emit_volume_end(v: HitVolume, reason: StringName) -> void:
 	emit(BattleEvent.VOLUME_END, fighter_by_id(v.owner_id), -1, v.pos, {"volume": v.id, "reason": reason, "visual": v.visual})
 
 
+## Scripted-scenario hook (the tutorial): sets a fighter's stamina, clamped
+## to its maximum. Lives on the sim so presentation code never mutates fighter
+## state directly; nothing in a ranked or online match calls it.
+func script_set_stamina(f: Fighter, value: float) -> void:
+	f.stamina = clampf(value, 0.0, f.max_stamina())
+
+
 func knock_out(f: Fighter, by: Fighter) -> void:
 	if f.is_ko():
 		return

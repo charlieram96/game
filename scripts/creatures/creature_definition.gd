@@ -25,6 +25,8 @@ extends Resource
 @export var basic_attack: AbilityDefinition
 ## Abilities this species can learn, with the level each becomes available.
 @export var learnable: Array[AbilityDefinition] = []
+## Not enforced in v0: every kith fights with its full kit so the prototype
+## shows the whole moveset (see docs/roadmap.md).
 @export var learn_levels: PackedInt32Array = PackedInt32Array()
 @export var default_loadout: Array[StringName] = []
 @export var passive: PassiveDefinition

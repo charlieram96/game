@@ -3,6 +3,7 @@ extends SceneTree
 ## win rates, average match length, timeouts, damage and per-ability hit rates.
 ##
 ##   N=40 godot --headless --path . -s res://tests/tools/balance_sim.gd
+##   ONLY=easy-story N=150 godot ...   # only matchups with these two AI profiles
 
 func _init() -> void:
 	process_frame.connect(_go, CONNECT_ONE_SHOT)
@@ -11,7 +12,10 @@ func _go() -> void:
 	var e: CreatureDefinition = load("res://resources/creatures/emberlyn.tres")
 	var s: CreatureDefinition = load("res://resources/creatures/stoneback.tres")
 	var n := int(OS.get_environment("N")) if OS.get_environment("N") != "" else 40
+	var only := OS.get_environment("ONLY")
 	for pair in [[e, s, "normal", "normal"], [s, e, "normal", "normal"], [e, e, "normal", "normal"], [s, s, "normal", "normal"], [e, s, "normal", "story"], [e, s, "easy", "story"]]:
+		if only != "" and "%s-%s" % [pair[2], pair[3]] != only:
+			continue
 		var wins := [0, 0, 0]
 		var total_ticks := 0
 		var timeouts := 0

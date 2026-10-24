@@ -22,6 +22,10 @@ func _ready() -> void:
 		_build()
 
 
+func _apply_settings() -> void:
+	sun.directional_shadow_mode = DirectionalLight3D.SHADOW_ORTHOGONAL if Settings.graphics_low else DirectionalLight3D.SHADOW_PARALLEL_2_SPLITS
+
+
 func _build() -> void:
 	sun = DirectionalLight3D.new()
 	sun.name = "Sun"
@@ -29,9 +33,10 @@ func _build() -> void:
 	sun.shadow_bias = 0.04
 	sun.shadow_normal_bias = 1.2
 	sun.shadow_blur = 1.2
-	sun.directional_shadow_mode = DirectionalLight3D.SHADOW_PARALLEL_2_SPLITS
 	sun.directional_shadow_max_distance = 60.0
 	add_child(sun)
+	_apply_settings()
+	Events.settings_changed.connect(_apply_settings)
 	env = Environment.new()
 	env.background_mode = Environment.BG_COLOR
 	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR

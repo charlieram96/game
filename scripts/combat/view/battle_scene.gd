@@ -91,16 +91,23 @@ func _setup_inputs() -> void:
 		transport.set_input_source(0, player_input)
 	match setup.mode:
 		BattleSetup.Mode.VERSUS:
+			player_input.prefix = InputSetup.P1_PREFIX
 			p2_input = LocalInputSource.new()
-			p2_input.prefix = "p2_"
+			p2_input.prefix = InputSetup.P2_PREFIX
 			p2_input.allow_mouse = false
 			transport.set_input_source(1, p2_input)
-			player_input.allow_gamepad = true
+			InputSetup.assign_versus_pads()
+			if not Input.joy_connection_changed.is_connected(_on_joy_changed):
+				Input.joy_connection_changed.connect(_on_joy_changed)
 		BattleSetup.Mode.TRAINING:
 			pass  # TrainingDirector installs a TrainingAI
 		_:
 			var profile := AIProfile.preset(setup.ai[1] if String(setup.ai[1]) != "" else Settings.ai_difficulty)
 			transport.set_input_source(1, CombatAI.new(profile, randi()))
+
+
+func _on_joy_changed(_device: int, _connected: bool) -> void:
+	InputSetup.assign_versus_pads()
 
 
 func _apply_touch_setting() -> void:

@@ -1,0 +1,99 @@
+# Tests every push, builds the web version, and publishes it to GitHub Pages
+# from the default branch (enable Pages -> Source: "GitHub Actions" once).
+# Desktop builds run on manual dispatch and on version tags (v*).
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      desktop:
+        description: Also build Windows, Linux and macOS
+        type: boolean
+        default: false
+
+env:
+  GODOT_VERSION: 4.7.2
+  GODOT_RELEASE: 4.7.2-stable
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Godot
+        run: |
+          curl -sSfL -o godot.zip "https://github.com/godotengine/godot/releases/download/${GODOT_RELEASE}/Godot_v${GODOT_RELEASE}_linux.x86_64.zip"
+          unzip -q godot.zip && sudo mv "Godot_v${GODOT_RELEASE}_linux.x86_64" /usr/local/bin/godot && rm godot.zip
+          godot --version
+      - name: Run tests
+        run: tools/run_tests.sh
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Godot
+        run: |
+          curl -sSfL -o godot.zip "https://github.com/godotengine/godot/releases/download/${GODOT_RELEASE}/Godot_v${GODOT_RELEASE}_linux.x86_64.zip"
+          unzip -q godot.zip && sudo mv "Godot_v${GODOT_RELEASE}_linux.x86_64" /usr/local/bin/godot && rm godot.zip
+      - name: Cache export templates
+        id: templates
+        uses: actions/cache@v4
+        with:
+          path: ~/.local/share/godot/export_templates/${{ env.GODOT_VERSION }}.stable
+          key: godot-templates-${{ env.GODOT_RELEASE }}
+      - name: Install export templates
+        if: steps.templates.outputs.cache-hit != 'true'
+        run: |
+          dir="$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable"
+          mkdir -p "$dir"
+          curl -sSfL -o templates.tpz "https://github.com/godotengine/godot/releases/download/${GODOT_RELEASE}/Godot_v${GODOT_RELEASE}_export_templates.tpz"
+          unzip -q -j templates.tpz "templates/version.txt" "templates/web_nothreads_*" "templates/linux_*x86_64" \
+            "templates/windows_*_x86_64.exe" "templates/macos.zip" -d "$dir"
+          rm templates.tpz
+          ls -la "$dir"
+      - name: Choose targets
+        id: targets
+        run: |
+          if [[ "${{ github.ref }}" == refs/tags/v* || "${{ inputs.desktop }}" == "true" ]]; then
+            echo "list=web windows linux macos" >> "$GITHUB_OUTPUT"
+          else
+            echo "list=web" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Export
+        run: tools/export.sh ${{ steps.targets.outputs.list }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wildbound-builds
+          path: build/dist/*
+          if-no-files-found: error
+      - name: Prepare Pages site
+        if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/web-dist
+
+  pages:
+    needs: build
+    if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4

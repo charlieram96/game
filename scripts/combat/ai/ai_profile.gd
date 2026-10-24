@@ -57,18 +57,18 @@ static func preset(preset_id: StringName) -> AIProfile:
 			p.patience = 0.8
 		&"story":
 			p.display_name = "Corin"
-			p.reaction_ticks = 24
-			p.decision_interval = 9
-			p.aim_error_deg = 12.0
-			p.lead_accuracy = 0.5
-			p.dodge_chance = 0.25
-			p.guard_chance = 0.2
-			p.dash_through_chance = 0.25
-			p.aggression = 0.55
-			p.focus_threshold = 0.42
-			p.mistake_chance = 0.2
-			p.combo_skill = 0.5
-			p.patience = 1.1
+			p.reaction_ticks = 26
+			p.decision_interval = 10
+			p.aim_error_deg = 13.0
+			p.lead_accuracy = 0.45
+			p.dodge_chance = 0.22
+			p.guard_chance = 0.18
+			p.dash_through_chance = 0.2
+			p.aggression = 0.5
+			p.focus_threshold = 0.44
+			p.mistake_chance = 0.22
+			p.combo_skill = 0.4
+			p.patience = 1.25
 		_:
 			p.display_name = "Normal"
 	return p

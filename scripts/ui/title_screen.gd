@@ -9,6 +9,7 @@ var cam: Camera3D
 var ui: Control
 var menu: VBoxContainer
 var panel: PanelContainer
+var _logo_nodes: Array[Control] = []
 var _t := 0.0
 var _shot_path := ""
 var _shot_frames := -1
@@ -144,6 +145,7 @@ func _build_ui() -> void:
 	sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	UiTheme.place(sub, Vector2(0.5, 0), Vector2(-500, 140), Vector2(1000, 32))
 	ui.add_child(sub)
+	_logo_nodes = [logo, sub]
 	var tag := UiTheme.label("v0 prototype · Chapter 1: The Kindling", 14, Color(0.85, 0.8, 0.7, 0.8))
 	UiTheme.place(tag, Vector2(1, 1), Vector2(-330, -30), Vector2(320, 24))
 	tag.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
@@ -162,6 +164,14 @@ func _clear() -> void:
 		c.queue_free()
 
 
+## Tall submenus (settings, how to play) reach the top of the screen, so the
+## logo steps aside while they are open.
+func _show_logo(on: bool) -> void:
+	for n in _logo_nodes:
+		var tw := create_tween()
+		tw.tween_property(n, "modulate:a", 1.0 if on else 0.0, 0.2)
+
+
 func _button(text: String, cb: Callable) -> Button:
 	var b := Button.new()
 	b.text = text
@@ -176,6 +186,7 @@ func _button(text: String, cb: Callable) -> Button:
 
 func _main_menu() -> void:
 	_clear()
+	_show_logo(true)
 	var first: Button = null
 	if SaveService.has_save():
 		first = _button("Continue", _continue)
@@ -257,7 +268,7 @@ func _versus_menu() -> void:
 	menu.add_child(UiTheme.label("Local Versus", 26, UiTheme.GOLD, true))
 	var p1 := _option("Player 1", ["Emberlyn", "Stoneback"], 0)
 	var p2 := _option("Player 2", ["Emberlyn", "Stoneback"], 1)
-	var note := UiTheme.label("P1: WASD + mouse  ·  P2: arrows, . attack,\n/ dash, ; ' [ ] specials, R-Ctrl guard, R-Shift focus.\nGamepads work for both.", 13, Color(0.85, 0.8, 0.7))
+	var note := UiTheme.label("P1: WASD + mouse, L-Shift focus, Space guard.\nP2: arrows, . attack, / dash, ; ' [ ] specials,\nR-Ctrl guard, R-Shift focus. One gamepad plays P2;\nwith two, pad 1 is P1 and pad 2 is P2.", 13, Color(0.85, 0.8, 0.7))
 	menu.add_child(note)
 	_button("Fight!", func() -> void:
 		Game.start_battle(Game.versus_setup(SPECIES[p1.selected], SPECIES[p2.selected]), Game.TITLE_SCENE)).grab_focus()
@@ -281,6 +292,7 @@ func _option(label_text: String, items: Array, selected: int) -> OptionButton:
 
 func _settings() -> void:
 	_clear()
+	_show_logo(false)
 	panel.offset_top = -600
 	panel.offset_right = 48 + 560
 	menu.add_child(SettingsPanel.new())
@@ -292,6 +304,7 @@ func _settings() -> void:
 
 func _how_to_play() -> void:
 	_clear()
+	_show_logo(false)
 	panel.offset_right = 48 + 880
 	panel.offset_top = -600
 	var rt := RichTextLabel.new()

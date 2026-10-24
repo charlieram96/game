@@ -23,7 +23,7 @@ func _ready() -> void:
 
 
 func _apply_settings() -> void:
-	mat.set_shader_parameter("blur_amount", 1.0 if Settings.tilt_shift else 0.0)
+	mat.set_shader_parameter("blur_amount", 1.0 if Settings.tilt_shift and not Settings.graphics_low else 0.0)
 
 
 func set_focus(center: float, width: float) -> void:

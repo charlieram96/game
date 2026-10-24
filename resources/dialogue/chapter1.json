@@ -149,10 +149,6 @@
 		{"speaker": "Hesper", "portrait": "hesper:stern", "text": "Those snares in the forest weren't catching kith at random. They were hunting for this. For Aurelune."},
 		{"speaker": "Hesper", "portrait": "hesper:neutral", "text": "Get some rest, Wardens. Tomorrow, we have a long road ahead."}
 	],
-	"chapter_end": [
-		{"speaker": "", "text": "WILDBOUND — Chapter 1: The Kindling — complete."},
-		{"speaker": "", "text": "Thank you for playing this early prototype! Free Battle and Local Versus are now on the title screen. Tell the developer what you thought!"}
-	],
 	"mossling_observed": [
 		{"speaker": "", "text": "The Mossling's ears twitch. It sniffs the air in your direction... and goes back to nibbling clover. It isn't afraid of you."},
 		{"speaker": "", "text": "Field Journal updated: Mossling."}

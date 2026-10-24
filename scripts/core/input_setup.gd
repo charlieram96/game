@@ -10,7 +10,23 @@ extends RefCounted
 ## Gamepad: L-stick move · R-stick aim · RT basic · RB dash · LT focus ·
 ##   LB guard · A/B/X/Y specials · D-pad switch · Start pause
 
+const P1_PREFIX := "p1_"
 const P2_PREFIX := "p2_"
+## Gamepad-driven actions each versus player gets on their assigned pad.
+const PAD_BUTTONS := {
+	"dash": JOY_BUTTON_RIGHT_SHOULDER, "guard": JOY_BUTTON_LEFT_SHOULDER,
+	"ability_1": JOY_BUTTON_A, "ability_2": JOY_BUTTON_B,
+	"ability_3": JOY_BUTTON_X, "ability_4": JOY_BUTTON_Y,
+	"move_up": JOY_BUTTON_DPAD_UP, "move_down": JOY_BUTTON_DPAD_DOWN,
+	"move_left": JOY_BUTTON_DPAD_LEFT, "move_right": JOY_BUTTON_DPAD_RIGHT,
+}
+const PAD_AXES := {
+	"move_up": [JOY_AXIS_LEFT_Y, -1.0], "move_down": [JOY_AXIS_LEFT_Y, 1.0],
+	"move_left": [JOY_AXIS_LEFT_X, -1.0], "move_right": [JOY_AXIS_LEFT_X, 1.0],
+	"aim_up": [JOY_AXIS_RIGHT_Y, -1.0], "aim_down": [JOY_AXIS_RIGHT_Y, 1.0],
+	"aim_left": [JOY_AXIS_RIGHT_X, -1.0], "aim_right": [JOY_AXIS_RIGHT_X, 1.0],
+	"attack": [JOY_AXIS_TRIGGER_RIGHT, 1.0], "focus": [JOY_AXIS_TRIGGER_LEFT, 1.0],
+}
 
 
 static func ensure_actions() -> void:
@@ -71,30 +87,79 @@ static func ensure_actions() -> void:
 	_joy(&"pause", JOY_BUTTON_START)
 	_key(&"debug_overlay", [KEY_F3])
 	_key(&"toggle_touch", [KEY_F6])
-	# Local versus: player 2 on the right side of the keyboard.
+	# Local versus: player 1 keeps the left side of the keyboard and the mouse
+	# (no arrows or right-hand modifiers, which belong to player 2).
+	_key(&"p1_move_up", [KEY_W])
+	_key(&"p1_move_down", [KEY_S])
+	_key(&"p1_move_left", [KEY_A])
+	_key(&"p1_move_right", [KEY_D])
+	_mouse(&"p1_attack", MOUSE_BUTTON_LEFT)
+	_key(&"p1_attack", [KEY_J])
+	_mouse(&"p1_dash", MOUSE_BUTTON_RIGHT)
+	_key(&"p1_dash", [KEY_K])
+	_key_at(&"p1_focus", KEY_SHIFT, KEY_LOCATION_LEFT)
+	_key(&"p1_guard", [KEY_SPACE])
+	_key(&"p1_ability_1", [KEY_Q])
+	_key(&"p1_ability_2", [KEY_E])
+	_key(&"p1_ability_3", [KEY_R])
+	_key(&"p1_ability_4", [KEY_F])
+	for a in ["aim_up", "aim_down", "aim_left", "aim_right"]:
+		_ensure(StringName(P1_PREFIX + a))
+		_ensure(StringName(P2_PREFIX + a))
+	# Player 2 on the right side of the keyboard.
 	_key(&"p2_move_up", [KEY_UP])
 	_key(&"p2_move_down", [KEY_DOWN])
 	_key(&"p2_move_left", [KEY_LEFT])
 	_key(&"p2_move_right", [KEY_RIGHT])
 	_key(&"p2_attack", [KEY_PERIOD])
 	_key(&"p2_dash", [KEY_SLASH])
-	_key(&"p2_focus", [KEY_SHIFT])  # replaced below with right shift via physical code
-	_key(&"p2_guard", [KEY_CTRL])
+	_key_at(&"p2_focus", KEY_SHIFT, KEY_LOCATION_RIGHT)
+	_key_at(&"p2_guard", KEY_CTRL, KEY_LOCATION_RIGHT)
 	_key(&"p2_ability_1", [KEY_SEMICOLON])
 	_key(&"p2_ability_2", [KEY_APOSTROPHE])
 	_key(&"p2_ability_3", [KEY_BRACKETLEFT])
 	_key(&"p2_ability_4", [KEY_BRACKETRIGHT])
-	# Right-hand modifiers for player 2 (location-specific).
-	InputMap.action_erase_events(&"p2_focus")
-	var rshift := InputEventKey.new()
-	rshift.keycode = KEY_SHIFT
-	rshift.location = KEY_LOCATION_RIGHT
-	InputMap.action_add_event(&"p2_focus", rshift)
-	InputMap.action_erase_events(&"p2_guard")
-	var rctrl := InputEventKey.new()
-	rctrl.keycode = KEY_CTRL
-	rctrl.location = KEY_LOCATION_RIGHT
-	InputMap.action_add_event(&"p2_guard", rctrl)
+
+
+## Gives each versus player their own gamepad: with two pads the first is
+## player 1's and the second player 2's; a single pad goes to player 2 (player
+## 1 has the keyboard and mouse). Call again when pads are (dis)connected.
+static func assign_versus_pads() -> Array:
+	var pads := Input.get_connected_joypads()
+	var p1 := -1
+	var p2 := -1
+	if pads.size() >= 2:
+		p1 = pads[0]
+		p2 = pads[1]
+	elif pads.size() == 1:
+		p2 = pads[0]
+	bind_player_pad(P1_PREFIX, p1)
+	bind_player_pad(P2_PREFIX, p2)
+	return [p1, p2]
+
+
+## Rebinds one versus player's gamepad events to `device` (-1 = no pad).
+static func bind_player_pad(prefix: String, device: int) -> void:
+	var names: Array = PAD_BUTTONS.keys() + PAD_AXES.keys()
+	for n in names:
+		var action := StringName(prefix + String(n))
+		_ensure(action)
+		for ev in InputMap.action_get_events(action):
+			if ev is InputEventJoypadButton or ev is InputEventJoypadMotion:
+				InputMap.action_erase_event(action, ev)
+	if device < 0:
+		return
+	for n in PAD_BUTTONS:
+		var b := InputEventJoypadButton.new()
+		b.button_index = PAD_BUTTONS[n]
+		b.device = device
+		InputMap.action_add_event(StringName(prefix + String(n)), b)
+	for n in PAD_AXES:
+		var m := InputEventJoypadMotion.new()
+		m.axis = PAD_AXES[n][0]
+		m.axis_value = PAD_AXES[n][1]
+		m.device = device
+		InputMap.action_add_event(StringName(prefix + String(n)), m)
 
 
 static func _ensure(action: StringName) -> void:
@@ -108,6 +173,16 @@ static func _key(action: StringName, keys: Array) -> void:
 		var ev := InputEventKey.new()
 		ev.keycode = k
 		InputMap.action_add_event(action, ev)
+
+
+## A key on one side of the keyboard only (left/right Shift, Ctrl...). Godot
+## only honours the location for physical-key bindings.
+static func _key_at(action: StringName, key: Key, location: KeyLocation) -> void:
+	_ensure(action)
+	var ev := InputEventKey.new()
+	ev.physical_keycode = key
+	ev.location = location
+	InputMap.action_add_event(action, ev)
 
 
 static func _mouse(action: StringName, button: MouseButton) -> void:
