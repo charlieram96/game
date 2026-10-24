@@ -118,8 +118,9 @@ func _configure(anim_name: String, ground: bool, dir: Vector2, tint: Color, glow
 	_set_frame(0)
 
 
-## Screen-space angle of a ground direction for the fixed-yaw cameras.
-static func screen_angle(dir: Vector2, pitch_deg: float = 44.0) -> float:
+## Screen-space angle of a ground direction for the fixed-yaw cameras
+## (the battle camera's pitch unless told otherwise).
+static func screen_angle(dir: Vector2, pitch_deg: float = BattleCamera.PITCH_DEG) -> float:
 	return atan2(-dir.y * sin(deg_to_rad(pitch_deg)), dir.x)
 
 
