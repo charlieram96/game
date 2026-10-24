@@ -25,7 +25,7 @@ var tip_label: RichTextLabel
 var pause_button: Button
 var touch_mode := false
 ## Seconds the full tip stays up before it shrinks to its one-line summary.
-const TIP_FULL_SECONDS := 5.0
+const TIP_FULL_SECONDS := 9.0
 var _tip_summary := ""
 var _tip_full_left := 0.0
 var _msg_tween: Tween
