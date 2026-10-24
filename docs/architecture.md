@@ -231,30 +231,32 @@ ONLY=easy-story N=150 godot --headless --path . -s res://tests/tools/balance_sim
 The harness runs N AI-vs-AI matches per pairing (Ranked level 50, the
 Ringstones, 120 s limit, fixed seeds) and prints win rates, average length,
 timeouts, damage and per-ability hit rates. `ONLY=<ai>-<ai>` restricts it to
-pairings with those two AI profiles. Results measured on 2026-10-24
-(n = 150 per row; wins are listed as team 0 / team 1 / draw):
+pairings with those two AI profiles. Results measured on 2026-10-24 with
+drag-to-dash movement (n = 150 per row; wins are listed as team 0 / team 1
+/ draw):
 
 | Pairing (AI profile) | Wins | Avg length | Timeouts |
 | --- | --- | --- | --- |
-| Emberlyn (normal) vs Stoneback (normal) | 80 / 70 / 0 | 39.1 s | 23 |
-| Stoneback (normal) vs Emberlyn (normal) | 65 / 85 / 0 | 36.9 s | 20 |
-| Emberlyn vs Emberlyn (normal) | 74 / 74 / 2 | 26.9 s | 12 |
-| Stoneback vs Stoneback (normal) | 79 / 65 / 6 | 83.8 s | 76 |
-| Emberlyn (normal) vs Stoneback (story) | 72 / 78 / 0 | 32.4 s | 16 |
-| Emberlyn (easy) vs Stoneback (story) | 48 / 102 / 0 | 26.5 s | 3 |
+| Emberlyn (normal) vs Stoneback (normal) | 90 / 60 / 0 | 28.5 s | 5 |
+| Stoneback (normal) vs Emberlyn (normal) | 54 / 96 / 0 | 25.3 s | 2 |
+| Emberlyn vs Emberlyn (normal) | 80 / 69 / 1 | 25.7 s | 8 |
+| Stoneback vs Stoneback (normal) | 62 / 88 / 0 | 66.0 s | 39 |
+| Emberlyn (normal) vs Stoneback (story) | 122 / 28 / 0 | 25.2 s | 6 |
+| Emberlyn (easy) vs Stoneback (story) | 20 / 129 / 1 | 26.9 s | 6 |
 
 How to read it:
 
-* Across both sides Emberlyn beats Stoneback **55%** of the time (165 of
-  300): 53% from the left spawn and 57% from the right. The Emberlyn mirror
-  splits exactly 74 / 74, so there is no measurable side or tick-order bias.
-  An earlier n = 40 run suggested a 50% vs 70% split; that was noise.
-* The Stoneback mirror runs long and half of those matches time out (a known
-  v0 issue).
-* An Easy-profile Emberlyn, standing in for a new player, beats story Corin
-  32% of the time. It was 25% before the Story profile was softened on
-  2026-10-24. The story duel also offers a "go a little easier" retry that
-  switches Corin to the Easy profile.
+* Across both sides Emberlyn beats Stoneback **62%** of the time (186 of
+  300): 60% from the left spawn and 64% from the right. With every move a
+  dash, the agile kiter has the edge at equal AI skill.
+* The Emberlyn mirror splits 80 / 69 (within noise). The Stoneback mirror
+  splits 62 / 88, about two standard deviations from even, so a small side
+  bias in the AI's lane choices is possible; it also runs long and a quarter
+  of its matches time out (a known v0 issue).
+* An Easy-profile Emberlyn, standing in for a weak player, beats story Corin
+  13% of the time; a Normal-profile one 81%. The Story profile was softened
+  for drag-to-dash, and the story duel also offers a "go a little easier"
+  retry that switches Corin to the Easy profile.
 
 These are AI proxies, not human playtests.
 
