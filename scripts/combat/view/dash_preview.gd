@@ -102,13 +102,14 @@ func _update_committed(sim: BattleSim, delta: float) -> void:
 			lane.set_param(&"flash", float(info["flash"]))
 			lane.set_param(&"opacity", 1.0)
 			lane.advance(delta)
-		elif not info.is_empty():
+		elif not info.is_empty() and not bool(info.get("done", false)):
+			# Landed: the lane fades out behind it.
 			var lane2: DashLane = info["lane"]
 			info["fade"] = float(info["fade"]) + delta
 			var k := clampf(float(info["fade"]) / FADE_TIME, 0.0, 1.0)
 			lane2.set_param(&"consumed", float(lane2.span) + 0.5)
 			lane2.set_param(&"opacity", 1.0 - k)
-			if k >= 1.0 and not bool(info.get("done", false)):
+			if k >= 1.0:
 				lane2.hide_lane()
 				info["start_tick"] = -1
 				info["done"] = true
@@ -174,7 +175,6 @@ class AimMarker:
 	var _lock := 1.0
 	var _last_key := Vector3i(-1, -1, -1)
 	var _ghost_fighter := -1
-	var _fade := 0.0
 
 	func build(p_source: LocalInputSource, p_team: int, color: Color) -> void:
 		source = p_source
@@ -257,7 +257,6 @@ class AimMarker:
 		# Aimed mid-dash, the next dash waits for the landing: plan it from there.
 		var mid_dash := f.state == SM.DASH_START or f.state == SM.DASH_ACTIVE
 		var plan := DashSystem.plan(sim, f, aim.dir_index, aim.cells, f.dash_to if mid_dash else Vector2.INF)
-		var arena := sim.setup.arena
 		showing = true
 		cancelled = aim.cancelled
 		cost = plan.cost
