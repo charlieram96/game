@@ -9,6 +9,8 @@ signal feedback(kind: StringName, data: Dictionary)
 const TEAM_COLORS: Array[Color] = [Color(0.35, 0.9, 0.95), Color(1.0, 0.45, 0.38)]
 const FONT := preload("res://assets/fonts/PixelifySans-Bold.ttf")
 const SM := FighterSM.State
+## A minor label (size < 1) shows at most once per this long per spot.
+const MINOR_POPUP_MS := 1000
 
 var sim: BattleSim
 var setup: BattleSetup
@@ -30,6 +32,7 @@ var local_input_teams: Array[int] = [0]
 var debug_draw: MeshInstance3D
 var _focus_loops: Dictionary = {}
 var _recent_popups: Array = []
+var _minor_popups: Dictionary = {}  # "text@x,z" -> msec shown
 
 
 func build(p_sim: BattleSim, p_setup: BattleSetup) -> void:
@@ -638,6 +641,17 @@ func _on_ko(f: Fighter, e: BattleEvent) -> void:
 ## would land on top of a recent one stack above it instead.
 func popup(pos: Vector3, text: String, color: Color, size_mult: float = 1.0) -> void:
 	var now := Time.get_ticks_msec()
+	# Minor labels ("Resisted", "Focus broken!") repeat on every burn tick or
+	# multi-hit: show each one once a second per spot. Callouts and numbers
+	# always show.
+	if size_mult < 1.0 and not text.is_valid_int():
+		for k in _minor_popups.keys():
+			if now - int(_minor_popups[k]) > MINOR_POPUP_MS:
+				_minor_popups.erase(k)
+		var key := "%s@%d,%d" % [text, roundi(pos.x), roundi(pos.z)]
+		if _minor_popups.has(key):
+			return
+		_minor_popups[key] = now
 	_recent_popups = _recent_popups.filter(func(r: Dictionary) -> bool: return now - int(r["t"]) < 450)
 	var lift := 0.0
 	for r in _recent_popups:
