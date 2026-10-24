@@ -270,6 +270,12 @@ asset name), and each forge validates its own output.
 | `tools/env_forge` | 48x48 seamless textures, foliage, props, the Dawncrane mural, VFX sheets, UI icons and 9-slice panels | `python3 tools/env_forge/build.py` |
 | `tools/audio_forge` | 75 SFX (44.1 kHz mono) and 6 music cues (32 kHz mono; loops carry `smpl` loop points and are rendered circularly) | `python3 tools/audio_forge/build.py` |
 
+`tools/art_forge` adds generated art through the OpenRouter Image API. It
+writes prompts from the briefs in `briefs.json`, checks each request against
+the model's published parameters and records provenance. `pixelize.py` turns
+the paintings into palette-locked pixel art in the same sheet contract. The
+API key is read from `OPENROUTER_API_KEY` and never stored. See its README.
+
 Shared palette and sheet-contract code is in `tools/common/`. See each
 forge's README for details. The music is stored as WAV in the repository;
 exports compress it to QOA at import time, so the whole web download is

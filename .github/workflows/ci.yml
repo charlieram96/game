@@ -36,6 +36,10 @@ jobs:
           godot --version
       - name: Run tests
         run: tools/run_tests.sh
+      - name: Run asset tool tests
+        run: |
+          python3 -m pip install --quiet numpy pillow
+          python3 -m unittest discover -s tools/art_forge -p "test_*.py"
 
   build:
     needs: test

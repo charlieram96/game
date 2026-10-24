@@ -117,17 +117,22 @@ through Milestone 3.
    * whether players understand the befriending without hints.
 2. **Address the Stoneback-mirror timeouts** and anything playtesting turns
    up.
-3. **Teams of three:** switching UI on the HUD and touch, a team-select
+3. **Art pass with `tools/art_forge`** once `OPENROUTER_API_KEY` is set:
+   * pick models with a bake-off;
+   * lock each character and kith design with a concept sheet;
+   * generate portraits, props and the mural;
+   * retune the sprite rigs to the approved designs.
+4. **Teams of three:** switching UI on the HUD and touch, a team-select
    screen, and the 3-5 minute match target from the brief.
-4. **Content:**
+5. **Content:**
    * battle kits for Mossling (Grove) and Lanternmoth (Aether);
    * one Tide and one Gale kith;
    * variants for every special, and a mastery and variant screen.
-5. **Online 1v1 prototype (Phase B):**
+6. **Online 1v1 prototype (Phase B):**
    * a headless Godot battle server and a `NetworkBattleTransport`;
    * prediction and reconciliation;
    * tests under simulated latency and packet loss before any capacity
      claims.
-6. **Chapter 2:** leave Mossford on the Sigilbinders' trail (see the hooks in
+7. **Chapter 2:** leave Mossford on the Sigilbinders' trail (see the hooks in
    story-and-world.md).
-7. **Profile performance** on target devices and set real budgets.
+8. **Profile performance** on target devices and set real budgets.

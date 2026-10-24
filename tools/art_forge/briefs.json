@@ -1,0 +1,182 @@
+{
+  "originality": "This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+  "kinds": {
+    "sprite": {
+      "style": "Game sprite in crisp, hand-placed pixel art in the manner of 16-bit-era role-playing games remastered with soft modern lighting: a limited palette, clean dark outlines one pixel wide that are never pure black, and a soft key light from the upper left. One character only, full body, standing, centred, with the whole figure visible and a generous margin. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border.",
+      "aspect_ratio": "1:1",
+      "model": "google/gemini-3-pro-image"
+    },
+    "portrait": {
+      "style": "Dialogue portrait in crisp pixel art for a 16-bit-era-inspired role-playing game: head and shoulders, three-quarter view turned slightly to the left, an expressive and readable face, a soft key light from the upper left, a limited palette and clean outlines that are never pure black. Flat solid magenta (#FF00FF) background. No text, watermark or frame.",
+      "aspect_ratio": "1:1",
+      "model": "google/gemini-3-pro-image"
+    },
+    "prop": {
+      "style": "A single game prop in crisp pixel art for a cozy fantasy role-playing game, three-quarter top-down view, a soft key light from the upper left, a limited palette and clean outlines that are never pure black. Centred with a generous margin on a flat solid magenta (#FF00FF) background with no shadow or floor. No text or watermark.",
+      "aspect_ratio": "1:1",
+      "model": "google/gemini-3-pro-image"
+    },
+    "concept": {
+      "style": "Character design reference sheet for a cozy fantasy creature role-playing game: the same character shown from the front, the back and the right side at the same scale, clean full-colour illustration with consistent proportions and colours on a plain light-grey background. No text labels.",
+      "aspect_ratio": "16:9",
+      "model": "google/gemini-3-pro-image"
+    },
+    "environment": {
+      "style": "Concept painting of a location for a cozy pixel-art fantasy role-playing game presented as a lit miniature diorama: three-quarter top-down view, tilt-shift depth of field, soft volumetric light and a warm storybook palette. No text and no people unless described.",
+      "aspect_ratio": "16:9",
+      "model": "openai/gpt-5.4-image-2"
+    },
+    "keyart": {
+      "style": "Key art for a cozy pixel-art fantasy role-playing game: rich, detailed pixel art with soft modern lighting and depth, painterly glow from light sources, a warm storybook mood. No text or logo.",
+      "aspect_ratio": "16:9",
+      "model": "openai/gpt-5.4-image-2"
+    }
+  },
+  "views": {
+    "s": "Facing the viewer, turned very slightly toward the lower right.",
+    "n": "Seen from behind, facing away from the viewer.",
+    "e": "In profile, facing to the right."
+  },
+  "briefs": {
+    "wren": {
+      "kind": "sprite",
+      "size": [32, 48],
+      "pivot": [16, 45],
+      "ramps": ["skin_tan", "hair_brown", "cloth_teal", "cloth_cream", "earth", "soot", "leather", "cloth_red", "ink"],
+      "subject": "Wren, a fourteen-year-old apprentice warden: tousled brown hair, warm tan skin, a short teal hooded cloak over a cream tunic, a red scarf, brown trousers, dark boots and a small leather satchel. Curious and kind, ready to set out."
+    },
+    "wren_portrait": {
+      "kind": "portrait",
+      "size": [64, 64],
+      "ramps": ["skin_tan", "hair_brown", "cloth_teal", "cloth_cream", "cloth_red", "leather", "ink"],
+      "subject": "Wren, a fourteen-year-old apprentice warden: tousled brown hair, warm tan skin, big earnest eyes, a teal hooded cloak and a red scarf.",
+      "expressions": {"neutral": "calm and attentive", "smile": "a bright, open smile", "worried": "brows raised, worried"}
+    },
+    "hesper": {
+      "kind": "sprite",
+      "size": [32, 48],
+      "pivot": [16, 45],
+      "ramps": ["skin_light", "hair_grey", "cloth_plum", "cloth_cream", "leather", "wood", "ink"],
+      "subject": "Warden Hesper, the elder warden of a forest village: a tall woman in her sixties with silver-grey hair in a low bun, light skin, a long plum-coloured coat over a cream blouse, sturdy leather shoes, leaning on a gnarled wooden staff. Warm and wry, with a stern edge."
+    },
+    "hesper_portrait": {
+      "kind": "portrait",
+      "size": [64, 64],
+      "ramps": ["skin_light", "hair_grey", "cloth_plum", "cloth_cream", "ink"],
+      "subject": "Warden Hesper, a woman in her sixties: silver-grey hair in a low bun with loose strands, light skin with laugh lines, sharp kind eyes, a high-collared plum coat over a cream blouse.",
+      "expressions": {"neutral": "composed, a hint of a smile", "smile": "a warm, knowing smile", "stern": "one eyebrow raised, stern"}
+    },
+    "corin": {
+      "kind": "sprite",
+      "size": [32, 48],
+      "pivot": [16, 45],
+      "ramps": ["skin_deep", "hair_copper", "cloth_red", "cloth_mustard", "stone", "cloth_blue", "leather", "ink"],
+      "subject": "Corin, a fourteen-year-old apprentice: deep brown skin, spiky copper-red hair under a red headband, a mustard-yellow vest over a grey shirt, blue trousers, leather boots and fingerless leather gloves. A confident grin; boastful but good-hearted."
+    },
+    "corin_portrait": {
+      "kind": "portrait",
+      "size": [64, 64],
+      "ramps": ["skin_deep", "hair_copper", "cloth_red", "cloth_mustard", "stone", "ink"],
+      "subject": "Corin, a fourteen-year-old apprentice: deep brown skin, spiky copper-red hair under a red headband, a mustard-yellow vest over a grey shirt.",
+      "expressions": {"neutral": "a cocky half-grin", "grin": "a big, boastful grin", "determined": "jaw set, determined"}
+    },
+    "wynn": {
+      "kind": "sprite",
+      "size": [32, 48],
+      "pivot": [16, 45],
+      "ramps": ["skin_light", "hair_copper", "cloth_cream", "cloth_red", "leather", "ink"],
+      "subject": "Wynn, the cheerful village baker: round-faced and rosy, hair tied up under a red kerchief, sleeves rolled up, a flour-dusted cream apron, holding a loaf of bread."
+    },
+    "bram": {
+      "kind": "sprite",
+      "size": [32, 48],
+      "pivot": [16, 45],
+      "ramps": ["skin_tan", "hair_grey", "sand", "cloth_green", "leather", "earth", "wood", "ink"],
+      "subject": "Bram, a gruff old farmer: broad shoulders, a wide straw hat, grey stubble, a green work shirt with rolled sleeves, leather braces, earth-brown trousers, holding a wooden hoe."
+    },
+    "sigilbinder": {
+      "kind": "sprite",
+      "size": [32, 48],
+      "pivot": [16, 45],
+      "ramps": ["ink", "soot", "sigil", "night"],
+      "subject": "A Sigilbinder: a silent hooded figure in a long, tattered ink-black cloak, the face lost in the hood's shadow except for two faint glowing eyes, with a glowing magenta chain of interlocking rune links wound around the right arm."
+    },
+    "emberlyn": {
+      "kind": "sprite",
+      "size": [48, 48],
+      "pivot": [24, 44],
+      "ramps": ["fur_russet", "cream", "soot", "ember", "gold", "ink"],
+      "subject": "Emberlyn, a small fire-element woodland creature: a long, low, stoat-like body with russet fur on the back and a cream underside and muzzle, a dark soot band across the eyes like a mask, soot-dark paws, small round ears, big amber eyes, and a long bushy tail that cradles a glowing ember coal in a ring of fur at its tip. Alert and a little timid."
+    },
+    "stoneback": {
+      "kind": "sprite",
+      "size": [48, 48],
+      "pivot": [24, 44],
+      "ramps": ["stone", "stone_warm", "moss", "sand", "gold", "ink"],
+      "subject": "Stoneback, a heavy stone-element creature: a compact, low, pangolin-like quadruped with overlapping slate-grey stone plates down its back, a thick ridge of moss with tiny white flowers along the spine, stubby warm-brown legs, a broad blunt snout, small glowing amber eyes under a heavy stone brow, and a short tail ending in a stone club. Sleepy, stubborn and sturdy."
+    },
+    "mossling": {
+      "kind": "sprite",
+      "size": [32, 32],
+      "pivot": [16, 29],
+      "ramps": ["moss", "leaf", "glow_moss", "cloth_cream", "ink", "sigil"],
+      "subject": "Mossling, a tiny shy grove-element creature: a round moss-covered puffball with long floppy leaf-shaped ears like a lop-eared rabbit, a tiny two-leaf sprout on its head, stubby feet, shiny dark eyes and a pinkish nose."
+    },
+    "lanternmoth": {
+      "kind": "sprite",
+      "size": [48, 48],
+      "pivot": [24, 46],
+      "ramps": ["cloth_plum", "aether", "cream", "gold", "ink"],
+      "subject": "Lanternmoth, a large and gentle moth creature: dusky plum wings with violet-tinted edges and soft eye-spots, a fuzzy cream thorax, feathery antennae, and a softly glowing golden abdomen like a paper lantern. Hovering with wings spread."
+    },
+    "emberlyn_concept": {
+      "kind": "concept",
+      "subject": "Emberlyn, a small fire-element woodland creature: a long, low, stoat-like body with russet fur on the back and a cream underside and muzzle, a dark soot band across the eyes like a mask, soot-dark paws, small round ears, big amber eyes, and a long bushy tail that cradles a glowing ember coal in a ring of fur at its tip."
+    },
+    "stoneback_concept": {
+      "kind": "concept",
+      "subject": "Stoneback, a heavy stone-element creature: a compact, low, pangolin-like quadruped with overlapping slate-grey stone plates, a mossy spine ridge with tiny white flowers, stubby warm-brown legs, a broad blunt snout, small glowing amber eyes under a heavy stone brow and a short tail ending in a stone club."
+    },
+    "mural_dawncrane": {
+      "kind": "prop",
+      "size": [128, 96],
+      "ramps": ["stone_warm", "stone", "gold", "moss", "ink"],
+      "subject": "An ancient carved stone wall mural seen straight on: Aurelune the Dawncrane, a mythic crane of dawn light with long sweeping wings and a crest like a rising sun, carved in relief with worn gold inlay, framed by weathered stone with creeping moss.",
+      "aspect_ratio": "4:3"
+    },
+    "standing_stone": {
+      "kind": "prop",
+      "size": [32, 64],
+      "ramps": ["stone", "stone_warm", "moss", "ink"],
+      "subject": "A tall, weathered standing stone from an ancient dueling circle, patched with moss and faint carved spirals.",
+      "aspect_ratio": "2:3"
+    },
+    "lantern_post": {
+      "kind": "prop",
+      "size": [24, 64],
+      "ramps": ["wood", "metal", "gold", "ember", "ink"],
+      "subject": "A wooden village lantern post with a small iron lantern hanging from an arm, glowing warmly.",
+      "aspect_ratio": "2:3"
+    },
+    "mossford_square": {
+      "kind": "environment",
+      "subject": "Mossford, a small forest village in the morning: thatched timber-frame cottages around a cobblestone square with a stone well and a great old oak, a bakery with a warm window, flower boxes, mossy stone walls and a stream with a wooden footbridge to the west."
+    },
+    "glimmerwood_clearing": {
+      "kind": "environment",
+      "subject": "The Glimmerwood: an old forest clearing in soft morning light, glowing teal moss on roots and stones, a fallen hollow log, a ring of stones for a campfire, a shallow stream, fireflies and drifting mist."
+    },
+    "ringstones": {
+      "kind": "environment",
+      "subject": "The Ringstones: an ancient circle of mossy standing stones around a packed-sand dueling floor, wooden bleachers for villagers, braziers and cloth banners, in golden late-afternoon light."
+    },
+    "dawn_shrine": {
+      "kind": "environment",
+      "subject": "The Dawn Shrine at night: overgrown stone ruins at the forest's edge, a great carved mural of a crane-like creature of dawn on the back wall glowing faintly gold, a small reflecting pond, lantern light and stars."
+    },
+    "title_keyart": {
+      "kind": "keyart",
+      "subject": "A young apprentice in a teal cloak and red scarf sits by a campfire in a forest clearing at dusk beside a small russet fox-like fire creature whose bushy tail holds a glowing ember; a large gentle moth with a softly glowing golden body rests on a branch nearby. Warm firelight against cool blue night, fireflies."
+    }
+  }
+}
