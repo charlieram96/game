@@ -55,6 +55,9 @@ var lunge_stop_on_hit: bool = true
 ## buffered DASH press so a dash queued during recovery still knows where to go.
 var dash_req_dir: int = -1
 var dash_req_cells: int = 0
+## A dash requested mid-dash waits for the landing's chain window (however
+## long the current dash is) instead of expiring with the input buffer.
+var dash_queued: bool = false
 var dash_dir: Vector2 = Vector2.ZERO
 var dash_from: Vector2 = Vector2.ZERO  # where the windup started
 var dash_home: Vector2 = Vector2.ZERO  # cell centre the travel starts from

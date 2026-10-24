@@ -257,6 +257,31 @@ func test_dashes_chain_from_the_landing() -> void:
 	assert_near(f.pos.distance_to(Vector2(1, 2)), 0.0, 0.0001, "both dashes landed")
 
 
+func test_a_dash_released_mid_dash_waits_for_the_landing() -> void:
+	var sim := _open()
+	var f := H.place(sim, 0, Vector2(0, 0))
+	H.dash(sim, 0, H.E, 5)
+	while f.state != SM.DASH_ACTIVE:
+		sim.step({})
+	# Released at the very start of a long travel, longer ago than the input
+	# buffer by the time the chain window opens: still chains.
+	sim.step({0: H.dash_cmd(H.N, 2)})
+	assert_gt(f.dash_travel_ticks + f.stats.dash.chain_after_ticks, CombatConst.INPUT_BUFFER_TICKS, "longer than the buffer")
+	var guard := 0
+	while f.state != SM.IDLE and guard < 120:
+		sim.step({})
+		guard += 1
+	assert_near(f.pos.distance_to(Vector2(5, -2)), 0.0, 0.0001, "both dashes happened")
+	# A request queued mid-dash is dropped if the dasher gets dazed.
+	var sim2 := _open()
+	var g := H.place(sim2, 0, Vector2(0, 0))
+	H.dash(sim2, 0, H.E, 3)
+	sim2.step({0: H.dash_cmd(H.S, 1)})
+	assert_true(g.dash_queued, "queued")
+	StunRules.apply(sim2, g, 20, &"test")
+	assert_false(g.dash_queued, "a daze drops it")
+
+
 func test_creatures_never_walk() -> void:
 	var sim := _open()
 	var f := H.place(sim, 0, Vector2(0, 0))

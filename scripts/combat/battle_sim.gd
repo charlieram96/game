@@ -168,6 +168,8 @@ func set_state(f: Fighter, s: FighterSM.State, duration: int = 0) -> bool:
 	f.state = s
 	f.state_tick = 0
 	f.state_duration = duration
+	if s != SM.DASH_START and s != SM.DASH_ACTIVE and s != SM.DASH_RECOVERY:
+		f.dash_queued = false
 	if prev != s:
 		emit(BattleEvent.STATE, f, -1, f.pos, {"from": prev, "to": s})
 	return true
@@ -365,6 +367,7 @@ func _step_fighter(f: Fighter, cmd: InputCommand) -> void:
 	if cmd.has_dash():
 		f.dash_req_dir = cmd.dash_dir
 		f.dash_req_cells = cmd.dash_cells
+		f.dash_queued = f.state == SM.DASH_START or f.state == SM.DASH_ACTIVE or f.state == SM.DASH_RECOVERY
 	_update_aim(f, cmd)
 	if f.hitstop > 0:
 		f.hitstop -= 1
@@ -489,8 +492,9 @@ func _handle_actions(f: Fighter, cmd: InputCommand) -> void:
 			else:
 				return
 		SM.DASH_RECOVERY:
-			# Dash chaining: a buffered dash may cut the landing short.
-			if DashSystem.can_chain(f) and f.buffer.has(InputCommand.DASH, tick):
+			# Dash chaining: a dash buffered (or queued mid-dash) may cut the
+			# landing short.
+			if DashSystem.can_chain(f) and (f.dash_queued or f.buffer.has(InputCommand.DASH, tick)):
 				f.buffer.consume(InputCommand.DASH)
 				_try_dash(f)
 			return
@@ -532,6 +536,7 @@ func _handle_actions(f: Fighter, cmd: InputCommand) -> void:
 
 
 func _try_dash(f: Fighter) -> bool:
+	f.dash_queued = false
 	var started := DashSystem.try_start(self, f, f.dash_req_dir, f.dash_req_cells)
 	f.dash_req_dir = -1
 	f.dash_req_cells = 0
