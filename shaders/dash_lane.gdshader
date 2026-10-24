@@ -69,9 +69,21 @@ vec4 over(vec4 dst, vec3 c, float a) {
 	return vec4(rgb, oa);
 }
 
+// Anti-aliased coverage of a signed distance (inside where d < 0), and a
+// soft falloff from d = 0 out to w. (smoothstep needs edge0 < edge1.)
+float fill_aa(float d, float aa) {
+	return 1.0 - smoothstep(-aa, aa, d);
+}
+
+float fade_out(float d, float w) {
+	return 1.0 - smoothstep(0.0, w, d);
+}
+
 void fragment() {
 	float s = UV.x * cell_span;
 	float t = UV.y - 0.5;
+	// Derivatives before any discard (they are undefined after one).
+	float aa = max(fwidth(s), 0.0005) * 1.25;
 	int k = clamp(int(floor(s)), 0, MAX_CELLS - 1);
 	float state = cell_state[k];
 	float appear = clamp(reveal - float(k), 0.0, 1.0);
@@ -79,28 +91,27 @@ void fragment() {
 		discard;
 	}
 	vec2 q = vec2(fract(s) - 0.5, t);
-	float aa = max(fwidth(s), 0.0005) * 1.25;
 	float pop = ease_out_back(appear);
 	float half_size = 0.42 * pop;
 	float d = sd_round_box(q, vec2(half_size), 0.11 * pop);
-	float inside = smoothstep(aa, -aa, d);
-	float halo = smoothstep(0.075, 0.0, d) * (1.0 - inside);
+	float inside = fill_aa(d, aa);
+	float halo = fade_out(d, 0.075) * (1.0 - inside);
 	float pulse = 0.5 + 0.5 * sin(TIME * 8.0);
 	vec4 o = vec4(0.0);
 	if (state > 4.5) {
 		// Wall: a hard bar across the near edge, hatching behind it.
 		float bar = sd_round_box(q - vec2(-0.43, 0.0), vec2(0.045, 0.4 * pop), 0.03);
 		float zone = sd_round_box(q - vec2(-0.28, 0.0), vec2(0.11, 0.4 * pop), 0.02);
-		float hatch = step(0.5, fract((q.y - q.x) * 8.0)) * smoothstep(aa, -aa, zone);
-		float bar_halo = smoothstep(0.07, 0.0, bar);
+		float hatch = step(0.5, fract((q.y - q.x) * 8.0)) * fill_aa(zone, aa);
+		float bar_halo = fade_out(bar, 0.07);
 		o = over(o, ink_color.rgb, bar_halo * 0.5);
 		o = over(o, block_color.rgb * 0.7, hatch * 0.45);
-		o = over(o, mix(block_color.rgb, vec3(1.0), 0.25 * pulse), smoothstep(aa, -aa, bar));
+		o = over(o, mix(block_color.rgb, vec3(1.0), 0.25 * pulse), fill_aa(bar, aa));
 	} else if (state > 3.5) {
 		// Out of reach: a dashed outline on a dark wash.
 		float ang = atan(q.y, q.x);
 		float dashes = step(0.42, fract(ang / 6.2831853 * 12.0));
-		float edge = smoothstep(aa, -aa, abs(d + 0.025) - 0.024);
+		float edge = fill_aa(abs(d + 0.025) - 0.024, aa);
 		o = over(o, ink_color.rgb, inside * 0.18);
 		o = over(o, block_color.rgb, edge * dashes * 0.85);
 	} else {
@@ -109,7 +120,7 @@ void fragment() {
 		vec3 base = ram ? ram_color.rgb : main_color.rgb;
 		vec3 light = mix(base, vec3(1.0), 0.4);
 		float border_w = landing ? 0.05 : 0.032;
-		float border = smoothstep(aa, -aa, abs(d + border_w) - border_w);
+		float border = fill_aa(abs(d + border_w) - border_w, aa);
 		float glow = exp(-max(-d, 0.0) * 9.0) * inside;
 		// A shaded panel (darker than any floor) lit by its coloured rim.
 		float shade = landing ? 0.42 : 0.3;
@@ -142,13 +153,13 @@ void fragment() {
 			if (ram) {
 				cd = min(sd_chevron(q - vec2(nudge - 0.1, 0.0), 0.3 * pop, 0.036 * pop), sd_chevron(q - vec2(nudge + 0.1, 0.0), 0.3 * pop, 0.036 * pop));
 			}
-			float ca = smoothstep(aa, -aa, cd);
-			float c_halo = smoothstep(0.05, 0.0, cd) * (1.0 - ca);
+			float ca = fill_aa(cd, aa);
+			float c_halo = fade_out(cd, 0.05) * (1.0 - ca);
 			o = over(o, ink_color.rgb, c_halo * 0.35);
 			o = over(o, mix(light, accent_color.rgb, 0.35 + 0.65 * lit), ca * (0.72 + 0.28 * lit));
 		} else {
 			// Landing: an inner frame, so the target cell reads at a glance.
-			float inner = smoothstep(aa, -aa, abs(sd_round_box(q, vec2(half_size * 0.62), 0.06) ) - 0.018);
+			float inner = fill_aa(abs(sd_round_box(q, vec2(half_size * 0.62), 0.06) ) - 0.018, aa);
 			o = over(o, light, inner * 0.75);
 		}
 	}

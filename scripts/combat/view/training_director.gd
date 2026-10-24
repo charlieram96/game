@@ -155,4 +155,4 @@ func _finish() -> void:
 	scene.hud.show_tip("[b]Training complete![/b] Hesper nods. \"You're ready for the Ringstones.\"")
 	Audio.sfx(&"befriend_success")
 	await get_tree().create_timer(2.4).timeout
-	Game.return_from_battle({"winner": 0, "local_team": 0, "mode": BattleSetup.Mode.TRAINING, "story_battle_id": &"training", "record": _player().record})
+	Game.return_from_battle({"winner": 0, "local_team": 0, "mode": BattleSetup.Mode.TRAINING, "story_battle_id": scene.setup.story_battle_id, "record": _player().record})

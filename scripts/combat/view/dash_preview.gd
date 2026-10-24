@@ -27,7 +27,7 @@ const FADE_TIME := 0.28
 
 var view: BattleView
 var _aims: Array[AimMarker] = []
-var _committed: Dictionary = {}  # fighter id -> {"lane": DashLane, "fade": float, "flash": float, "start_tick": int}
+var _committed: Dictionary = {}  # fighter id -> {"lane": DashLane, "fade": float, "flash": float, "dash_id": int, "done": bool}
 
 
 func setup(p_view: BattleView) -> void:
@@ -81,14 +81,12 @@ func _update_committed(sim: BattleSim, delta: float) -> void:
 		var dashing := f.on_field and (f.state == SM.DASH_START or f.state == SM.DASH_ACTIVE)
 		var info: Dictionary = _committed.get(f.id, {})
 		if dashing:
-			# A new dash: first sight of it, or a windup that started on a later tick.
-			var start_tick := sim.tick - f.state_tick if f.state == SM.DASH_START else int(info.get("start_tick", -1))
-			var fresh := info.is_empty() or bool(info.get("done", false))
-			if f.state == SM.DASH_START and int(info.get("start_tick", -1)) != start_tick:
-				fresh = true
-			if fresh:
+			# Each dash that starts bumps the creature's dash count (this also
+			# holds through hitstop, when state ticks freeze).
+			var dash_id := int(f.record.get("dashes", 0))
+			if info.is_empty() or int(info.get("dash_id", -1)) != dash_id:
 				info = _begin_committed(sim, f, info)
-				info["start_tick"] = start_tick
+				info["dash_id"] = dash_id
 				_committed[f.id] = info
 			var lane: DashLane = info["lane"]
 			lane.visible = true
@@ -111,7 +109,6 @@ func _update_committed(sim: BattleSim, delta: float) -> void:
 			lane2.set_param(&"opacity", 1.0 - k)
 			if k >= 1.0:
 				lane2.hide_lane()
-				info["start_tick"] = -1
 				info["done"] = true
 
 
@@ -147,7 +144,7 @@ func _begin_committed(sim: BattleSim, f: Fighter, info: Dictionary) -> Dictionar
 	# shoots out from it so the windup reads.
 	lane.reveal = float(cells) if local else 0.0
 	lane.visible = true
-	return {"lane": lane, "fade": 0.0, "flash": 1.0 if local else 0.6, "start_tick": -1, "done": false}
+	return {"lane": lane, "fade": 0.0, "flash": 1.0 if local else 0.6, "dash_id": -1, "done": false}
 
 
 # --- Aim marker (one per local player) -----------------------------------------------
@@ -249,7 +246,7 @@ class AimMarker:
 	func refresh(view: BattleView, sim: BattleSim, delta: float) -> void:
 		var aim := source.aim_state
 		var f := sim.active_fighter(team)
-		if f == null or not f.on_field or f.is_ko() or not aim.active or aim.dir_index < 0 or not source.enabled:
+		if f == null or not f.on_field or f.is_ko() or not aim.active or aim.dir_index < 0 or not source.enabled or sim.is_finished():
 			if showing:
 				_hide_all()
 			_last_key = Vector3i(-1, -1, -1)

@@ -36,6 +36,16 @@ vec4 over(vec4 dst, vec3 c, float a) {
 	return vec4(rgb, oa);
 }
 
+// Anti-aliased coverage of a signed distance (inside where d < 0), and a
+// soft falloff from d = 0 out to w. (smoothstep needs edge0 < edge1.)
+float fill_aa(float d, float aa) {
+	return 1.0 - smoothstep(-aa, aa, d);
+}
+
+float fade_out(float d, float w) {
+	return 1.0 - smoothstep(0.0, w, d);
+}
+
 void fragment() {
 	vec2 p = (UV - 0.5) * quad_size;
 	float aa = max(fwidth(p.x), 0.0005) * 1.25;
@@ -48,20 +58,20 @@ void fragment() {
 	float arm = 0.22 + 0.04 * (1.0 - ease);
 	float th = 0.05;
 	float br = min(sd_segment(q, vec2(half_s), vec2(half_s - arm, half_s)), sd_segment(q, vec2(half_s), vec2(half_s, half_s - arm))) - th;
-	float a_br = smoothstep(aa, -aa, br);
-	float br_halo = smoothstep(0.08, 0.0, br) * (1.0 - a_br);
+	float a_br = fill_aa(br, aa);
+	float br_halo = fade_out(br, 0.08) * (1.0 - a_br);
 	// Core diamond.
 	float pulse = 0.5 + 0.5 * sin(t * 7.0);
 	vec2 r = vec2(p.x + p.y, p.x - p.y) * 0.70710678;
 	float dia = sd_box(r, vec2(0.08 + 0.02 * pulse)) - 0.01;
-	float a_dia = smoothstep(aa, -aa, dia);
-	float dia_halo = smoothstep(0.07, 0.0, dia) * (1.0 - a_dia);
+	float a_dia = fill_aa(dia, aa);
+	float dia_halo = fade_out(dia, 0.07) * (1.0 - a_dia);
 	// Dashed ring, turning.
 	float rad = length(p);
 	float ring = abs(rad - 0.27) - 0.02;
 	float ang = atan(p.y, p.x);
 	float dashes = step(0.45, fract((ang + t * 1.4) / 6.2831853 * 10.0));
-	float a_ring = smoothstep(aa, -aa, ring) * dashes * ease;
+	float a_ring = fill_aa(ring, aa) * dashes * ease;
 	vec4 o = vec4(0.0);
 	o = over(o, ink_color.rgb, br_halo * 0.5);
 	o = over(o, ink_color.rgb, dia_halo * 0.45);
@@ -71,8 +81,8 @@ void fragment() {
 	// Charge ring: fills clockwise from north.
 	if (charge >= 0.0) {
 		float cr = abs(rad - 0.72) - 0.032;
-		float band = smoothstep(aa, -aa, cr);
-		float band_halo = smoothstep(0.06, 0.0, cr) * (1.0 - band);
+		float band = fill_aa(cr, aa);
+		float band_halo = fade_out(cr, 0.06) * (1.0 - band);
 		float u = fract(atan(p.x, -p.y) / 6.2831853 + 1.0);
 		o = over(o, ink_color.rgb, band_halo * 0.4 + band * 0.35);
 		o = over(o, core_color.rgb, band * step(u, charge));

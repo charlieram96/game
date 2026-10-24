@@ -324,11 +324,18 @@ func _update_dash(delta: float) -> void:
 		_squash_vel = Vector2.ZERO
 		if not heavy:
 			offset.y = sin(u * PI) * 0.12
-		# Afterimages by distance travelled; the smear follows the creature.
-		_ghost_travel += position.distance_to(_last_pos)
-		while _ghost_travel >= GHOST_SPACING:
+		# Afterimages every GHOST_SPACING along the path, placed where each was
+		# due on this frame's segment (so low frame rates don't stack them).
+		var seg := position - _last_pos
+		var seg_len := seg.length()
+		_ghost_travel += seg_len
+		var made := 0
+		while _ghost_travel >= GHOST_SPACING and made < 4:
 			_ghost_travel -= GHOST_SPACING
-			_spawn_ghost(position, 0.42, 0.2)
+			var due := seg_len - _ghost_travel
+			_spawn_ghost(_last_pos + seg * (due / seg_len) if seg_len > 0.0001 else position, 0.42, 0.2)
+			made += 1
+		_ghost_travel = minf(_ghost_travel, GHOST_SPACING)
 		_layout_smear(Vector3(f.dash_home.x, 0.0, f.dash_home.y), position, 1.0)
 		_smear_fade = 0.0
 	elif _smear_fade >= 0.0:

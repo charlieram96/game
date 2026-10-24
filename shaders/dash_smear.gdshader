@@ -18,11 +18,11 @@ void fragment() {
 	float y = UV.y * 2.0 - 1.0;
 	// Taper: thin tail, full width near the head.
 	float width = mix(0.25, 1.0, smoothstep(0.0, 0.85, x));
-	float body = smoothstep(width, width * 0.35, abs(y));
-	float along = smoothstep(0.0, 0.6, x) * smoothstep(1.0, 0.94, x);
+	float body = 1.0 - smoothstep(width * 0.35, width, abs(y));
+	float along = smoothstep(0.0, 0.6, x) * (1.0 - smoothstep(0.94, 1.0, x));
 	// Speed lines: a few thin streaks across the width.
 	float lane = floor((y * 0.5 + 0.5) * 7.0);
-	float streak = step(0.55, hash(lane + seed * 13.1)) * smoothstep(0.0, 0.08, fract((y * 0.5 + 0.5) * 7.0)) * smoothstep(0.32, 0.18, fract((y * 0.5 + 0.5) * 7.0));
+	float streak = step(0.55, hash(lane + seed * 13.1)) * smoothstep(0.0, 0.08, fract((y * 0.5 + 0.5) * 7.0)) * (1.0 - smoothstep(0.18, 0.32, fract((y * 0.5 + 0.5) * 7.0)));
 	float a = body * along * (0.45 + 0.55 * streak);
 	ALBEDO = color.rgb * a * opacity;
 }

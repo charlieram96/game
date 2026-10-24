@@ -90,13 +90,16 @@ func take_pending_battle() -> BattleSetup:
 
 
 func return_from_battle(result: Dictionary) -> void:
-	last_result = result
+	# Only the world consumes a result (story battles). A battle started from
+	# the title (Free Battle, Dash Training) must not leave one behind for a
+	# later New Journey or Continue to apply.
+	last_result = result if _battle_return == WORLD_SCENE else {}
 	Events.battle_finished.emit(result)
 	goto_scene(_battle_return if _battle_return != "" else TITLE_SCENE)
 
 
 func abandon_battle(_setup: BattleSetup) -> void:
-	last_result = {"abandoned": true}
+	last_result = {"abandoned": true} if _battle_return == WORLD_SCENE else {}
 	goto_scene(_battle_return if _battle_return != "" else TITLE_SCENE)
 
 

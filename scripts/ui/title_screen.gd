@@ -308,7 +308,9 @@ func _settings() -> void:
 ## Hesper's training yard on its own: learn drag-to-dash, strikes, Focus,
 ## rams and guard against the totem, then come back here.
 func _dash_training() -> void:
-	Game.start_battle(Game.training_setup(), Game.TITLE_SCENE)
+	var setup := Game.training_setup()
+	setup.story_battle_id = &""  # practice only: no story progress
+	Game.start_battle(setup, Game.TITLE_SCENE)
 
 
 func _how_to_play() -> void:
