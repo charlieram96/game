@@ -1,0 +1,64 @@
+[gd_resource type="Resource" script_class="AbilityDefinition" format=3]
+
+[ext_resource type="Script" path="res://scripts/creatures/ability_component.gd" id="1_prw8k"]
+[ext_resource type="Script" path="res://scripts/creatures/hit_spec.gd" id="2_0yjs7"]
+[ext_resource type="Script" path="res://scripts/creatures/status_application.gd" id="3_m2rhy"]
+[ext_resource type="Script" path="res://scripts/combat/abilities/components/projectile_component.gd" id="4_qf3oi"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_definition.gd" id="5_ucyxn"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_variant.gd" id="6_3hi70"]
+
+[sub_resource type="Resource" id="Resource_3vuuf"]
+script = ExtResource("2_0yjs7")
+power = 7.0
+knockback = 0.45
+hitstop_ticks = 2
+hit_sfx = &"ember_bolt_impact"
+hit_vfx = &"ember_impact"
+
+[sub_resource type="Resource" id="Resource_mlbvv"]
+script = ExtResource("4_qf3oi")
+speed = 16.0
+radius = 0.22
+hit = SubResource("Resource_3vuuf")
+visual = &"ember_bolt"
+
+[sub_resource type="Resource" id="Resource_ad4iw"]
+script = ExtResource("6_3hi70")
+id = &"needle"
+display_name = "Needle Bolt"
+description = "A thinner bolt that flies much faster but deals less damage."
+overrides = {
+"components/0/hit/power": 5.5,
+"components/0/radius": 0.17,
+"components/0/speed": 22.0
+}
+vfx_tint = Color(1, 0.95, 0.6, 1)
+
+[sub_resource type="Resource" id="Resource_jog8x"]
+script = ExtResource("6_3hi70")
+id = &"blaze"
+display_name = "Blaze Bolt"
+description = "A heavy, slower fireball that hits harder and wins clashes."
+unlock_mastery = 6
+overrides = {
+"components/0/clash_weight": 2,
+"components/0/hit/power": 9.0,
+"components/0/radius": 0.32,
+"components/0/speed": 12.0
+}
+vfx_tint = Color(1, 0.45, 0.25, 1)
+
+[resource]
+script = ExtResource("5_ucyxn")
+id = &"ember_bolt"
+display_name = "Ember Bolt"
+description = "A fast, straight bolt of fire."
+element = &"ember"
+icon_path = "res://assets/ui/icons/ability_ember_bolt.png"
+startup_ticks = 7
+active_ticks = 1
+cooldown_ticks = 54
+max_range = 9.0
+components = Array[ExtResource("1_prw8k")]([SubResource("Resource_mlbvv")])
+cast_sfx = &"ember_bolt_cast"
+variants = Array[ExtResource("6_3hi70")]([SubResource("Resource_ad4iw"), SubResource("Resource_jog8x")])

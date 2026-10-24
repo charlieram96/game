@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="AbilityDefinition" format=3]
+
+[ext_resource type="Script" path="res://scripts/creatures/ability_component.gd" id="1_fvnsd"]
+[ext_resource type="Script" path="res://scripts/combat/abilities/components/lunge_component.gd" id="2_digag"]
+[ext_resource type="Script" path="res://scripts/creatures/hit_spec.gd" id="3_vt2po"]
+[ext_resource type="Script" path="res://scripts/creatures/status_application.gd" id="4_ovlnq"]
+[ext_resource type="Script" path="res://scripts/combat/abilities/components/melee_component.gd" id="5_0ny8l"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_definition.gd" id="6_awoxi"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_variant.gd" id="7_bi6ma"]
+
+[sub_resource type="Resource" id="Resource_vo7bn"]
+script = ExtResource("2_digag")
+distance = 2.4
+
+[sub_resource type="Resource" id="Resource_684jk"]
+script = ExtResource("3_vt2po")
+power = 13.0
+knockback = 1.4
+hitstun_ticks = 18
+hitstop_ticks = 6
+hit_sfx = &"hit_heavy"
+hit_vfx = &"flash_strike"
+
+[sub_resource type="Resource" id="Resource_cvcku"]
+script = ExtResource("5_0ny8l")
+radius = 0.85
+angle_deg = 0.0
+hit = SubResource("Resource_684jk")
+visual = &"flash_strike"
+
+[resource]
+script = ExtResource("6_awoxi")
+id = &"flash_strike"
+display_name = "Flash Strike"
+description = "Blinks forward with a lightning-quick claw strike."
+element = &"ember"
+icon_path = "res://assets/ui/icons/ability_flash_strike.png"
+startup_ticks = 4
+active_ticks = 7
+recovery_ticks = 15
+cooldown_ticks = 300
+stamina_cost = 10.0
+max_range = 3.0
+components = Array[ExtResource("1_fvnsd")]([SubResource("Resource_vo7bn"), SubResource("Resource_cvcku")])
+anim = &"melee"
+cast_sfx = &"flash_strike"

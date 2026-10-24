@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="ElementChart" format=3]
+
+[ext_resource type="Script" path="res://scripts/combat/damage/element_chart.gd" id="1_jt8qs"]
+
+[resource]
+script = ExtResource("1_jt8qs")
+table = {
+"ember>ember": 0.9,
+"ember>grove": 1.25,
+"ember>stone": 0.9,
+"ember>tide": 0.8,
+"gale>grove": 1.25,
+"gale>stone": 0.8,
+"gale>tide": 1.1,
+"grove>ember": 0.8,
+"grove>gale": 0.85,
+"grove>stone": 1.2,
+"grove>tide": 1.25,
+"stone>ember": 1.1,
+"stone>gale": 1.25,
+"stone>grove": 0.85,
+"tide>ember": 1.25,
+"tide>grove": 0.8,
+"tide>stone": 1.1
+}
+display_names = {
+"aether": "Aether",
+"ember": "Ember",
+"gale": "Gale",
+"grove": "Grove",
+"neutral": "Neutral",
+"stone": "Stone",
+"tide": "Tide"
+}
+colors = {
+"aether": Color(0.6039216, 0.5254902, 0.9019608, 1),
+"ember": Color(0.9411765, 0.5411765, 0.16470589, 1),
+"gale": Color(0.8039216, 0.7490196, 0.96862745, 1),
+"grove": Color(0.4862745, 0.69803923, 0.2901961, 1),
+"neutral": Color(0.8901961, 0.8117647, 0.6509804, 1),
+"stone": Color(0.6509804, 0.65882355, 0.69803923, 1),
+"tide": Color(0.2627451, 0.56078434, 0.61960787, 1)
+}

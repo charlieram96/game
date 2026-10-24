@@ -1,0 +1,85 @@
+; Engine configuration file.
+; Wildbound — original HD-2D creature-collecting action RPG prototype.
+; Input actions are registered at runtime by res://scripts/core/input_setup.gd
+; (keeps bindings in one typed place and makes rebinding/persistence easy).
+
+config_version=5
+
+[application]
+
+config/name="Wildbound"
+config/description="Wildbound (working title) — HD-2D creature-collecting action RPG prototype (v0)."
+config/version="0.1.0"
+run/main_scene="res://scenes/boot/boot.tscn"
+config/features=PackedStringArray("4.7", "GL Compatibility")
+config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0.0705882, 0.0509804, 0.0901961, 1)
+boot_splash/show_image=false
+
+[autoload]
+
+Events="*res://scripts/core/events.gd"
+Settings="*res://scripts/core/settings.gd"
+Registry="*res://scripts/creatures/creature_registry.gd"
+SaveService="*res://scripts/persistence/save_service.gd"
+Audio="*res://scripts/core/audio_manager.gd"
+Game="*res://scripts/core/game.gd"
+
+[debug]
+
+gdscript/warnings/untyped_declaration=1
+gdscript/warnings/inferred_declaration=0
+gdscript/warnings/unsafe_property_access=0
+gdscript/warnings/unsafe_method_access=0
+gdscript/warnings/unsafe_cast=0
+gdscript/warnings/unsafe_call_argument=0
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/resizable=true
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation=4
+window/vsync/vsync_mode=1
+
+[gui]
+
+theme/default_font_antialiasing=0
+theme/default_font_hinting=0
+theme/default_font_subpixel_positioning=0
+
+[importer_defaults]
+
+texture={
+"compress/mode": 0,
+"detect_3d/compress_to": 0,
+"mipmaps/generate": false,
+"process/fix_alpha_border": true
+}
+wav={
+"compress/mode": 2
+}
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=false
+pointing/emulate_mouse_from_touch=true
+
+[physics]
+
+common/physics_ticks_per_second=60
+common/max_physics_steps_per_frame=8
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/canvas_textures/default_texture_filter=0
+textures/default_filters/anisotropic_filtering_level=0
+lights_and_shadows/directional_shadow/size=4096
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=3
+lights_and_shadows/positional_shadow/soft_shadow_filter_quality=2
+anti_aliasing/quality/msaa_3d=1
+environment/defaults/default_clear_color=Color(0.0705882, 0.0509804, 0.0901961, 1)

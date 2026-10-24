@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1f5a5a"/>
+      <stop offset="1" stop-color="#11232a"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.62" r="0.45">
+      <stop offset="0" stop-color="#f8be47" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#f8be47" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect x="4" y="4" width="120" height="120" rx="22" fill="url(#bg)" stroke="#120e17" stroke-width="6"/>
+  <circle cx="64" cy="78" r="50" fill="url(#glow)"/>
+  <!-- leaf cradle -->
+  <path d="M24 92 C40 70 58 66 64 66 C70 66 88 70 104 92 C86 104 42 104 24 92 Z" fill="#36723a" stroke="#11231c" stroke-width="4"/>
+  <path d="M34 92 C50 82 78 82 94 92" fill="none" stroke="#7cb24a" stroke-width="3" stroke-linecap="round"/>
+  <!-- ember -->
+  <path d="M64 22 C74 40 88 50 84 70 C82 82 74 88 64 88 C54 88 46 82 44 70 C42 56 52 50 56 38 C58 46 62 50 64 52 C66 42 66 32 64 22 Z" fill="#d1541e" stroke="#3a1116" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M64 46 C70 56 76 62 74 72 C72 80 68 82 64 82 C60 82 55 79 54 72 C53 64 60 60 64 46 Z" fill="#f8be47"/>
+  <path d="M64 62 C67 67 69 71 68 75 C67 78 65 79 64 79 C62 79 60 77 60 74 C60 70 63 67 64 62 Z" fill="#fff0a3"/>
+</svg>

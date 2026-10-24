@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="AbilityDefinition" format=3]
+
+[ext_resource type="Script" path="res://scripts/creatures/ability_component.gd" id="1_jxilx"]
+[ext_resource type="Script" path="res://scripts/creatures/hit_spec.gd" id="2_xq6kb"]
+[ext_resource type="Script" path="res://scripts/creatures/status_application.gd" id="3_kh0rf"]
+[ext_resource type="Resource" path="res://resources/status/slow.tres" id="4_ori74"]
+[ext_resource type="Script" path="res://scripts/combat/abilities/components/self_area_component.gd" id="5_hafvl"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_definition.gd" id="6_ag6jv"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_variant.gd" id="7_xf6qd"]
+
+[sub_resource type="Resource" id="Resource_rbqyr"]
+script = ExtResource("3_kh0rf")
+status = ExtResource("4_ori74")
+duration_ticks = 90
+
+[sub_resource type="Resource" id="Resource_yu74f"]
+script = ExtResource("2_xq6kb")
+power = 13.0
+knockback = 1.6
+knockback_mode = 1
+hitstun_ticks = 16
+hitstop_ticks = 6
+statuses = Array[ExtResource("3_kh0rf")]([SubResource("Resource_rbqyr")])
+hit_sfx = &"hit_heavy"
+hit_vfx = &"shockwave"
+
+[sub_resource type="Resource" id="Resource_5xvt5"]
+script = ExtResource("5_hafvl")
+radius = 2.3
+hit = SubResource("Resource_yu74f")
+visual = &"shockwave"
+
+[resource]
+script = ExtResource("6_ag6jv")
+id = &"ground_pound"
+display_name = "Ground Pound"
+description = "Rears up and slams the ground, slowing everything nearby. Can't be flinched while winding up."
+element = &"stone"
+aim_mode = 2
+icon_path = "res://assets/ui/icons/ability_ground_pound.png"
+startup_ticks = 18
+recovery_ticks = 20
+cooldown_ticks = 300
+stamina_cost = 12.0
+max_range = 2.3
+armor_during_startup = true
+telegraph = true
+components = Array[ExtResource("1_jxilx")]([SubResource("Resource_5xvt5")])
+cast_sfx = &"ground_pound"

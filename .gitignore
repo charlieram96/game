@@ -1,0 +1,20 @@
+# Godot
+.godot/
+*.translation
+export_credentials.cfg
+/build/
+/android/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Generated previews / scratch
+tools/**/previews/
+tools/**/_out/
+*.import.bak
+
+# OS
+.DS_Store
+Thumbs.db

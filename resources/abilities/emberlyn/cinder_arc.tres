@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="AbilityDefinition" format=3]
+
+[ext_resource type="Script" path="res://scripts/creatures/ability_component.gd" id="1_78mo5"]
+[ext_resource type="Script" path="res://scripts/creatures/hit_spec.gd" id="2_l1h0v"]
+[ext_resource type="Script" path="res://scripts/creatures/status_application.gd" id="3_nxu1b"]
+[ext_resource type="Resource" path="res://resources/status/burn.tres" id="4_1o1ci"]
+[ext_resource type="Script" path="res://scripts/combat/abilities/components/melee_component.gd" id="5_uph28"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_definition.gd" id="6_2lpnm"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_variant.gd" id="7_0fdqg"]
+
+[sub_resource type="Resource" id="Resource_6f5yg"]
+script = ExtResource("3_nxu1b")
+status = ExtResource("4_1o1ci")
+duration_ticks = 120
+
+[sub_resource type="Resource" id="Resource_p2pv8"]
+script = ExtResource("2_l1h0v")
+power = 10.0
+knockback = 0.9
+hitstun_ticks = 14
+hitstop_ticks = 4
+statuses = Array[ExtResource("3_nxu1b")]([SubResource("Resource_6f5yg")])
+hit_vfx = &"ember_impact"
+
+[sub_resource type="Resource" id="Resource_cv08x"]
+script = ExtResource("5_uph28")
+shape = 1
+radius = 2.4
+angle_deg = 110.0
+forward_offset = 0.1
+hit = SubResource("Resource_p2pv8")
+visual = &"cinder_arc"
+
+[resource]
+script = ExtResource("6_2lpnm")
+id = &"cinder_arc"
+display_name = "Cinder Arc"
+description = "A short-range cone of embers that leaves a Burn."
+element = &"ember"
+icon_path = "res://assets/ui/icons/ability_cinder_arc.png"
+startup_ticks = 9
+active_ticks = 4
+recovery_ticks = 16
+cooldown_ticks = 210
+stamina_cost = 8.0
+max_range = 2.4
+components = Array[ExtResource("1_78mo5")]([SubResource("Resource_cv08x")])
+cast_sfx = &"cinder_arc"

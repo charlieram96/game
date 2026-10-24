@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="CreatureDefinition" format=3]
+
+[ext_resource type="Script" path="res://scripts/creatures/dash_profile.gd" id="1_rsirl"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_definition.gd" id="2_xntiq"]
+[ext_resource type="Resource" path="res://resources/abilities/common/acorn_shot.tres" id="3_kf80p"]
+[ext_resource type="Script" path="res://scripts/creatures/movement_profile.gd" id="4_2hfno"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_definition.gd" id="5_rgnt8"]
+[ext_resource type="Script" path="res://scripts/creatures/stamina_profile.gd" id="6_6nsii"]
+
+[sub_resource type="Resource" id="Resource_kek0r"]
+script = ExtResource("1_rsirl")
+distance = 0.0
+stamina_cost = 9999.0
+
+[sub_resource type="Resource" id="Resource_s67qx"]
+script = ExtResource("4_2hfno")
+speed = 0.0
+acceleration = 0.0
+deceleration = 100.0
+turn_acceleration = 0.0
+collision_radius = 0.42
+mass = 50.0
+
+[sub_resource type="Resource" id="Resource_oa2kw"]
+script = ExtResource("6_6nsii")
+focus_rate = 0.0
+guard_stamina_factor = 0.5
+
+[resource]
+script = ExtResource("5_rgnt8")
+id = &"training_totem"
+display_name = "Training Totem"
+description = "A straw sparring dummy on a sturdy post."
+archetype = "Dummy"
+base_hp = 80.0
+base_attack = 8.0
+movement = SubResource("Resource_s67qx")
+dash = SubResource("Resource_kek0r")
+stamina = SubResource("Resource_oa2kw")
+learnable = Array[ExtResource("2_xntiq")]([ExtResource("3_kf80p")])
+learn_levels = PackedInt32Array(1)
+default_loadout = Array[StringName]([&"acorn_shot"])
+sprite_manifest = "res://assets/sprites/props/training_totem.json"

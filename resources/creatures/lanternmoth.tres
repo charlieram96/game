@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="CreatureDefinition" format=3]
+
+[ext_resource type="Script" path="res://scripts/creatures/dash_profile.gd" id="1_yjdii"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_definition.gd" id="2_tstja"]
+[ext_resource type="Script" path="res://scripts/creatures/movement_profile.gd" id="3_vv812"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_definition.gd" id="4_k6pcg"]
+[ext_resource type="Script" path="res://scripts/creatures/stamina_profile.gd" id="5_clfv2"]
+
+[sub_resource type="Resource" id="Resource_imrmu"]
+script = ExtResource("1_yjdii")
+
+[sub_resource type="Resource" id="Resource_dgpe4"]
+script = ExtResource("3_vv812")
+speed = 4.0
+
+[sub_resource type="Resource" id="Resource_lnwds"]
+script = ExtResource("5_clfv2")
+
+[resource]
+script = ExtResource("4_k6pcg")
+id = &"lanternmoth"
+display_name = "Lanternmoth"
+description = "A gentle moth whose abdomen glows like a paper lantern."
+element = &"aether"
+archetype = "Guide"
+base_hp = 90.0
+base_attack = 9.0
+movement = SubResource("Resource_dgpe4")
+dash = SubResource("Resource_imrmu")
+stamina = SubResource("Resource_lnwds")
+learn_levels = PackedInt32Array()
+sprite_manifest = "res://assets/sprites/kith/lanternmoth.json"
+habitat = "Wherever travellers are lost at night"
+journal_entry = "Lanternmoths were the first kith to return to people after the Sundering. Warden Hesper's companion, Lumen, has guided Mossford's lost for forty years."

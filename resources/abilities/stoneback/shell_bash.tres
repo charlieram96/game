@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="AbilityDefinition" format=3]
+
+[ext_resource type="Resource" path="res://resources/abilities/stoneback/shell_bash_2.tres" id="1_x34il"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_component.gd" id="2_yntrs"]
+[ext_resource type="Script" path="res://scripts/creatures/hit_spec.gd" id="3_kehs0"]
+[ext_resource type="Script" path="res://scripts/creatures/status_application.gd" id="4_xw4qn"]
+[ext_resource type="Script" path="res://scripts/combat/abilities/components/melee_component.gd" id="5_daw16"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_definition.gd" id="6_2giys"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_variant.gd" id="7_ks7y8"]
+
+[sub_resource type="Resource" id="Resource_pepui"]
+script = ExtResource("3_kehs0")
+power = 6.0
+knockback = 0.7
+hitstun_ticks = 13
+hitstop_ticks = 4
+
+[sub_resource type="Resource" id="Resource_y4vmi"]
+script = ExtResource("5_daw16")
+angle_deg = 0.0
+forward_offset = 0.75
+hit = SubResource("Resource_pepui")
+
+[resource]
+script = ExtResource("6_2giys")
+id = &"shell_bash"
+display_name = "Shell Bash"
+description = "A shoulder-check with its stone shell. Press twice for a heavy follow-up."
+element = &"stone"
+kind = 0
+icon_path = "res://assets/ui/icons/ability_shell_bash.png"
+startup_ticks = 8
+active_ticks = 4
+recovery_ticks = 14
+cooldown_ticks = 0
+dash_cancel_from_recovery_tick = 7
+chain_next = ExtResource("1_x34il")
+chain_window_ticks = 10
+components = Array[ExtResource("2_yntrs")]([SubResource("Resource_y4vmi")])
+anim = &"melee"

@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="AbilityDefinition" format=3]
+
+[ext_resource type="Script" path="res://scripts/creatures/ability_component.gd" id="1_cjsw0"]
+[ext_resource type="Script" path="res://scripts/combat/abilities/components/self_status_component.gd" id="2_qhi3o"]
+[ext_resource type="Script" path="res://scripts/creatures/status_application.gd" id="3_8mdkn"]
+[ext_resource type="Resource" path="res://resources/status/stoneguard.tres" id="4_0n01k"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_definition.gd" id="5_521tf"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_variant.gd" id="6_qfwfs"]
+
+[sub_resource type="Resource" id="Resource_ojwf6"]
+script = ExtResource("3_8mdkn")
+status = ExtResource("4_0n01k")
+duration_ticks = 80
+
+[sub_resource type="Resource" id="Resource_sfgsu"]
+script = ExtResource("2_qhi3o")
+status = SubResource("Resource_ojwf6")
+
+[resource]
+script = ExtResource("5_521tf")
+id = &"stone_guard"
+display_name = "Stone Guard"
+description = "Hardens its plates for a moment: much less damage, no flinching, and dashes bounce off."
+element = &"stone"
+aim_mode = 2
+icon_path = "res://assets/ui/icons/ability_stone_guard.png"
+active_ticks = 1
+recovery_ticks = 6
+cooldown_ticks = 600
+stamina_cost = 20.0
+max_range = 0.0
+components = Array[ExtResource("1_cjsw0")]([SubResource("Resource_sfgsu")])
+anim = &"guard"
+cast_sfx = &"stone_guard_on"

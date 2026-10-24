@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="AbilityDefinition" format=3]
+
+[ext_resource type="Resource" path="res://resources/abilities/emberlyn/tail_swipe_2.tres" id="1_0ded6"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_component.gd" id="2_xu4fd"]
+[ext_resource type="Script" path="res://scripts/creatures/hit_spec.gd" id="3_4ww8q"]
+[ext_resource type="Script" path="res://scripts/creatures/status_application.gd" id="4_e6cph"]
+[ext_resource type="Script" path="res://scripts/combat/abilities/components/melee_component.gd" id="5_oisd7"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_definition.gd" id="6_kue8p"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_variant.gd" id="7_drgfh"]
+
+[sub_resource type="Resource" id="Resource_nsdxj"]
+script = ExtResource("3_4ww8q")
+power = 4.0
+knockback = 0.35
+hitstun_ticks = 11
+
+[sub_resource type="Resource" id="Resource_xlbwm"]
+script = ExtResource("5_oisd7")
+shape = 1
+radius = 1.25
+angle_deg = 120.0
+forward_offset = 0.15
+hit = SubResource("Resource_nsdxj")
+
+[resource]
+script = ExtResource("6_kue8p")
+id = &"tail_swipe"
+display_name = "Tail Swipe"
+description = "Quick tail swipes. Press repeatedly for a three-hit string."
+element = &"ember"
+kind = 0
+icon_path = "res://assets/ui/icons/ability_tail_swipe.png"
+startup_ticks = 5
+recovery_ticks = 11
+cooldown_ticks = 0
+dash_cancel_from_recovery_tick = 5
+chain_next = ExtResource("1_0ded6")
+chain_window_ticks = 9
+components = Array[ExtResource("2_xu4fd")]([SubResource("Resource_xlbwm")])
+anim = &"melee"

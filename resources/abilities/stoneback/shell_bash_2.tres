@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="AbilityDefinition" format=3]
+
+[ext_resource type="Script" path="res://scripts/creatures/ability_component.gd" id="1_128h3"]
+[ext_resource type="Script" path="res://scripts/creatures/hit_spec.gd" id="2_s2qdw"]
+[ext_resource type="Script" path="res://scripts/creatures/status_application.gd" id="3_mkrdv"]
+[ext_resource type="Script" path="res://scripts/combat/abilities/components/melee_component.gd" id="4_0umfu"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_definition.gd" id="5_u0umt"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_variant.gd" id="6_iktlu"]
+
+[sub_resource type="Resource" id="Resource_l6phx"]
+script = ExtResource("2_s2qdw")
+power = 8.5
+knockback = 1.6
+hitstun_ticks = 18
+hitstop_ticks = 7
+hit_sfx = &"hit_heavy"
+hit_vfx = &"hit_heavy"
+
+[sub_resource type="Resource" id="Resource_qlpxv"]
+script = ExtResource("4_0umfu")
+radius = 1.15
+angle_deg = 0.0
+forward_offset = 0.8
+hit = SubResource("Resource_l6phx")
+
+[resource]
+script = ExtResource("5_u0umt")
+id = &"shell_bash_2"
+display_name = "Shell Bash"
+description = "Heavy follow-up slam."
+element = &"stone"
+kind = 0
+icon_path = "res://assets/ui/icons/ability_shell_bash.png"
+startup_ticks = 9
+active_ticks = 5
+recovery_ticks = 20
+cooldown_ticks = 0
+dash_cancel_from_recovery_tick = 10
+components = Array[ExtResource("1_128h3")]([SubResource("Resource_qlpxv")])
+anim = &"melee"

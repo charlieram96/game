@@ -1,0 +1,70 @@
+[gd_resource type="Resource" script_class="CreatureDefinition" format=3]
+
+[ext_resource type="Resource" path="res://resources/abilities/emberlyn/tail_swipe.tres" id="1_bwo0g"]
+[ext_resource type="Script" path="res://scripts/creatures/dash_profile.gd" id="2_val0t"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_definition.gd" id="3_0hj5s"]
+[ext_resource type="Resource" path="res://resources/abilities/emberlyn/ember_bolt.tres" id="4_x76qd"]
+[ext_resource type="Resource" path="res://resources/abilities/emberlyn/cinder_arc.tres" id="5_hpn0n"]
+[ext_resource type="Resource" path="res://resources/abilities/emberlyn/flash_strike.tres" id="6_4i15k"]
+[ext_resource type="Resource" path="res://resources/abilities/emberlyn/heat_ring.tres" id="7_atmff"]
+[ext_resource type="Script" path="res://scripts/creatures/movement_profile.gd" id="8_g2jdj"]
+[ext_resource type="Script" path="res://scripts/creatures/passive_definition.gd" id="9_68w2u"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_definition.gd" id="10_tftch"]
+[ext_resource type="Script" path="res://scripts/creatures/stamina_profile.gd" id="11_hobkm"]
+
+[sub_resource type="Resource" id="Resource_nkjmw"]
+script = ExtResource("2_val0t")
+dash_type = 1
+distance = 4.0
+projectile_intangible_ticks = 5
+trait_name = "Phase Step"
+trait_description = "Long, quick dash. Projectiles pass through Emberlyn during the first frames."
+
+[sub_resource type="Resource" id="Resource_tkur1"]
+script = ExtResource("8_g2jdj")
+speed = 7.0
+acceleration = 45.0
+deceleration = 60.0
+turn_acceleration = 95.0
+collision_radius = 0.42
+
+[sub_resource type="Resource" id="Resource_33l04"]
+script = ExtResource("9_68w2u")
+id = &"quickfoot"
+display_name = "Quickfoot"
+description = "Enters and leaves Focus 45% faster, and moves 10% faster while low on stamina."
+focus_transition_mult = 0.55
+low_stamina_speed_bonus = 0.1
+
+[sub_resource type="Resource" id="Resource_o8o6x"]
+script = ExtResource("11_hobkm")
+max_stamina = 80.0
+focus_rate = 28.0
+guard_stamina_factor = 1.25
+
+[resource]
+script = ExtResource("10_tftch")
+id = &"emberlyn"
+display_name = "Emberlyn"
+description = "A quick woodland kith that carries a living ember in the tip of its tail."
+element = &"ember"
+archetype = "Agile"
+base_hp = 110.0
+base_attack = 12.0
+base_defense = 9.0
+movement = SubResource("Resource_tkur1")
+dash = SubResource("Resource_nkjmw")
+stamina = SubResource("Resource_o8o6x")
+hurt_radius = 0.48
+basic_attack = ExtResource("1_bwo0g")
+learnable = Array[ExtResource("3_0hj5s")]([ExtResource("4_x76qd"), ExtResource("5_hpn0n"), ExtResource("6_4i15k"), ExtResource("7_atmff")])
+learn_levels = PackedInt32Array(1, 1, 4, 7)
+default_loadout = Array[StringName]([&"ember_bolt", &"cinder_arc", &"flash_strike", &"heat_ring"])
+passive = SubResource("Resource_33l04")
+sprite_manifest = "res://assets/sprites/kith/emberlyn.json"
+portrait_manifest = "res://assets/sprites/portraits/portrait_emberlyn.json"
+icon_color = Color(0.9411765, 0.5411765, 0.16470589, 1)
+cry_sfx = &"emberlyn_chirp"
+visual_height = 1.0
+habitat = "Glimmerwood thickets, warm hollows"
+journal_entry = "Emberlyn keep a coal of living fire in the tip of their tails. When frightened or cold the ember gutters; when they trust someone it burns bright enough to read by."

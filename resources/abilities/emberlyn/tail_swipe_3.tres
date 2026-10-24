@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="AbilityDefinition" format=3]
+
+[ext_resource type="Script" path="res://scripts/creatures/ability_component.gd" id="1_aoww6"]
+[ext_resource type="Script" path="res://scripts/creatures/hit_spec.gd" id="2_ypxqi"]
+[ext_resource type="Script" path="res://scripts/creatures/status_application.gd" id="3_tav5i"]
+[ext_resource type="Script" path="res://scripts/combat/abilities/components/melee_component.gd" id="4_ogtkh"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_definition.gd" id="5_bjt3y"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_variant.gd" id="6_tx6v1"]
+
+[sub_resource type="Resource" id="Resource_lqcu8"]
+script = ExtResource("2_ypxqi")
+power = 6.5
+knockback = 1.3
+hitstun_ticks = 18
+hitstop_ticks = 6
+hit_sfx = &"hit_heavy"
+hit_vfx = &"hit_heavy"
+
+[sub_resource type="Resource" id="Resource_2bbbh"]
+script = ExtResource("4_ogtkh")
+shape = 1
+radius = 1.45
+angle_deg = 140.0
+forward_offset = 0.1
+hit = SubResource("Resource_lqcu8")
+
+[resource]
+script = ExtResource("5_bjt3y")
+id = &"tail_swipe_3"
+display_name = "Tail Swipe"
+description = "Finisher: a wide spinning tail sweep."
+element = &"ember"
+kind = 0
+icon_path = "res://assets/ui/icons/ability_tail_swipe.png"
+startup_ticks = 7
+active_ticks = 4
+recovery_ticks = 16
+cooldown_ticks = 0
+dash_cancel_from_recovery_tick = 8
+components = Array[ExtResource("1_aoww6")]([SubResource("Resource_2bbbh")])
+anim = &"melee"
+cast_sfx = &"flash_strike"

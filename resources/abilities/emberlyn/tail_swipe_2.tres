@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="AbilityDefinition" format=3]
+
+[ext_resource type="Resource" path="res://resources/abilities/emberlyn/tail_swipe_3.tres" id="1_1rmg8"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_component.gd" id="2_fnks3"]
+[ext_resource type="Script" path="res://scripts/creatures/hit_spec.gd" id="3_ifybc"]
+[ext_resource type="Script" path="res://scripts/creatures/status_application.gd" id="4_xa203"]
+[ext_resource type="Script" path="res://scripts/combat/abilities/components/melee_component.gd" id="5_g2h0t"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_definition.gd" id="6_og24h"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_variant.gd" id="7_l0gch"]
+
+[sub_resource type="Resource" id="Resource_ut4u5"]
+script = ExtResource("3_ifybc")
+power = 4.0
+knockback = 0.35
+hitstun_ticks = 11
+
+[sub_resource type="Resource" id="Resource_bddrj"]
+script = ExtResource("5_g2h0t")
+shape = 1
+radius = 1.25
+angle_deg = 120.0
+forward_offset = 0.15
+hit = SubResource("Resource_ut4u5")
+
+[resource]
+script = ExtResource("6_og24h")
+id = &"tail_swipe_2"
+display_name = "Tail Swipe"
+description = "Second swipe of the string."
+element = &"ember"
+kind = 0
+icon_path = "res://assets/ui/icons/ability_tail_swipe.png"
+startup_ticks = 4
+recovery_ticks = 11
+cooldown_ticks = 0
+dash_cancel_from_recovery_tick = 5
+chain_next = ExtResource("1_1rmg8")
+chain_window_ticks = 9
+components = Array[ExtResource("2_fnks3")]([SubResource("Resource_bddrj")])
+anim = &"melee"

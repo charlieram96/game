@@ -1,0 +1,76 @@
+[gd_resource type="Resource" script_class="CreatureDefinition" format=3]
+
+[ext_resource type="Resource" path="res://resources/abilities/stoneback/shell_bash.tres" id="1_2nxvo"]
+[ext_resource type="Script" path="res://scripts/creatures/dash_profile.gd" id="2_4i312"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_definition.gd" id="3_nv6df"]
+[ext_resource type="Resource" path="res://resources/abilities/stoneback/boulder_toss.tres" id="4_dnkf6"]
+[ext_resource type="Resource" path="res://resources/abilities/stoneback/ground_pound.tres" id="5_jrck6"]
+[ext_resource type="Resource" path="res://resources/abilities/stoneback/stone_guard.tres" id="6_1h4wi"]
+[ext_resource type="Resource" path="res://resources/abilities/stoneback/fault_line.tres" id="7_si2ba"]
+[ext_resource type="Script" path="res://scripts/creatures/movement_profile.gd" id="8_fvxki"]
+[ext_resource type="Script" path="res://scripts/creatures/passive_definition.gd" id="9_28ph6"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_definition.gd" id="10_27n0h"]
+[ext_resource type="Script" path="res://scripts/creatures/stamina_profile.gd" id="11_24jg2"]
+
+[sub_resource type="Resource" id="Resource_jpdcf"]
+script = ExtResource("2_4i312")
+dash_type = 2
+distance = 2.0
+duration_ticks = 13
+startup_ticks = 3
+recovery_ticks = 10
+stamina_cost = 40.0
+armor_damage_mult = 0.5
+flinch_immune_while_active = true
+trait_name = "Rolling Fortress"
+trait_description = "Short rolling dash that can't be flinched and halves damage taken."
+
+[sub_resource type="Resource" id="Resource_ik5w7"]
+script = ExtResource("8_fvxki")
+speed = 4.2
+acceleration = 25.0
+deceleration = 32.0
+turn_acceleration = 30.0
+collision_radius = 0.55
+mass = 2.2
+
+[sub_resource type="Resource" id="Resource_7r0x4"]
+script = ExtResource("9_28ph6")
+id = &"bedrock"
+display_name = "Bedrock"
+description = "Takes half knockback, recovers from flinches 20% faster, and its dash-through stuns last 20% longer."
+knockback_taken_mult = 0.5
+hitstun_taken_mult = 0.8
+dash_through_stun_mult = 1.2
+
+[sub_resource type="Resource" id="Resource_wup8l"]
+script = ExtResource("11_24jg2")
+max_stamina = 140.0
+focus_rate = 15.0
+guard_stamina_factor = 0.8
+
+[resource]
+script = ExtResource("10_27n0h")
+id = &"stoneback"
+display_name = "Stoneback"
+description = "A stubborn, moss-covered kith whose back is a shield of overlapping stone plates."
+element = &"stone"
+archetype = "Heavy"
+base_hp = 170.0
+base_attack = 11.0
+base_defense = 13.0
+movement = SubResource("Resource_ik5w7")
+dash = SubResource("Resource_jpdcf")
+stamina = SubResource("Resource_wup8l")
+hurt_radius = 0.6
+basic_attack = ExtResource("1_2nxvo")
+learnable = Array[ExtResource("3_nv6df")]([ExtResource("4_dnkf6"), ExtResource("5_jrck6"), ExtResource("6_1h4wi"), ExtResource("7_si2ba")])
+learn_levels = PackedInt32Array(1, 1, 5, 8)
+default_loadout = Array[StringName]([&"boulder_toss", &"ground_pound", &"stone_guard", &"fault_line"])
+passive = SubResource("Resource_7r0x4")
+sprite_manifest = "res://assets/sprites/kith/stoneback.json"
+icon_color = Color(0.6509804, 0.65882355, 0.69803923, 1)
+cry_sfx = &"stoneback_grunt"
+visual_height = 1.0
+habitat = "Riverbeds and old quarries"
+journal_entry = "Stoneback sleep for days in cold riverbeds until moss and flowers grow on their plates. Wake one and it will follow you anywhere — slowly."

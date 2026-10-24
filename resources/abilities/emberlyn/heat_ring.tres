@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="AbilityDefinition" format=3]
+
+[ext_resource type="Script" path="res://scripts/creatures/ability_component.gd" id="1_lmcrg"]
+[ext_resource type="Script" path="res://scripts/creatures/hit_spec.gd" id="2_8ji2a"]
+[ext_resource type="Script" path="res://scripts/creatures/status_application.gd" id="3_boqcq"]
+[ext_resource type="Resource" path="res://resources/status/burn.tres" id="4_kirqr"]
+[ext_resource type="Script" path="res://scripts/combat/abilities/components/targeted_area_component.gd" id="5_3jswf"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_definition.gd" id="6_1kiv4"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_variant.gd" id="7_dgh63"]
+
+[sub_resource type="Resource" id="Resource_duv2f"]
+script = ExtResource("3_boqcq")
+status = ExtResource("4_kirqr")
+duration_ticks = 150
+
+[sub_resource type="Resource" id="Resource_vbme8"]
+script = ExtResource("2_8ji2a")
+power = 17.0
+knockback = 1.1
+knockback_mode = 1
+hitstun_ticks = 20
+hitstop_ticks = 6
+statuses = Array[ExtResource("3_boqcq")]([SubResource("Resource_duv2f")])
+hit_sfx = &"heat_ring_burst"
+hit_vfx = &"heat_ring"
+
+[sub_resource type="Resource" id="Resource_sdlek"]
+script = ExtResource("5_3jswf")
+radius = 1.7
+hit = SubResource("Resource_vbme8")
+visual = &"heat_ring"
+
+[resource]
+script = ExtResource("6_1kiv4")
+id = &"heat_ring"
+display_name = "Heat Ring"
+description = "Marks a spot that erupts in flame after a short delay."
+element = &"ember"
+aim_mode = 1
+icon_path = "res://assets/ui/icons/ability_heat_ring.png"
+startup_ticks = 10
+active_ticks = 1
+recovery_ticks = 14
+cooldown_ticks = 420
+stamina_cost = 15.0
+max_range = 7.0
+components = Array[ExtResource("1_lmcrg")]([SubResource("Resource_sdlek")])
+cast_sfx = &"heat_ring_charge"

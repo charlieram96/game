@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="CreatureDefinition" format=3]
+
+[ext_resource type="Script" path="res://scripts/creatures/dash_profile.gd" id="1_0shfl"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_definition.gd" id="2_rwkfd"]
+[ext_resource type="Script" path="res://scripts/creatures/movement_profile.gd" id="3_q5stc"]
+[ext_resource type="Script" path="res://scripts/creatures/creature_definition.gd" id="4_dj5p4"]
+[ext_resource type="Script" path="res://scripts/creatures/stamina_profile.gd" id="5_7tw1x"]
+
+[sub_resource type="Resource" id="Resource_itlnw"]
+script = ExtResource("1_0shfl")
+
+[sub_resource type="Resource" id="Resource_04ucq"]
+script = ExtResource("3_q5stc")
+speed = 5.5
+collision_radius = 0.3
+
+[sub_resource type="Resource" id="Resource_q3wl0"]
+script = ExtResource("5_7tw1x")
+
+[resource]
+script = ExtResource("4_dj5p4")
+id = &"mossling"
+display_name = "Mossling"
+description = "A puff of living moss with long leaf ears. Bolts at the first loud footstep."
+element = &"grove"
+archetype = "Shy"
+base_hp = 70.0
+base_attack = 7.0
+base_defense = 8.0
+movement = SubResource("Resource_04ucq")
+dash = SubResource("Resource_itlnw")
+stamina = SubResource("Resource_q3wl0")
+learn_levels = PackedInt32Array()
+sprite_manifest = "res://assets/sprites/kith/mossling.json"
+habitat = "Damp meadows by the stream"
+journal_entry = "Mosslings graze on dew and starlight. They can hear a running footstep from across a meadow, but will sniff the boots of anyone who approaches softly."

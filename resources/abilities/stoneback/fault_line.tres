@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="AbilityDefinition" format=3]
+
+[ext_resource type="Script" path="res://scripts/creatures/ability_component.gd" id="1_sach8"]
+[ext_resource type="Script" path="res://scripts/creatures/hit_spec.gd" id="2_2sur5"]
+[ext_resource type="Script" path="res://scripts/creatures/status_application.gd" id="3_j2lid"]
+[ext_resource type="Script" path="res://scripts/combat/abilities/components/line_wave_component.gd" id="4_g7b21"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_definition.gd" id="5_7eee7"]
+[ext_resource type="Script" path="res://scripts/creatures/ability_variant.gd" id="6_df860"]
+
+[sub_resource type="Resource" id="Resource_jikf1"]
+script = ExtResource("2_2sur5")
+power = 16.0
+knockback = 0.6
+hitstun_ticks = 26
+hitstop_ticks = 5
+hit_sfx = &"hit_heavy"
+hit_vfx = &"fault_spike"
+
+[sub_resource type="Resource" id="Resource_nwn4t"]
+script = ExtResource("4_g7b21")
+hit = SubResource("Resource_jikf1")
+visual = &"fault_spike"
+
+[resource]
+script = ExtResource("5_7eee7")
+id = &"fault_line"
+display_name = "Fault Line"
+description = "Cracks the earth in a line; after a moment, stone spikes erupt along it."
+element = &"stone"
+icon_path = "res://assets/ui/icons/ability_fault_line.png"
+startup_ticks = 12
+active_ticks = 1
+recovery_ticks = 18
+cooldown_ticks = 480
+stamina_cost = 18.0
+max_range = 9.0
+components = Array[ExtResource("1_sach8")]([SubResource("Resource_nwn4t")])
+cast_sfx = &"fault_line_charge"
