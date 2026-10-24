@@ -12,6 +12,7 @@
 		<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
 		<style>
 :root {
+	color-scheme: dark;
 	--night: #120d17;
 	--night-2: #1d1526;
 	--gold: #f2c36b;
@@ -28,6 +29,10 @@ html, body, #canvas {
 	border: 0;
 }
 
+html, body {
+	height: 100%;
+}
+
 body {
 	color: var(--parchment);
 	background: var(--night);
@@ -38,8 +43,12 @@ body {
 	user-select: none;
 }
 
+/* Fixed to the viewport so host padding (safe areas) never adds scrollbars. */
 #canvas {
 	display: block;
+	position: fixed;
+	left: 0;
+	top: 0;
 }
 
 #canvas:focus {
@@ -47,14 +56,16 @@ body {
 }
 
 #status {
-	position: absolute;
+	position: fixed;
 	inset: 0;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	gap: 14px;
-	padding: 16px;
+	padding-block: 16px;
+	padding-left: max(16px, env(safe-area-inset-left, 0px));
+	padding-right: max(16px, env(safe-area-inset-right, 0px));
 	box-sizing: border-box;
 	text-align: center;
 	background:
@@ -277,6 +288,9 @@ const engine = new Engine(GODOT_CONFIG);
 	let initializing = true;
 
 	function fail(err) {
+		if (!initializing) {
+			return;
+		}
 		console.error(err);
 		const msg = err instanceof Error ? err.message : (typeof err === 'string' ? err : 'An unknown error occurred.');
 		notice.textContent = msg;
@@ -285,6 +299,20 @@ const engine = new Engine(GODOT_CONFIG);
 		statusText.textContent = 'Wildbound could not start.';
 		initializing = false;
 	}
+
+	// The engine compiles WebAssembly outside startGame's promise chain, so a
+	// host that blocks it would otherwise leave the bar stuck on "Starting".
+	window.addEventListener('unhandledrejection', (e) => {
+		if (/wasm|WebAssembly|CompileError/i.test(String(e.reason))) {
+			fail(e.reason);
+		}
+	});
+	document.addEventListener('securitypolicyviolation', (e) => {
+		// Fonts or icons being blocked is harmless; scripts, wasm or data loads are not.
+		if (/^(script-src|connect-src|worker-src)/.test(e.effectiveDirective)) {
+			fail('This page\'s host blocked something the game needs (' + e.effectiveDirective + ': ' + (e.blockedURI || 'inline') + ').\nTry the downloadable or itch.io build instead.');
+		}
+	});
 
 	const missing = Engine.getMissingFeatures({ threads: GODOT_THREADS_ENABLED });
 	if (missing.length !== 0) {
