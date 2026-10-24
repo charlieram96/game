@@ -1,0 +1,157 @@
+class_name TrainingDirector
+extends Node
+## Hesper's combat tutorial, run inside a training battle against a totem.
+## Each step shows a tip and completes from real simulation events, so the
+## tutorial teaches exactly the rules the game enforces.
+
+const SM := FighterSM.State
+
+var scene: Node  # battle_scene.gd
+var sim: BattleSim
+var totem_ai: TrainingAI
+var step := -1
+var _markers: Array = []
+var _counter := 0
+var _used: Dictionary = {}
+var _advance_at := -1
+var _done := false
+
+const STEPS := [
+	{"id": "move", "tip": "[b]Move[/b] — walk onto each glowing mark with [b]WASD[/b] (or the left stick / left thumb). You can move in 8 directions."},
+	{"id": "dash", "tip": "[b]Dash[/b] — press [b]Right Click[/b]. Dashes only ever go straight [b]N, S, E or W[/b]: hold a direction to choose one. Dash twice."},
+	{"id": "basic", "tip": "[b]Strike[/b] — hit the totem with [b]Left Click[/b] three times. Keep clicking to chain a three-hit string."},
+	{"id": "specials", "tip": "[b]Specials[/b] — use all four: [b]Q[/b] Ember Bolt, [b]E[/b] Cinder Arc, [b]R[/b] Flash Strike, [b]F[/b] Heat Ring. Aim with the mouse."},
+	{"id": "focus", "tip": "[b]Focus[/b] — stamina never refills on its own. Hold [b]Shift[/b] to Focus until the ring under you is full. You can't move or attack while focusing!"},
+	{"id": "dash_through", "tip": "[b]Dash-through[/b] — dash straight [b]through[/b] the totem to daze it. A dazed foe is open, but it can't be dazed again for a moment."},
+	{"id": "guard", "tip": "[b]Guard[/b] — the totem throws acorns now. Hold [b]Space[/b] to guard your front. Guard right before impact for a [b]Perfect Guard[/b]. Block 2 acorns."},
+]
+
+
+func begin(battle_scene: Node) -> void:
+	scene = battle_scene
+	sim = battle_scene.sim
+	totem_ai = TrainingAI.new()
+	battle_scene.transport.set_input_source(1, totem_ai)
+	_next_step()
+
+
+func _player() -> Fighter:
+	return sim.active_fighter(0)
+
+
+func _next_step() -> void:
+	step += 1
+	_counter = 0
+	_used.clear()
+	_clear_markers()
+	if step >= STEPS.size():
+		_finish()
+		return
+	var s: Dictionary = STEPS[step]
+	scene.hud.show_tip("%s\n[color=#6b5134]Step %d of %d[/color]" % [s["tip"], step + 1, STEPS.size()])
+	totem_ai.mode = TrainingAI.Mode.IDLE
+	match s["id"]:
+		"move":
+			for p in [Vector2(-4.5, -2.6), Vector2(-1.0, 2.4), Vector2(1.6, -2.4)]:
+				_add_marker(p)
+		"focus":
+			_player().stamina = minf(_player().stamina, 12.0)
+		"guard":
+			totem_ai.mode = TrainingAI.Mode.SHOOT
+			totem_ai.shoot_interval_ticks = 110
+
+
+func _add_marker(p: Vector2) -> void:
+	var d := GroundDecal.new()
+	scene.view.add_child(d)
+	d.position = Vector3(p.x, 0.03, p.y)
+	d.set_circle(0.6, GroundDecal.Shape.RING, 0.6)
+	d.set_colors(Color(1.0, 0.9, 0.45), Color(1.0, 0.85, 0.4), 0.9)
+	d.set_progress(1.0)
+	d.set_meta("pos", p)
+	_markers.append(d)
+
+
+func _clear_markers() -> void:
+	for m in _markers:
+		if is_instance_valid(m):
+			m.queue_free()
+	_markers.clear()
+
+
+func on_tick(events: Array[BattleEvent]) -> void:
+	if _done:
+		return
+	if _advance_at >= 0:
+		if sim.tick >= _advance_at:
+			_advance_at = -1
+			_next_step()
+		return
+	var me := _player()
+	var id: String = STEPS[step]["id"]
+	match id:
+		"move":
+			for m in _markers.duplicate():
+				var p: Vector2 = m.get_meta("pos")
+				if me.pos.distance_to(p) < 0.75:
+					Audio.sfx(&"item_pickup")
+					m.queue_free()
+					_markers.erase(m)
+			if _markers.is_empty():
+				_complete()
+		"dash":
+			for e in events:
+				if e.type == BattleEvent.DASH_START and e.fighter_id == me.id:
+					_counter += 1
+			if _counter >= 2:
+				_complete()
+		"basic":
+			for e in events:
+				if e.type == BattleEvent.HIT and e.fighter_id == me.id and String(e.data.get("ability", "")).begins_with("tail_swipe"):
+					_counter += 1
+			if _counter >= 3:
+				_complete()
+		"specials":
+			for e in events:
+				if e.type == BattleEvent.ABILITY_START and e.fighter_id == me.id and int(e.data.get("slot", -1)) >= 0:
+					_used[e.data["ability"]] = true
+			if _used.size() >= 4:
+				_complete()
+			elif not _used.is_empty():
+				scene.hud.show_sub("%d / 4 specials used" % _used.size(), 0.1)
+		"focus":
+			if me.stamina >= me.max_stamina() * 0.95:
+				_complete()
+		"dash_through":
+			for e in events:
+				if e.type == BattleEvent.DASH_THROUGH and e.fighter_id == me.id and bool(e.data.get("stunned", false)):
+					_complete()
+		"guard":
+			for e in events:
+				if e.target_id == me.id or e.fighter_id == me.id:
+					if e.type == BattleEvent.BLOCK and e.fighter_id == me.id:
+						_counter += 1
+					elif e.type == BattleEvent.PERFECT_GUARD and e.fighter_id == me.id:
+						_counter += 2
+			if _counter >= 2:
+				_complete()
+	# Keep the player topped up outside the stamina lesson so nothing stalls.
+	if id != "focus" and id != "dash_through" and me.stamina < me.stats.dash.stamina_cost and not FighterSM.is_focusing(me.state):
+		if id != "dash":
+			pass
+		me.stamina = minf(me.max_stamina(), me.stamina + 0.6)
+
+
+func _complete() -> void:
+	Audio.sfx(&"quest_update")
+	scene.hud.show_message("Nice!", UiTheme.GOLD, 0.5, 64)
+	_advance_at = sim.tick + 50
+	totem_ai.mode = TrainingAI.Mode.IDLE
+
+
+func _finish() -> void:
+	_done = true
+	scene.hud.show_tip("[b]Training complete![/b] Hesper nods. \"You're ready for the Ringstones.\"")
+	Audio.sfx(&"befriend_success")
+	await get_tree().create_timer(2.4).timeout
+	Game.return_from_battle({"winner": 0, "local_team": 0, "mode": BattleSetup.Mode.TRAINING, "story_battle_id": &"training", "record": _player().record})

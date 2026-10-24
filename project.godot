@@ -72,6 +72,13 @@ pointing/emulate_mouse_from_touch=true
 common/physics_ticks_per_second=60
 common/max_physics_steps_per_frame=8
 
+[shader_globals]
+
+sprite_stretch={
+"type": "float",
+"value": 1.0
+}
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

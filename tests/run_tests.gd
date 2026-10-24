@@ -1,8 +1,8 @@
-extends SceneTree
-## Headless test runner.
+extends Node
+## Headless test runner (a scene, so autoload services are available).
 ##
-##   godot --headless --path . -s res://tests/run_tests.gd
-##   godot --headless --path . -s res://tests/run_tests.gd -- --filter=dash
+##   godot --headless --path . res://tests/run_tests.tscn
+##   godot --headless --path . res://tests/run_tests.tscn -- --filter=dash
 ##
 ## Discovers tests/unit/test_*.gd and tests/integration/test_*.gd; runs every
 ## `test_*` method; exits with code 1 if anything fails.
@@ -10,9 +10,10 @@ extends SceneTree
 const DIRS := ["res://tests/unit", "res://tests/integration"]
 
 
-func _init() -> void:
+func _ready() -> void:
 	# Run after the tree (and autoloads) are ready.
-	process_frame.connect(_run, CONNECT_ONE_SHOT)
+	await get_tree().process_frame
+	_run()
 
 
 func _run() -> void:
@@ -67,7 +68,7 @@ func _run() -> void:
 	print("%d tests, %d failed (%.2f s)" % [total, failed, secs])
 	if failed > 0:
 		print("Failed: ", ", ".join(failed_names))
-	quit(1 if failed > 0 else 0)
+	get_tree().quit(1 if failed > 0 else 0)
 
 
 func _list(dir: String) -> Array[String]:

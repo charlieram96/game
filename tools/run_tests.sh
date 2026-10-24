@@ -9,4 +9,4 @@ cd "$(dirname "$0")/.."
 "$GODOT" --headless --import --path . >/dev/null 2>&1 || true
 ARGS=()
 if [[ $# -gt 0 ]]; then ARGS=(-- "--filter=$1"); fi
-"$GODOT" --headless --path . -s res://tests/run_tests.gd "${ARGS[@]}"
+"$GODOT" --headless --path . res://tests/run_tests.tscn "${ARGS[@]}"

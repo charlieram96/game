@@ -69,7 +69,7 @@ static func from_dict(d: Dictionary) -> PlayerProfile:
 	if p.player_name.strip_edges() == "":
 		p.player_name = "Wren"
 	p.story_step = str(d.get("story_step", "prologue"))
-	p.flags = d.get("flags", {})
+	p.flags = _ints_restored(d.get("flags", {}))
 	p.party = []
 	for c in d.get("party", []):
 		if c is Dictionary:
@@ -84,3 +84,18 @@ static func from_dict(d: Dictionary) -> PlayerProfile:
 	p.wins = maxi(0, int(d.get("wins", 0)))
 	p.losses = maxi(0, int(d.get("losses", 0)))
 	return p
+
+
+## JSON has a single number type; restore whole-number values to ints so
+## flags like "kindlemoss": 3 round-trip exactly.
+static func _ints_restored(d: Dictionary) -> Dictionary:
+	var out := {}
+	for k in d.keys():
+		var v: Variant = d[k]
+		if typeof(v) == TYPE_FLOAT and is_equal_approx(v, roundf(v)) and absf(v) < 1e9:
+			out[k] = int(v)
+		elif v is Dictionary:
+			out[k] = _ints_restored(v)
+		else:
+			out[k] = v
+	return out

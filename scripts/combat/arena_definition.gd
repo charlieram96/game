@@ -20,11 +20,11 @@ static func ringstones() -> ArenaDefinition:
 	var d := ArenaDefinition.new()
 	d.id = &"ringstones"
 	d.display_name = "The Ringstones"
-	d.size = Vector2(16, 10)
+	d.size = Vector2(14, 9)
 	# Point-symmetric so neither side has an advantage.
-	d.circles = PackedVector3Array([Vector3(-2.6, -2.1, 0.55), Vector3(2.6, 2.1, 0.55)])
-	d.spawn_team0 = Vector2(-5.5, 0)
-	d.spawn_team1 = Vector2(5.5, 0)
+	d.circles = PackedVector3Array([Vector3(-2.3, -1.9, 0.55), Vector3(2.3, 1.9, 0.55)])
+	d.spawn_team0 = Vector2(-4.8, 0)
+	d.spawn_team1 = Vector2(4.8, 0)
 	return d
 
 
@@ -32,7 +32,7 @@ static func training_yard() -> ArenaDefinition:
 	var d := ArenaDefinition.new()
 	d.id = &"training_yard"
 	d.display_name = "Mossford Training Yard"
-	d.size = Vector2(14, 9)
+	d.size = Vector2(13, 8)
 	d.circles = PackedVector3Array()
 	d.spawn_team0 = Vector2(-4, 0)
 	d.spawn_team1 = Vector2(3, 0)
