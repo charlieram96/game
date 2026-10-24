@@ -95,3 +95,19 @@ func test_each_gamepad_drives_one_player() -> void:
 	assert_false(_pressed("p1_ability_1"), "and not player 1")
 	_pad_button(0, JOY_BUTTON_A, false)
 	InputSetup.bind_player_pad(InputSetup.P2_PREFIX, -1)
+
+
+func test_pad_ownership_follows_the_versus_binding() -> void:
+	InputSetup.ensure_actions()
+	InputSetup.bind_player_pad(InputSetup.P1_PREFIX, 0)
+	InputSetup.bind_player_pad(InputSetup.P2_PREFIX, 1)
+	var p1 := LocalInputSource.new()
+	p1.prefix = InputSetup.P1_PREFIX
+	var p2 := LocalInputSource.new()
+	p2.prefix = InputSetup.P2_PREFIX
+	assert_true(p1.owns_pad(0) and not p1.owns_pad(1), "pad 1 is player 1's")
+	assert_true(p2.owns_pad(1) and not p2.owns_pad(0), "pad 2 is player 2's")
+	var solo := LocalInputSource.new()
+	assert_true(solo.owns_pad(0) and solo.owns_pad(3), "single player uses any pad")
+	InputSetup.bind_player_pad(InputSetup.P1_PREFIX, -1)
+	InputSetup.bind_player_pad(InputSetup.P2_PREFIX, -1)

@@ -267,7 +267,7 @@ func _handle(e: BattleEvent) -> void:
 				other.impact(cdir, 0.8)
 			camera.add_trauma(0.32)
 			_zoom_punch(0.04)
-			feedback.emit(&"impact", {"strength": 0.55, "screen": screen_uv(_pos3(e.pos, 0.5))})
+			feedback.emit(&"impact", {"strength": 0.55, "screen": screen_uv(_pos3(e.pos, 0.5)), "teams": _teams_of(f, e.target_id)})
 		BattleEvent.DASH_BLOCKED:
 			if f and is_friendly(f.team) and _is_local_input(f.team):
 				Audio.sfx(&"dash_blocked", -6.0, 0.0, 200)
@@ -433,7 +433,18 @@ func _on_ram(f: Fighter, e: BattleEvent) -> void:
 	_zoom_punch(0.06)
 	arena.cheer(1.0)
 	Audio.sfx(&"crowd_gasp", -12.0, 0.05, 400)
-	feedback.emit(&"impact", {"strength": 1.0, "screen": screen_uv(at + Vector3(0, 0.5, 0))})
+	feedback.emit(&"impact", {"strength": 1.0, "screen": screen_uv(at + Vector3(0, 0.5, 0)), "teams": _teams_of(f, e.target_id)})
+
+
+## Teams of the two creatures in an exchange (for haptics on local players).
+func _teams_of(f: Fighter, other_id: int) -> Array[int]:
+	var out: Array[int] = []
+	if f:
+		out.append(f.team)
+	var o := sim.fighter_by_id(other_id)
+	if o:
+		out.append(o.team)
+	return out
 
 
 func _camera_kick(dir: Vector2, amount: float) -> void:

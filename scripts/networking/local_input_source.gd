@@ -325,6 +325,22 @@ func _touch_owns_mouse() -> bool:
 	return touch != null and touch.is_active() and Settings.touch_mode == Settings.TouchMode.ALWAYS
 
 
+## True when gamepad `device` drives this source (any pad in single player).
+func owns_pad(device: int) -> bool:
+	if not allow_gamepad:
+		return false
+	if prefix == "":
+		return true
+	var ev := InputEventJoypadButton.new()
+	ev.device = device
+	for a in InputSetup.PAD_BUTTONS.keys():
+		ev.button_index = InputSetup.PAD_BUTTONS[a]
+		var action := StringName(prefix + String(a))
+		if InputMap.has_action(action) and InputMap.event_is_action(ev, action):
+			return true
+	return false
+
+
 ## In versus each player has their own pad; the other player's stick must not
 ## switch this player away from mouse aiming.
 func _owns_pad_event(event: InputEvent) -> bool:

@@ -239,8 +239,25 @@ func _handle_flow_events(events: Array[BattleEvent]) -> void:
 func _on_feedback(kind: StringName, data: Dictionary) -> void:
 	if kind == &"impact":
 		post.impact(float(data.get("strength", 0.5)), data.get("screen", Vector2(0.5, 0.5)))
+		_haptics(float(data.get("strength", 0.5)), data.get("teams", []))
 		return
 	hud.on_feedback(kind, data)
+
+
+## A short buzz when a local player's creature rams, is rammed or clashes:
+## the phone (touch play) or that player's gamepad.
+func _haptics(strength: float, teams: Array) -> void:
+	if Settings.screen_shake <= 0.0:
+		return
+	for team in view.local_input_teams:
+		if not team in teams:
+			continue
+		if touch.visible and team == local_team:
+			Input.vibrate_handheld(int(30 + 40 * strength))
+		var source: LocalInputSource = p2_input if team == 1 and p2_input else player_input
+		for pad in Input.get_connected_joypads():
+			if source.owns_pad(pad):
+				Input.start_joy_vibration(pad, 0.3 * strength, 0.65 * strength, 0.12 + 0.08 * strength)
 
 
 func _show_results() -> void:
