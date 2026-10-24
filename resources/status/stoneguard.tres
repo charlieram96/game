@@ -6,12 +6,12 @@
 script = ExtResource("1_7qk4u")
 id = &"stoneguard"
 display_name = "Stone Guard"
-description = "Takes 65% less damage, can't be flinched, and repels dashes. Moves slowly."
+description = "Takes 55% less damage, can't be flinched, and repels dashes. Moves slowly."
 icon_path = "res://assets/ui/icons/status_armor.png"
 default_duration_ticks = 80
 is_debuff = false
 move_speed_mult = 0.6
-damage_taken_mult = 0.35
+damage_taken_mult = 0.45
 knockback_taken_mult = 0.3
 flinch_immune = true
 repels_dash_through = true
