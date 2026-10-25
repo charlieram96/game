@@ -27,6 +27,7 @@ from pix import bezier, col
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 from common.sheet import SheetBuilder  # noqa: E402
+from portraits import installed_by_art_forge  # noqa: E402
 
 S = 2                    # raster pixels per design pixel
 DW = DH = 48             # design frame (rig coordinates)
@@ -1211,7 +1212,10 @@ ORDER = ["idle_s", "idle_n", "idle_e", "ready_s", "ready_n", "ready_e", "move_s"
          "cower_s", "curl_s", "happy_s"]
 
 
-def build(out_dir: str) -> SheetBuilder:
+def build(out_dir: str):
+    if installed_by_art_forge(out_dir, "emberlyn"):
+        print("  kith        emberlyn             kept (HD sheet from tools/art_forge)")
+        return []
     A = animations()
     assert set(A) == set(ORDER), set(A) ^ set(ORDER)
     sb = SheetBuilder("emberlyn", W, H, PIVOT, columns=8, pixels_per_unit=PPU,

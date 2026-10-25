@@ -33,6 +33,7 @@ from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from common import palette as P  # noqa: E402
+from common import palette_hd as HD  # noqa: E402  (the HD sheets' own palettes, never part of the default)
 
 # palette.nearest's perceptual weights for R, G, B
 WEIGHTS = np.array([3.0, 4.0, 2.0], dtype=np.float32)
@@ -49,9 +50,10 @@ def palette_for(ramps: list[str] | None = None) -> tuple[np.ndarray, list[str]]:
     colors: list[tuple[int, int, int]] = []
     owners: list[str] = []
     for name in names:
-        if name not in P.RAMPS:
+        source = P.RAMPS if name in P.RAMPS else HD.RAMPS
+        if name not in source:
             raise ValueError(f"unknown palette ramp '{name}'")
-        for c in P.RAMPS[name]:
+        for c in source[name]:
             colors.append(c[:3])
             owners.append(name)
     return np.array(colors, dtype=np.float32), owners
@@ -80,12 +82,29 @@ def flood_from_border(candidate: np.ndarray) -> np.ndarray:
         reach = grown
 
 
-def foreground_mask(img: np.ndarray, tolerance: float = 48.0) -> np.ndarray:
-    return _foreground(img, tolerance)[0]
+def foreground_mask(img: np.ndarray, tolerance: float = 48.0, holes: bool = False) -> np.ndarray:
+    return _foreground(img, tolerance, holes)[0]
 
 
-def _foreground(img: np.ndarray, tolerance: float) -> tuple[np.ndarray, np.ndarray | None]:
-    """The subject mask, and the keyed background colour (None when the image had real alpha)."""
+def _erode(m: np.ndarray, n: int) -> np.ndarray:
+    for _ in range(n):
+        m = m & _shift(m, 1, 0) & _shift(m, -1, 0) & _shift(m, 0, 1) & _shift(m, 0, -1)
+    return m
+
+
+def _dilate(m: np.ndarray, n: int) -> np.ndarray:
+    for _ in range(n):
+        m = m | _shift(m, 1, 0) | _shift(m, -1, 0) | _shift(m, 0, 1) | _shift(m, 0, -1)
+    return m
+
+
+def _foreground(img: np.ndarray, tolerance: float, holes: bool = False) -> tuple[np.ndarray, np.ndarray | None]:
+    """The subject mask, and the keyed background colour (None when the image had real alpha).
+
+    With `holes`, background-coloured regions enclosed by the subject (the
+    backdrop seen between a tail and a back) are keyed out too, as long as they
+    are at least a few pixels thick (thin anti-aliased seams stay subject).
+    """
     alpha = img[..., 3]
     if (alpha < 128).mean() > 0.01:
         return alpha >= 128, None
@@ -95,7 +114,11 @@ def _foreground(img: np.ndarray, tolerance: float) -> tuple[np.ndarray, np.ndarr
     border = np.concatenate([rgb[0], rgb[-1], rgb[:, 0], rgb[:, -1]])
     background_color = np.median(border, axis=0)
     distance = np.sqrt(((rgb - background_color) ** 2).sum(-1))
-    background = flood_from_border(distance < tolerance)
+    near = distance < tolerance
+    background = flood_from_border(near)
+    if holes:
+        enclosed = near & ~background
+        background |= _dilate(_erode(enclosed, 1), 2) & enclosed
     small = ~background
     return np.repeat(np.repeat(small, step, axis=0), step, axis=1)[:h, :w], background_color
 
@@ -287,7 +310,8 @@ def _outline(indices: np.ndarray, opaque: np.ndarray, pal: np.ndarray, owners: l
             if 0 <= yy < h and 0 <= xx < w and opaque[yy, xx] and (best is None or luminance[yy, xx] < luminance[best]):
                 best = (yy, xx)
         if best is not None:
-            darkest = P.darkest(owners[indices[best]])[:3]
+            owner = owners[indices[best]]
+            darkest = (P.RAMPS[owner] if owner in P.RAMPS else HD.RAMPS[owner])[0][:3]
             out_idx[y, x] = lookup.get(tuple(darkest), indices[best])
             outline[y, x] = True
     return out_idx, opaque | outline, outline
@@ -312,6 +336,7 @@ def pixelize(
     align_grid: bool = True,
     opaque: bool = False,
     clean_specks: bool = False,
+    holes: bool = False,
 ) -> Image.Image:
     """Clean pixel art from a generated image.
 
@@ -321,12 +346,13 @@ def pixelize(
 
     With `opaque`, the whole picture is the subject (a scene, not a sprite):
     the result is exactly width x height, fully opaque and borderless.
-    `clean_specks` runs `despeckle` (before the outline).
+    `clean_specks` runs `despeckle` (before the outline). `holes` also keys out
+    backdrop seen through enclosed gaps in the subject (see `_foreground`).
     """
     img = source if isinstance(source, np.ndarray) else load_rgba(source)
     if opaque:
         return _pixelize_scene(img, height, width, ramps, align_grid)
-    mask, background = _foreground(img, tolerance)
+    mask, background = _foreground(img, tolerance, holes)
     img, mask = crop_to_mask(img, mask)
     h, w = mask.shape
     pad = 2 if outline else 0

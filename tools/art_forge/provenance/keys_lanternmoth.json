@@ -1,0 +1,258 @@
+{
+ "asset": "tools/art_forge/keys/lanternmoth/",
+ "keys": {
+  "wings_down_e": {
+   "source_image": "wings_down_e_r0_gpt-image-2_81f87d92698c_1.png",
+   "source_path": "lanternmoth_hd/wings_down_e_r0_gpt-image-2_81f87d92698c_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. It hovers in mid-air with nothing below it; with its wings spread it fills about three quarters of the picture width, and in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Lanternmoth, a large and gentle moth creature: dusky plum wings with violet-tinted edges and soft eye-spots, a fuzzy cream thorax, feathery antennae, and a softly glowing golden abdomen like a paper lantern. Hovering with wings spread. Pose: hovering with its wings swept down and forward at the bottom of a wingbeat, the glowing abdomen hanging below. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale and in the same place; only the wings move. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "wings_up_e_r0_gpt-image-2_e08b72fc2e03_1.png",
+      "sha256": "9b1e265f0a032a3e2dc966ccf0810e3d27a3018894acdba9fc0ce741ac86bd7f"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2794,
+     "completion_tokens": 878,
+     "total_tokens": 3672,
+     "cost": 0.046454,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.046454,
+      "upstream_inference_prompt_cost": 0.020114,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 15.3,
+    "created": "2026-10-25T06:00:19Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 8.458,
+    "scale": 1.0,
+    "tolerance": 48.0
+   },
+   "installed": "2026-10-25T06:09:42Z",
+   "cleanup": []
+  },
+  "wings_down_s": {
+   "source_image": "wings_down_s_r0_gpt-image-2_acb6492072bf_0.png",
+   "source_path": "lanternmoth_hd/wings_down_s_r0_gpt-image-2_acb6492072bf_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. It hovers in mid-air with nothing below it; with its wings spread it fills about three quarters of the picture width, and in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Lanternmoth, a large and gentle moth creature: dusky plum wings with violet-tinted edges and soft eye-spots, a fuzzy cream thorax, feathery antennae, and a softly glowing golden abdomen like a paper lantern. Hovering with wings spread. Pose: hovering with its wings swept down and forward at the bottom of a wingbeat, the glowing abdomen hanging below. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale and in the same place; only the wings move. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "wings_up_s_r0_gpt-image-2_5b6be3943446_1.png",
+      "sha256": "1219b607a4e9f794d7835bf9aab413db43d2c7e8258ffd5135bf137cc0cd6461"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2800,
+     "completion_tokens": 878,
+     "total_tokens": 3678,
+     "cost": 0.046484,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.046484,
+      "upstream_inference_prompt_cost": 0.020144,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 14.4,
+    "created": "2026-10-25T06:00:17Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 8.458,
+    "scale": 1.0,
+    "tolerance": 48.0
+   },
+   "installed": "2026-10-25T06:09:40Z",
+   "cleanup": []
+  },
+  "wings_up_e": {
+   "source_image": "wings_up_e_r0_gpt-image-2_e08b72fc2e03_1.png",
+   "source_path": "lanternmoth_hd/wings_up_e_r0_gpt-image-2_e08b72fc2e03_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. It hovers in mid-air with nothing below it; with its wings spread it fills about three quarters of the picture width, and in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Lanternmoth, a large and gentle moth creature: dusky plum wings with violet-tinted edges and soft eye-spots, a fuzzy cream thorax, feathery antennae, and a softly glowing golden abdomen like a paper lantern. Hovering with wings spread. Pose: hovering with its wings raised high above the body at the top of a wingbeat, the glowing abdomen hanging below. The reference shows the creature from the front and from the side. Keep its design, colours and proportions. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "lanternmoth_old.png",
+      "sha256": "d004bee6531bf8338570219f630f014989c9ceb8a8b5e4f40549675f085b3439"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 1868,
+     "completion_tokens": 391,
+     "total_tokens": 2259,
+     "cost": 0.024526,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.024526,
+      "upstream_inference_prompt_cost": 0.012796,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 11.1,
+    "created": "2026-10-25T05:59:17Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 8.458,
+    "scale": 1.0,
+    "tolerance": 48.0
+   },
+   "installed": "2026-10-25T06:09:41Z",
+   "cleanup": []
+  },
+  "wings_up_s": {
+   "source_image": "wings_up_s_r0_gpt-image-2_5b6be3943446_1.png",
+   "source_path": "lanternmoth_hd/wings_up_s_r0_gpt-image-2_5b6be3943446_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. It hovers in mid-air with nothing below it; with its wings spread it fills about three quarters of the picture width, and in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Lanternmoth, a large and gentle moth creature: dusky plum wings with violet-tinted edges and soft eye-spots, a fuzzy cream thorax, feathery antennae, and a softly glowing golden abdomen like a paper lantern. Hovering with wings spread. Pose: hovering with its wings raised high above the body at the top of a wingbeat, the glowing abdomen hanging below. The reference shows the creature from the front and from the side. Keep its design, colours and proportions. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "lanternmoth_old.png",
+      "sha256": "d004bee6531bf8338570219f630f014989c9ceb8a8b5e4f40549675f085b3439"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 1874,
+     "completion_tokens": 391,
+     "total_tokens": 2265,
+     "cost": 0.024556,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.024556,
+      "upstream_inference_prompt_cost": 0.012826,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 11.4,
+    "created": "2026-10-25T05:59:17Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 8.458,
+    "scale": 1.0,
+    "tolerance": 48.0
+   },
+   "installed": "2026-10-25T06:09:40Z",
+   "cleanup": []
+  }
+ },
+ "palette": {
+  "sources": [
+   "wings_up_s_r0_gpt-image-2_5b6be3943446_1.png",
+   "wings_down_s_r0_gpt-image-2_acb6492072bf_0.png",
+   "wings_up_e_r0_gpt-image-2_e08b72fc2e03_1.png",
+   "wings_down_e_r0_gpt-image-2_81f87d92698c_1.png"
+  ],
+  "k": 40,
+  "ramps": [
+   [
+    "#b27a92"
+   ],
+   [
+    "#432922"
+   ],
+   [
+    "#412879",
+    "#5239a2",
+    "#67428a",
+    "#664bb8",
+    "#7d5ec8",
+    "#9171db",
+    "#9d81e6",
+    "#aa8cea",
+    "#c5a8f2"
+   ],
+   [
+    "#211321",
+    "#2b182a",
+    "#381c33",
+    "#43203c",
+    "#4e2444",
+    "#59294c",
+    "#642c55",
+    "#6a325a",
+    "#753a65",
+    "#864470",
+    "#964f7e",
+    "#a25d88"
+   ],
+   [
+    "#633c26",
+    "#81532e",
+    "#8e6d50",
+    "#aa681b",
+    "#a4835e",
+    "#ca8425",
+    "#b7966f",
+    "#cbab80"
+   ],
+   [
+    "#e2a030",
+    "#dcbf92",
+    "#f7c342",
+    "#ecd3a5",
+    "#fde262",
+    "#f9e9c2",
+    "#fef29e",
+    "#fdf6d9"
+   ],
+   [
+    "#120e17"
+   ]
+  ]
+ }
+}

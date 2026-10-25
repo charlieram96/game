@@ -18,6 +18,7 @@ from pix import bezier, col
 
 sys.path.insert(0, "/home/user/game/tools")
 from common.sheet import SheetBuilder  # noqa: E402
+from portraits import installed_by_art_forge  # noqa: E402
 
 W = H = 32
 PIVOT = (16, 29)
@@ -184,7 +185,10 @@ def animations():
 ORDER = ["idle_s", "idle_e", "hop_s", "hop_n", "hop_e", "alert_s", "sleep_s"]
 
 
-def build(out_dir: str) -> SheetBuilder:
+def build(out_dir: str):
+    if installed_by_art_forge(out_dir, "mossling"):
+        print("  kith        mossling             kept (HD sheet from tools/art_forge)")
+        return []
     A = animations()
     sb = SheetBuilder("mossling", W, H, PIVOT, columns=8, meta={"kind": "kith", "element": "grove",
                                                                 "generator": "tools/sprite_forge/mossling.py"})

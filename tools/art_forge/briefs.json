@@ -30,6 +30,47 @@
       "style": "Key art for a cozy pixel-art fantasy role-playing game: rich, detailed pixel art with soft modern lighting and depth, painterly glow from light sources, a warm storybook mood. No text or logo.",
       "aspect_ratio": "16:9",
       "model": "openai/gpt-5.4-image-2"
+    },
+    "sprite_hd": {
+      "style": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border.",
+      "framing": "When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale.",
+      "views": {
+        "s": "The creature faces the viewer, turned very slightly toward the lower right.",
+        "n": "The creature is seen from behind, facing away from the viewer.",
+        "e": "The creature faces to the right, seen in profile."
+      },
+      "aspect_ratio": "1:1",
+      "model": "openai/gpt-image-2"
+    },
+    "prop_hd": {
+      "style": "Game prop sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives it real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One object only, whole, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border.",
+      "framing": "Upright, the object fills about seven tenths of the picture height; in every pose it is drawn at that same scale.",
+      "views": {
+        "s": "It faces the viewer."
+      },
+      "aspect_ratio": "2:3",
+      "model": "openai/gpt-image-2"
+    },
+    "character_hd": {
+      "style": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border.",
+      "framing": "Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale.",
+      "views": {
+        "s": "The character faces the viewer, turned very slightly toward the lower right.",
+        "n": "The character is seen from directly behind, facing away from the viewer; the face is hidden.",
+        "e": "The character faces to the right, seen in profile."
+      },
+      "aspect_ratio": "2:3",
+      "model": "openai/gpt-image-2"
+    },
+    "turnaround_char_hd": {
+      "style": "Character turnaround sheet in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: the same character shown three times side by side at the same scale, standing on the same baseline, full body from head to feet with stylized proportions about four and a half heads tall, each seen from slightly above as in a three-quarter top-down game: on the left from the front (facing the viewer), in the middle from directly behind (facing away from the viewer), and on the right in profile facing to the right. Small, even, square pixels, a rich limited palette with four to six shades per material, a soft key light from the upper left, clean dark outlines that are never pure black. Flat solid magenta (#FF00FF) background with no shadow, floor or scenery. No text, labels, watermark or border.",
+      "aspect_ratio": "3:2",
+      "model": "openai/gpt-image-2"
+    },
+    "turnaround_hd": {
+      "style": "Character turnaround sheet in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: the same creature shown three times side by side at the same scale, standing on the same baseline, each seen from slightly above as in a three-quarter top-down game: on the left from the front (facing the viewer), in the middle from behind (facing away from the viewer), and on the right in profile facing to the right. Small, even, square pixels, a rich limited palette with four to six shades per material, a soft key light from the upper left, clean dark outlines that are never pure black. Flat solid magenta (#FF00FF) background with no shadow, floor or scenery. No text, labels, watermark or border.",
+      "aspect_ratio": "3:2",
+      "model": "openai/gpt-image-2"
     }
   },
   "views": {
@@ -147,6 +188,265 @@
       "ramps": ["fur_russet", "cream", "soot", "ember", "cloth_red", "water", "ink"],
       "subject": "Emberlyn, a small fire-element woodland creature, its head and chest: a stoat-like face with russet fur on the head and shoulders and a cream chest, cheeks and muzzle, a dark soot band across the eyes like a mask, small round russet ears, big amber eyes and a small dark nose. Its long bushy russet tail curls up behind one shoulder, and a ring of cream fur at the tip cradles a glowing ember flame.",
       "expressions": {"neutral": "alert and curious", "scared": "wide, frightened eyes with small pupils, ears pressed back, mouth slightly open, a bead of sweat at the brow", "happy": "eyes squeezed shut in a big happy smile, mouth open, cheeks flushed, the tail ember burning brighter"}
+    },
+    "emberlyn_turnaround": {
+      "kind": "turnaround_hd",
+      "subject": "Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid."
+    },
+    "emberlyn_hd": {
+      "kind": "sprite_hd",
+      "size": [128, 144],
+      "pivot": [64, 136],
+      "ramps": ["fur_russet_hd", "cream_hd", "soot_hd", "ember", "gold", "ink"],
+      "subject": "Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid.",
+      "poses": {
+        "stand": "standing calmly on all four paws, relaxed and alert, head up, ears up, the bushy tail curving up behind the back with the ember burning softly at the top.",
+        "ready": "a low, springy battle stance on all four paws: front legs spread and braced, shoulders lowered, head held low and forward with the eyes fixed on a foe, ears forward, the bushy tail raised high and tense behind it with the ember blazing.",
+        "walk_a": "trotting, mid-stride: the near front paw and the far hind paw reach forward while the other two push back, head up, the tail bobbing behind.",
+        "walk_b": "trotting, mid-stride: the far front paw and the near hind paw reach forward while the other two push back, head up, the tail bobbing behind.",
+        "crouch": "coiled to spring forward: crouched very low on deeply bent legs, chest close to the floor, rump and tail raised, head low with narrowed eyes, every muscle tense.",
+        "leap": {"all": "leaping forward at full speed, all four paws off the floor: the body stretched out long, front legs reaching forward, hind legs kicked back, ears flat, the tail streaming back with the ember flame flaring and trailing sparks.", "s": "It leaps straight toward the viewer, so the body is strongly foreshortened: the head and reaching front paws are closest, the tail streams up and back behind it.", "n": "It leaps straight away from the viewer: we see its back, the hind paws kicked back toward us, the tail streaming back toward us over the body.", "e": "It leaps to the right."},
+        "land": "skidding to a stop after a leap: front legs braced stiffly forward, hind legs bent under the body, body tilted back, head up, the tail swinging forward over the back.",
+        "ram": "the moment of a head-first ram: shoulders hunched, head down butting forward, eyes squeezed shut, ears flat back, the body squashed short and compact, the tail whipped up with sparks flying from the ember.",
+        "cast_wind": "drawing a deep breath before breathing fire: chest puffed out, head pulled back a little, eyes narrowed, the tail ember glowing brighter.",
+        "cast": "breathing a burst of fire: standing firm, head thrust forward, mouth wide open with a small ball of bright flame at the mouth, the tail ember blazing brightly.",
+        "melee_wind": "winding up a claw swipe: weight shifted back onto the hind legs, one front paw raised high and pulled back, claws out, head low, teeth bared.",
+        "melee": "a fast claw swipe: lunging forward with one front paw slashing down and across, claws out, teeth bared, ears back.",
+        "focus": "sitting upright with the eyes closed in calm concentration, front paws together, the tail curled up beside the body, the ember glowing big, bright and steady.",
+        "guard": "bracing defensively: crouched low behind its raised bushy tail, which it curls around the front of its body like a shield, eyes peeking over the tail, ears flat.",
+        "hurt": "recoiling from a hit: flinching back with the eyes squeezed shut, ears flat back, the body twisted away, fur ruffled, the ember flickering.",
+        "dizzy": "dazed and dizzy: sitting back on its haunches with swirly, unfocused eyes, head tilted, mouth hanging open, the ember sputtering weakly.",
+        "ko_fall": "knocked out and toppling over onto its side, legs folding, eyes shut, the ember dimming.",
+        "ko_lie": "knocked out, lying flat on its side on the floor with the legs limp and the eyes shut, the ember only a faint glow.",
+        "victory": "celebrating a win: sitting up proudly on its hind legs with the chest puffed out and both front paws raised, eyes happily closed and mouth open in a cheer, the ember blazing big and bright.",
+        "cower": "frightened and cowering: crouched low and small, ears pressed back, wide frightened eyes, trembling, the tail tucked around itself, the ember small and weak.",
+        "curl": "curled up asleep in a tight ball on the floor with its bushy tail wrapped around itself like a blanket, eyes peacefully shut, the ember glowing softly at the tail tip.",
+        "happy": "jumping for joy: a happy little hop with all four paws off the floor, eyes squeezed shut in a big smile, mouth open, tail wagging, the ember blazing."
+      }
+    },
+    "stoneback_turnaround": {
+      "kind": "turnaround_hd",
+      "subject": "Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy."
+    },
+    "stoneback_hd": {
+      "kind": "sprite_hd",
+      "size": [128, 144],
+      "pivot": [64, 136],
+      "ramps": ["stone_hd", "stone_warm_hd", "moss_hd", "glow_moss_hd", "sand_hd", "gold", "ink"],
+      "framing": "When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale.",
+      "subject": "Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy.",
+      "poses": {
+        "stand": "standing calmly on its four stubby legs, head out under the brow, sleepy half-closed eyes.",
+        "ready": "a heavy, braced battle stance: legs planted wide, the shell lowered, head pushed forward under the stone brow with the glowing eyes fixed on a foe, the tail club raised.",
+        "walk_a": "plodding forward, mid-step: the near front leg and the far hind leg step forward while the other two push back.",
+        "walk_b": "plodding forward, mid-step: the far front leg and the near hind leg step forward while the other two push back.",
+        "crouch": "tucking in to roll: head and legs half pulled in under the shell, the shell lowered and curling forward, starting to become a ball.",
+        "ball": "rolled up completely into a tight, round stone ball: only the overlapping slate plates and the moss with its flowers are visible, no head or legs.",
+        "land": "coming out of its ball with a heavy thud: legs splayed out wide to brake, the shell still low and tilted forward, head popping out, dust kicked up.",
+        "ram": "the moment of a crushing shell-first ram: rolled into a tight ball and slammed into a foe, the ball squashed a little flat from the impact, with bits of stone and moss flying.",
+        "cast_wind": "rearing up on its hind legs to stamp, front legs lifted high, head raised, the moss on its back glowing a bright, soft green.",
+        "cast": "stamping down hard with both front legs to make the ground shake, the shell tilted forward, the moss glowing bright green, small rocks jumping up around its feet.",
+        "melee_wind": "swinging its tail club back for a strike, the body twisted, head turned to look at the target.",
+        "melee": "slamming its stone tail club around in a heavy swipe, the body twisted, the club at the end of the swing.",
+        "focus": "settled low with the legs tucked under and the eyes closed in calm concentration, the moss on its back glowing a soft bright green with tiny motes of light rising.",
+        "guard": "withdrawn into its shell for defence: head and legs pulled almost completely inside, the heavy stone brow and plates lowered to the floor like a fortress, eyes peeking out of the dark gap.",
+        "hurt": "flinching from a hit: the shell jolted and tilted back, eyes squeezed shut, mouth open in a grunt, a chip of stone flying off.",
+        "dizzy": "dazed and dizzy: wobbling with swirly, unfocused eyes, head drooping and tilted, legs splayed.",
+        "ko_fall": "knocked out and toppling over onto its back, legs in the air, eyes shut.",
+        "ko_lie": "knocked out, lying upside down on its shell with the stubby legs limp in the air and the eyes shut.",
+        "victory": "celebrating a win: rearing up proudly on its hind legs with the front legs raised, eyes happily closed, mouth open in a cheer, the flowers on its moss in full bloom.",
+        "sleep": "fast asleep: settled flat on its belly with the legs tucked under, eyes shut, head resting on the floor, peaceful."
+      }
+    },
+    "training_totem_hd": {
+      "kind": "prop_hd",
+      "size": [112, 176],
+      "pivot": [56, 168],
+      "subject": "A training dummy for young creature tamers: a stout wooden post set in a heavy wooden foot, a short wooden crossbar for arms with rounded ends, a plump body of tied straw wrapped in a weathered burlap sack bound with twisted rope at the waist and neck, loose straw tufts poking out at the hem, a round burlap sack head with two stitched X eyes, and a painted red and cream bullseye target on the chest. Sturdy, homely and well used.",
+      "poses": {
+        "idle": "standing upright and still.",
+        "hit_back": "knocked back by a hit: the whole dummy tilts backward and to the right on its post, straw bits and dust burst from the chest.",
+        "hit_forward": "springing back after a hit: the whole dummy tilts forward and to the left on its post, a few loose straw bits still in the air."
+      }
+    },
+    "explorer_turnaround": {
+      "kind": "turnaround_char_hd",
+      "subject": "Wren, a fourteen-year-old apprentice warden with a gentle, youthful face: a mop of tousled brown hair with a few spiky tufts on top and a soft fringe, warm tan skin, big earnest brown eyes, a short teal hooded cloak with the hood down, a red scarf wrapped at the neck, a cream tunic, a thin brown leather satchel strap across the chest with the satchel at the hip, brown trousers and dark brown boots. Curious and kind, ready to set out."
+    },
+    "explorer_hd": {
+      "kind": "character_hd",
+      "size": [
+        128,
+        224
+      ],
+      "pivot": [
+        64,
+        216
+      ],
+      "subject": "Wren, a fourteen-year-old apprentice warden with a gentle, youthful face: a mop of tousled brown hair with a few spiky tufts on top and a soft fringe, warm tan skin, big earnest brown eyes, a short teal hooded cloak with the hood down, a red scarf wrapped at the neck, a cream tunic, a thin brown leather satchel strap across the chest with the satchel at the hip, brown trousers and dark brown boots. Curious and kind, ready to set out.",
+      "poses": {
+        "idle": "standing relaxed, arms at the sides, weight on both feet.",
+        "walk_a": "walking, mid-stride: the left leg steps forward and the right arm swings forward.",
+        "walk_b": "walking, mid-stride: the right leg steps forward and the left arm swings forward.",
+        "talk": "talking cheerfully, one hand raised in a friendly gesture, mouth open mid-word.",
+        "sneak_a": "sneaking on tiptoe, crouched low with the knees bent and the arms held close, mid-step with the left foot forward.",
+        "sneak_b": "sneaking on tiptoe, crouched low with the knees bent and the arms held close, mid-step with the right foot forward.",
+        "interact": "reaching one hand forward at chest height to touch or pick up something just in front of them.",
+        "sit": "sitting on the ground with the legs crossed, hands resting on the knees, relaxed.",
+        "cheer": "cheering: a little jump with both fists raised high in the air and a big happy grin.",
+        "surprised": "startled: leaning back with wide eyes, mouth open, both hands raised in surprise."
+      }
+    },
+    "corin_turnaround": {
+      "kind": "turnaround_char_hd",
+      "subject": "Corin, a fourteen-year-old apprentice with a cocky, energetic look: deep brown skin, bright green eyes, a shock of spiky copper-orange hair standing up in flame-like points above a red cloth headband whose knotted tails hang at one side, a mustard-yellow vest with rounded padded shoulders over a slate-grey shirt, blue trousers, brown leather boots and fingerless leather gloves. Boastful but good-hearted."
+    },
+    "corin_hd": {
+      "kind": "character_hd",
+      "size": [
+        128,
+        224
+      ],
+      "pivot": [
+        64,
+        216
+      ],
+      "subject": "Corin, a fourteen-year-old apprentice with a cocky, energetic look: deep brown skin, bright green eyes, a shock of spiky copper-orange hair standing up in flame-like points above a red cloth headband whose knotted tails hang at one side, a mustard-yellow vest with rounded padded shoulders over a slate-grey shirt, blue trousers, brown leather boots and fingerless leather gloves. Boastful but good-hearted.",
+      "poses": {
+        "idle": "standing relaxed, arms at the sides, weight on both feet.",
+        "walk_a": "walking, mid-stride: the left leg steps forward and the right arm swings forward.",
+        "walk_b": "walking, mid-stride: the right leg steps forward and the left arm swings forward.",
+        "talk": "talking with a confident grin, one hand on the hip and the other jabbing a thumb at his own chest.",
+        "cheer": "cheering: one fist pumped high in the air, a big boastful grin.",
+        "slump": "slumped in defeat: shoulders drooping, head hanging low, arms limp."
+      }
+    },
+    "hesper_turnaround": {
+      "kind": "turnaround_char_hd",
+      "subject": "Warden Hesper, the elder warden of a forest village, a woman in her sixties: silver-grey hair pulled up into a neat round bun with a few loose strands, light skin with laugh lines, kind blue-grey eyes behind small round gold-rimmed spectacles, a long high-collared plum coat with a row of gold buttons over a cream blouse, sturdy brown shoes, and a gnarled wooden staff a little taller than she is, with a small glowing brass lantern hanging from its curled top. Warm and wry, with a stern edge."
+    },
+    "hesper_hd": {
+      "kind": "character_hd",
+      "size": [
+        128,
+        224
+      ],
+      "pivot": [
+        64,
+        216
+      ],
+      "subject": "Warden Hesper, the elder warden of a forest village, a woman in her sixties: silver-grey hair pulled up into a neat round bun with a few loose strands, light skin with laugh lines, kind blue-grey eyes behind small round gold-rimmed spectacles, a long high-collared plum coat with a row of gold buttons over a cream blouse, sturdy brown shoes, and a gnarled wooden staff a little taller than she is, with a small glowing brass lantern hanging from its curled top. Warm and wry, with a stern edge.",
+      "poses": {
+        "idle": "standing upright and composed, one hand resting on the staff planted beside her.",
+        "walk_a": "walking with the staff in one hand, mid-stride with the left leg forward.",
+        "walk_b": "walking with the staff in one hand, mid-stride with the right leg forward.",
+        "talk": "talking calmly, one hand raised as she explains something, the other holding the staff.",
+        "point": "pointing ahead with one arm outstretched, the staff held in the other hand."
+      }
+    },
+    "villager_baker_turnaround": {
+      "kind": "turnaround_char_hd",
+      "subject": "Wynn, the cheerful village baker: a round-faced, rosy woman with brown hair tied up under a red kerchief with white polka dots, a red dress with the sleeves rolled up, a flour-dusted cream apron and brown shoes."
+    },
+    "villager_baker_hd": {
+      "kind": "character_hd",
+      "size": [
+        128,
+        224
+      ],
+      "pivot": [
+        64,
+        216
+      ],
+      "subject": "Wynn, the cheerful village baker: a round-faced, rosy woman with brown hair tied up under a red kerchief with white polka dots, a red dress with the sleeves rolled up, a flour-dusted cream apron and brown shoes.",
+      "poses": {
+        "idle": "standing relaxed, arms at the sides, weight on both feet.",
+        "walk_a": "walking, mid-stride: the left leg steps forward and the right arm swings forward.",
+        "walk_b": "walking, mid-stride: the right leg steps forward and the left arm swings forward.",
+        "talk": "talking cheerfully, one hand raised in a friendly gesture, mouth open mid-word."
+      }
+    },
+    "villager_farmer_turnaround": {
+      "kind": "turnaround_char_hd",
+      "subject": "Bram, a gruff old farmer: broad shoulders, a wide straw hat, grey hair and a bushy grey moustache, a cream work shirt with rolled sleeves, green overalls with brass buttons and brown work boots."
+    },
+    "villager_farmer_hd": {
+      "kind": "character_hd",
+      "size": [
+        128,
+        224
+      ],
+      "pivot": [
+        64,
+        216
+      ],
+      "subject": "Bram, a gruff old farmer: broad shoulders, a wide straw hat, grey hair and a bushy grey moustache, a cream work shirt with rolled sleeves, green overalls with brass buttons and brown work boots.",
+      "poses": {
+        "idle": "standing relaxed, arms at the sides, weight on both feet.",
+        "walk_a": "walking, mid-stride: the left leg steps forward and the right arm swings forward.",
+        "walk_b": "walking, mid-stride: the right leg steps forward and the left arm swings forward.",
+        "talk": "talking gruffly, one thumb hooked in an overall strap, the other hand gesturing."
+      }
+    },
+    "mossling_turnaround": {
+      "kind": "turnaround_hd",
+      "subject": "Mossling, a tiny shy grove-element creature: a round moss-covered puffball with long floppy leaf-shaped ears like a lop-eared rabbit, a tiny two-leaf sprout on its head, stubby feet, shiny dark eyes and a pinkish nose."
+    },
+    "mossling_hd": {
+      "kind": "sprite_hd",
+      "size": [
+        104,
+        104
+      ],
+      "pivot": [
+        52,
+        98
+      ],
+      "subject": "Mossling, a tiny shy grove-element creature: a round moss-covered puffball with long floppy leaf-shaped ears like a lop-eared rabbit, a tiny two-leaf sprout on its head, stubby feet, shiny dark eyes and a pinkish nose.",
+      "poses": {
+        "stand": "sitting calmly on its stubby feet, the long leaf ears drooping down at its sides, looking curious.",
+        "hop": "in the middle of a happy little hop, its round body stretched a little taller, both feet off the floor and tucked under, the leaf ears flying up and back.",
+        "alert": "startled and alert: standing up tall on its stubby feet, the long leaf ears pointing straight up, eyes wide open.",
+        "sleep": "fast asleep, settled flat and round on the floor with its feet tucked in, the leaf ears draped over its sides, eyes peacefully shut."
+      }
+    },
+    "lanternmoth_hd": {
+      "kind": "sprite_hd",
+      "size": [
+        128,
+        144
+      ],
+      "pivot": [
+        64,
+        138
+      ],
+      "subject": "Lanternmoth, a large and gentle moth creature: dusky plum wings with violet-tinted edges and soft eye-spots, a fuzzy cream thorax, feathery antennae, and a softly glowing golden abdomen like a paper lantern. Hovering with wings spread.",
+      "framing": "It hovers in mid-air with nothing below it; with its wings spread it fills about three quarters of the picture width, and in every pose it is drawn at that same scale.",
+      "poses": {
+        "wings_up": "hovering with its wings raised high above the body at the top of a wingbeat, the glowing abdomen hanging below.",
+        "wings_down": "hovering with its wings swept down and forward at the bottom of a wingbeat, the glowing abdomen hanging below."
+      }
+    },
+    "sigilbinder_turnaround": {
+      "kind": "turnaround_char_hd",
+      "subject": "A Sigilbinder: a silent hooded figure in a long, tattered ink-black cloak, the face lost in the hood's shadow except for two faint glowing eyes, with a glowing magenta chain of interlocking rune links wound around the right arm."
+    },
+    "sigilbinder_hd": {
+      "kind": "character_hd",
+      "size": [
+        128,
+        240
+      ],
+      "pivot": [
+        64,
+        232
+      ],
+      "subject": "A Sigilbinder: a silent hooded figure in a long, tattered ink-black cloak, the face lost in the hood's shadow except for two faint glowing eyes, with a glowing magenta chain of interlocking rune links wound around the right arm.",
+      "poses": {
+        "idle": "standing perfectly still and upright, menacing and silent, arms hidden in the cloak except the chained right arm hanging at the side.",
+        "run_a": "running away fast, leaning forward, the left leg striding forward and the tattered cloak streaming out behind.",
+        "run_b": "running away fast, leaning forward, the right leg striding forward and the tattered cloak streaming out behind."
+      }
     },
     "stoneback_concept": {
       "kind": "concept",

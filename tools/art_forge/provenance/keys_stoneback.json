@@ -1,0 +1,2664 @@
+{
+ "asset": "tools/art_forge/keys/stoneback/",
+ "keys": {
+  "ball_e": {
+   "source_image": "ball_e_r0_gpt-image-2_f464acf0c1cd_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: rolled up completely into a tight, round stone ball: only the overlapping slate plates and the moss with its flowers are visible, no head or legs. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. In profile it stays short and round like the reference, with the head tucked close under the front of the shell. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_e_r0_gpt-image-2_9d501bb4b98a_0.png",
+      "sha256": "4fb5a4b076cb80d46b18c24faef0a98bff070a009bfc1e3e3256b5224cac9eea"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3064,
+     "completion_tokens": 391,
+     "total_tokens": 3455,
+     "cost": 0.033194,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.033194,
+      "upstream_inference_prompt_cost": 0.021464,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 9.6,
+    "created": "2026-10-25T04:10:38Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:41:48Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/ball_e_r0_gpt-image-2_f464acf0c1cd_1.png"
+  },
+  "ball_s": {
+   "source_image": "ball_s_r0_gpt-image-2_00fbf9a5ec7b_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: rolled up completely into a tight, round stone ball: only the overlapping slate plates and the moss with its flowers are visible, no head or legs. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_4892b563a40d_1.png",
+      "sha256": "d5078a3c7385832fe2c032e28eb9117bb56ae506e89b1a299cfe6465f5508ce6"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3024,
+     "completion_tokens": 391,
+     "total_tokens": 3415,
+     "cost": 0.032994,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.032994,
+      "upstream_inference_prompt_cost": 0.021264,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 11.6,
+    "created": "2026-10-25T04:10:37Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:41:32Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/ball_s_r0_gpt-image-2_00fbf9a5ec7b_0.png"
+  },
+  "cast_e": {
+   "source_image": "cast_e_r0_gpt-image-2_e6e6d5f4256f_0.png",
+   "source_path": "stoneback_hd/cast_e_r0_gpt-image-2_e6e6d5f4256f_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: stamping down hard with both front legs to make the ground shake, the shell tilted forward, the moss glowing bright green, small rocks jumping up around its feet. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. In profile it stays short and round like the reference, with the head tucked close under the front of the shell. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_e_r0_gpt-image-2_9d501bb4b98a_0.png",
+      "sha256": "4fb5a4b076cb80d46b18c24faef0a98bff070a009bfc1e3e3256b5224cac9eea"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3068,
+     "completion_tokens": 391,
+     "total_tokens": 3459,
+     "cost": 0.033214,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.033214,
+      "upstream_inference_prompt_cost": 0.021484,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 13.1,
+    "created": "2026-10-25T04:11:08Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 8.512,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 1.12,
+    "matched_to": "stand_e"
+   },
+   "installed": "2026-10-25T05:38:43Z",
+   "cleanup": []
+  },
+  "cast_n": {
+   "source_image": "cast_n_r0_gpt-image-2_486aafac0832_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature is seen from behind, facing away from the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: stamping down hard with both front legs to make the ground shake, the shell tilted forward, the moss glowing bright green, small rocks jumping up around its feet. Seen from directly behind, facing away from the viewer, exactly like the reference image: we see the back of the domed shell with its plates and the moss and flowers on top, the hind legs and the tail club; the head and face are hidden on the far side and must not be visible at all. Drawn at exactly the same scale as the reference, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_n_r0_gpt-image-2_e30ce9f6b1db_0.png",
+      "sha256": "5a69357df9ed8c8bcb3d30fa96369557e14a5a387a6b925bfbf96c9852ab0065"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3120,
+     "completion_tokens": 391,
+     "total_tokens": 3511,
+     "cost": 0.033474,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.033474,
+      "upstream_inference_prompt_cost": 0.021744,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 12.0,
+    "created": "2026-10-25T04:11:06Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:42:03Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/cast_n_r0_gpt-image-2_486aafac0832_1.png"
+  },
+  "cast_s": {
+   "source_image": "cast_s_r0_gpt-image-2_05198a0f4107_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: stamping down hard with both front legs to make the ground shake, the shell tilted forward, the moss glowing bright green, small rocks jumping up around its feet. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_4892b563a40d_1.png",
+      "sha256": "d5078a3c7385832fe2c032e28eb9117bb56ae506e89b1a299cfe6465f5508ce6"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3028,
+     "completion_tokens": 878,
+     "total_tokens": 3906,
+     "cost": 0.047624,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.047624,
+      "upstream_inference_prompt_cost": 0.021284,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 15.7,
+    "created": "2026-10-25T04:11:08Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:41:36Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/cast_s_r0_gpt-image-2_05198a0f4107_0.png"
+  },
+  "cast_wind_e": {
+   "source_image": "cast_wind_e_r0_gpt-image-2_29f53285c4e1_1.png",
+   "source_path": "stoneback_hd/cast_wind_e_r0_gpt-image-2_29f53285c4e1_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: rearing up on its hind legs to stamp, front legs lifted high, head raised, the moss on its back glowing a bright, soft green. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. In profile it stays short and round like the reference, with the head tucked close under the front of the shell. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_e_r0_gpt-image-2_9d501bb4b98a_0.png",
+      "sha256": "4fb5a4b076cb80d46b18c24faef0a98bff070a009bfc1e3e3256b5224cac9eea"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3064,
+     "completion_tokens": 635,
+     "total_tokens": 3699,
+     "cost": 0.040514,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.040514,
+      "upstream_inference_prompt_cost": 0.021464,
+      "upstream_inference_completions_cost": 0.01905
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 635
+     }
+    },
+    "seconds": 13.3,
+    "created": "2026-10-25T04:11:05Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 6.992,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 0.92,
+    "matched_to": "stand_e"
+   },
+   "installed": "2026-10-25T05:38:43Z",
+   "cleanup": []
+  },
+  "cast_wind_n": {
+   "source_image": "cast_wind_n_r0_gpt-image-2_ff5a46f0061d_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature is seen from behind, facing away from the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: rearing up on its hind legs to stamp, front legs lifted high, head raised, the moss on its back glowing a bright, soft green. Seen from directly behind, facing away from the viewer, exactly like the reference image: we see the back of the domed shell with its plates and the moss and flowers on top, the hind legs and the tail club; the head and face are hidden on the far side and must not be visible at all. Drawn at exactly the same scale as the reference, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_n_r0_gpt-image-2_e30ce9f6b1db_0.png",
+      "sha256": "5a69357df9ed8c8bcb3d30fa96369557e14a5a387a6b925bfbf96c9852ab0065"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3116,
+     "completion_tokens": 878,
+     "total_tokens": 3994,
+     "cost": 0.048064,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.048064,
+      "upstream_inference_prompt_cost": 0.021724,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 14.4,
+    "created": "2026-10-25T04:11:00Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:42:02Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/cast_wind_n_r0_gpt-image-2_ff5a46f0061d_0.png"
+  },
+  "cast_wind_s": {
+   "source_image": "cast_wind_s_r0_gpt-image-2_9b525c0d31f4_0.png",
+   "source_path": "stoneback_hd/cast_wind_s_r0_gpt-image-2_9b525c0d31f4_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: rearing up on its hind legs to stamp, front legs lifted high, head raised, the moss on its back glowing a bright, soft green. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_4892b563a40d_1.png",
+      "sha256": "d5078a3c7385832fe2c032e28eb9117bb56ae506e89b1a299cfe6465f5508ce6"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3024,
+     "completion_tokens": 391,
+     "total_tokens": 3415,
+     "cost": 0.032994,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.032994,
+      "upstream_inference_prompt_cost": 0.021264,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 13.5,
+    "created": "2026-10-25T04:10:57Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.992,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 0.92,
+    "matched_to": "stand_s"
+   },
+   "installed": "2026-10-25T05:38:37Z",
+   "cleanup": []
+  },
+  "crouch_e": {
+   "source_image": "crouch_e_r0_gpt-image-2_f7fe3d820680_0.png",
+   "source_path": "stoneback_hd/crouch_e_r0_gpt-image-2_f7fe3d820680_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: tucking in to roll: head and legs half pulled in under the shell, the shell lowered and curling forward, starting to become a ball. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. In profile it stays short and round like the reference, with the head tucked close under the front of the shell. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_e_r0_gpt-image-2_9d501bb4b98a_0.png",
+      "sha256": "4fb5a4b076cb80d46b18c24faef0a98bff070a009bfc1e3e3256b5224cac9eea"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3062,
+     "completion_tokens": 878,
+     "total_tokens": 3940,
+     "cost": 0.047794,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.047794,
+      "upstream_inference_prompt_cost": 0.021454,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 14.5,
+    "created": "2026-10-25T04:10:36Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 8.36,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 1.1,
+    "matched_to": "stand_e"
+   },
+   "installed": "2026-10-25T05:38:41Z",
+   "cleanup": []
+  },
+  "crouch_n": {
+   "source_image": "crouch_n_r0_gpt-image-2_f2e14388f8a0_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature is seen from behind, facing away from the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: tucking in to roll: head and legs half pulled in under the shell, the shell lowered and curling forward, starting to become a ball. Seen from directly behind, facing away from the viewer, exactly like the reference image: we see the back of the domed shell with its plates and the moss and flowers on top, the hind legs and the tail club; the head and face are hidden on the far side and must not be visible at all. Drawn at exactly the same scale as the reference, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_n_r0_gpt-image-2_e30ce9f6b1db_0.png",
+      "sha256": "5a69357df9ed8c8bcb3d30fa96369557e14a5a387a6b925bfbf96c9852ab0065"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3114,
+     "completion_tokens": 391,
+     "total_tokens": 3505,
+     "cost": 0.033444,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.033444,
+      "upstream_inference_prompt_cost": 0.021714,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 11.9,
+    "created": "2026-10-25T04:10:27Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:42:00Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/crouch_n_r0_gpt-image-2_f2e14388f8a0_0.png"
+  },
+  "crouch_s": {
+   "source_image": "crouch_s_r0_gpt-image-2_338405d4883a_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: tucking in to roll: head and legs half pulled in under the shell, the shell lowered and curling forward, starting to become a ball. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_4892b563a40d_1.png",
+      "sha256": "d5078a3c7385832fe2c032e28eb9117bb56ae506e89b1a299cfe6465f5508ce6"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3022,
+     "completion_tokens": 635,
+     "total_tokens": 3657,
+     "cost": 0.040304,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.040304,
+      "upstream_inference_prompt_cost": 0.021254,
+      "upstream_inference_completions_cost": 0.01905
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 635
+     }
+    },
+    "seconds": 19.1,
+    "created": "2026-10-25T04:10:33Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:41:32Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/crouch_s_r0_gpt-image-2_338405d4883a_0.png"
+  },
+  "dizzy_s": {
+   "source_image": "dizzy_s_r0_gpt-image-2_295aed781200_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: dazed and dizzy: wobbling with swirly, unfocused eyes, head drooping and tilted, legs splayed. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_4892b563a40d_1.png",
+      "sha256": "d5078a3c7385832fe2c032e28eb9117bb56ae506e89b1a299cfe6465f5508ce6"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3016,
+     "completion_tokens": 878,
+     "total_tokens": 3894,
+     "cost": 0.047564,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.047564,
+      "upstream_inference_prompt_cost": 0.021224,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 14.8,
+    "created": "2026-10-25T04:11:50Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:41:41Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/dizzy_s_r0_gpt-image-2_295aed781200_1.png"
+  },
+  "focus_e": {
+   "source_image": "focus_e_r0_gpt-image-2_c4aa2a2aedd0_1.png",
+   "source_path": "stoneback_hd/focus_e_r0_gpt-image-2_c4aa2a2aedd0_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: settled low with the legs tucked under and the eyes closed in calm concentration, the moss on its back glowing a soft bright green with tiny motes of light rising. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. In profile it stays short and round like the reference, with the head tucked close under the front of the shell. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_e_r0_gpt-image-2_9d501bb4b98a_0.png",
+      "sha256": "4fb5a4b076cb80d46b18c24faef0a98bff070a009bfc1e3e3256b5224cac9eea"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3070,
+     "completion_tokens": 878,
+     "total_tokens": 3948,
+     "cost": 0.047834,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.047834,
+      "upstream_inference_prompt_cost": 0.021494,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 14.9,
+    "created": "2026-10-25T04:11:34Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 8.056,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 1.06,
+    "matched_to": "stand_e"
+   },
+   "installed": "2026-10-25T05:38:45Z",
+   "cleanup": []
+  },
+  "focus_n": {
+   "source_image": "focus_n_r0_gpt-image-2_cc16e387bf6d_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature is seen from behind, facing away from the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: settled low with the legs tucked under and the eyes closed in calm concentration, the moss on its back glowing a soft bright green with tiny motes of light rising. Seen from directly behind, facing away from the viewer, exactly like the reference image: we see the back of the domed shell with its plates and the moss and flowers on top, the hind legs and the tail club; the head and face are hidden on the far side and must not be visible at all. Drawn at exactly the same scale as the reference, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_n_r0_gpt-image-2_e30ce9f6b1db_0.png",
+      "sha256": "5a69357df9ed8c8bcb3d30fa96369557e14a5a387a6b925bfbf96c9852ab0065"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3122,
+     "completion_tokens": 391,
+     "total_tokens": 3513,
+     "cost": 0.033484,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.033484,
+      "upstream_inference_prompt_cost": 0.021754,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 11.7,
+    "created": "2026-10-25T04:11:28Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:42:05Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/focus_n_r0_gpt-image-2_cc16e387bf6d_1.png"
+  },
+  "focus_s": {
+   "source_image": "focus_s_r0_gpt-image-2_2b78402e1ec6_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: settled low with the legs tucked under and the eyes closed in calm concentration, the moss on its back glowing a soft bright green with tiny motes of light rising. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_4892b563a40d_1.png",
+      "sha256": "d5078a3c7385832fe2c032e28eb9117bb56ae506e89b1a299cfe6465f5508ce6"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3030,
+     "completion_tokens": 878,
+     "total_tokens": 3908,
+     "cost": 0.047634,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.047634,
+      "upstream_inference_prompt_cost": 0.021294,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 15.0,
+    "created": "2026-10-25T04:11:28Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:41:38Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/focus_s_r0_gpt-image-2_2b78402e1ec6_1.png"
+  },
+  "guard_e": {
+   "source_image": "guard_e_r0_gpt-image-2_d779e4fc4ec5_0.png",
+   "source_path": "stoneback_hd/guard_e_r0_gpt-image-2_d779e4fc4ec5_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: withdrawn into its shell for defence: head and legs pulled almost completely inside, the heavy stone brow and plates lowered to the floor like a fortress, eyes peeking out of the dark gap. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. In profile it stays short and round like the reference, with the head tucked close under the front of the shell. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_e_r0_gpt-image-2_9d501bb4b98a_0.png",
+      "sha256": "4fb5a4b076cb80d46b18c24faef0a98bff070a009bfc1e3e3256b5224cac9eea"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3080,
+     "completion_tokens": 391,
+     "total_tokens": 3471,
+     "cost": 0.033274,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.033274,
+      "upstream_inference_prompt_cost": 0.021544,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 11.0,
+    "created": "2026-10-25T04:11:35Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 8.588,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 1.13,
+    "matched_to": "stand_e"
+   },
+   "installed": "2026-10-25T05:38:45Z",
+   "cleanup": []
+  },
+  "guard_n": {
+   "source_image": "guard_n_r0_gpt-image-2_3541cfa50017_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature is seen from behind, facing away from the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: withdrawn into its shell for defence: head and legs pulled almost completely inside, the heavy stone brow and plates lowered to the floor like a fortress, eyes peeking out of the dark gap. Seen from directly behind, facing away from the viewer, exactly like the reference image: we see the back of the domed shell with its plates and the moss and flowers on top, the hind legs and the tail club; the head and face are hidden on the far side and must not be visible at all. Drawn at exactly the same scale as the reference, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_n_r0_gpt-image-2_e30ce9f6b1db_0.png",
+      "sha256": "5a69357df9ed8c8bcb3d30fa96369557e14a5a387a6b925bfbf96c9852ab0065"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3132,
+     "completion_tokens": 391,
+     "total_tokens": 3523,
+     "cost": 0.033534,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.033534,
+      "upstream_inference_prompt_cost": 0.021804,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 10.9,
+    "created": "2026-10-25T04:11:33Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:42:06Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/guard_n_r0_gpt-image-2_3541cfa50017_0.png"
+  },
+  "guard_s": {
+   "source_image": "guard_s_r0_gpt-image-2_98a24d18b9f5_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: withdrawn into its shell for defence: head and legs pulled almost completely inside, the heavy stone brow and plates lowered to the floor like a fortress, eyes peeking out of the dark gap. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_4892b563a40d_1.png",
+      "sha256": "d5078a3c7385832fe2c032e28eb9117bb56ae506e89b1a299cfe6465f5508ce6"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3040,
+     "completion_tokens": 878,
+     "total_tokens": 3918,
+     "cost": 0.047684,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.047684,
+      "upstream_inference_prompt_cost": 0.021344,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 15.6,
+    "created": "2026-10-25T04:11:37Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:41:39Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/guard_s_r0_gpt-image-2_98a24d18b9f5_0.png"
+  },
+  "hurt_e": {
+   "source_image": "hurt_e_r0_gpt-image-2_6d407cf8402a_0.png",
+   "source_path": "stoneback_hd/hurt_e_r0_gpt-image-2_6d407cf8402a_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: flinching from a hit: the shell jolted and tilted back, eyes squeezed shut, mouth open in a grunt, a chip of stone flying off. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. In profile it stays short and round like the reference, with the head tucked close under the front of the shell. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_e_r0_gpt-image-2_9d501bb4b98a_0.png",
+      "sha256": "4fb5a4b076cb80d46b18c24faef0a98bff070a009bfc1e3e3256b5224cac9eea"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3068,
+     "completion_tokens": 878,
+     "total_tokens": 3946,
+     "cost": 0.047824,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.047824,
+      "upstream_inference_prompt_cost": 0.021484,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 15.0,
+    "created": "2026-10-25T04:11:49Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 8.056,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 1.06,
+    "matched_to": "stand_e"
+   },
+   "installed": "2026-10-25T05:38:46Z",
+   "cleanup": []
+  },
+  "hurt_n": {
+   "source_image": "hurt_n_r0_gpt-image-2_77bf668ebf6d_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature is seen from behind, facing away from the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: flinching from a hit: the shell jolted and tilted back, eyes squeezed shut, mouth open in a grunt, a chip of stone flying off. Seen from directly behind, facing away from the viewer, exactly like the reference image: we see the back of the domed shell with its plates and the moss and flowers on top, the hind legs and the tail club; the head and face are hidden on the far side and must not be visible at all. Drawn at exactly the same scale as the reference, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_n_r0_gpt-image-2_e30ce9f6b1db_0.png",
+      "sha256": "5a69357df9ed8c8bcb3d30fa96369557e14a5a387a6b925bfbf96c9852ab0065"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3120,
+     "completion_tokens": 391,
+     "total_tokens": 3511,
+     "cost": 0.033474,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.033474,
+      "upstream_inference_prompt_cost": 0.021744,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 13.9,
+    "created": "2026-10-25T04:11:43Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:42:07Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/hurt_n_r0_gpt-image-2_77bf668ebf6d_1.png"
+  },
+  "hurt_s": {
+   "source_image": "hurt_s_r0_gpt-image-2_6bc39b2b3160_0.png",
+   "source_path": "stoneback_hd/hurt_s_r0_gpt-image-2_6bc39b2b3160_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: flinching from a hit: the shell jolted and tilted back, eyes squeezed shut, mouth open in a grunt, a chip of stone flying off. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_4892b563a40d_1.png",
+      "sha256": "d5078a3c7385832fe2c032e28eb9117bb56ae506e89b1a299cfe6465f5508ce6"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3028,
+     "completion_tokens": 878,
+     "total_tokens": 3906,
+     "cost": 0.047624,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.047624,
+      "upstream_inference_prompt_cost": 0.021284,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 15.7,
+    "created": "2026-10-25T04:11:45Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.22,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 0.95,
+    "matched_to": "stand_s"
+   },
+   "installed": "2026-10-25T05:38:39Z",
+   "cleanup": []
+  },
+  "ko_fall_s": {
+   "source_image": "ko_fall_s_r0_gpt-image-2_207b012f6965_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: knocked out and toppling over onto its back, legs in the air, eyes shut. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_4892b563a40d_1.png",
+      "sha256": "d5078a3c7385832fe2c032e28eb9117bb56ae506e89b1a299cfe6465f5508ce6"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3000,
+     "completion_tokens": 878,
+     "total_tokens": 3878,
+     "cost": 0.047484,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.047484,
+      "upstream_inference_prompt_cost": 0.021144,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 14.9,
+    "created": "2026-10-25T04:11:51Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:41:42Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/ko_fall_s_r0_gpt-image-2_207b012f6965_1.png"
+  },
+  "ko_lie_s": {
+   "source_image": "ko_lie_s_r0_gpt-image-2_dfb1b05df87a_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: knocked out, lying upside down on its shell with the stubby legs limp in the air and the eyes shut. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_4892b563a40d_1.png",
+      "sha256": "d5078a3c7385832fe2c032e28eb9117bb56ae506e89b1a299cfe6465f5508ce6"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3010,
+     "completion_tokens": 391,
+     "total_tokens": 3401,
+     "cost": 0.032924,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.032924,
+      "upstream_inference_prompt_cost": 0.021194,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 11.1,
+    "created": "2026-10-25T04:11:49Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:41:43Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/ko_lie_s_r0_gpt-image-2_dfb1b05df87a_0.png"
+  },
+  "land_e": {
+   "source_image": "land_e_r0_gpt-image-2_0bc15d954f2f_1.png",
+   "source_path": "stoneback_hd/land_e_r0_gpt-image-2_0bc15d954f2f_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: coming out of its ball with a heavy thud: legs splayed out wide to brake, the shell still low and tilted forward, head popping out, dust kicked up. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. In profile it stays short and round like the reference, with the head tucked close under the front of the shell. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_e_r0_gpt-image-2_9d501bb4b98a_0.png",
+      "sha256": "4fb5a4b076cb80d46b18c24faef0a98bff070a009bfc1e3e3256b5224cac9eea"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3074,
+     "completion_tokens": 878,
+     "total_tokens": 3952,
+     "cost": 0.047854,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.047854,
+      "upstream_inference_prompt_cost": 0.021514,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 14.7,
+    "created": "2026-10-25T04:10:52Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 8.056,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 1.06,
+    "matched_to": "stand_e"
+   },
+   "installed": "2026-10-25T05:38:42Z",
+   "cleanup": []
+  },
+  "land_n": {
+   "source_image": "land_n_r0_gpt-image-2_1a1519a45ef1_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature is seen from behind, facing away from the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: coming out of its ball with a heavy thud: legs splayed out wide to brake, the shell still low and tilted forward, head popping out, dust kicked up. Seen from directly behind, facing away from the viewer, exactly like the reference image: we see the back of the domed shell with its plates and the moss and flowers on top, the hind legs and the tail club; the head and face are hidden on the far side and must not be visible at all. Drawn at exactly the same scale as the reference, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_n_r0_gpt-image-2_e30ce9f6b1db_0.png",
+      "sha256": "5a69357df9ed8c8bcb3d30fa96369557e14a5a387a6b925bfbf96c9852ab0065"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3126,
+     "completion_tokens": 391,
+     "total_tokens": 3517,
+     "cost": 0.033504,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.033504,
+      "upstream_inference_prompt_cost": 0.021774,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 10.6,
+    "created": "2026-10-25T04:10:45Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:42:01Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/land_n_r0_gpt-image-2_1a1519a45ef1_0.png"
+  },
+  "land_s": {
+   "source_image": "land_s_r0_gpt-image-2_64fb79b5495d_1.png",
+   "source_path": "stoneback_hd/land_s_r0_gpt-image-2_64fb79b5495d_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: coming out of its ball with a heavy thud: legs splayed out wide to brake, the shell still low and tilted forward, head popping out, dust kicked up. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_4892b563a40d_1.png",
+      "sha256": "d5078a3c7385832fe2c032e28eb9117bb56ae506e89b1a299cfe6465f5508ce6"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3034,
+     "completion_tokens": 391,
+     "total_tokens": 3425,
+     "cost": 0.033044,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.033044,
+      "upstream_inference_prompt_cost": 0.021314,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 13.4,
+    "created": "2026-10-25T04:10:42Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 8.056,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 1.06,
+    "matched_to": "stand_s"
+   },
+   "installed": "2026-10-25T05:38:36Z",
+   "cleanup": []
+  },
+  "melee_e": {
+   "source_image": "melee_e_r0_gpt-image-2_85c2d63d2f7e_1.png",
+   "source_path": "stoneback_hd/melee_e_r0_gpt-image-2_85c2d63d2f7e_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: slamming its stone tail club around in a heavy swipe, the body twisted, the club at the end of the swing. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. In profile it stays short and round like the reference, with the head tucked close under the front of the shell. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_e_r0_gpt-image-2_9d501bb4b98a_0.png",
+      "sha256": "4fb5a4b076cb80d46b18c24faef0a98bff070a009bfc1e3e3256b5224cac9eea"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3054,
+     "completion_tokens": 878,
+     "total_tokens": 3932,
+     "cost": 0.047754,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.047754,
+      "upstream_inference_prompt_cost": 0.021414,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 14.1,
+    "created": "2026-10-25T04:11:23Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 6.992,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 0.92,
+    "matched_to": "stand_e"
+   },
+   "installed": "2026-10-25T05:38:44Z",
+   "cleanup": []
+  },
+  "melee_n": {
+   "source_image": "melee_n_r0_gpt-image-2_6294e7683e6a_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature is seen from behind, facing away from the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: slamming its stone tail club around in a heavy swipe, the body twisted, the club at the end of the swing. Seen from directly behind, facing away from the viewer, exactly like the reference image: we see the back of the domed shell with its plates and the moss and flowers on top, the hind legs and the tail club; the head and face are hidden on the far side and must not be visible at all. Drawn at exactly the same scale as the reference, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_n_r0_gpt-image-2_e30ce9f6b1db_0.png",
+      "sha256": "5a69357df9ed8c8bcb3d30fa96369557e14a5a387a6b925bfbf96c9852ab0065"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3106,
+     "completion_tokens": 391,
+     "total_tokens": 3497,
+     "cost": 0.033404,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.033404,
+      "upstream_inference_prompt_cost": 0.021674,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 11.6,
+    "created": "2026-10-25T04:11:21Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:42:04Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/melee_n_r0_gpt-image-2_6294e7683e6a_0.png"
+  },
+  "melee_s": {
+   "source_image": "melee_s_r0_gpt-image-2_98f559a9d708_1.png",
+   "source_path": "stoneback_hd/melee_s_r0_gpt-image-2_98f559a9d708_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: slamming its stone tail club around in a heavy swipe, the body twisted, the club at the end of the swing. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_4892b563a40d_1.png",
+      "sha256": "d5078a3c7385832fe2c032e28eb9117bb56ae506e89b1a299cfe6465f5508ce6"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3014,
+     "completion_tokens": 391,
+     "total_tokens": 3405,
+     "cost": 0.032944,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.032944,
+      "upstream_inference_prompt_cost": 0.021214,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 13.0,
+    "created": "2026-10-25T04:11:20Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 7.22,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 0.95,
+    "matched_to": "stand_s"
+   },
+   "installed": "2026-10-25T05:38:38Z",
+   "cleanup": []
+  },
+  "melee_wind_e": {
+   "source_image": "melee_wind_e_r0_gpt-image-2_d5933b813da1_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: swinging its tail club back for a strike, the body twisted, head turned to look at the target. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. In profile it stays short and round like the reference, with the head tucked close under the front of the shell. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_e_r0_gpt-image-2_9d501bb4b98a_0.png",
+      "sha256": "4fb5a4b076cb80d46b18c24faef0a98bff070a009bfc1e3e3256b5224cac9eea"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3046,
+     "completion_tokens": 391,
+     "total_tokens": 3437,
+     "cost": 0.033104,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.033104,
+      "upstream_inference_prompt_cost": 0.021374,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 11.7,
+    "created": "2026-10-25T04:11:18Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:41:53Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/melee_wind_e_r0_gpt-image-2_d5933b813da1_0.png"
+  },
+  "melee_wind_n": {
+   "source_image": "melee_wind_n_r0_gpt-image-2_dc5af880e916_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature is seen from behind, facing away from the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: swinging its tail club back for a strike, the body twisted, head turned to look at the target. Seen from directly behind, facing away from the viewer, exactly like the reference image: we see the back of the domed shell with its plates and the moss and flowers on top, the hind legs and the tail club; the head and face are hidden on the far side and must not be visible at all. Drawn at exactly the same scale as the reference, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_n_r0_gpt-image-2_e30ce9f6b1db_0.png",
+      "sha256": "5a69357df9ed8c8bcb3d30fa96369557e14a5a387a6b925bfbf96c9852ab0065"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3098,
+     "completion_tokens": 878,
+     "total_tokens": 3976,
+     "cost": 0.047974,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.047974,
+      "upstream_inference_prompt_cost": 0.021634,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 14.6,
+    "created": "2026-10-25T04:11:16Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:42:04Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/melee_wind_n_r0_gpt-image-2_dc5af880e916_0.png"
+  },
+  "melee_wind_s": {
+   "source_image": "melee_wind_s_r0_gpt-image-2_f66b7d8900a5_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: swinging its tail club back for a strike, the body twisted, head turned to look at the target. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_4892b563a40d_1.png",
+      "sha256": "d5078a3c7385832fe2c032e28eb9117bb56ae506e89b1a299cfe6465f5508ce6"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3006,
+     "completion_tokens": 878,
+     "total_tokens": 3884,
+     "cost": 0.047514,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.047514,
+      "upstream_inference_prompt_cost": 0.021174,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 14.5,
+    "created": "2026-10-25T04:11:12Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:41:37Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/melee_wind_s_r0_gpt-image-2_f66b7d8900a5_0.png"
+  },
+  "ram_e": {
+   "source_image": "ram_e_r0_gpt-image-2_4d193f5e9a45_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: the moment of a crushing shell-first ram: rolled into a tight ball and slammed into a foe, the ball squashed a little flat from the impact, with bits of stone and moss flying. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. In profile it stays short and round like the reference, with the head tucked close under the front of the shell. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_e_r0_gpt-image-2_9d501bb4b98a_0.png",
+      "sha256": "4fb5a4b076cb80d46b18c24faef0a98bff070a009bfc1e3e3256b5224cac9eea"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3082,
+     "completion_tokens": 878,
+     "total_tokens": 3960,
+     "cost": 0.047894,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.047894,
+      "upstream_inference_prompt_cost": 0.021554,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 15.1,
+    "created": "2026-10-25T04:10:54Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:41:50Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/ram_e_r0_gpt-image-2_4d193f5e9a45_1.png"
+  },
+  "ram_n": {
+   "source_image": "ram_n_r0_gpt-image-2_6d43963d9a2a_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature is seen from behind, facing away from the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: the moment of a crushing shell-first ram: rolled into a tight ball and slammed into a foe, the ball squashed a little flat from the impact, with bits of stone and moss flying. Seen from directly behind, facing away from the viewer, exactly like the reference image: we see the back of the domed shell with its plates and the moss and flowers on top, the hind legs and the tail club; the head and face are hidden on the far side and must not be visible at all. Drawn at exactly the same scale as the reference, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_n_r0_gpt-image-2_e30ce9f6b1db_0.png",
+      "sha256": "5a69357df9ed8c8bcb3d30fa96369557e14a5a387a6b925bfbf96c9852ab0065"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3134,
+     "completion_tokens": 391,
+     "total_tokens": 3525,
+     "cost": 0.033544,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.033544,
+      "upstream_inference_prompt_cost": 0.021814,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 11.9,
+    "created": "2026-10-25T04:10:50Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:42:01Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/ram_n_r0_gpt-image-2_6d43963d9a2a_0.png"
+  },
+  "ram_s": {
+   "source_image": "ram_s_r0_gpt-image-2_2d24e0453394_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: the moment of a crushing shell-first ram: rolled into a tight ball and slammed into a foe, the ball squashed a little flat from the impact, with bits of stone and moss flying. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_4892b563a40d_1.png",
+      "sha256": "d5078a3c7385832fe2c032e28eb9117bb56ae506e89b1a299cfe6465f5508ce6"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3042,
+     "completion_tokens": 878,
+     "total_tokens": 3920,
+     "cost": 0.047694,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.047694,
+      "upstream_inference_prompt_cost": 0.021354,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 15.7,
+    "created": "2026-10-25T04:10:53Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:41:34Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/ram_s_r0_gpt-image-2_2d24e0453394_0.png"
+  },
+  "ready_e": {
+   "source_image": "ready_e_r0_gpt-image-2_be0107c6b7c4_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: a heavy, braced battle stance: legs planted wide, the shell lowered, head pushed forward under the stone brow with the glowing eyes fixed on a foe, the tail club raised. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. In profile it stays short and round like the reference, with the head tucked close under the front of the shell. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_e_r0_gpt-image-2_9d501bb4b98a_0.png",
+      "sha256": "4fb5a4b076cb80d46b18c24faef0a98bff070a009bfc1e3e3256b5224cac9eea"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3078,
+     "completion_tokens": 391,
+     "total_tokens": 3469,
+     "cost": 0.033264,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.033264,
+      "upstream_inference_prompt_cost": 0.021534,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 21.3,
+    "created": "2026-10-25T04:10:21Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:41:46Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/ready_e_r0_gpt-image-2_be0107c6b7c4_1.png"
+  },
+  "ready_n": {
+   "source_image": "ready_n_r0_gpt-image-2_61d1f472213c_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature is seen from behind, facing away from the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: a heavy, braced battle stance: legs planted wide, the shell lowered, head pushed forward under the stone brow with the glowing eyes fixed on a foe, the tail club raised. Seen from directly behind, facing away from the viewer, exactly like the reference image: we see the back of the domed shell with its plates and the moss and flowers on top, the hind legs and the tail club; the head and face are hidden on the far side and must not be visible at all. Drawn at exactly the same scale as the reference, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_n_r0_gpt-image-2_e30ce9f6b1db_0.png",
+      "sha256": "5a69357df9ed8c8bcb3d30fa96369557e14a5a387a6b925bfbf96c9852ab0065"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3130,
+     "completion_tokens": 391,
+     "total_tokens": 3521,
+     "cost": 0.033524,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.033524,
+      "upstream_inference_prompt_cost": 0.021794,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 13.0,
+    "created": "2026-10-25T04:10:12Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:41:58Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/ready_n_r0_gpt-image-2_61d1f472213c_0.png"
+  },
+  "ready_s": {
+   "source_image": "ready_s_r0_gpt-image-2_4635ca7dc582_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: a heavy, braced battle stance: legs planted wide, the shell lowered, head pushed forward under the stone brow with the glowing eyes fixed on a foe, the tail club raised. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_4892b563a40d_1.png",
+      "sha256": "d5078a3c7385832fe2c032e28eb9117bb56ae506e89b1a299cfe6465f5508ce6"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3038,
+     "completion_tokens": 878,
+     "total_tokens": 3916,
+     "cost": 0.047674,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.047674,
+      "upstream_inference_prompt_cost": 0.021334,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 14.7,
+    "created": "2026-10-25T04:10:14Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:41:29Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/ready_s_r0_gpt-image-2_4635ca7dc582_0.png"
+  },
+  "sleep_s": {
+   "source_image": "sleep_s_r0_gpt-image-2_26e461bdccb7_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: fast asleep: settled flat on its belly with the legs tucked under, eyes shut, head resting on the floor, peaceful. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_4892b563a40d_1.png",
+      "sha256": "d5078a3c7385832fe2c032e28eb9117bb56ae506e89b1a299cfe6465f5508ce6"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3014,
+     "completion_tokens": 878,
+     "total_tokens": 3892,
+     "cost": 0.047554,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.047554,
+      "upstream_inference_prompt_cost": 0.021214,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 13.0,
+    "created": "2026-10-25T04:11:59Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:41:44Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/sleep_s_r0_gpt-image-2_26e461bdccb7_0.png"
+  },
+  "stand_e": {
+   "source_image": "stand_e_r0_gpt-image-2_9d501bb4b98a_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: standing calmly on its four stubby legs, head out under the brow, sleepy half-closed eyes. The reference shows it from the front; this picture shows the same creature in profile facing right. In profile it is short and round, nearly as tall as it is long, like a boulder on legs: the high domed shell, the head poking out only a little at the front under the stone brow, and the tail club tucked against the back of the shell. Drawn at exactly the same scale as the reference. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 3,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_4892b563a40d_1.png",
+      "sha256": "d5078a3c7385832fe2c032e28eb9117bb56ae506e89b1a299cfe6465f5508ce6"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 4653,
+     "completion_tokens": 586,
+     "total_tokens": 5239,
+     "cost": 0.050061,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.050061,
+      "upstream_inference_prompt_cost": 0.032481,
+      "upstream_inference_completions_cost": 0.01758
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 586
+     }
+    },
+    "seconds": 12.2,
+    "created": "2026-10-25T03:54:32Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:41:45Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/stand_e_r0_gpt-image-2_9d501bb4b98a_0.png"
+  },
+  "stand_n": {
+   "source_image": "stand_n_r0_gpt-image-2_e30ce9f6b1db_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature is seen from behind, facing away from the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: standing calmly on its four stubby legs, head out under the brow, sleepy half-closed eyes. The first reference shows it from the front; this picture shows the same creature from directly behind, like the middle view of the second reference: we see only the back of the domed shell with its curved plates and the moss and flowers on top, the two stubby hind legs and the short tail club hanging down in the middle. The head and face are completely hidden on the far side. Drawn at exactly the same scale as the first reference. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 3,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_4892b563a40d_1.png",
+      "sha256": "d5078a3c7385832fe2c032e28eb9117bb56ae506e89b1a299cfe6465f5508ce6"
+     },
+     {
+      "file": "r0_gpt-image-2_b8ce1b572fb9_1.png",
+      "sha256": "b1abd4184909c9073389075cc416666b44866d10419ccd58ab204b0794ca0285"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 9279,
+     "completion_tokens": 830,
+     "total_tokens": 10109,
+     "cost": 0.094335,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.094335,
+      "upstream_inference_prompt_cost": 0.069435,
+      "upstream_inference_completions_cost": 0.0249
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 830
+     }
+    },
+    "seconds": 16.5,
+    "created": "2026-10-25T03:54:36Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:41:57Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/stand_n_r0_gpt-image-2_e30ce9f6b1db_0.png"
+  },
+  "stand_s": {
+   "source_image": "stand_s_r0_gpt-image-2_4892b563a40d_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: standing calmly on its four stubby legs, head out under the brow, sleepy half-closed eyes. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "r0_gpt-image-2_b8ce1b572fb9_1.png",
+      "sha256": "b1abd4184909c9073389075cc416666b44866d10419ccd58ab204b0794ca0285"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3958,
+     "completion_tokens": 635,
+     "total_tokens": 4593,
+     "cost": 0.048056,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.048056,
+      "upstream_inference_prompt_cost": 0.029006,
+      "upstream_inference_completions_cost": 0.01905
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 635
+     }
+    },
+    "seconds": 13.3,
+    "created": "2026-10-25T03:49:25Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:41:28Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/stand_s_r0_gpt-image-2_4892b563a40d_1.png"
+  },
+  "victory_s": {
+   "source_image": "victory_s_r0_gpt-image-2_66d1f8f9c07d_0.png",
+   "source_path": "stoneback_hd/victory_s_r0_gpt-image-2_66d1f8f9c07d_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: celebrating a win: rearing up proudly on its hind legs with the front legs raised, eyes happily closed, mouth open in a cheer, the flowers on its moss in full bloom. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_4892b563a40d_1.png",
+      "sha256": "d5078a3c7385832fe2c032e28eb9117bb56ae506e89b1a299cfe6465f5508ce6"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3038,
+     "completion_tokens": 391,
+     "total_tokens": 3429,
+     "cost": 0.033064,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.033064,
+      "upstream_inference_prompt_cost": 0.021334,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 11.0,
+    "created": "2026-10-25T04:11:55Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.916,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 0.91,
+    "matched_to": "stand_s"
+   },
+   "installed": "2026-10-25T05:38:40Z",
+   "cleanup": []
+  },
+  "walk_a_e": {
+   "source_image": "walk_a_e_r0_gpt-image-2_092f927218be_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: plodding forward, mid-step: the near front leg and the far hind leg step forward while the other two push back. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. In profile it stays short and round like the reference, with the head tucked close under the front of the shell. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_e_r0_gpt-image-2_9d501bb4b98a_0.png",
+      "sha256": "4fb5a4b076cb80d46b18c24faef0a98bff070a009bfc1e3e3256b5224cac9eea"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3056,
+     "completion_tokens": 391,
+     "total_tokens": 3447,
+     "cost": 0.033154,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.033154,
+      "upstream_inference_prompt_cost": 0.021424,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 11.3,
+    "created": "2026-10-25T04:10:11Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:41:46Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/walk_a_e_r0_gpt-image-2_092f927218be_0.png"
+  },
+  "walk_a_n": {
+   "source_image": "walk_a_n_r0_gpt-image-2_74174be8a243_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature is seen from behind, facing away from the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: plodding forward, mid-step: the near front leg and the far hind leg step forward while the other two push back. Seen from directly behind, facing away from the viewer, exactly like the reference image: we see the back of the domed shell with its plates and the moss and flowers on top, the hind legs and the tail club; the head and face are hidden on the far side and must not be visible at all. Drawn at exactly the same scale as the reference, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_n_r0_gpt-image-2_e30ce9f6b1db_0.png",
+      "sha256": "5a69357df9ed8c8bcb3d30fa96369557e14a5a387a6b925bfbf96c9852ab0065"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3108,
+     "completion_tokens": 391,
+     "total_tokens": 3499,
+     "cost": 0.033414,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.033414,
+      "upstream_inference_prompt_cost": 0.021684,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 12.2,
+    "created": "2026-10-25T04:10:12Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:41:58Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/walk_a_n_r0_gpt-image-2_74174be8a243_0.png"
+  },
+  "walk_a_s": {
+   "source_image": "walk_a_s_r0_gpt-image-2_40b6c4d53494_0.png",
+   "source_path": "stoneback_hd/walk_a_s_r0_gpt-image-2_40b6c4d53494_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: plodding forward, mid-step: the near front leg and the far hind leg step forward while the other two push back. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_4892b563a40d_1.png",
+      "sha256": "d5078a3c7385832fe2c032e28eb9117bb56ae506e89b1a299cfe6465f5508ce6"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3016,
+     "completion_tokens": 878,
+     "total_tokens": 3894,
+     "cost": 0.047564,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.047564,
+      "upstream_inference_prompt_cost": 0.021224,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 13.9,
+    "created": "2026-10-25T04:10:13Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.22,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 0.95,
+    "matched_to": "stand_s"
+   },
+   "installed": "2026-10-25T05:38:35Z",
+   "cleanup": []
+  },
+  "walk_b_e": {
+   "source_image": "walk_b_e_r0_gpt-image-2_992dee680a40_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: plodding forward, mid-step: the far front leg and the near hind leg step forward while the other two push back. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. In profile it stays short and round like the reference, with the head tucked close under the front of the shell. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_e_r0_gpt-image-2_9d501bb4b98a_0.png",
+      "sha256": "4fb5a4b076cb80d46b18c24faef0a98bff070a009bfc1e3e3256b5224cac9eea"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3056,
+     "completion_tokens": 391,
+     "total_tokens": 3447,
+     "cost": 0.033154,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.033154,
+      "upstream_inference_prompt_cost": 0.021424,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 12.4,
+    "created": "2026-10-25T04:10:26Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:41:47Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/walk_b_e_r0_gpt-image-2_992dee680a40_0.png"
+  },
+  "walk_b_n": {
+   "source_image": "walk_b_n_r0_gpt-image-2_a51dcca858d7_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature is seen from behind, facing away from the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: plodding forward, mid-step: the far front leg and the near hind leg step forward while the other two push back. Seen from directly behind, facing away from the viewer, exactly like the reference image: we see the back of the domed shell with its plates and the moss and flowers on top, the hind legs and the tail club; the head and face are hidden on the far side and must not be visible at all. Drawn at exactly the same scale as the reference, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_n_r0_gpt-image-2_e30ce9f6b1db_0.png",
+      "sha256": "5a69357df9ed8c8bcb3d30fa96369557e14a5a387a6b925bfbf96c9852ab0065"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3108,
+     "completion_tokens": 391,
+     "total_tokens": 3499,
+     "cost": 0.033414,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.033414,
+      "upstream_inference_prompt_cost": 0.021684,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 11.3,
+    "created": "2026-10-25T04:10:24Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:41:59Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/walk_b_n_r0_gpt-image-2_a51dcca858d7_1.png"
+  },
+  "walk_b_s": {
+   "source_image": "walk_b_s_r0_gpt-image-2_81c6ff335065_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature is about three fifths of the picture width wide; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Stoneback, a heavy stone-element creature like a small armadillo with a tall, high, rounded dome of a shell, a little taller than it is wide, like a rounded boulder: overlapping slate blue-grey stone plates in curved bands with chipped edges and faint cracks, a thick cushion of green moss with tiny white and pale-yellow flowers growing on the crown of the dome, a broad blunt warm-brown snout and face peeking out from under a heavy stone brow, small glowing amber eyes, stubby warm-brown legs with pale claws, and a short tail ending in a round stone club. In profile the body is short and compact, almost round, with the head tucked close under the front of the shell and the tail club tucked close behind, so every view fits inside a square. Sleepy, stubborn and sturdy. Pose: plodding forward, mid-step: the far front leg and the near hind leg step forward while the other two push back. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_4892b563a40d_1.png",
+      "sha256": "d5078a3c7385832fe2c032e28eb9117bb56ae506e89b1a299cfe6465f5508ce6"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3016,
+     "completion_tokens": 878,
+     "total_tokens": 3894,
+     "cost": 0.047564,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.047564,
+      "upstream_inference_prompt_cost": 0.021224,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 16.0,
+    "created": "2026-10-25T04:10:28Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 7.6,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_stoneback_0",
+     "hd_stoneback_1",
+     "hd_stoneback_2",
+     "hd_stoneback_3",
+     "hd_stoneback_4"
+    ]
+   },
+   "installed": "2026-10-25T04:41:31Z",
+   "cleanup": [],
+   "source_path": "stoneback_hd/walk_b_s_r0_gpt-image-2_81c6ff335065_1.png"
+  }
+ },
+ "palette": {
+  "sources": [
+   "stand_s_r0_gpt-image-2_4892b563a40d_1.png",
+   "stand_e_r0_gpt-image-2_9d501bb4b98a_0.png",
+   "stand_n_r0_gpt-image-2_e30ce9f6b1db_0.png",
+   "cast_s_r0_gpt-image-2_05198a0f4107_0.png",
+   "focus_s_r0_gpt-image-2_2b78402e1ec6_1.png",
+   "focus_e_r0_gpt-image-2_c4aa2a2aedd0_1.png",
+   "hurt_s_r0_gpt-image-2_6bc39b2b3160_0.png",
+   "ram_s_r0_gpt-image-2_2d24e0453394_0.png",
+   "melee_s_r0_gpt-image-2_98f559a9d708_1.png",
+   "victory_s_r0_gpt-image-2_66d1f8f9c07d_0.png",
+   "ko_lie_s_r0_gpt-image-2_dfb1b05df87a_0.png",
+   "guard_s_r0_gpt-image-2_98a24d18b9f5_0.png",
+   "land_e_r0_gpt-image-2_0bc15d954f2f_1.png",
+   "ball_s_r0_gpt-image-2_00fbf9a5ec7b_0.png",
+   "sleep_s_r0_gpt-image-2_26e461bdccb7_0.png",
+   "dizzy_s_r0_gpt-image-2_295aed781200_1.png"
+  ],
+  "k": 48,
+  "ramps": [
+   [
+    "#d8550e"
+   ],
+   [
+    "#2b190e",
+    "#3b2414",
+    "#4a2e1a",
+    "#583820",
+    "#674326",
+    "#764e2d",
+    "#865a34",
+    "#95683c",
+    "#a67746",
+    "#b98752",
+    "#d1985d",
+    "#e5ad66",
+    "#efc693",
+    "#ebdac6"
+   ],
+   [
+    "#877957",
+    "#eedf37"
+   ],
+   [
+    "#162208",
+    "#24340b",
+    "#31450e",
+    "#3f5510",
+    "#506812",
+    "#647b14",
+    "#7b8f18",
+    "#94a31b",
+    "#afba1f"
+   ],
+   [
+    "#120e17",
+    "#181214",
+    "#1e1b22",
+    "#28252c",
+    "#322f36",
+    "#3b373f",
+    "#423e47",
+    "#494550",
+    "#504d5a",
+    "#585563",
+    "#615e6d",
+    "#6a6876",
+    "#74727e",
+    "#7e7c86",
+    "#8a878e",
+    "#949196",
+    "#a09c9d",
+    "#afa9a8",
+    "#c9beb7",
+    "#fbf5e7"
+   ]
+  ]
+ }
+}

@@ -36,6 +36,11 @@ func set_sheet(s: SpriteSheet) -> void:
 		_use_placeholder()
 		return
 	_mat.set_shader_parameter("sheet", s.texture)
+	# HD-2D lighting through the sheet's normal map, when it has one.
+	_mat.set_shader_parameter("normal_sheet", s.normal_texture)
+	_mat.set_shader_parameter("has_normal_map", s.normal_texture != null)
+	for k: String in s.lighting:
+		_mat.set_shader_parameter(k, s.lighting[k])
 	_mat.set_shader_parameter("sheet_size", s.texture.get_size())
 	_mat.set_shader_parameter("frame_size", s.frame_size)
 	_mat.set_shader_parameter("columns", float(s.columns))
@@ -174,6 +179,7 @@ func _use_placeholder() -> void:
 				img.set_pixel(x, y, Color(0.85, 0.5, 0.75) if dx * dx + dy * dy < 0.8 else Color(0.25, 0.1, 0.25))
 	var tex := ImageTexture.create_from_image(img)
 	_mat.set_shader_parameter("sheet", tex)
+	_mat.set_shader_parameter("has_normal_map", false)
 	_mat.set_shader_parameter("sheet_size", Vector2(32, 40))
 	_mat.set_shader_parameter("frame_size", Vector2(32, 40))
 	_mat.set_shader_parameter("columns", 1.0)

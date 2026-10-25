@@ -20,6 +20,7 @@ from pix import col
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 from common.sheet import SheetBuilder  # noqa: E402
+from portraits import installed_by_art_forge  # noqa: E402
 
 S = 2
 DW, DH = 32, 48
@@ -126,7 +127,10 @@ def draw_totem(rot: float = 0.0, bits: int = 0):
     return cv.render()
 
 
-def build(out_dir: str) -> SheetBuilder:
+def build(out_dir: str):
+    if installed_by_art_forge(out_dir, "training_totem"):
+        print("  props       training_totem       kept (HD sheet from tools/art_forge)")
+        return []
     sb = SheetBuilder("training_totem", W, H, PIVOT, columns=8, pixels_per_unit=PPU,
                       meta={"kind": "prop", "generator": "tools/sprite_forge/props.py", "scale": S})
     idle = [draw_totem(0.0)]

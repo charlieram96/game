@@ -19,6 +19,7 @@ from pix import col
 
 sys.path.insert(0, "/home/user/game/tools")
 from common.sheet import SheetBuilder  # noqa: E402
+from portraits import installed_by_art_forge  # noqa: E402
 
 CLOAK, INNER, BOOT, SIG = "ink", "soot", "soot", "sigil"
 TALL = dict(ADULT, hip_y=31.0, sh_y=20.6, head_y=11.8, neck_y=18.6, sh_dx=5.8, hand_dx=7.2, hand_y=29.4)
@@ -221,7 +222,10 @@ def animations():
 ORDER = ["idle_s", "idle_e", "run_e"]
 
 
-def build(out_dir: str) -> SheetBuilder:
+def build(out_dir: str):
+    if installed_by_art_forge(out_dir, "sigilbinder"):
+        print("  characters  sigilbinder          kept (HD sheet from tools/art_forge)")
+        return []
     A = animations()
     sb = SheetBuilder("sigilbinder", W, H, PIVOT, columns=8, meta={"kind": "character", "role": "antagonist",
                                                                    "generator": "tools/sprite_forge/sigilbinder.py"})

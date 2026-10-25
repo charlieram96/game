@@ -18,6 +18,7 @@ from pix import Shape, bezier, col
 
 sys.path.insert(0, "/home/user/game/tools")
 from common.sheet import SheetBuilder  # noqa: E402
+from portraits import installed_by_art_forge  # noqa: E402
 
 W = H = 48
 PIVOT = (24, 46)
@@ -209,7 +210,10 @@ def animations():
 ORDER = ["hover_s", "hover_e"]
 
 
-def build(out_dir: str) -> SheetBuilder:
+def build(out_dir: str):
+    if installed_by_art_forge(out_dir, "lanternmoth"):
+        print("  kith        lanternmoth          kept (HD sheet from tools/art_forge)")
+        return []
     A = animations()
     sb = SheetBuilder("lanternmoth", W, H, PIVOT, columns=8, meta={"kind": "kith", "element": "light", "partner_of": "hesper",
                                                                    "generator": "tools/sprite_forge/lanternmoth.py"})

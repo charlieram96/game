@@ -1,0 +1,598 @@
+{
+ "asset": "tools/art_forge/keys/hesper/",
+ "keys": {
+  "idle_e": {
+   "source_image": "idle_e_r0_gpt-image-2_265fd6346dc0_1.png",
+   "source_path": "hesper_hd/idle_e_r0_gpt-image-2_265fd6346dc0_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Warden Hesper, the elder warden of a forest village, a woman in her sixties: silver-grey hair pulled up into a neat round bun with a few loose strands, light skin with laugh lines, kind blue-grey eyes behind small round gold-rimmed spectacles, a long high-collared plum coat with a row of gold buttons over a cream blouse, sturdy brown shoes, and a gnarled wooden staff a little taller than she is, with a small glowing brass lantern hanging from its curled top. Warm and wry, with a stern edge. Pose: standing upright and composed, one hand resting on the staff planted beside her. The reference is the character's turnaround sheet: draw this character exactly as in the right view (the profile), alone and larger, with the same outfit, colours and proportions. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "r0_gpt-image-2_bb9d11c099b8_0.png",
+      "sha256": "523a75f4534d63f9c42878768c44849f96e7fee82328fc3afb373bff56610178"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3930,
+     "completion_tokens": 686,
+     "total_tokens": 4616,
+     "cost": 0.049446,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.049446,
+      "upstream_inference_prompt_cost": 0.028866,
+      "upstream_inference_completions_cost": 0.02058
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 686
+     }
+    },
+    "seconds": 15.8,
+    "created": "2026-10-25T05:03:34Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 6.895,
+    "scale": 1.0,
+    "tolerance": 48.0
+   },
+   "installed": "2026-10-25T05:39:47Z",
+   "cleanup": []
+  },
+  "idle_n": {
+   "source_image": "idle_n_r0_gpt-image-2_9fda3a099e94_0.png",
+   "source_path": "hesper_hd/idle_n_r0_gpt-image-2_9fda3a099e94_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character is seen from directly behind, facing away from the viewer; the face is hidden. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Warden Hesper, the elder warden of a forest village, a woman in her sixties: silver-grey hair pulled up into a neat round bun with a few loose strands, light skin with laugh lines, kind blue-grey eyes behind small round gold-rimmed spectacles, a long high-collared plum coat with a row of gold buttons over a cream blouse, sturdy brown shoes, and a gnarled wooden staff a little taller than she is, with a small glowing brass lantern hanging from its curled top. Warm and wry, with a stern edge. Pose: standing upright and composed, one hand resting on the staff planted beside her. The reference is the character's turnaround sheet: draw this character exactly as in the middle view (the back), alone and larger, with the same outfit, colours and proportions. Seen from directly behind: the face is hidden and must not be visible. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "r0_gpt-image-2_bb9d11c099b8_0.png",
+      "sha256": "523a75f4534d63f9c42878768c44849f96e7fee82328fc3afb373bff56610178"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3976,
+     "completion_tokens": 501,
+     "total_tokens": 4477,
+     "cost": 0.044126,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.044126,
+      "upstream_inference_prompt_cost": 0.029096,
+      "upstream_inference_completions_cost": 0.01503
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 501
+     }
+    },
+    "seconds": 14.6,
+    "created": "2026-10-25T05:03:33Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.405,
+    "scale": 1.0,
+    "tolerance": 48.0
+   },
+   "installed": "2026-10-25T05:39:46Z",
+   "cleanup": []
+  },
+  "idle_s": {
+   "source_image": "idle_s_r0_gpt-image-2_9699dfe27ac5_0.png",
+   "source_path": "hesper_hd/idle_s_r0_gpt-image-2_9699dfe27ac5_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Warden Hesper, the elder warden of a forest village, a woman in her sixties: silver-grey hair pulled up into a neat round bun with a few loose strands, light skin with laugh lines, kind blue-grey eyes behind small round gold-rimmed spectacles, a long high-collared plum coat with a row of gold buttons over a cream blouse, sturdy brown shoes, and a gnarled wooden staff a little taller than she is, with a small glowing brass lantern hanging from its curled top. Warm and wry, with a stern edge. Pose: standing upright and composed, one hand resting on the staff planted beside her. The reference is the character's turnaround sheet: draw this character exactly as in the left view (the front), alone and larger, with the same outfit, colours and proportions. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "r0_gpt-image-2_bb9d11c099b8_0.png",
+      "sha256": "523a75f4534d63f9c42878768c44849f96e7fee82328fc3afb373bff56610178"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3936,
+     "completion_tokens": 686,
+     "total_tokens": 4622,
+     "cost": 0.049476,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.049476,
+      "upstream_inference_prompt_cost": 0.028896,
+      "upstream_inference_completions_cost": 0.02058
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 686
+     }
+    },
+    "seconds": 15.4,
+    "created": "2026-10-25T05:03:33Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.79,
+    "scale": 1.0,
+    "tolerance": 48.0
+   },
+   "installed": "2026-10-25T05:39:45Z",
+   "cleanup": []
+  },
+  "point_e": {
+   "source_image": "point_e_r0_gpt-image-2_90e77452ccc6_0.png",
+   "source_path": "hesper_hd/point_e_r0_gpt-image-2_90e77452ccc6_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Warden Hesper, the elder warden of a forest village, a woman in her sixties: silver-grey hair pulled up into a neat round bun with a few loose strands, light skin with laugh lines, kind blue-grey eyes behind small round gold-rimmed spectacles, a long high-collared plum coat with a row of gold buttons over a cream blouse, sturdy brown shoes, and a gnarled wooden staff a little taller than she is, with a small glowing brass lantern hanging from its curled top. Warm and wry, with a stern edge. Pose: pointing ahead with one arm outstretched, the staff held in the other hand. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_e_r0_gpt-image-2_265fd6346dc0_1.png",
+      "sha256": "fe4853c256191708e02f318ab856a5b9e98a0fd1012cc037bbbb04c4049fa199"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3940,
+     "completion_tokens": 501,
+     "total_tokens": 4441,
+     "cost": 0.043946,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.043946,
+      "upstream_inference_prompt_cost": 0.028916,
+      "upstream_inference_completions_cost": 0.01503
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 501
+     }
+    },
+    "seconds": 14.0,
+    "created": "2026-10-25T05:11:20Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.205,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 0.9,
+    "matched_to": "idle_e"
+   },
+   "installed": "2026-10-25T05:41:12Z",
+   "cleanup": []
+  },
+  "talk_s": {
+   "source_image": "talk_s_r0_gpt-image-2_83e467ed824b_0.png",
+   "source_path": "hesper_hd/talk_s_r0_gpt-image-2_83e467ed824b_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Warden Hesper, the elder warden of a forest village, a woman in her sixties: silver-grey hair pulled up into a neat round bun with a few loose strands, light skin with laugh lines, kind blue-grey eyes behind small round gold-rimmed spectacles, a long high-collared plum coat with a row of gold buttons over a cream blouse, sturdy brown shoes, and a gnarled wooden staff a little taller than she is, with a small glowing brass lantern hanging from its curled top. Warm and wry, with a stern edge. Pose: talking calmly, one hand raised as she explains something, the other holding the staff. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_s_r0_gpt-image-2_9699dfe27ac5_0.png",
+      "sha256": "5f458ec668416a818ee1a6f2ceaff12c375aed7d7647fd3be7a2aea09c5833cb"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3946,
+     "completion_tokens": 1715,
+     "total_tokens": 5661,
+     "cost": 0.080396,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.080396,
+      "upstream_inference_prompt_cost": 0.028946,
+      "upstream_inference_completions_cost": 0.05145
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 1715
+     }
+    },
+    "seconds": 25.4,
+    "created": "2026-10-25T05:11:30Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.79,
+    "scale": 1.0,
+    "tolerance": 48.0
+   },
+   "installed": "2026-10-25T05:39:55Z",
+   "cleanup": []
+  },
+  "walk_a_e": {
+   "source_image": "walk_a_e_r0_gpt-image-2_731213fe384a_0.png",
+   "source_path": "hesper_hd/walk_a_e_r0_gpt-image-2_731213fe384a_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Warden Hesper, the elder warden of a forest village, a woman in her sixties: silver-grey hair pulled up into a neat round bun with a few loose strands, light skin with laugh lines, kind blue-grey eyes behind small round gold-rimmed spectacles, a long high-collared plum coat with a row of gold buttons over a cream blouse, sturdy brown shoes, and a gnarled wooden staff a little taller than she is, with a small glowing brass lantern hanging from its curled top. Warm and wry, with a stern edge. Pose: walking with the staff in one hand, mid-stride with the left leg forward. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_e_r0_gpt-image-2_265fd6346dc0_1.png",
+      "sha256": "fe4853c256191708e02f318ab856a5b9e98a0fd1012cc037bbbb04c4049fa199"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3940,
+     "completion_tokens": 501,
+     "total_tokens": 4441,
+     "cost": 0.043946,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.043946,
+      "upstream_inference_prompt_cost": 0.028916,
+      "upstream_inference_completions_cost": 0.01503
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 501
+     }
+    },
+    "seconds": 14.6,
+    "created": "2026-10-25T05:11:04Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.688,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 0.97,
+    "matched_to": "idle_e"
+   },
+   "installed": "2026-10-25T05:41:14Z",
+   "cleanup": []
+  },
+  "walk_a_n": {
+   "source_image": "walk_a_n_r0_gpt-image-2_3a5f3f7faefc_0.png",
+   "source_path": "hesper_hd/walk_a_n_r0_gpt-image-2_3a5f3f7faefc_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character is seen from directly behind, facing away from the viewer; the face is hidden. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Warden Hesper, the elder warden of a forest village, a woman in her sixties: silver-grey hair pulled up into a neat round bun with a few loose strands, light skin with laugh lines, kind blue-grey eyes behind small round gold-rimmed spectacles, a long high-collared plum coat with a row of gold buttons over a cream blouse, sturdy brown shoes, and a gnarled wooden staff a little taller than she is, with a small glowing brass lantern hanging from its curled top. Warm and wry, with a stern edge. Pose: walking with the staff in one hand, mid-stride with the left leg forward. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. Seen from directly behind: the face is hidden and must not be visible. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_n_r0_gpt-image-2_9fda3a099e94_0.png",
+      "sha256": "da2bdb59989a806c0975f8d6da98a4968c992b60440cbbce5ea190340a3f2ca2"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3986,
+     "completion_tokens": 315,
+     "total_tokens": 4301,
+     "cost": 0.038596,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.038596,
+      "upstream_inference_prompt_cost": 0.029146,
+      "upstream_inference_completions_cost": 0.00945
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 315
+     }
+    },
+    "seconds": 15.6,
+    "created": "2026-10-25T05:11:04Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.085,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 0.95,
+    "matched_to": "idle_n"
+   },
+   "installed": "2026-10-25T05:41:10Z",
+   "cleanup": []
+  },
+  "walk_a_s": {
+   "source_image": "walk_a_s_r0_gpt-image-2_cfdebc202e76_0.png",
+   "source_path": "hesper_hd/walk_a_s_r0_gpt-image-2_cfdebc202e76_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Warden Hesper, the elder warden of a forest village, a woman in her sixties: silver-grey hair pulled up into a neat round bun with a few loose strands, light skin with laugh lines, kind blue-grey eyes behind small round gold-rimmed spectacles, a long high-collared plum coat with a row of gold buttons over a cream blouse, sturdy brown shoes, and a gnarled wooden staff a little taller than she is, with a small glowing brass lantern hanging from its curled top. Warm and wry, with a stern edge. Pose: walking with the staff in one hand, mid-stride with the left leg forward. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_s_r0_gpt-image-2_9699dfe27ac5_0.png",
+      "sha256": "5f458ec668416a818ee1a6f2ceaff12c375aed7d7647fd3be7a2aea09c5833cb"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3946,
+     "completion_tokens": 2744,
+     "total_tokens": 6690,
+     "cost": 0.111266,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.111266,
+      "upstream_inference_prompt_cost": 0.028946,
+      "upstream_inference_completions_cost": 0.08232
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 2744
+     }
+    },
+    "seconds": 23.5,
+    "created": "2026-10-25T05:11:07Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.79,
+    "scale": 1.0,
+    "tolerance": 48.0
+   },
+   "installed": "2026-10-25T05:39:48Z",
+   "cleanup": []
+  },
+  "walk_b_e": {
+   "source_image": "walk_b_e_r0_gpt-image-2_2cdd5faa0a31_0.png",
+   "source_path": "hesper_hd/walk_b_e_r0_gpt-image-2_2cdd5faa0a31_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Warden Hesper, the elder warden of a forest village, a woman in her sixties: silver-grey hair pulled up into a neat round bun with a few loose strands, light skin with laugh lines, kind blue-grey eyes behind small round gold-rimmed spectacles, a long high-collared plum coat with a row of gold buttons over a cream blouse, sturdy brown shoes, and a gnarled wooden staff a little taller than she is, with a small glowing brass lantern hanging from its curled top. Warm and wry, with a stern edge. Pose: walking with the staff in one hand, mid-stride with the right leg forward. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_e_r0_gpt-image-2_265fd6346dc0_1.png",
+      "sha256": "fe4853c256191708e02f318ab856a5b9e98a0fd1012cc037bbbb04c4049fa199"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3940,
+     "completion_tokens": 315,
+     "total_tokens": 4255,
+     "cost": 0.038366,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.038366,
+      "upstream_inference_prompt_cost": 0.028916,
+      "upstream_inference_completions_cost": 0.00945
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 315
+     }
+    },
+    "seconds": 13.7,
+    "created": "2026-10-25T05:11:12Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.688,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 0.97,
+    "matched_to": "idle_e"
+   },
+   "installed": "2026-10-25T05:41:15Z",
+   "cleanup": []
+  },
+  "walk_b_n": {
+   "source_image": "walk_b_n_r0_gpt-image-2_bdad41855813_0.png",
+   "source_path": "hesper_hd/walk_b_n_r0_gpt-image-2_bdad41855813_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character is seen from directly behind, facing away from the viewer; the face is hidden. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Warden Hesper, the elder warden of a forest village, a woman in her sixties: silver-grey hair pulled up into a neat round bun with a few loose strands, light skin with laugh lines, kind blue-grey eyes behind small round gold-rimmed spectacles, a long high-collared plum coat with a row of gold buttons over a cream blouse, sturdy brown shoes, and a gnarled wooden staff a little taller than she is, with a small glowing brass lantern hanging from its curled top. Warm and wry, with a stern edge. Pose: walking with the staff in one hand, mid-stride with the right leg forward. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. Seen from directly behind: the face is hidden and must not be visible. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_n_r0_gpt-image-2_9fda3a099e94_0.png",
+      "sha256": "da2bdb59989a806c0975f8d6da98a4968c992b60440cbbce5ea190340a3f2ca2"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3986,
+     "completion_tokens": 315,
+     "total_tokens": 4301,
+     "cost": 0.038596,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.038596,
+      "upstream_inference_prompt_cost": 0.029146,
+      "upstream_inference_completions_cost": 0.00945
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 315
+     }
+    },
+    "seconds": 11.6,
+    "created": "2026-10-25T05:11:07Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.405,
+    "scale": 1.0,
+    "tolerance": 48.0
+   },
+   "installed": "2026-10-25T05:39:51Z",
+   "cleanup": []
+  },
+  "walk_b_s": {
+   "source_image": "walk_b_s_r0_gpt-image-2_1f64044318ac_0.png",
+   "source_path": "hesper_hd/walk_b_s_r0_gpt-image-2_1f64044318ac_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Warden Hesper, the elder warden of a forest village, a woman in her sixties: silver-grey hair pulled up into a neat round bun with a few loose strands, light skin with laugh lines, kind blue-grey eyes behind small round gold-rimmed spectacles, a long high-collared plum coat with a row of gold buttons over a cream blouse, sturdy brown shoes, and a gnarled wooden staff a little taller than she is, with a small glowing brass lantern hanging from its curled top. Warm and wry, with a stern edge. Pose: walking with the staff in one hand, mid-stride with the right leg forward. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_s_r0_gpt-image-2_9699dfe27ac5_0.png",
+      "sha256": "5f458ec668416a818ee1a6f2ceaff12c375aed7d7647fd3be7a2aea09c5833cb"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3946,
+     "completion_tokens": 686,
+     "total_tokens": 4632,
+     "cost": 0.049526,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.049526,
+      "upstream_inference_prompt_cost": 0.028946,
+      "upstream_inference_completions_cost": 0.02058
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 686
+     }
+    },
+    "seconds": 14.4,
+    "created": "2026-10-25T05:11:10Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.586,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 0.97,
+    "matched_to": "idle_s"
+   },
+   "installed": "2026-10-25T05:41:09Z",
+   "cleanup": []
+  }
+ },
+ "palette": {
+  "sources": [
+   "idle_s_r0_gpt-image-2_9699dfe27ac5_0.png",
+   "idle_n_r0_gpt-image-2_9fda3a099e94_0.png",
+   "idle_e_r0_gpt-image-2_265fd6346dc0_1.png",
+   "talk_s_r0_gpt-image-2_83e467ed824b_0.png",
+   "point_e_r0_gpt-image-2_90e77452ccc6_0.png"
+  ],
+  "k": 44,
+  "ramps": [
+   [
+    "#954773",
+    "#a24c7f",
+    "#ab5681",
+    "#c0688f"
+   ],
+   [
+    "#2d191a",
+    "#3d2013"
+   ],
+   [
+    "#3b2135",
+    "#4e2443",
+    "#592a4b",
+    "#662d55",
+    "#74335f",
+    "#873b70",
+    "#8e3f72"
+   ],
+   [
+    "#4d2917",
+    "#5e321b",
+    "#6f3b1f",
+    "#804523",
+    "#905029",
+    "#a05b2f",
+    "#b06635",
+    "#c0723d",
+    "#cf7f45",
+    "#dd8e51",
+    "#e89d5e",
+    "#efaf79",
+    "#f4c08c"
+   ],
+   [
+    "#a38c6a",
+    "#f7b448",
+    "#fcd46e",
+    "#fadca8"
+   ],
+   [
+    "#120e17",
+    "#211315",
+    "#494450",
+    "#605a67",
+    "#756f7b",
+    "#89848e",
+    "#9c979e",
+    "#afa9ac",
+    "#bfbbbe",
+    "#d0cccc",
+    "#e2dedb",
+    "#faf5e5"
+   ]
+  ]
+ }
+}

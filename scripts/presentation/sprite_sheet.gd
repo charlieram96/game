@@ -3,16 +3,24 @@ extends RefCounted
 ## Runtime view of an art sheet: texture + manifest (see tools/common/sheet.py).
 ## Direction fallback: <anim>_<dir> -> <anim>_s -> <anim>. West mirrors east.
 
+const LIGHTING_KEYS := ["shade_floor", "normal_strength", "rim_strength", "rim_power"]
+
 static var _cache: Dictionary = {}
 
 var path: String = ""
 var texture: Texture2D
+## Optional normal map in the sheet's layout (manifest "normal_map"): rgb is
+## the screen-aligned normal, alpha the emission mask (see pixel_sprite.gdshader).
+var normal_texture: Texture2D
 var frame_size := Vector2(48, 48)
 var columns := 1
 var frame_count := 1
 var pivot := Vector2(24, 44)
 var pixels_per_unit := 24.0
 var animations: Dictionary = {}  # name -> {"frames": Array, "fps": float, "loop": bool}
+## Per-sheet lighting response (manifest "lighting"): shader parameters such as
+## shade_floor, normal_strength, rim_strength and rim_power (see pixel_sprite.gdshader).
+var lighting: Dictionary = {}
 var valid := false
 
 
@@ -58,6 +66,13 @@ func _load(manifest_path: String) -> void:
 		push_warning("Missing sprite image: %s" % image_path)
 		return
 	texture = load(image_path)
+	var normal_name := str(data.get("normal_map", ""))
+	if normal_name != "":
+		var normal_path := manifest_path.get_base_dir().path_join(normal_name)
+		if ResourceLoader.exists(normal_path):
+			normal_texture = load(normal_path)
+		else:
+			push_warning("Missing normal map: %s" % normal_path)
 	var fs: Array = data.get("frame_size", [48, 48])
 	frame_size = Vector2(float(fs[0]), float(fs[1]))
 	columns = int(data.get("columns", 1))
@@ -66,6 +81,11 @@ func _load(manifest_path: String) -> void:
 	pivot = Vector2(float(pv[0]), float(pv[1]))
 	pixels_per_unit = float(data.get("pixels_per_unit", 24))
 	animations = data.get("animations", {})
+	var light_data: Variant = data.get("lighting", {})
+	if light_data is Dictionary:
+		for k: String in light_data:
+			if k in LIGHTING_KEYS:
+				lighting[k] = float(light_data[k])
 	valid = texture != null
 
 

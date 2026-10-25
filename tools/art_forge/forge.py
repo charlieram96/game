@@ -47,14 +47,20 @@ def get_brief(briefs: dict, brief_id: str) -> dict:
     return briefs["briefs"][brief_id]
 
 
-def compose_prompt(briefs: dict, brief_id: str, view: str | None = None, expr: str | None = None, with_refs: bool = False) -> str:
+def compose_prompt(briefs: dict, brief_id: str, view: str | None = None, expr: str | None = None, with_refs: bool = False,
+                   pose: str | None = None, note: str | None = None) -> str:
     brief = get_brief(briefs, brief_id)
     kind = briefs["kinds"][brief["kind"]]
     parts = [kind["style"]]
+    # the brief may override the kind's framing (how big the subject is drawn), the kind the shared views
+    framing = brief.get("framing", kind.get("framing"))
+    if framing:
+        parts.append(framing)
+    views = kind.get("views", briefs["views"])
     if view:
-        if view not in briefs["views"]:
-            sys.exit(f"unknown view '{view}' (use {', '.join(briefs['views'])})")
-        parts.append(briefs["views"][view])
+        if view not in views:
+            sys.exit(f"unknown view '{view}' (use {', '.join(views)})")
+        parts.append(views[view])
     if with_refs:
         parts.append("Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings.")
     parts.append("Subject: " + brief["subject"])
@@ -63,6 +69,16 @@ def compose_prompt(briefs: dict, brief_id: str, view: str | None = None, expr: s
         if expr not in expressions:
             sys.exit(f"brief '{brief_id}' has no expression '{expr}' (has: {', '.join(expressions) or 'none'})")
         parts.append("Expression: " + expressions[expr] + ".")
+    if pose:
+        poses = brief.get("poses", {})
+        if pose not in poses:
+            sys.exit(f"brief '{brief_id}' has no pose '{pose}' (has: {', '.join(poses) or 'none'})")
+        text = poses[pose]
+        if isinstance(text, dict):  # per-view wording, with an optional shared "all"
+            text = " ".join(t for t in (text.get("all"), text.get(view or "s")) if t)
+        parts.append("Pose: " + text)
+    if note:
+        parts.append(note)
     parts.append(briefs["originality"])
     return " ".join(parts)
 
@@ -91,10 +107,10 @@ def generate(briefs: dict, brief_id: str, model: str, count: int, args: argparse
     brief = get_brief(briefs, brief_id)
     kind = briefs["kinds"][brief["kind"]]
     refs = [Path(r) for r in (args.ref or [])]
-    prompt = compose_prompt(briefs, brief_id, args.view, args.expr, bool(refs))
+    prompt = compose_prompt(briefs, brief_id, args.view, args.expr, bool(refs), getattr(args, "pose", None), getattr(args, "note", None))
     entry = OR.find_model(model, models())
     batch = OR.max_batch(entry)
-    tag = "_".join(x for x in (args.view, args.expr, tag_extra) if x)
+    tag = "_".join(x for x in (getattr(args, "pose", None), args.view, args.expr, tag_extra) if x)
     saved: list[Path] = []
     rounds = 0
     while len(saved) < count:
@@ -119,7 +135,7 @@ def generate(briefs: dict, brief_id: str, model: str, count: int, args: argparse
 
 
 def cmd_prompt(args: argparse.Namespace) -> None:
-    print(compose_prompt(load_briefs(), args.brief, args.view, args.expr, bool(args.ref)))
+    print(compose_prompt(load_briefs(), args.brief, args.view, args.expr, bool(args.ref), args.pose, args.note))
 
 
 def cmd_gen(args: argparse.Namespace) -> None:
@@ -308,6 +324,8 @@ def main() -> None:
         p.add_argument("brief")
         p.add_argument("--view", choices=["s", "n", "e"])
         p.add_argument("--expr")
+        p.add_argument("--pose", help="a pose from the brief's `poses` (sprite_hd briefs)")
+        p.add_argument("--note", help="extra direction appended to the prompt (kept in the sidecar's prompt)")
         p.add_argument("--ref", nargs="*", help="reference images for a consistent design")
         p.add_argument("--count", type=int, default=2)
         p.add_argument("--aspect")
@@ -322,6 +340,8 @@ def main() -> None:
     p.add_argument("brief")
     p.add_argument("--view", choices=["s", "n", "e"])
     p.add_argument("--expr")
+    p.add_argument("--pose")
+    p.add_argument("--note")
     p.add_argument("--ref", nargs="*")
     p.set_defaults(func=cmd_prompt)
 

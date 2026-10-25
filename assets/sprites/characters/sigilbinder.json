@@ -1,30 +1,31 @@
 {
  "version": 1,
  "image": "sigilbinder.png",
+ "normal_map": "sigilbinder_normal.png",
  "frame_size": [
-  32,
-  48
+  160,
+  240
  ],
  "columns": 8,
  "frame_count": 8,
  "pivot": [
-  16,
-  45
+  80,
+  232
  ],
- "pixels_per_unit": 24,
+ "pixels_per_unit": 112,
  "animations": {
   "idle_e": {
    "frames": [
-    2,
-    3
+    0,
+    1
    ],
    "fps": 2,
    "loop": true
   },
   "idle_s": {
    "frames": [
-    0,
-    1
+    2,
+    3
    ],
    "fps": 2,
    "loop": true
@@ -40,9 +41,18 @@
    "loop": true
   }
  },
+ "lighting": {
+  "shade_floor": 0.3,
+  "rim_strength": 1.2,
+  "rim_power": 3.0
+ },
  "meta": {
   "kind": "character",
   "role": "antagonist",
-  "generator": "tools/sprite_forge/sigilbinder.py"
+  "route": "art_forge (gpt-image-2 key poses)",
+  "generator": "tools/art_forge/animate.py",
+  "recipe": "tools/art_forge/sheets/sigilbinder.py",
+  "keys": "tools/art_forge/keys/sigilbinder/",
+  "provenance": "tools/art_forge/provenance/keys_sigilbinder.json"
  }
 }

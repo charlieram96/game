@@ -148,16 +148,29 @@ rewards. It never trusts client-provided inventory, XP, damage or results.
 * **Sprites:** `PixelSprite3D` is an upright, Y-axis billboard quad with a
   pixel-art shader. "Smooth pixel" sampling keeps texels crisp at any scale
   and anti-aliases texel edges by one screen pixel, so pixels don't
-  shimmer. The shader also does hit flash, outline glow, dithered dissolve,
+  shimmer (when a texel is smaller than a pixel it takes a plain bilinear
+  tap). The shader also does hit flash, outline glow, dithered dissolve,
   auto-emission for the brightest pixels (embers, lanterns, eyes) and wind
   sway. A height stretch of
   1/cos(camera pitch) keeps sprites from looking squashed. In the overworld,
   foliage between the camera and the explorer dithers out
   (shader globals `occluder_*`).
+* **Sprite lighting:** a sheet with a normal map (the HD sheets) is lit
+  through it by the sun and every point light: each texel has its own
+  screen-aligned normal, a wrap term keeps the painted shading readable on
+  the dark side, and a rim light picks out the silhouette's edges on the
+  side facing a light (brightest for lights behind the sprite, such as a
+  brazier). The normal map's alpha marks what glows (flames, lanterns,
+  eyes), so only those pixels bloom. In the shadow pass the card keeps the
+  main camera's orientation (`MAIN_CAM_INV_VIEW_MATRIX`), so a sprite that
+  casts shadows casts the silhouette that is on screen and never shadows
+  itself. Sheets without a normal map are lit as before.
 * **Sprite sheet contract:** a PNG plus a JSON manifest with frame size,
-  columns, pivot (feet), 24 pixels per unit, and animations as
-  `<name>_<dir>` with directions `s` / `n` / `e` (west mirrors east). Each
-  animation has frame lists, fps and a loop flag.
+  columns, pivot (feet), pixels per unit (24 for the procedural sheets, 112
+  for the HD sheets), and animations as `<name>_<dir>` with directions
+  `s` / `n` / `e` (west mirrors east). Each animation has frame lists, fps
+  and a loop flag. Optional: `normal_map` (a PNG in the sheet's layout) and
+  `lighting` (the sheet's shade floor and rim strength).
 * **World:** a triplanar pixel-textured world shader, splat-mapped terrain,
   MultiMesh foliage, water, blob shadows, directional sun shadows, and
   lighting presets (morning, day, golden, dusk, night) with fog and glow.
@@ -265,16 +278,16 @@ These are AI proxies, not human playtests.
 
 ## Asset pipeline
 
-All audio and nearly all art is generated from code. There are no source
-art files, no samples and no borrowed melodies. Builds are deterministic
-(seeded per asset name), and each forge validates its own output. The
-exceptions are the dialogue portraits and the web loading key art: image-model
-paintings rebuilt as palette-locked pixel art by `tools/art_forge`, each with
-a provenance record.
+All audio and most art is generated from code. There are no source art
+files, no samples and no borrowed melodies. Builds are deterministic (seeded
+per asset name), and each forge validates its own output. The exceptions are
+the HD character and kith sheets, the dialogue portraits and the web loading
+key art: image-model paintings rebuilt as palette-locked pixel art by
+`tools/art_forge`, each with a provenance record.
 
 | Forge | Produces | Command |
 | --- | --- | --- |
-| `tools/sprite_forge` | Characters, kith and props (shaded volumetric parts, rigs per character family, 1 px material outlines, binary alpha), plus fallback portraits it never writes over art_forge ones | `python3 tools/sprite_forge/build.py` |
+| `tools/sprite_forge` | The crowd, plus procedural fallbacks for the characters, kith, totem and portraits (shaded volumetric parts, rigs per character family, 1 px material outlines, binary alpha); it never writes over a sheet art_forge installed | `python3 tools/sprite_forge/build.py` |
 | `tools/env_forge` | 48x48 seamless textures, foliage, props, the Dawncrane mural, VFX sheets, UI icons and 9-slice panels | `python3 tools/env_forge/build.py` |
 | `tools/audio_forge` | 87 SFX (44.1 kHz mono) and 6 music cues (32 kHz mono; loops carry `smpl` loop points and are rendered circularly) | `python3 tools/audio_forge/build.py` |
 
@@ -282,9 +295,12 @@ a provenance record.
 writes prompts from the briefs in `briefs.json`, checks each request against
 the model's published parameters and records provenance. `pixelize.py` turns
 the paintings into palette-locked pixel art in the same sheet contract. It
-made the 128x128 dialogue portraits (`assets/sprites/portraits/`) and the
-web loading key art (`export/web/keyart.png`). The API key is read from
-`OPENROUTER_API_KEY` and never stored. See its README.
+made the HD sheets of the kith, the people and the training totem (112 px
+per unit, each with a normal map: key poses painted per view, then
+registered, in-betweened and normal-mapped by `animate.py`), the 128x128
+dialogue portraits (`assets/sprites/portraits/`) and the web loading key art
+(`export/web/keyart.png`). The API key is read from `OPENROUTER_API_KEY` and
+never stored. See its README.
 
 Shared palette and sheet-contract code is in `tools/common/`. See each
 forge's README for details. The music is stored as WAV in the repository;

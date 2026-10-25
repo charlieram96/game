@@ -13,6 +13,7 @@ from pix import col
 
 sys.path.insert(0, "/home/user/game/tools")
 from common.sheet import SheetBuilder  # noqa: E402
+from portraits import installed_by_art_forge  # noqa: E402
 
 # ============================================================================
 # FARMER: wide straw hat, green overalls over a cream shirt, light skin, grey moustache
@@ -346,9 +347,13 @@ def _build(name, D, out_dir, role):
 
 
 def build(out_dir: str):
-    farmer = _build("villager_farmer", {v: farmer_draw(v) for v in "sne"}, out_dir, "villager")
-    baker = _build("villager_baker", {v: baker_draw(v) for v in "sne"}, out_dir, "villager")
-    return [farmer, baker]
+    sheets = []
+    for name, draw in (("villager_farmer", farmer_draw), ("villager_baker", baker_draw)):
+        if installed_by_art_forge(out_dir, name):
+            print(f"  characters  {name:20s} kept (HD sheet from tools/art_forge)")
+            continue
+        sheets.append(_build(name, {v: draw(v) for v in "sne"}, out_dir, "villager"))
+    return sheets
 
 
 if __name__ == "__main__":

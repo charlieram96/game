@@ -29,6 +29,7 @@ from pix import col
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 from common.sheet import SheetBuilder  # noqa: E402
+from portraits import installed_by_art_forge  # noqa: E402
 
 S = 2                    # raster pixels per design pixel
 DW = DH = 48             # design frame (rig coordinates)
@@ -968,7 +969,10 @@ ORDER = ["idle_s", "idle_n", "idle_e", "ready_s", "ready_n", "ready_e", "move_s"
          "guard_s", "guard_n", "guard_e", "hurt_s", "hurt_n", "hurt_e", "stunned_s", "ko_s", "victory_s", "sleep_s"]
 
 
-def build(out_dir: str) -> SheetBuilder:
+def build(out_dir: str):
+    if installed_by_art_forge(out_dir, "stoneback"):
+        print("  kith        stoneback            kept (HD sheet from tools/art_forge)")
+        return []
     A = animations()
     assert set(A) == set(ORDER), set(A) ^ set(ORDER)
     sb = SheetBuilder("stoneback", W, H, PIVOT, columns=8, pixels_per_unit=PPU,

@@ -1,0 +1,1212 @@
+{
+ "asset": "tools/art_forge/keys/explorer/",
+ "keys": {
+  "cheer_s": {
+   "source_image": "cheer_s_r0_gpt-image-2_866e97de5be8_0.png",
+   "source_path": "explorer_hd/cheer_s_r0_gpt-image-2_866e97de5be8_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wren, a fourteen-year-old apprentice warden with a gentle, youthful face: a mop of tousled brown hair with a few spiky tufts on top and a soft fringe, warm tan skin, big earnest brown eyes, a short teal hooded cloak with the hood down, a red scarf wrapped at the neck, a cream tunic, a thin brown leather satchel strap across the chest with the satchel at the hip, brown trousers and dark brown boots. Curious and kind, ready to set out. Pose: cheering: a little jump with both fists raised high in the air and a big happy grin. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_s_r0_gpt-image-2_ced109fb9a48_0.png",
+      "sha256": "8a4b9f45317e14adcf8dedeb59eaa8a84b61fd2f03d9ec65f054f9e783d3d7ad"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3930,
+     "completion_tokens": 315,
+     "total_tokens": 4245,
+     "cost": 0.038316,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.038316,
+      "upstream_inference_prompt_cost": 0.028866,
+      "upstream_inference_completions_cost": 0.00945
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 315
+     }
+    },
+    "seconds": 13.5,
+    "created": "2026-10-25T05:10:33Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.962,
+    "scale": 1.0,
+    "tolerance": 48.0
+   },
+   "installed": "2026-10-25T05:41:41Z",
+   "cleanup": []
+  },
+  "idle_e": {
+   "source_image": "idle_e_r0_gpt-image-2_c3a62828a19d_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wren, a fourteen-year-old apprentice warden with a gentle, youthful face: a mop of tousled brown hair with a few spiky tufts on top and a soft fringe, warm tan skin, big earnest brown eyes, a short teal hooded cloak with the hood down, a red scarf wrapped at the neck, a cream tunic, a thin brown leather satchel strap across the chest with the satchel at the hip, brown trousers and dark brown boots. Curious and kind, ready to set out. Pose: standing relaxed, arms at the sides, weight on both feet. The reference is the character's turnaround sheet: draw this character exactly as in the right view (the profile), alone and larger, with the same outfit, colours and proportions. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "r0_gpt-image-2_93814ac1dbaf_0.png",
+      "sha256": "51ba97969fd40e3117bb3578e51b7ff86388efa1df3a4035921214f749dbea7c"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3906,
+     "completion_tokens": 686,
+     "total_tokens": 4592,
+     "cost": 0.049326,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.049326,
+      "upstream_inference_prompt_cost": 0.028746,
+      "upstream_inference_completions_cost": 0.02058
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 686
+     }
+    },
+    "seconds": 13.3,
+    "created": "2026-10-25T05:03:17Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_explorer_0",
+     "hd_explorer_1",
+     "hd_explorer_2",
+     "hd_explorer_3",
+     "hd_explorer_4"
+    ]
+   },
+   "installed": "2026-10-25T05:31:08Z",
+   "cleanup": [],
+   "source_path": "explorer_hd/idle_e_r0_gpt-image-2_c3a62828a19d_0.png"
+  },
+  "idle_n": {
+   "source_image": "idle_n_r0_gpt-image-2_7bbc4c08dab5_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character is seen from directly behind, facing away from the viewer; the face is hidden. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wren, a fourteen-year-old apprentice warden with a gentle, youthful face: a mop of tousled brown hair with a few spiky tufts on top and a soft fringe, warm tan skin, big earnest brown eyes, a short teal hooded cloak with the hood down, a red scarf wrapped at the neck, a cream tunic, a thin brown leather satchel strap across the chest with the satchel at the hip, brown trousers and dark brown boots. Curious and kind, ready to set out. Pose: standing relaxed, arms at the sides, weight on both feet. The reference is the character's turnaround sheet: draw this character exactly as in the middle view (the back), alone and larger, with the same outfit, colours and proportions. Seen from directly behind: the face is hidden and must not be visible. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "r0_gpt-image-2_93814ac1dbaf_0.png",
+      "sha256": "51ba97969fd40e3117bb3578e51b7ff86388efa1df3a4035921214f749dbea7c"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3952,
+     "completion_tokens": 686,
+     "total_tokens": 4638,
+     "cost": 0.049556,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.049556,
+      "upstream_inference_prompt_cost": 0.028976,
+      "upstream_inference_completions_cost": 0.02058
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 686
+     }
+    },
+    "seconds": 13.0,
+    "created": "2026-10-25T05:03:17Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.414,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_explorer_0",
+     "hd_explorer_1",
+     "hd_explorer_2",
+     "hd_explorer_3",
+     "hd_explorer_4"
+    ]
+   },
+   "installed": "2026-10-25T05:31:07Z",
+   "cleanup": [],
+   "source_path": "explorer_hd/idle_n_r0_gpt-image-2_7bbc4c08dab5_0.png"
+  },
+  "idle_s": {
+   "source_image": "idle_s_r0_gpt-image-2_ced109fb9a48_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wren, a fourteen-year-old apprentice warden with a gentle, youthful face: a mop of tousled brown hair with a few spiky tufts on top and a soft fringe, warm tan skin, big earnest brown eyes, a short teal hooded cloak with the hood down, a red scarf wrapped at the neck, a cream tunic, a thin brown leather satchel strap across the chest with the satchel at the hip, brown trousers and dark brown boots. Curious and kind, ready to set out. Pose: standing relaxed, arms at the sides, weight on both feet. The reference is the character's turnaround sheet: draw this character exactly as in the left view (the front), alone and larger, with the same outfit, colours and proportions. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "r0_gpt-image-2_93814ac1dbaf_0.png",
+      "sha256": "51ba97969fd40e3117bb3578e51b7ff86388efa1df3a4035921214f749dbea7c"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3912,
+     "completion_tokens": 686,
+     "total_tokens": 4598,
+     "cost": 0.049356,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.049356,
+      "upstream_inference_prompt_cost": 0.028776,
+      "upstream_inference_completions_cost": 0.02058
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 686
+     }
+    },
+    "seconds": 14.7,
+    "created": "2026-10-25T05:03:18Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.962,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_explorer_0",
+     "hd_explorer_1",
+     "hd_explorer_2",
+     "hd_explorer_3",
+     "hd_explorer_4"
+    ]
+   },
+   "installed": "2026-10-25T05:31:06Z",
+   "cleanup": [],
+   "source_path": "explorer_hd/idle_s_r0_gpt-image-2_ced109fb9a48_0.png"
+  },
+  "interact_e": {
+   "source_image": "interact_e_r0_gpt-image-2_1221a1aacb7b_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wren, a fourteen-year-old apprentice warden with a gentle, youthful face: a mop of tousled brown hair with a few spiky tufts on top and a soft fringe, warm tan skin, big earnest brown eyes, a short teal hooded cloak with the hood down, a red scarf wrapped at the neck, a cream tunic, a thin brown leather satchel strap across the chest with the satchel at the hip, brown trousers and dark brown boots. Curious and kind, ready to set out. Pose: reaching one hand forward at chest height to touch or pick up something just in front of them. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_e_r0_gpt-image-2_c3a62828a19d_0.png",
+      "sha256": "57055e694f651ca4bfde291332c8c2f82b1fc3762ee9c5dc58970daa4de248a2"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3924,
+     "completion_tokens": 686,
+     "total_tokens": 4610,
+     "cost": 0.049416,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.049416,
+      "upstream_inference_prompt_cost": 0.028836,
+      "upstream_inference_completions_cost": 0.02058
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 686
+     }
+    },
+    "seconds": 14.1,
+    "created": "2026-10-25T05:10:25Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_explorer_0",
+     "hd_explorer_1",
+     "hd_explorer_2",
+     "hd_explorer_3",
+     "hd_explorer_4"
+    ]
+   },
+   "installed": "2026-10-25T05:31:24Z",
+   "cleanup": [],
+   "source_path": "explorer_hd/interact_e_r0_gpt-image-2_1221a1aacb7b_0.png"
+  },
+  "interact_n": {
+   "source_image": "interact_n_r0_gpt-image-2_7ea0ab478528_0.png",
+   "source_path": "explorer_hd/interact_n_r0_gpt-image-2_7ea0ab478528_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character is seen from directly behind, facing away from the viewer; the face is hidden. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wren, a fourteen-year-old apprentice warden with a gentle, youthful face: a mop of tousled brown hair with a few spiky tufts on top and a soft fringe, warm tan skin, big earnest brown eyes, a short teal hooded cloak with the hood down, a red scarf wrapped at the neck, a cream tunic, a thin brown leather satchel strap across the chest with the satchel at the hip, brown trousers and dark brown boots. Curious and kind, ready to set out. Pose: reaching one hand forward at chest height to touch or pick up something just in front of them. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. Seen from directly behind: the face is hidden and must not be visible. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_n_r0_gpt-image-2_7bbc4c08dab5_0.png",
+      "sha256": "31b51640e73d087fb9838bba6fe485920643552bc2fa09ec130b664b0904dd45"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3970,
+     "completion_tokens": 315,
+     "total_tokens": 4285,
+     "cost": 0.038516,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.038516,
+      "upstream_inference_prompt_cost": 0.029066,
+      "upstream_inference_completions_cost": 0.00945
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 315
+     }
+    },
+    "seconds": 11.3,
+    "created": "2026-10-25T05:10:20Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.117,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 0.96,
+    "matched_to": "idle_n"
+   },
+   "installed": "2026-10-25T05:40:57Z",
+   "cleanup": []
+  },
+  "interact_s": {
+   "source_image": "interact_s_r0_gpt-image-2_c62711579240_0.png",
+   "source_path": "explorer_hd/interact_s_r0_gpt-image-2_c62711579240_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wren, a fourteen-year-old apprentice warden with a gentle, youthful face: a mop of tousled brown hair with a few spiky tufts on top and a soft fringe, warm tan skin, big earnest brown eyes, a short teal hooded cloak with the hood down, a red scarf wrapped at the neck, a cream tunic, a thin brown leather satchel strap across the chest with the satchel at the hip, brown trousers and dark brown boots. Curious and kind, ready to set out. Pose: reaching one hand forward at chest height to touch or pick up something just in front of them. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_s_r0_gpt-image-2_ced109fb9a48_0.png",
+      "sha256": "8a4b9f45317e14adcf8dedeb59eaa8a84b61fd2f03d9ec65f054f9e783d3d7ad"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3930,
+     "completion_tokens": 686,
+     "total_tokens": 4616,
+     "cost": 0.049446,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.049446,
+      "upstream_inference_prompt_cost": 0.028866,
+      "upstream_inference_completions_cost": 0.02058
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 686
+     }
+    },
+    "seconds": 16.5,
+    "created": "2026-10-25T05:10:25Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.753,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 0.97,
+    "matched_to": "idle_s"
+   },
+   "installed": "2026-10-25T05:40:51Z",
+   "cleanup": []
+  },
+  "sit_e": {
+   "source_image": "sit_e_r0_gpt-image-2_c369518677d0_0.png",
+   "source_path": "explorer_hd/sit_e_r0_gpt-image-2_c369518677d0_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wren, a fourteen-year-old apprentice warden with a gentle, youthful face: a mop of tousled brown hair with a few spiky tufts on top and a soft fringe, warm tan skin, big earnest brown eyes, a short teal hooded cloak with the hood down, a red scarf wrapped at the neck, a cream tunic, a thin brown leather satchel strap across the chest with the satchel at the hip, brown trousers and dark brown boots. Curious and kind, ready to set out. Pose: sitting on the ground with the legs crossed, hands resting on the knees, relaxed. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_e_r0_gpt-image-2_c3a62828a19d_0.png",
+      "sha256": "57055e694f651ca4bfde291332c8c2f82b1fc3762ee9c5dc58970daa4de248a2"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3920,
+     "completion_tokens": 686,
+     "total_tokens": 4606,
+     "cost": 0.049396,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.049396,
+      "upstream_inference_prompt_cost": 0.028816,
+      "upstream_inference_completions_cost": 0.02058
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 686
+     }
+    },
+    "seconds": 14.6,
+    "created": "2026-10-25T05:10:27Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.56,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 1.08,
+    "matched_to": "idle_e"
+   },
+   "installed": "2026-10-25T05:41:00Z",
+   "cleanup": []
+  },
+  "sit_s": {
+   "source_image": "sit_s_r0_gpt-image-2_fbe967b284ed_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wren, a fourteen-year-old apprentice warden with a gentle, youthful face: a mop of tousled brown hair with a few spiky tufts on top and a soft fringe, warm tan skin, big earnest brown eyes, a short teal hooded cloak with the hood down, a red scarf wrapped at the neck, a cream tunic, a thin brown leather satchel strap across the chest with the satchel at the hip, brown trousers and dark brown boots. Curious and kind, ready to set out. Pose: sitting on the ground with the legs crossed, hands resting on the knees, relaxed. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_s_r0_gpt-image-2_ced109fb9a48_0.png",
+      "sha256": "8a4b9f45317e14adcf8dedeb59eaa8a84b61fd2f03d9ec65f054f9e783d3d7ad"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3926,
+     "completion_tokens": 686,
+     "total_tokens": 4612,
+     "cost": 0.049426,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.049426,
+      "upstream_inference_prompt_cost": 0.028846,
+      "upstream_inference_completions_cost": 0.02058
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 686
+     }
+    },
+    "seconds": 13.7,
+    "created": "2026-10-25T05:10:26Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.962,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_explorer_0",
+     "hd_explorer_1",
+     "hd_explorer_2",
+     "hd_explorer_3",
+     "hd_explorer_4"
+    ]
+   },
+   "installed": "2026-10-25T05:31:25Z",
+   "cleanup": [],
+   "source_path": "explorer_hd/sit_s_r0_gpt-image-2_fbe967b284ed_0.png"
+  },
+  "sneak_a_e": {
+   "source_image": "sneak_a_e_r0_gpt-image-2_2c3f3b34f5a0_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wren, a fourteen-year-old apprentice warden with a gentle, youthful face: a mop of tousled brown hair with a few spiky tufts on top and a soft fringe, warm tan skin, big earnest brown eyes, a short teal hooded cloak with the hood down, a red scarf wrapped at the neck, a cream tunic, a thin brown leather satchel strap across the chest with the satchel at the hip, brown trousers and dark brown boots. Curious and kind, ready to set out. Pose: sneaking on tiptoe, crouched low with the knees bent and the arms held close, mid-step with the left foot forward. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_e_r0_gpt-image-2_c3a62828a19d_0.png",
+      "sha256": "57055e694f651ca4bfde291332c8c2f82b1fc3762ee9c5dc58970daa4de248a2"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3940,
+     "completion_tokens": 686,
+     "total_tokens": 4626,
+     "cost": 0.049496,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.049496,
+      "upstream_inference_prompt_cost": 0.028916,
+      "upstream_inference_completions_cost": 0.02058
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 686
+     }
+    },
+    "seconds": 14.3,
+    "created": "2026-10-25T05:10:11Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_explorer_0",
+     "hd_explorer_1",
+     "hd_explorer_2",
+     "hd_explorer_3",
+     "hd_explorer_4"
+    ]
+   },
+   "installed": "2026-10-25T05:31:19Z",
+   "cleanup": [],
+   "source_path": "explorer_hd/sneak_a_e_r0_gpt-image-2_2c3f3b34f5a0_0.png"
+  },
+  "sneak_a_n": {
+   "source_image": "sneak_a_n_r0_gpt-image-2_fc30c9e56d56_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character is seen from directly behind, facing away from the viewer; the face is hidden. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wren, a fourteen-year-old apprentice warden with a gentle, youthful face: a mop of tousled brown hair with a few spiky tufts on top and a soft fringe, warm tan skin, big earnest brown eyes, a short teal hooded cloak with the hood down, a red scarf wrapped at the neck, a cream tunic, a thin brown leather satchel strap across the chest with the satchel at the hip, brown trousers and dark brown boots. Curious and kind, ready to set out. Pose: sneaking on tiptoe, crouched low with the knees bent and the arms held close, mid-step with the left foot forward. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. Seen from directly behind: the face is hidden and must not be visible. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_n_r0_gpt-image-2_7bbc4c08dab5_0.png",
+      "sha256": "31b51640e73d087fb9838bba6fe485920643552bc2fa09ec130b664b0904dd45"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3986,
+     "completion_tokens": 315,
+     "total_tokens": 4301,
+     "cost": 0.038596,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.038596,
+      "upstream_inference_prompt_cost": 0.029146,
+      "upstream_inference_completions_cost": 0.00945
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 315
+     }
+    },
+    "seconds": 12.6,
+    "created": "2026-10-25T05:10:08Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 7.414,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_explorer_0",
+     "hd_explorer_1",
+     "hd_explorer_2",
+     "hd_explorer_3",
+     "hd_explorer_4"
+    ]
+   },
+   "installed": "2026-10-25T05:31:17Z",
+   "cleanup": [],
+   "source_path": "explorer_hd/sneak_a_n_r0_gpt-image-2_fc30c9e56d56_1.png"
+  },
+  "sneak_a_s": {
+   "source_image": "sneak_a_s_r0_gpt-image-2_2d4ec3a46100_0.png",
+   "source_path": "explorer_hd/sneak_a_s_r0_gpt-image-2_2d4ec3a46100_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wren, a fourteen-year-old apprentice warden with a gentle, youthful face: a mop of tousled brown hair with a few spiky tufts on top and a soft fringe, warm tan skin, big earnest brown eyes, a short teal hooded cloak with the hood down, a red scarf wrapped at the neck, a cream tunic, a thin brown leather satchel strap across the chest with the satchel at the hip, brown trousers and dark brown boots. Curious and kind, ready to set out. Pose: sneaking on tiptoe, crouched low with the knees bent and the arms held close, mid-step with the left foot forward. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_s_r0_gpt-image-2_ced109fb9a48_0.png",
+      "sha256": "8a4b9f45317e14adcf8dedeb59eaa8a84b61fd2f03d9ec65f054f9e783d3d7ad"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3946,
+     "completion_tokens": 686,
+     "total_tokens": 4632,
+     "cost": 0.049526,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.049526,
+      "upstream_inference_prompt_cost": 0.028946,
+      "upstream_inference_completions_cost": 0.02058
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 686
+     }
+    },
+    "seconds": 15.1,
+    "created": "2026-10-25T05:10:08Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.753,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 0.97,
+    "matched_to": "idle_s"
+   },
+   "installed": "2026-10-25T05:40:52Z",
+   "cleanup": []
+  },
+  "sneak_b_e": {
+   "source_image": "sneak_b_e_r0_gpt-image-2_c472cd8b956b_1.png",
+   "source_path": "explorer_hd/sneak_b_e_r0_gpt-image-2_c472cd8b956b_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wren, a fourteen-year-old apprentice warden with a gentle, youthful face: a mop of tousled brown hair with a few spiky tufts on top and a soft fringe, warm tan skin, big earnest brown eyes, a short teal hooded cloak with the hood down, a red scarf wrapped at the neck, a cream tunic, a thin brown leather satchel strap across the chest with the satchel at the hip, brown trousers and dark brown boots. Curious and kind, ready to set out. Pose: sneaking on tiptoe, crouched low with the knees bent and the arms held close, mid-step with the right foot forward. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_e_r0_gpt-image-2_c3a62828a19d_0.png",
+      "sha256": "57055e694f651ca4bfde291332c8c2f82b1fc3762ee9c5dc58970daa4de248a2"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3940,
+     "completion_tokens": 501,
+     "total_tokens": 4441,
+     "cost": 0.043946,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.043946,
+      "upstream_inference_prompt_cost": 0.028916,
+      "upstream_inference_completions_cost": 0.01503
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 501
+     }
+    },
+    "seconds": 13.5,
+    "created": "2026-10-25T05:10:19Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 6.72,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 0.96,
+    "matched_to": "idle_e"
+   },
+   "installed": "2026-10-25T05:41:01Z",
+   "cleanup": []
+  },
+  "sneak_b_n": {
+   "source_image": "sneak_b_n_r0_gpt-image-2_cbef4da7897c_1.png",
+   "source_path": "explorer_hd/sneak_b_n_r0_gpt-image-2_cbef4da7897c_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character is seen from directly behind, facing away from the viewer; the face is hidden. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wren, a fourteen-year-old apprentice warden with a gentle, youthful face: a mop of tousled brown hair with a few spiky tufts on top and a soft fringe, warm tan skin, big earnest brown eyes, a short teal hooded cloak with the hood down, a red scarf wrapped at the neck, a cream tunic, a thin brown leather satchel strap across the chest with the satchel at the hip, brown trousers and dark brown boots. Curious and kind, ready to set out. Pose: sneaking on tiptoe, crouched low with the knees bent and the arms held close, mid-step with the right foot forward. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. Seen from directly behind: the face is hidden and must not be visible. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_n_r0_gpt-image-2_7bbc4c08dab5_0.png",
+      "sha256": "31b51640e73d087fb9838bba6fe485920643552bc2fa09ec130b664b0904dd45"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3986,
+     "completion_tokens": 315,
+     "total_tokens": 4301,
+     "cost": 0.038596,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.038596,
+      "upstream_inference_prompt_cost": 0.029146,
+      "upstream_inference_completions_cost": 0.00945
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 315
+     }
+    },
+    "seconds": 11.7,
+    "created": "2026-10-25T05:10:10Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 7.117,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 0.96,
+    "matched_to": "idle_n"
+   },
+   "installed": "2026-10-25T05:40:58Z",
+   "cleanup": []
+  },
+  "sneak_b_s": {
+   "source_image": "sneak_b_s_r0_gpt-image-2_c420c8da5b5b_0.png",
+   "source_path": "explorer_hd/sneak_b_s_r0_gpt-image-2_c420c8da5b5b_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wren, a fourteen-year-old apprentice warden with a gentle, youthful face: a mop of tousled brown hair with a few spiky tufts on top and a soft fringe, warm tan skin, big earnest brown eyes, a short teal hooded cloak with the hood down, a red scarf wrapped at the neck, a cream tunic, a thin brown leather satchel strap across the chest with the satchel at the hip, brown trousers and dark brown boots. Curious and kind, ready to set out. Pose: sneaking on tiptoe, crouched low with the knees bent and the arms held close, mid-step with the right foot forward. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_s_r0_gpt-image-2_ced109fb9a48_0.png",
+      "sha256": "8a4b9f45317e14adcf8dedeb59eaa8a84b61fd2f03d9ec65f054f9e783d3d7ad"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3946,
+     "completion_tokens": 686,
+     "total_tokens": 4632,
+     "cost": 0.049526,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.049526,
+      "upstream_inference_prompt_cost": 0.028946,
+      "upstream_inference_completions_cost": 0.02058
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 686
+     }
+    },
+    "seconds": 13.9,
+    "created": "2026-10-25T05:10:11Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.753,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 0.97,
+    "matched_to": "idle_s"
+   },
+   "installed": "2026-10-25T05:40:53Z",
+   "cleanup": []
+  },
+  "surprised_s": {
+   "source_image": "surprised_s_r0_gpt-image-2_cfb439ba0be9_0.png",
+   "source_path": "explorer_hd/surprised_s_r0_gpt-image-2_cfb439ba0be9_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wren, a fourteen-year-old apprentice warden with a gentle, youthful face: a mop of tousled brown hair with a few spiky tufts on top and a soft fringe, warm tan skin, big earnest brown eyes, a short teal hooded cloak with the hood down, a red scarf wrapped at the neck, a cream tunic, a thin brown leather satchel strap across the chest with the satchel at the hip, brown trousers and dark brown boots. Curious and kind, ready to set out. Pose: startled: leaning back with wide eyes, mouth open, both hands raised in surprise. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_s_r0_gpt-image-2_ced109fb9a48_0.png",
+      "sha256": "8a4b9f45317e14adcf8dedeb59eaa8a84b61fd2f03d9ec65f054f9e783d3d7ad"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3926,
+     "completion_tokens": 501,
+     "total_tokens": 4427,
+     "cost": 0.043876,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.043876,
+      "upstream_inference_prompt_cost": 0.028846,
+      "upstream_inference_completions_cost": 0.01503
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 501
+     }
+    },
+    "seconds": 13.8,
+    "created": "2026-10-25T05:10:35Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.753,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 0.97,
+    "matched_to": "idle_s"
+   },
+   "installed": "2026-10-25T05:40:55Z",
+   "cleanup": []
+  },
+  "walk_a_e": {
+   "source_image": "walk_a_e_r0_gpt-image-2_9cee736d799d_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wren, a fourteen-year-old apprentice warden with a gentle, youthful face: a mop of tousled brown hair with a few spiky tufts on top and a soft fringe, warm tan skin, big earnest brown eyes, a short teal hooded cloak with the hood down, a red scarf wrapped at the neck, a cream tunic, a thin brown leather satchel strap across the chest with the satchel at the hip, brown trousers and dark brown boots. Curious and kind, ready to set out. Pose: walking, mid-stride: the left leg steps forward and the right arm swings forward. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_e_r0_gpt-image-2_c3a62828a19d_0.png",
+      "sha256": "57055e694f651ca4bfde291332c8c2f82b1fc3762ee9c5dc58970daa4de248a2"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3922,
+     "completion_tokens": 501,
+     "total_tokens": 4423,
+     "cost": 0.043856,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.043856,
+      "upstream_inference_prompt_cost": 0.028826,
+      "upstream_inference_completions_cost": 0.01503
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 501
+     }
+    },
+    "seconds": 14.9,
+    "created": "2026-10-25T05:09:56Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_explorer_0",
+     "hd_explorer_1",
+     "hd_explorer_2",
+     "hd_explorer_3",
+     "hd_explorer_4"
+    ]
+   },
+   "installed": "2026-10-25T05:31:13Z",
+   "cleanup": [],
+   "source_path": "explorer_hd/walk_a_e_r0_gpt-image-2_9cee736d799d_0.png"
+  },
+  "walk_a_n": {
+   "source_image": "walk_a_n_r0_gpt-image-2_77c31487e93e_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character is seen from directly behind, facing away from the viewer; the face is hidden. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wren, a fourteen-year-old apprentice warden with a gentle, youthful face: a mop of tousled brown hair with a few spiky tufts on top and a soft fringe, warm tan skin, big earnest brown eyes, a short teal hooded cloak with the hood down, a red scarf wrapped at the neck, a cream tunic, a thin brown leather satchel strap across the chest with the satchel at the hip, brown trousers and dark brown boots. Curious and kind, ready to set out. Pose: walking, mid-stride: the left leg steps forward and the right arm swings forward. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. Seen from directly behind: the face is hidden and must not be visible. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_n_r0_gpt-image-2_7bbc4c08dab5_0.png",
+      "sha256": "31b51640e73d087fb9838bba6fe485920643552bc2fa09ec130b664b0904dd45"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3968,
+     "completion_tokens": 315,
+     "total_tokens": 4283,
+     "cost": 0.038506,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.038506,
+      "upstream_inference_prompt_cost": 0.029056,
+      "upstream_inference_completions_cost": 0.00945
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 315
+     }
+    },
+    "seconds": 11.5,
+    "created": "2026-10-25T05:09:52Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.414,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_explorer_0",
+     "hd_explorer_1",
+     "hd_explorer_2",
+     "hd_explorer_3",
+     "hd_explorer_4"
+    ]
+   },
+   "installed": "2026-10-25T05:31:11Z",
+   "cleanup": [],
+   "source_path": "explorer_hd/walk_a_n_r0_gpt-image-2_77c31487e93e_0.png"
+  },
+  "walk_a_s": {
+   "source_image": "walk_a_s_r0_gpt-image-2_98091ddf11d0_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wren, a fourteen-year-old apprentice warden with a gentle, youthful face: a mop of tousled brown hair with a few spiky tufts on top and a soft fringe, warm tan skin, big earnest brown eyes, a short teal hooded cloak with the hood down, a red scarf wrapped at the neck, a cream tunic, a thin brown leather satchel strap across the chest with the satchel at the hip, brown trousers and dark brown boots. Curious and kind, ready to set out. Pose: walking, mid-stride: the left leg steps forward and the right arm swings forward. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_s_r0_gpt-image-2_ced109fb9a48_0.png",
+      "sha256": "8a4b9f45317e14adcf8dedeb59eaa8a84b61fd2f03d9ec65f054f9e783d3d7ad"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3928,
+     "completion_tokens": 1715,
+     "total_tokens": 5643,
+     "cost": 0.080306,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.080306,
+      "upstream_inference_prompt_cost": 0.028856,
+      "upstream_inference_completions_cost": 0.05145
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 1715
+     }
+    },
+    "seconds": 23.5,
+    "created": "2026-10-25T05:10:04Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.962,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_explorer_0",
+     "hd_explorer_1",
+     "hd_explorer_2",
+     "hd_explorer_3",
+     "hd_explorer_4"
+    ]
+   },
+   "installed": "2026-10-25T05:31:09Z",
+   "cleanup": [],
+   "source_path": "explorer_hd/walk_a_s_r0_gpt-image-2_98091ddf11d0_0.png"
+  },
+  "walk_b_e": {
+   "source_image": "walk_b_e_r0_gpt-image-2_f806a22a63aa_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wren, a fourteen-year-old apprentice warden with a gentle, youthful face: a mop of tousled brown hair with a few spiky tufts on top and a soft fringe, warm tan skin, big earnest brown eyes, a short teal hooded cloak with the hood down, a red scarf wrapped at the neck, a cream tunic, a thin brown leather satchel strap across the chest with the satchel at the hip, brown trousers and dark brown boots. Curious and kind, ready to set out. Pose: walking, mid-stride: the right leg steps forward and the left arm swings forward. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_e_r0_gpt-image-2_c3a62828a19d_0.png",
+      "sha256": "57055e694f651ca4bfde291332c8c2f82b1fc3762ee9c5dc58970daa4de248a2"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3922,
+     "completion_tokens": 686,
+     "total_tokens": 4608,
+     "cost": 0.049406,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.049406,
+      "upstream_inference_prompt_cost": 0.028826,
+      "upstream_inference_completions_cost": 0.02058
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 686
+     }
+    },
+    "seconds": 16.5,
+    "created": "2026-10-25T05:09:57Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_explorer_0",
+     "hd_explorer_1",
+     "hd_explorer_2",
+     "hd_explorer_3",
+     "hd_explorer_4"
+    ]
+   },
+   "installed": "2026-10-25T05:31:14Z",
+   "cleanup": [],
+   "source_path": "explorer_hd/walk_b_e_r0_gpt-image-2_f806a22a63aa_0.png"
+  },
+  "walk_b_n": {
+   "source_image": "walk_b_n_r0_gpt-image-2_39c012e444ee_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character is seen from directly behind, facing away from the viewer; the face is hidden. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wren, a fourteen-year-old apprentice warden with a gentle, youthful face: a mop of tousled brown hair with a few spiky tufts on top and a soft fringe, warm tan skin, big earnest brown eyes, a short teal hooded cloak with the hood down, a red scarf wrapped at the neck, a cream tunic, a thin brown leather satchel strap across the chest with the satchel at the hip, brown trousers and dark brown boots. Curious and kind, ready to set out. Pose: walking, mid-stride: the right leg steps forward and the left arm swings forward. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. Seen from directly behind: the face is hidden and must not be visible. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_n_r0_gpt-image-2_7bbc4c08dab5_0.png",
+      "sha256": "31b51640e73d087fb9838bba6fe485920643552bc2fa09ec130b664b0904dd45"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3968,
+     "completion_tokens": 501,
+     "total_tokens": 4469,
+     "cost": 0.044086,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.044086,
+      "upstream_inference_prompt_cost": 0.029056,
+      "upstream_inference_completions_cost": 0.01503
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 501
+     }
+    },
+    "seconds": 13.4,
+    "created": "2026-10-25T05:09:54Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.414,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_explorer_0",
+     "hd_explorer_1",
+     "hd_explorer_2",
+     "hd_explorer_3",
+     "hd_explorer_4"
+    ]
+   },
+   "installed": "2026-10-25T05:31:12Z",
+   "cleanup": [],
+   "source_path": "explorer_hd/walk_b_n_r0_gpt-image-2_39c012e444ee_0.png"
+  },
+  "walk_b_s": {
+   "source_image": "walk_b_s_r0_gpt-image-2_5542d2d88eb7_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wren, a fourteen-year-old apprentice warden with a gentle, youthful face: a mop of tousled brown hair with a few spiky tufts on top and a soft fringe, warm tan skin, big earnest brown eyes, a short teal hooded cloak with the hood down, a red scarf wrapped at the neck, a cream tunic, a thin brown leather satchel strap across the chest with the satchel at the hip, brown trousers and dark brown boots. Curious and kind, ready to set out. Pose: walking, mid-stride: the right leg steps forward and the left arm swings forward. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_s_r0_gpt-image-2_ced109fb9a48_0.png",
+      "sha256": "8a4b9f45317e14adcf8dedeb59eaa8a84b61fd2f03d9ec65f054f9e783d3d7ad"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3928,
+     "completion_tokens": 501,
+     "total_tokens": 4429,
+     "cost": 0.043886,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.043886,
+      "upstream_inference_prompt_cost": 0.028856,
+      "upstream_inference_completions_cost": 0.01503
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 501
+     }
+    },
+    "seconds": 14.8,
+    "created": "2026-10-25T05:09:56Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.962,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_explorer_0",
+     "hd_explorer_1",
+     "hd_explorer_2",
+     "hd_explorer_3",
+     "hd_explorer_4"
+    ]
+   },
+   "installed": "2026-10-25T05:31:10Z",
+   "cleanup": [],
+   "source_path": "explorer_hd/walk_b_s_r0_gpt-image-2_5542d2d88eb7_0.png"
+  }
+ },
+ "palette": {
+  "sources": [
+   "idle_s_r0_gpt-image-2_ced109fb9a48_0.png",
+   "idle_n_r0_gpt-image-2_7bbc4c08dab5_0.png",
+   "idle_e_r0_gpt-image-2_c3a62828a19d_0.png",
+   "sneak_a_s_r0_gpt-image-2_2d4ec3a46100_0.png",
+   "sneak_b_s_r0_gpt-image-2_c420c8da5b5b_0.png",
+   "sneak_a_n_r0_gpt-image-2_fc30c9e56d56_1.png",
+   "sneak_b_n_r0_gpt-image-2_cbef4da7897c_1.png"
+  ],
+  "k": 44,
+  "ramps": [
+   [
+    "#721813",
+    "#992219",
+    "#bc3220",
+    "#dd4f2a"
+   ],
+   [
+    "#381e12",
+    "#462616",
+    "#522d19",
+    "#60351c",
+    "#6c3b1f",
+    "#794222",
+    "#864b24",
+    "#925328",
+    "#9e5b2b",
+    "#866c57",
+    "#ad642f",
+    "#b5733e",
+    "#c67c3c",
+    "#b69671",
+    "#db8944",
+    "#dfa15e",
+    "#ecac5c",
+    "#dbbd96"
+   ],
+   [
+    "#fbd16b",
+    "#f3e3c5"
+   ],
+   [
+    "#113a37",
+    "#144a47",
+    "#135653",
+    "#186461",
+    "#187170",
+    "#237e7b",
+    "#1e8b8a",
+    "#2e9690",
+    "#57a796"
+   ],
+   [
+    "#120e17",
+    "#1a1310",
+    "#281812",
+    "#0f2523",
+    "#2c2522",
+    "#362f2d",
+    "#443c3a",
+    "#534843",
+    "#67574e"
+   ]
+  ]
+ }
+}

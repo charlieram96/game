@@ -105,13 +105,80 @@ Only curated, pixelized results and their provenance records are committed.
 
 - **`kinds`**: one shared style per kind of image, with its default aspect
   ratio and model. The kinds are sprite, portrait, prop, concept,
-  environment and keyart.
+  environment and keyart, plus the HD sheet kinds `sprite_hd` (kith),
+  `character_hd` (people), `prop_hd` and their `turnaround_hd` /
+  `turnaround_char_hd` design sheets. A kind may carry its own `views` and a
+  `framing` sentence (how big the subject is drawn, the same in every pose);
+  a brief may override the framing.
 - **`views`**: the three sprite directions (`s`, `n`, `e`). West is the
   engine's mirror of east.
 - **`briefs`**: one entry per character, kith, prop or place. Each has a
   `subject`, plus a target `size`, `pivot` and palette `ramps` where the
   result goes into the game. The current colours and silhouettes come from
-  the existing sprites, so new art fits beside old.
+  the existing sprites, so new art fits beside old. HD briefs (`*_hd`) also
+  list `poses`; `gen --pose <name>` adds the pose to the prompt (a pose may
+  word each view differently) and `--note` adds one-off direction.
+
+## HD sheets (kith, people, the training totem)
+
+The battle sprites and the main characters are HD pixel art built from
+generated key poses: 112 px per world unit, so they render near 1:1 on phone
+and 1080p screens (a board cell is 82-100 device pixels), and a creature
+stands inside one board cell (Emberlyn about 0.8 x 1.1 cells, Stoneback 0.9 x
+0.75, the totem 0.75 x 1.3, Mossling 0.6 x 0.6, Lanternmoth a 0.85-cell
+wingspan; people 1.6-1.8 cells tall).
+
+1. **Lock the design.** `gen <name>_turnaround --ref <old sprite sheet views>
+   <portrait>` paints front, back and side on one canvas. Pick one.
+2. **One key per pose and view.** `gen <name>_hd --pose idle --view s --ref
+   <turnaround>` for the reference pose of each view, then every other pose
+   with that view's reference (`--note` reminds the model to keep the scale
+   and floor line; back views need "the face is hidden"). Paintings are 1024
+   px (2:3 for people and the totem), drawn at about 7 px per sprite pixel.
+3. **A shared palette.** `keys.py palette <sheet> <paintings>` fits about 45
+   colours to the sheet's paintings (k-means in OKLab, backdrop spill
+   ignored, nothing darker than the ink ramp) and writes them into
+   `tools/common/palette.py` as `hd_<sheet>_*` ramps. `keys.py grade` can
+   shift it afterwards (Emberlyn's fur was graded to the portrait's russet;
+   the flame colours were left alone) and remaps every key.
+4. **Install keys.** `keys.py install <sheet> <pose>_<view> <painting>
+   --cell <c>` pixelizes at `c` painting pixels per sprite pixel (7 = the
+   painting's own grid; larger shrinks the subject, e.g. 7.6 for Stoneback,
+   9 for the totem, and per view for people so every view has the same
+   height) into `keys/<sheet>/`, with a provenance entry in
+   `provenance/keys_<sheet>.json`. Enclosed backdrop (between a tail and a
+   back) is keyed out too.
+5. **Match scales.** The model doesn't always keep the scale it was asked
+   for. `keys.py scale <sheet> <keys> --ref <reference key> --head
+   x0,y0,x1,y1` finds how much bigger each key is drawn than its view's
+   reference (normalized cross-correlation of the reference's head, or for
+   Stoneback its shell, at 0.8-1.25x) and with `--apply` re-installs it to
+   match. Weak matches (a turned or hidden head) and matches at the search
+   limit are reported and left alone; check those by eye.
+6. **Build.** `animate.py <sheet>` (recipes in `sheets/<sheet>.py`) places
+   every key with its feet on the pivot row, registered sideways to its
+   view's reference pose so bodies don't swim (a hovering moth is registered
+   on its body instead), makes the in-betweens by moving pixels only
+   (breathing and bobs that keep the feet planted, a flickering flame, a
+   rolling ball whose light stays put, squash, hops) and writes
+   `<sheet>.png`, `<sheet>_normal.png` and the manifest, and sets the normal
+   map's import flags (no normal-map compression, no alpha-border fix: run
+   it once more after Godot first imports a new map). `--review` writes
+   `_out/review/<sheet>_overview.png` (every animation at 1x with a lit
+   preview) and `<sheet>_4x_pN.png` (every frame at 4x, pivot row marked).
+
+**Normal maps** (`normals.py`): the sheet's normal map has the same layout
+as the sheet. Its rgb is a screen-aligned normal (x right, y up, z toward the
+camera) from the inflated silhouette (blurs of the mask at several scales),
+creases along the art's own interior contour lines and a little embossed
+luminance; its alpha is the emission mask (255 none, 128 full). Each recipe
+decides what glows: Emberlyn's flame (eyes and sparks a little), Stoneback's
+amber eyes (and its moss while it focuses), the lanterns of Wren and Hesper.
+The manifest names the map (`"normal_map"`) and the sheet's lighting
+response (`"lighting"`: shade floor, rim strength and power).
+
+`tools/sprite_forge/build.py` keeps every sheet whose manifest says
+`tools/art_forge` made it.
 
 ## Installed art
 
@@ -126,6 +193,14 @@ Only curated, pixelized results and their provenance records are committed.
   the old procedural portrait (softened) as a reference, and the expressions
   were made with `--ref` and `composite`. `tools/sprite_forge/build.py`
   leaves these sheets alone.
+- **HD sheets** (`assets/sprites/kith/emberlyn`, `stoneback`, `mossling`,
+  `lanternmoth`, `assets/sprites/props/training_totem`,
+  `assets/sprites/characters/explorer`, `corin`, `hesper`, `villager_baker`,
+  `villager_farmer`, `sigilbinder`; each with a `_normal.png`): see "HD
+  sheets" above. Keys in `keys/<sheet>/`, recipes in `sheets/`, provenance in
+  `provenance/keys_<sheet>.json` (every key's prompt, references by name and
+  hash, model, cost and pixelize settings, plus the fitted palette and any
+  grade), all painted by `openai/gpt-image-2`.
 - **Web loading key art** (`export/web/keyart.png`, brief `title_keyart`):
   480x270, opaque, palette PNG, shown behind the loading text by
   `export/web/shell.html` and copied next to `index.html` by

@@ -15,6 +15,7 @@ from pix import col
 
 sys.path.insert(0, "/home/user/game/tools")
 from common.sheet import SheetBuilder  # noqa: E402
+from portraits import installed_by_art_forge  # noqa: E402
 
 SKIN, HAIR, BAND = "skin_deep", "hair_copper", "cloth_red"
 VEST, SHIRT, TROUS, BOOT, GLOVE = "cloth_mustard", "stone", "cloth_blue", "leather", "leather"
@@ -206,7 +207,10 @@ def animations():
 ORDER = ["idle_s", "idle_n", "idle_e", "walk_s", "walk_n", "walk_e", "talk_s", "cheer_s", "slump_s"]
 
 
-def build(out_dir: str) -> SheetBuilder:
+def build(out_dir: str):
+    if installed_by_art_forge(out_dir, "corin"):
+        print("  characters  corin                kept (HD sheet from tools/art_forge)")
+        return []
     A = animations()
     assert set(A) == set(ORDER), set(A) ^ set(ORDER)
     sb = SheetBuilder("corin", W, H, PIVOT, columns=8, meta={"kind": "character", "role": "rival",
