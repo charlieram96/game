@@ -120,7 +120,7 @@ func get_command(sim: BattleSim, team: int) -> InputCommand:
 	# --- Offense ----------------------------------------------------------------------
 	if FighterSM.is_actionable(me.state) and sim.tick >= _next_decision:
 		_next_decision = sim.tick + maxi(1, profile.decision_interval + rng.randi_range(-1, 2))
-		var choice := _choose_offense(sim, me, foe, seen, dist, vulnerable)
+		var choice := _choose_offense(sim, me, foe, seen, vulnerable)
 		if not choice.is_empty():
 			if choice["kind"] == &"ram":
 				_next_move = sim.tick + _move_gap()
@@ -312,7 +312,7 @@ func _escape_score(p: Vector2, me: Fighter, threat: Dictionary) -> float:
 
 # --- Offense -------------------------------------------------------------------------
 
-func _choose_offense(sim: BattleSim, me: Fighter, foe: Fighter, seen: Dictionary, dist: float, vulnerable: bool) -> Dictionary:
+func _choose_offense(sim: BattleSim, me: Fighter, foe: Fighter, seen: Dictionary, vulnerable: bool) -> Dictionary:
 	var best := {}
 	var best_score := 0.42 * profile.patience
 	# Specials and basic attack
@@ -320,7 +320,7 @@ func _choose_offense(sim: BattleSim, me: Fighter, foe: Fighter, seen: Dictionary
 		var ability := me.ability_in_slot(slot)
 		if ability == null or AbilitySystem.check_usable(me, ability) != &"":
 			continue
-		var score := _score_ability(sim, me, seen, ability, dist, vulnerable)
+		var score := _score_ability(sim, me, me.pos, seen["pos"], ability, vulnerable)
 		if score <= 0.0:
 			continue
 		score *= lerpf(0.7, 1.15, profile.aggression)
@@ -340,8 +340,16 @@ func _choose_offense(sim: BattleSim, me: Fighter, foe: Fighter, seen: Dictionary
 	return best
 
 
-func _score_ability(sim: BattleSim, me: Fighter, seen: Dictionary, ability: AbilityDefinition, dist: float, vulnerable: bool) -> float:
+## What using `ability` from `from` on a foe seen at `target` is worth
+## (0 = it would miss). Attacks run along the row or column toward the foe,
+## so most only connect when it is lined up.
+func _score_ability(sim: BattleSim, me: Fighter, from: Vector2, target: Vector2, ability: AbilityDefinition, vulnerable: bool) -> float:
 	var foe_r := 0.5
+	var to := target - from
+	var dist := to.length()
+	var lane := Cardinal.snap(to)
+	var along := to.dot(lane)
+	var off := absf(to.dot(CombatConst.perpendicular(lane)))
 	var score := 0.0
 	var lunge_reach := 0.0
 	for c in ability.components:
@@ -350,22 +358,22 @@ func _score_ability(sim: BattleSim, me: Fighter, seen: Dictionary, ability: Abil
 	for c in ability.components:
 		if c is ProjectileComponent:
 			var p := c as ProjectileComponent
-			if dist > 1.6 and dist < p.max_range * 0.92 and _line_clear(sim, me.pos, seen["pos"], p.radius):
-				score = maxf(score, 0.62 - dist * 0.012)
+			if along > 1.2 and along < p.max_range * 0.92 and off < p.radius + foe_r - 0.1 and _line_clear(sim, from, from + lane * along, p.radius):
+				score = maxf(score, 0.62 - along * 0.012)
 		elif c is MeleeComponent:
-			var m := c as MeleeComponent
-			var reach := m.forward_offset + m.radius + foe_r + lunge_reach
-			if dist < reach * 0.92 and (lunge_reach == 0.0 or dist > 1.0):
+			if (lunge_reach == 0.0 or along > 1.0) and _melee_reaches(c as MeleeComponent, from, lane, target, foe_r * 0.8, lunge_reach):
 				score = maxf(score, 0.85 if ability.kind == AbilityDefinition.Kind.BASIC else 0.8)
 		elif c is TargetedAreaComponent:
-			if dist < ability.max_range:
+			# It lands on a whole cell down the lane.
+			var cells := clampf(roundf(along), 1.0, maxf(1.0, floorf(ability.max_range + 0.001)))
+			if along > 0.5 and (from + lane * cells).distance_to(target) < (c as TargetedAreaComponent).radius + foe_r * 0.5:
 				score = maxf(score, 0.42 + (0.4 if vulnerable or _is_slowed(sim, me) else 0.0))
 		elif c is SelfAreaComponent:
 			if dist < (c as SelfAreaComponent).radius + foe_r - 0.25:
 				score = maxf(score, 0.9)
 		elif c is LineWaveComponent:
 			var w := c as LineWaveComponent
-			if dist > 1.4 and dist < w.length * 0.88:
+			if along > 1.4 and along < w.length * 0.88 and off < w.width * 0.5 + foe_r - 0.15:
 				score = maxf(score, 0.45 + (0.35 if vulnerable else 0.0))
 		elif c is SelfStatusComponent:
 			# Defensive buff: use when something is coming or the foe is in our face.
@@ -373,7 +381,7 @@ func _score_ability(sim: BattleSim, me: Fighter, seen: Dictionary, ability: Abil
 			var close := dist < 2.2 and foe and FighterSM.is_attacking(foe.state)
 			var incoming := false
 			for v in sim.volumes:
-				if v.team != me.team and not v.dead and v.pos.distance_to(me.pos) < 3.5:
+				if v.team != me.team and not v.dead and v.pos.distance_to(from) < 3.5:
 					incoming = true
 			if close or incoming:
 				score = maxf(score, 0.88)
@@ -382,6 +390,38 @@ func _score_ability(sim: BattleSim, me: Fighter, seen: Dictionary, ability: Abil
 	return score
 
 
+## Does a swing down `lane` reach a body at `target`? A lunge carries the
+## hitbox forward, so the swing is checked along the lunge too.
+func _melee_reaches(m: MeleeComponent, from: Vector2, lane: Vector2, target: Vector2, r: float, lunge: float) -> bool:
+	var s := 0.0
+	while s < lunge:
+		if m.reaches(from + lane * s, lane, target, r):
+			return true
+		s += 0.5
+	return m.reaches(from + lane * lunge, lane, target, r)
+
+
+## The best attack the AI could throw from `from` (buffs don't count: they
+## don't care where it stands).
+func _strike_value(sim: BattleSim, me: Fighter, from: Vector2, seen: Dictionary) -> float:
+	var best := 0.0
+	for slot in range(-1, 4):
+		var ability := me.ability_in_slot(slot)
+		if ability == null or _is_buff(ability) or AbilitySystem.check_usable(me, ability) != &"":
+			continue
+		best = maxf(best, _score_ability(sim, me, from, seen["pos"], ability, false))
+	return best
+
+
+func _is_buff(ability: AbilityDefinition) -> bool:
+	for c in ability.components:
+		if c is SelfStatusComponent:
+			return true
+	return false
+
+
+## Aim straight down the row or column toward the foe. The distance (for
+## targeted areas: which cell) leads a little along that lane.
 func _aim_for(me: Fighter, seen: Dictionary, ability: AbilityDefinition) -> Array:
 	var target: Vector2 = seen["pos"]
 	var vel: Vector2 = seen["vel"]
@@ -394,12 +434,11 @@ func _aim_for(me: Fighter, seen: Dictionary, ability: AbilityDefinition) -> Arra
 		elif c is LineWaveComponent:
 			var w := c as LineWaveComponent
 			lead_t = float(ability.startup_ticks + w.telegraph_ticks) / 60.0 * 0.4
+	var to := target - me.pos
+	var lane := Cardinal.snap(to) if to.length_squared() > 1e-4 else Cardinal.snap(me.facing)
 	# Dashes are short bursts: only lead a little, or we aim past the landing.
 	target += vel * minf(lead_t, 0.15) * profile.lead_accuracy
-	var to := target - me.pos
-	if to.length() < 0.01:
-		to = me.facing
-	return [to.normalized(), to.length()]
+	return [lane, maxf(1.0, (target - me.pos).dot(lane))]
 
 
 ## A dash whose path runs through the foe (it must be rammable and not
@@ -471,6 +510,8 @@ func _reposition(sim: BattleSim, me: Fighter, foe: Fighter, seen: Dictionary, di
 
 func _spot_score(sim: BattleSim, me: Fighter, foe: Fighter, seen: Dictionary, p: Vector2) -> float:
 	var score := _band_score(me, p, seen)
+	# Lined up to strike (a row or column the foe is on, in range).
+	score += _strike_value(sim, me, p, seen) * 0.35
 	if _in_ram_lane(sim, p, foe, seen):
 		score -= 0.45 * (1.15 - profile.aggression * 0.5)
 	# Room to manoeuvre: edges and corners are traps.

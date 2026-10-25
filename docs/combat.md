@@ -45,15 +45,19 @@ Presentation is in `scripts/combat/view/`.
 
 ## The board and movement
 
-* The arena floor is a **board of 1-unit cells** (Ringstones is 14 x 9,
-  the training yard 13 x 9). Spawns and standing stones sit on cell
+* The arena floor is a **board of 1-unit cells** (the Ringstones and the
+  training yard are both 20 x 12). Spawns and standing stones sit on cell
   centres, and every creature fits inside one cell.
 * **Creatures never walk.** Every move is a **dash**: straight along a row
   or column (east, south, west or north), a whole number of cells, landing
   on a cell centre. Knockback is the only other way a creature moves.
-* **Bodies are solid.** Knockback slides along walls and stops at stones; a
-  heavier creature knocked into a lighter one nudges it (scaled by mass),
-  never the other way round.
+* **Nothing moves diagonally.** Dashes, lunges, projectiles, lines and
+  knockback all run along rows and columns. A dash's wind-up slides onto
+  its cell centre across the lane first, then along it.
+* **Bodies are solid.** Knockback stops at walls and stones; a heavier
+  creature knocked into a lighter one nudges it (scaled by mass), never the
+  other way round. Overlapping bodies are separated along one axis, and a
+  dashing creature holds its lane while the other makes room.
 
 ## Dash
 
@@ -188,9 +192,13 @@ itself, and the dasher hasn't already passed it this dash:
   starts when the ability is activated, and stamina is paid then too. If the
   ability isn't ready it is denied (cooldown, stamina or status) and its HUD
   slot shakes.
+* **Attacks follow the board.** The aim picks a row or column (its dominant
+  axis, with the same hysteresis as dashes), so projectiles, lunges, cones
+  and lines always point east, south, west or north.
 * **Aim modes:** direction (projectiles, cones, lines), target point (Heat
-  Ring; clamped to max range) and self (Ground Pound, Stone Guard). Aim keeps
-  updating during startup and is fixed from the active frame on.
+  Ring: it lands on a whole cell along the lane, 1 cell up to its max range)
+  and self (Ground Pound, Stone Guard). Aim keeps updating during startup
+  and is fixed from the active frame on.
 * **Components:** abilities are built from reusable parts rather than
   bespoke code: projectile, melee (circle, cone or box attached to the
   caster), lunge, targeted area (delayed circle or ring), self area, line
@@ -202,7 +210,7 @@ itself, and the dasher hasn't already passed it this dash:
   have no cancels in v0.
 * **Armor:** an ability can be unflinchable during startup or active (Ground
   Pound's wind-up). Armored creatures still take damage, and their knockback
-  is cut to 30%.
+  is cut to 30% (an armored dash takes none: it holds its lane).
 * **Telegraphs:** Ground Pound shows its radius during startup. Heat Ring
   marks its circle for 40 ticks, and Fault Line marks its line for 30 ticks,
   before they become dangerous.
@@ -240,7 +248,7 @@ damage = power x mastery_mult x (ATK / DEF) x element_mult x ruleset.damage_scal
 | --- | --- |
 | Hitstop | Freezes the target for the hit's hitstop ticks (max 10). It also freezes the attacker for attached melee, which gives melee its weight. Frozen fighters' timers and cooldowns pause, and an attached hitbox doesn't age while its owner is frozen. Hits with hitstop >= 5 count as "heavy" for feedback. |
 | Hitstun | The hit's hitstun x the target's passive (Bedrock 0.8), applied as a stun through the stun rules below. Skipped if the target is flinch-immune (Stone Guard, ARMORED dash, ability armor). |
-| Knockback | Distance = knockback x status mult x passive mult (x0.3 if flinch-immune). It is spread over 8 ticks with geometric decay 0.85 per tick (the first tick covers ~21% of the distance) and stops at walls. Directional along the hitbox, or radial from its center (static circles are always radial). A KO blow pushes at least 0.8. |
+| Knockback | Distance = knockback x status mult x passive mult (x0.3 if flinch-immune, none during an armored dash). It is spread over 8 ticks with geometric decay 0.85 per tick (the first tick covers ~21% of the distance) and stops at walls. Always along a row or column: the hitbox's direction, or for radial hits (static circles are always radial) the dominant axis from its centre to the target. Starting a dash ends any knockback still sliding the creature. A KO blow pushes at least 0.8. |
 | Chip | Blocked hits only: 15% of raw damage, can't KO. |
 
 **Projectiles:**
@@ -345,8 +353,8 @@ counter, not a state.
   button starts the exit. In guard, releasing returns to IDLE after
   blockstun.
 * **Aim:** mouse or right-stick aim when present. Otherwise the creature
-  soft-locks onto the opponent. Facing follows the aim while actionable,
-  guarding or focusing.
+  soft-locks onto the opponent. Facing follows the aim's row or column while
+  actionable, guarding or focusing.
 
 ## Match flow
 
@@ -390,11 +398,14 @@ manages stamina with Focus. Each tick it:
 4. Continues basic strings.
 5. Picks an offensive option by utility every decision interval.
 6. Holds its preferred range band with planned dashes (it never walks
-   either): Agile 3.2-5.6 u (kite), Heavy 0-1.8 u (brawl), anything else
-   1.5-4.0 u. It backs off to 5-7.5 u when it needs to Focus. Candidate
-   landing cells are scored by the band, lanes the foe could ram, edges and
-   corners, and the stamina the dash costs; it dodges with short dashes and
-   takes rams when a plan shows one.
+   either): Agile 3.0-5.5 u (kite), Heavy 0.9-2.1 u (brawl), anything else
+   1.5-4.0 u. It backs off to 4.5-7.5 u when it needs to Focus. Candidate
+   landing cells are scored by the band, by the best attack it could throw
+   from there (attacks run along rows and columns, so it lines up on the
+   foe's row or column), lanes the foe could ram, edges and corners, and
+   the stamina the dash costs; it dodges with short dashes and takes rams
+   when a plan shows one. An attack is only chosen when its hitbox, swung
+   down that lane, would reach the foe.
 
 | Preset | Reaction | Decision | Aim error | Lead | Dodge | Guard | Dash-through | Aggression | Focus below | Mistakes | Combo skill | Patience |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |

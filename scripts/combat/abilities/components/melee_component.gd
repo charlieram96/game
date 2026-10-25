@@ -21,9 +21,24 @@ func execute(sim: BattleSim, caster: Fighter, ability: AbilityDefinition, _phase
 	var v := sim.new_volume(caster, ability, hit)
 	v.motion = HitVolume.Motion.ATTACHED
 	v.cancel_with_owner = true
-	v.dir = caster.ability_dir
+	_shape(v, caster.pos, caster.ability_dir)
+	v.active_ticks = active_ticks if active_ticks > 0 else ability.active_ticks
+	v.visual = visual
+	sim.add_volume(v)
+
+
+## Would this hitbox, swung from `from` along `dir`, touch a body of radius
+## `r` at `p`? (The AI checks its reach with this.)
+func reaches(from: Vector2, dir: Vector2, p: Vector2, r: float) -> bool:
+	var v := HitVolume.new()
+	_shape(v, from, dir)
+	return v.overlaps(p, r)
+
+
+func _shape(v: HitVolume, from: Vector2, dir: Vector2) -> void:
+	v.dir = dir
 	v.forward_offset = forward_offset
-	v.pos = caster.pos + v.dir * forward_offset
+	v.pos = from + dir * forward_offset
 	match shape:
 		MeleeShape.CIRCLE:
 			v.shape = HitVolume.Shape.CIRCLE
@@ -36,9 +51,6 @@ func execute(sim: BattleSim, caster: Fighter, ability: AbilityDefinition, _phase
 			v.shape = HitVolume.Shape.BOX
 			v.length = length
 			v.width = width
-	v.active_ticks = active_ticks if active_ticks > 0 else ability.active_ticks
-	v.visual = visual
-	sim.add_volume(v)
 
 
 func telegraph_shape(caster: Fighter, _ability: AbilityDefinition) -> Dictionary:

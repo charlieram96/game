@@ -123,7 +123,9 @@ static func apply_hit(sim: BattleSim, v: HitVolume, target: Fighter) -> void:
 		var kb := hit.knockback * target.status_mult("knockback_taken_mult")
 		if target.stats.passive:
 			kb *= target.stats.passive.knockback_taken_mult
-		if flinch_immune:
+		if DashSystem.is_flinch_immune(target):
+			kb = 0.0  # an armored dash holds its lane
+		elif flinch_immune:
 			kb *= 0.3
 		MovementSystem.push(target, _knockback_dir(v, target), kb)
 	for app in hit.statuses:
@@ -146,12 +148,14 @@ static func apply_dot(sim: BattleSim, f: Fighter, s: StatusInstance) -> void:
 	StaminaSystem.interrupt(sim, f)
 
 
+## Knockback runs along a row or column like every other move: radial hits
+## push along the dominant axis away from their centre.
 static func _knockback_dir(v: HitVolume, target: Fighter) -> Vector2:
 	var radial := v.hit.knockback_mode == HitSpec.KnockbackMode.RADIAL
 	if radial or (v.shape == HitVolume.Shape.CIRCLE and v.motion == HitVolume.Motion.STATIC):
 		var d := target.pos - v.pos
-		return d.normalized() if d.length_squared() > 1e-6 else v.dir
-	return v.dir
+		return Cardinal.snap(d) if d.length_squared() > 1e-6 else Cardinal.snap(v.dir)
+	return Cardinal.snap(v.dir)
 
 
 static func _contact_point(v: HitVolume, target: Fighter) -> Vector2:

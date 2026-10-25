@@ -168,6 +168,9 @@ static func try_start(sim: BattleSim, f: Fighter, dir_index: int, cells: int) ->
 	f.dash_extra_recovery = 0
 	f.dash_active_tick = 0
 	f.vel = Vector2.ZERO
+	# The dash takes over from any knockback still sliding the creature.
+	f.knockback_ticks = 0
+	f.knockback_vel = Vector2.ZERO
 	f.facing = p.dir
 	f.cardinal_facing = p.dir
 	sim.set_state(f, SM.DASH_START, maxi(1, prof.startup_ticks))
@@ -179,14 +182,26 @@ static func try_start(sim: BattleSim, f: Fighter, dir_index: int, cells: int) ->
 	return true
 
 
-## Windup: slide onto the home cell's centre while coiling.
+## Windup: slide onto the home cell's centre while coiling: first across
+## the lane, then along it. Each tick moves along one axis only.
 static func step_windup(_sim: BattleSim, f: Fighter) -> void:
 	var u := clampf(float(f.state_tick) / maxf(1.0, float(f.state_duration)), 0.0, 1.0)
-	f.pos = f.dash_from.lerp(f.dash_home, u * u * (3.0 - 2.0 * u))
+	var across := CombatConst.perpendicular(f.dash_dir)
+	var corner := f.dash_from + across * (f.dash_home - f.dash_from).dot(across)
+	if absf((f.dash_home - f.pos).dot(across)) > 0.0005:
+		f.pos = f.dash_from.lerp(corner, _smooth(minf(1.0, u * 2.0)))
+	else:
+		f.pos = corner.lerp(f.dash_home, _smooth(clampf(u * 2.0 - 1.0, 0.0, 1.0)))
+
+
+static func _smooth(u: float) -> float:
+	return u * u * (3.0 - 2.0 * u)
 
 
 static func begin_active(sim: BattleSim, f: Fighter) -> void:
-	f.pos = f.dash_home
+	# Finish lining up on the lane (across only); travel runs along it.
+	var across := CombatConst.perpendicular(f.dash_dir)
+	f.pos += across * (f.dash_home - f.pos).dot(across)
 	sim.set_state(f, SM.DASH_ACTIVE, 0)
 	f.dash_active_tick = 0
 

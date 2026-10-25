@@ -39,7 +39,7 @@ static func start(sim: BattleSim, f: Fighter, ability: AbilityDefinition, slot: 
 	f.current_slot = slot
 	f.ability_hit_landed = false
 	f.lunge_ticks = 0
-	capture_aim(f, ability)
+	capture_aim(sim, f, ability)
 	f.vel = Vector2.ZERO
 	sim.set_state(f, SM.ATTACK_START, ability.startup_ticks)
 	f.usage_for(ability.id)["uses"] += 1
@@ -61,13 +61,21 @@ static func start(sim: BattleSim, f: Fighter, ability: AbilityDefinition, slot: 
 				sim.emit(BattleEvent.TELEGRAPH, f, -1, f.pos, shape)
 
 
-static func capture_aim(f: Fighter, ability: AbilityDefinition) -> void:
-	var dir := f.aim if f.aim != Vector2.ZERO else f.facing
-	f.ability_dir = dir.normalized()
+## Attacks follow the board like dashes: always along a row or column. The
+## aim picks the lane (keeping the current one near a diagonal while aiming
+## during startup); a targeted area lands on a whole cell along that lane.
+static func capture_aim(sim: BattleSim, f: Fighter, ability: AbilityDefinition) -> void:
+	var raw := f.aim if f.aim != Vector2.ZERO else f.facing
+	var previous := Cardinal.index_of(f.ability_dir) if f.state == SM.ATTACK_START and Cardinal.is_cardinal(f.ability_dir) else -1
+	var lane := Cardinal.pick(raw, previous)
+	f.ability_dir = Cardinal.from_index(lane) if lane >= 0 else Cardinal.snap(f.facing)
 	match ability.aim_mode:
 		AbilityDefinition.AimMode.TARGET_POINT:
-			var dist := clampf(f.pos.distance_to(f.aim_point), 0.0, ability.max_range)
-			f.ability_point = f.pos + f.ability_dir * dist
+			var arena := sim.setup.arena
+			var origin := arena.cell_center(arena.cell_of(f.pos))
+			var max_cells := maxi(1, int(floor(ability.max_range + 0.001)))
+			var cells := clampi(int(round((f.aim_point - origin).dot(f.ability_dir))), 1, max_cells)
+			f.ability_point = origin + f.ability_dir * float(cells)
 		AbilityDefinition.AimMode.SELF:
 			f.ability_point = f.pos
 		_:
@@ -83,7 +91,7 @@ static func step(sim: BattleSim, f: Fighter, cmd: InputCommand) -> void:
 	match f.state:
 		SM.ATTACK_START:
 			if ability.can_aim_during_startup:
-				capture_aim(f, ability)
+				capture_aim(sim, f, ability)
 		SM.ATTACK_ACTIVE:
 			_run(sim, f, ability, Trigger.ACTIVE_TICK, f.state_tick)
 			_step_lunge(sim, f)

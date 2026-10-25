@@ -5,7 +5,7 @@ const H := preload("res://tests/sim_helpers.gd")
 const SM := FighterSM.State
 
 
-func _ai_battle(a_path: String, b_path: String, a_ai: InputSource, b_ai: InputSource, max_ticks: int = 7200) -> BattleSim:
+func _ai_battle(a_path: String, b_path: String, a_ai: InputSource, b_ai: InputSource, max_ticks: int = 7200, on_tick: Callable = Callable()) -> BattleSim:
 	var setup := BattleSetup.new()
 	setup.ruleset = BattleRuleset.make(BattleRuleset.Kind.RANKED)
 	setup.countdown = false
@@ -20,9 +20,15 @@ func _ai_battle(a_path: String, b_path: String, a_ai: InputSource, b_ai: InputSo
 	transport.set_input_source(1, b_ai)
 	for i in max_ticks:
 		transport.step()
+		if on_tick.is_valid():
+			on_tick.call(transport.sim)
 		if transport.sim.is_finished():
 			break
 	return transport.sim
+
+
+static func _diagonal(v: Vector2) -> bool:
+	return minf(absf(v.x), absf(v.y)) > 0.001
 
 
 func test_ai_beats_a_passive_opponent() -> void:
@@ -41,6 +47,30 @@ func test_ai_vs_ai_matches_complete() -> void:
 		for f in sim.fighters:
 			dealt += float(f.record["damage_dealt"])
 		assert_gt(dealt, 50.0, "both sides fought")
+
+
+## Nothing travels diagonally: dashes, lunges, knockback, body pushes,
+## projectiles and every attack's direction follow the board's rows and
+## columns.
+func test_nothing_moves_diagonally() -> void:
+	var bad: Array[String] = []
+	var last := {}
+	var check := func(sim: BattleSim) -> void:
+		for f in sim.fighters:
+			var step: Vector2 = f.pos - (last.get(f.id, f.pos) as Vector2)
+			last[f.id] = f.pos
+			if _diagonal(step):
+				bad.append("tick %d: fighter %d moved %s (%s)" % [sim.tick, f.id, step, FighterSM.State.keys()[f.state]])
+			if _diagonal(f.facing) or (FighterSM.is_attacking(f.state) and _diagonal(f.ability_dir)):
+				bad.append("tick %d: fighter %d faces %s / aims %s" % [sim.tick, f.id, f.facing, f.ability_dir])
+		for v in sim.volumes:
+			if _diagonal(v.dir) or _diagonal(v.velocity):
+				bad.append("tick %d: volume %s dir %s vel %s" % [sim.tick, v.ability.id if v.ability else &"?", v.dir, v.velocity])
+	for pair in [[H.EMBERLYN, H.STONEBACK], [H.STONEBACK, H.EMBERLYN]]:
+		last.clear()
+		var sim := _ai_battle(pair[0], pair[1], CombatAI.new(AIProfile.preset(&"hard"), 17), CombatAI.new(AIProfile.preset(&"normal"), 41), 7200, check)
+		assert_true(sim.is_finished(), "%s vs %s finished" % [pair[0].get_file(), pair[1].get_file()])
+	assert_eq(bad.size(), 0, "no diagonal motion: %s" % [bad.slice(0, 6)])
 
 
 func test_ai_focuses_when_out_of_stamina() -> void:

@@ -426,9 +426,13 @@ func _update_aim(f: Fighter, cmd: InputCommand) -> void:
 		else:
 			f.aim = f.facing
 			f.aim_point = f.pos + f.facing * 3.0
-	# Facing follows the aim while able to turn; otherwise the action's direction.
+	# Facing follows the aim while able to turn; otherwise the action's
+	# direction. Like every move and attack, it lies along a row or column
+	# (with lane hysteresis, so it doesn't flicker near a diagonal).
 	if FighterSM.is_actionable(f.state) or f.state == SM.GUARDING or FighterSM.is_focusing(f.state):
-		f.facing = f.aim
+		var lane := Cardinal.pick(f.aim, Cardinal.index_of(f.facing))
+		if lane >= 0:
+			f.facing = Cardinal.from_index(lane)
 
 
 ## Time-driven phase transitions.
