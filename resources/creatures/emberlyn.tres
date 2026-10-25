@@ -72,6 +72,6 @@ sprite_manifest = "res://assets/sprites/kith/emberlyn.json"
 portrait_manifest = "res://assets/sprites/portraits/portrait_emberlyn.json"
 icon_color = Color(0.9411765, 0.5411765, 0.16470589, 1)
 cry_sfx = &"emberlyn_chirp"
-visual_height = 1.0
+visual_height = 1.05
 habitat = "Glimmerwood thickets, warm hollows"
 journal_entry = "Emberlyn keep a coal of living fire in the tip of their tails. When frightened or cold the ember gutters; when they trust someone it burns bright enough to read by."
