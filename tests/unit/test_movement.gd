@@ -26,12 +26,12 @@ func test_arenas_put_spawns_and_stones_on_cell_centres() -> void:
 func test_cell_helpers_round_trip() -> void:
 	var def := ArenaDefinition.ringstones()
 	var n := def.cell_count()
-	assert_eq(n, Vector2i(14, 9), "14 x 9 board")
+	assert_eq(n, Vector2i(20, 12), "20 x 12 board")
 	for y in n.y:
 		for x in n.x:
 			var c := Vector2i(x, y)
 			assert_eq(def.cell_of(def.cell_center(c)), c, "cell %s" % c)
-	assert_false(def.has_cell(Vector2i(14, 0)), "off the board")
+	assert_false(def.has_cell(Vector2i(20, 0)), "off the board")
 
 
 func test_knockback_never_leaves_the_arena() -> void:

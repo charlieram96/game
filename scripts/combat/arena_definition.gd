@@ -10,7 +10,7 @@ extends Resource
 
 @export var id: StringName = &"ringstones"
 @export var display_name: String = "The Ringstones"
-@export var size: Vector2 = Vector2(16, 10)
+@export var size: Vector2 = Vector2(20, 12)
 ## Standing stones: (x, z, radius).
 @export var circles: PackedVector3Array = PackedVector3Array()
 ## Solid boxes (crates, walls) in XZ.
@@ -25,11 +25,18 @@ static func ringstones() -> ArenaDefinition:
 	var d := ArenaDefinition.new()
 	d.id = &"ringstones"
 	d.display_name = "The Ringstones"
-	d.size = Vector2(14, 9)
-	# Point-symmetric so neither side has an advantage; each stone fills a cell.
-	d.circles = PackedVector3Array([Vector3(-2.5, -2.0, 0.45), Vector3(2.5, 2.0, 0.45)])
-	d.spawn_team0 = Vector2(-4.5, 0)
-	d.spawn_team1 = Vector2(4.5, 0)
+	d.size = Vector2(20, 12)
+	# Point-symmetric so neither side has an advantage; each stone fills a
+	# cell. Two pairs break up the long rows and columns: cover from shots
+	# and something to dash around.
+	d.circles = PackedVector3Array([
+		Vector3(-3.5, -2.5, 0.45), Vector3(3.5, 2.5, 0.45),
+		Vector3(-6.5, 3.5, 0.45), Vector3(6.5, -3.5, 0.45),
+	])
+	# The board has an even number of rows, so the spawns sit one row apart
+	# (point-symmetric): nobody starts in the other's line of fire.
+	d.spawn_team0 = Vector2(-7.5, -0.5)
+	d.spawn_team1 = Vector2(7.5, 0.5)
 	return d
 
 
@@ -37,10 +44,10 @@ static func training_yard() -> ArenaDefinition:
 	var d := ArenaDefinition.new()
 	d.id = &"training_yard"
 	d.display_name = "Mossford Training Yard"
-	d.size = Vector2(13, 9)
+	d.size = Vector2(20, 12)
 	d.circles = PackedVector3Array()
-	d.spawn_team0 = Vector2(-4, 0)
-	d.spawn_team1 = Vector2(3, 0)
+	d.spawn_team0 = Vector2(-6.5, -0.5)
+	d.spawn_team1 = Vector2(3.5, -0.5)
 	d.floor_style = &"dirt"
 	d.crowd = false
 	return d

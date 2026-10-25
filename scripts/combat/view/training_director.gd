@@ -7,7 +7,7 @@ extends Node
 const SM := FighterSM.State
 ## The "dash to move" marks: cell centres a few straight dashes apart in the
 ## training yard (N 3, E 4, S 5 from the start).
-const MOVE_MARKS: Array[Vector2] = [Vector2(-4, -3), Vector2(0, -3), Vector2(0, 2)]
+const MOVE_MARKS: Array[Vector2] = [Vector2(-6.5, -3.5), Vector2(-2.5, -3.5), Vector2(-2.5, 1.5)]
 
 var scene: Node  # battle_scene.gd
 var sim: BattleSim
