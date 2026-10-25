@@ -29,5 +29,4 @@ description = "A slow practice projectile."
 startup_ticks = 20
 active_ticks = 1
 recovery_ticks = 20
-cooldown_ticks = 90
 components = Array[ExtResource("1_kevlk")]([SubResource("Resource_hmh17")])

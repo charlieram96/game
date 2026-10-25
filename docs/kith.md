@@ -16,48 +16,53 @@ kit are species identity: they are never scaled by level, even in Ranked.
 | Kith | Element | Archetype | Base HP / ATK / DEF | Battle-ready | Where |
 | --- | --- | --- | --- | --- | --- |
 | Emberlyn | Ember | Agile | 110 / 12 / 9 | Yes | Glimmerwood (the player's partner) |
-| Stoneback | Stone | Heavy | 170 / 12.5 / 12 | Yes | Riverbeds (Corin's Biscuit) |
+| Stoneback | Stone | Heavy | 155 / 12.5 / 12 | Yes | Riverbeds (Corin's Biscuit) |
 | Training Totem | Neutral | Dummy | 80 / 8 / 10 | Training only | Training yard |
 | Mossling | Grove | Shy | 70 / 7 / 8 | No kit (world and journal only) | North meadow |
 | Lanternmoth | Aether | Guide | 90 / 9 / 10 | No kit (world and journal only) | Lumen, Hesper's companion |
 
-## Body, movement, dash and stamina
+## Body, dash and stamina
+
+Creatures don't walk in battle: every move is a dash of whole cells along a
+row or column (see combat.md).
 
 | | Emberlyn | Stoneback |
 | --- | --- | --- |
-| Walk speed | 7.0 u/s | 4.2 u/s |
-| Acceleration / deceleration | 45 / 60 u/s^2 | 25 / 32 u/s^2 |
-| Turn acceleration (reversing, angle > 90 deg) | 95 u/s^2 | 30 u/s^2 |
-| Collision radius / hurt radius | 0.42 / 0.48 | 0.55 / 0.60 |
+| Collision radius / hurt radius | 0.42 / 0.48 | 0.47 / 0.60 |
 | Mass (body pushing) | 1.0 | 2.2 |
-| Max stamina | 80 | 140 |
-| Focus regen | 28 /s (empty to full in ~2.9 s) | 15 /s (~9.3 s) |
+| Max stamina | 100 | 130 |
+| Focus regen | 37 /s (empty to full in ~2.7 s) | 30 /s (~4.3 s) |
 | Focus enter / exit | 4 / 4 ticks (~67 ms, Quickfoot) | 7 / 7 ticks (~117 ms) |
 | Guard stamina factor (stamina lost per point blocked) | 1.25 | 0.8 |
 | Dash trait | **Phase Step** (FAST) | **Rolling Fortress** (ARMORED) |
-| Dash distance | 4.0 u | 2.0 u |
-| Dash startup / active / recovery | 2 / 11 / 8 ticks (33 / 183 / 133 ms) | 3 / 13 / 10 ticks (50 / 217 / 167 ms) |
-| Dash speed | ~21.8 u/s | ~9.2 u/s |
-| Dash cost | 25 (3 dashes per full bar) | 40 (3 per full bar) |
-| Dash special | Projectiles pass through during the first 5 active ticks (83 ms) | Can't be flinched during startup and active; takes x0.5 damage while active |
+| Dash reach | 1-5 cells | 1-3 cells |
+| Dash cost | 6 + 5 per cell (11 for one cell, 31 for five) | 9 + 8 per cell (17 for one, 33 for three) |
+| Dash windup / recovery | 3 / 7 ticks (a chained dash after 3) | 5 / 10 ticks (chained after 5) |
+| Dash travel | 4 + 1.7 ticks per cell (five cells in ~13 ticks) | 6 + 2.6 ticks per cell (three cells in ~14 ticks) |
+| Ram power | 6.5 | 9 |
+| Dash special | Projectiles pass through during the first 5 travel ticks (83 ms) | Can't be flinched or knocked off its lane during windup and travel; takes x0.5 damage while travelling |
 | Dash-through stun inflicted | 15 ticks (250 ms) | 18 ticks (300 ms, from Bedrock) |
 
 **Passives**
 
 * **Quickfoot** (Emberlyn): Focus enter and exit take x0.55 as long (7 -> 4
-  ticks), and Emberlyn walks 10% faster while below 30% stamina.
+  ticks), dashes travel 10% faster while below 30% stamina, and it earns
+  45% more Surge (it hits fast but light, so it lives on its specials).
 * **Bedrock** (Stoneback): takes half knockback, recovers from flinches 20%
   faster (hitstun x0.8), and its dash-through stuns last 20% longer.
 
-Body contact: a heavier creature walking into a lighter one shoves it. The
-lighter one takes up to 40% of the overlap correction, scaled by mass ratio;
-Stoneback against Emberlyn gives 24%. Otherwise bodies are solid and the
-mover takes the correction (see combat.md).
+Body contact: overlapping bodies are pushed apart along one board axis. The
+creature that moved into the other takes the correction, except that a
+heavier one nudges a lighter one (up to 40% of the overlap, scaled by mass
+ratio; Stoneback against Emberlyn gives 24%), and a dashing creature holds
+its lane while the other makes room (see combat.md).
 
 ## Ability frame data
 
-Every ability runs startup -> active -> recovery. The cooldown starts and
-the stamina is paid when the ability is activated. "Total" is the time until
+Every ability runs startup -> active -> recovery, and nothing has a
+cooldown: a special's Surge cost (in stages, see combat.md) is paid when it
+starts, and it can be used again as soon as it can be paid for. Basic
+attacks are free. Every attack runs along a row or column. "Total" is the time until
 the creature can act again, not counting hitstop. All v0 abilities root the
 caster and keep tracking the aim during startup. Basic-attack strings chain
 when attack is pressed (or held) during the first N ticks of recovery, and
@@ -68,26 +73,26 @@ can be dash-cancelled from a given recovery tick.
 Default loadout and keys: Q Ember Bolt, E Cinder Arc, R Flash Strike, F Heat
 Ring. Basic attack on left click.
 
-| Ability | Startup | Active | Recovery | Total | Cooldown | Cost | Notes |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| Tail Swipe 1 | 5 (83) | 3 (50) | 11 (183) | 19 (317) | - | 0 | chain window 9, dash-cancel from recovery tick 5 |
-| Tail Swipe 2 | 4 (67) | 3 (50) | 11 (183) | 18 (300) | - | 0 | chain window 9, dash-cancel from 5 |
-| Tail Swipe 3 (finisher) | 7 (117) | 4 (67) | 16 (267) | 27 (450) | - | 0 | dash-cancel from 8 |
-| Ember Bolt | 7 (117) | 1 (17) | 10 (167) | 18 (300) | 54 (0.9 s) | 0 | - |
-| Cinder Arc | 9 (150) | 4 (67) | 16 (267) | 29 (483) | 210 (3.5 s) | 8 | - |
-| Flash Strike | 4 (67) | 7 (117) | 15 (250) | 26 (433) | 300 (5 s) | 10 | - |
-| Heat Ring | 10 (167) | 1 (17) | 14 (233) | 25 (417) | 420 (7 s) | 15 | - |
+| Ability | Startup | Active | Recovery | Total | Surge | Notes |
+| --- | --- | --- | --- | --- | --- | --- |
+| Tail Swipe 1 | 5 (83) | 3 (50) | 11 (183) | 19 (317) | free | chain window 9, dash-cancel from recovery tick 5 |
+| Tail Swipe 2 | 4 (67) | 3 (50) | 11 (183) | 18 (300) | free | chain window 9, dash-cancel from 5 |
+| Tail Swipe 3 (finisher) | 7 (117) | 4 (67) | 16 (267) | 27 (450) | free | dash-cancel from 8 |
+| Ember Bolt | 7 (117) | 1 (17) | 10 (167) | 18 (300) | 1 stage | - |
+| Cinder Arc | 9 (150) | 4 (67) | 16 (267) | 29 (483) | 2 stages | - |
+| Flash Strike | 4 (67) | 7 (117) | 15 (250) | 26 (433) | 3 stages | - |
+| Heat Ring | 10 (167) | 1 (17) | 14 (233) | 25 (417) | 4 stages | - |
 
 | Ability | Power | Dmg vs Stoneback / Emberlyn | Hitstun | Hitstop | Knockback | Hitbox | Effects |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Tail Swipe 1, 2 | 4 | ~3.6 / ~4.8 | 11 | 3 | 0.35 | 120 deg cone, reach 1.25 | - |
-| Tail Swipe 3 | 6.5 | ~5.9 / ~7.8 | 18 | 6 | 1.3 | 140 deg cone, reach 1.45 | - |
-| Ember Bolt | 7 | ~6.3 / ~8.4 | 10 | 2 | 0.45 | Projectile, 16 u/s, radius 0.22, range 9 | Clash weight 1 |
-| Cinder Arc | 10 | ~9.0 / ~12.0 | 14 | 4 | 0.9 | 110 deg cone, reach 2.4 | Burn 120 ticks (2 s) |
-| Flash Strike | 13 | ~11.7 / ~15.6 | 18 | 6 | 1.4 | Lunge 2.4 u over 6 ticks (stops on hit, bodies, walls), then a radius 0.85 circle 0.6 ahead for 7 ticks | - |
-| Heat Ring | 17 | ~15.3 / ~20.4 | 20 | 6 | 1.1 radial | Circle radius 1.7 at the aimed point (max 7 u). Telegraphed for 40 ticks (667 ms), then live for 6 ticks. | Burn 150 ticks (2.5 s) |
+| Tail Swipe 1, 2 | 4.5 | ~4.1 / ~5.4 | 11 | 3 | 0.35 | 120 deg cone, reach 1.25 | - |
+| Tail Swipe 3 | 7.5 | ~6.8 / ~9.0 | 18 | 6 | 1.3 | 140 deg cone, reach 1.45 | - |
+| Ember Bolt | 13 | ~11.7 / ~15.6 | 10 | 2 | 0.45 | Projectile, 16 u/s, radius 0.22, range 9 | Clash weight 1 |
+| Cinder Arc | 22 | ~19.8 / ~26.4 | 14 | 4 | 0.9 | 110 deg cone, reach 2.4 | Burn 120 ticks (2 s) |
+| Flash Strike | 32 | ~28.8 / ~38.4 | 18 | 6 | 1.4 | Lunge 2.4 u over 6 ticks (stops on hit, bodies, walls), then a radius 0.85 circle 0.6 ahead for 7 ticks | - |
+| Heat Ring | 44 | ~39.6 / ~52.8 | 20 | 6 | 1.1, along the board | Circle radius 1.7 on a whole cell 1-7 cells down the lane. Telegraphed for 40 ticks (667 ms), then live for 6 ticks. | Burn 150 ticks (2.5 s) |
 
-The full Tail Swipe string deals about 13 to a Stoneback and about 17 to an
+The full Tail Swipe string deals about 15 to a Stoneback and about 20 to an
 Emberlyn. Burn deals 1.0 power every 30 ticks (about 1 per tick on a
 Stoneback, 1.3 on an Emberlyn). Cinder Arc's burn ticks 4 times and Heat
 Ring's 5 times.
@@ -97,33 +102,34 @@ Ring's 5 times.
 Default loadout and keys: Q Boulder Toss, E Ground Pound, R Stone Guard, F
 Fault Line.
 
-| Ability | Startup | Active | Recovery | Total | Cooldown | Cost | Notes |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| Shell Bash 1 | 8 (133) | 4 (67) | 14 (233) | 26 (433) | - | 0 | chain window 10, dash-cancel from 7 |
-| Shell Bash 2 | 9 (150) | 5 (83) | 20 (333) | 34 (567) | - | 0 | dash-cancel from 10 |
-| Boulder Toss | 14 (233) | 1 (17) | 16 (267) | 31 (517) | 240 (4 s) | 10 | - |
-| Ground Pound | 18 (300) | 3 (50) | 20 (333) | 41 (683) | 300 (5 s) | 12 | Armored (can't be flinched) during startup; radius telegraphed to both players |
-| Stone Guard | 6 (100) | 1 (17) | 6 (100) | 13 (217) | 720 (12 s) | 20 | - |
-| Fault Line | 12 (200) | 1 (17) | 18 (300) | 31 (517) | 480 (8 s) | 18 | - |
+| Ability | Startup | Active | Recovery | Total | Surge | Notes |
+| --- | --- | --- | --- | --- | --- | --- |
+| Shell Bash 1 | 8 (133) | 4 (67) | 14 (233) | 26 (433) | free | chain window 10, dash-cancel from 7 |
+| Shell Bash 2 | 9 (150) | 5 (83) | 20 (333) | 34 (567) | free | dash-cancel from 10 |
+| Boulder Toss | 14 (233) | 1 (17) | 16 (267) | 31 (517) | 2 stages | - |
+| Ground Pound | 18 (300) | 3 (50) | 20 (333) | 41 (683) | 1 stage | Armored (can't be flinched) during startup; radius telegraphed to both players |
+| Stone Guard | 6 (100) | 1 (17) | 6 (100) | 13 (217) | 3 stages | - |
+| Fault Line | 12 (200) | 1 (17) | 18 (300) | 31 (517) | 4 stages | - |
 
 | Ability | Power | Dmg vs Emberlyn / Stoneback | Hitstun | Hitstop | Knockback | Hitbox | Effects |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Shell Bash 1 | 6 | ~9.2 / ~6.3 | 13 | 4 | 0.7 | Radius 1.0 circle, 0.75 ahead | - |
-| Shell Bash 2 | 8.5 | ~13.0 / ~8.9 | 18 | 7 | 1.6 | Radius 1.15 circle, 0.8 ahead | - |
-| Boulder Toss | 14 | ~21.4 / ~14.6 | 22 | 6 | 2.0 | Projectile, 9.5 u/s, radius 0.5, range 8 | Clash weight 3: smashes through smaller projectiles |
-| Ground Pound | 13 | ~19.9 / ~13.5 | 16 | 6 | 1.6 radial | Radius 2.3 burst around self, 3 ticks | Slow 90 ticks (1.5 s, move x0.65) |
+| Shell Bash 1 | 5.5 | ~8.4 / ~5.8 | 13 | 4 | 0.7 | Radius 1.0 circle, 0.75 ahead | - |
+| Shell Bash 2 | 7.5 | ~11.5 / ~7.9 | 18 | 7 | 1.6 | Radius 1.15 circle, 0.8 ahead | - |
+| Boulder Toss | 26 | ~39.9 / ~27.2 | 22 | 6 | 2.0 | Projectile, 9.5 u/s, radius 0.5, range 8 | Clash weight 3: smashes through smaller projectiles |
+| Ground Pound | 14 | ~21.5 / ~14.7 | 16 | 6 | 1.6, along the board | Radius 2.3 burst around self, 3 ticks | Slow 90 ticks (1.5 s, move x0.65) |
 | Stone Guard | - | - | - | - | - | Self | Stone Guard status for 80 ticks (1.33 s): takes x0.45 damage, x0.3 knockback, can't be flinched, repels dash-throughs from any side, moves x0.6 |
-| Fault Line | 16 | ~24.4 / ~16.7 | 26 | 5 | 0.6 | Line 9 long (clipped at walls), 1.1 wide. Telegraphed for 30 ticks (500 ms), then a damaging band 1.4 deep sweeps outward at 20 u/s (~27 ticks to reach the end). | - |
+| Fault Line | 44 | ~67.5 / ~46.1 | 26 | 5 | 0.6 | Line 9 long (clipped at walls), 1.1 wide, down a row or column. Telegraphed for 30 ticks (500 ms), then a damaging band 1.4 deep sweeps outward at 20 u/s (~27 ticks to reach the end). | - |
 
-Rough time-to-KO at equal levels: about 27 Ember Bolts to drop a Stoneback,
-and 6 Boulder Tosses to drop an Emberlyn. Emberlyn wins by volume and
-mobility; Stoneback wins by making each mistake expensive.
+Rough time-to-KO at equal levels: about 14 Ember Bolts (14 stages of
+Surge) to drop a Stoneback, and 3 Boulder Tosses (6 stages) to drop an
+Emberlyn. Emberlyn wins by volume, mobility and a fast-filling Surge meter;
+Stoneback wins by making each mistake expensive.
 
 ### Training Totem
 
 It can't move, dash (cost 9999) or Focus (regen 0), and has mass 50. Its one
 ability is **Acorn Shot**: startup 20 (333 ms), active 1, recovery 20,
-cooldown 90 (1.5 s), projectile 7 u/s with range 10, power 3, hitstun 8,
+no Surge cost, projectile 7 u/s with range 10, power 3, hitstun 8,
 hitstop 2, knockback 0.3. It is driven by a scripted `TrainingAI` (idle /
 shoot every 100 ticks / hold guard). In training it can't be knocked out: its
 HP refills and "Reset!" pops up.

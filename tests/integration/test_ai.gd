@@ -105,6 +105,7 @@ func test_hard_ai_dodges_some_projectiles() -> void:
 		var sim := H.make_sim(H.STONEBACK, H.EMBERLYN)
 		H.place(sim, 0, Vector2(-5, 0), Vector2.RIGHT)
 		var target := H.place(sim, 1, Vector2(3, 0), Vector2.LEFT)
+		H.full_surge(sim)
 		var ai := CombatAI.new(AIProfile.preset(&"hard"), 100 + i)
 		var hp := target.hp
 		sim.step({0: H.cmd(InputCommand.ABILITY_1, InputCommand.ABILITY_1, Vector2.RIGHT, 8.0), 1: ai.get_command(sim, 1)})

@@ -9,7 +9,7 @@
 
 [sub_resource type="Resource" id="Resource_83lar"]
 script = ExtResource("2_5ej0i")
-power = 14.0
+power = 26.0
 knockback = 2.0
 hitstun_ticks = 22
 hitstop_ticks = 6
@@ -29,6 +29,7 @@ visual = &"boulder"
 [resource]
 script = ExtResource("5_4idc1")
 id = &"boulder_toss"
+surge_stages = 2
 display_name = "Boulder Toss"
 description = "Hurls a slow, heavy boulder that smashes through smaller projectiles."
 element = &"stone"
@@ -36,8 +37,6 @@ icon_path = "res://assets/ui/icons/ability_boulder_toss.png"
 startup_ticks = 14
 active_ticks = 1
 recovery_ticks = 16
-cooldown_ticks = 240
-stamina_cost = 10.0
 max_range = 8.0
 components = Array[ExtResource("1_60hsy")]([SubResource("Resource_teyks")])
 cast_sfx = &"boulder_toss"

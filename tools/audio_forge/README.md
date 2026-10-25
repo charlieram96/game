@@ -21,7 +21,7 @@ check in the report fails.
 
 | | folder | format | levels |
 |---|---|---|---|
-| SFX (87) | `assets/audio/sfx/` | 44.1 kHz mono 16-bit PCM | peak-normalised per category: impacts -1 dBFS, most hits/spells -2..-5, creatures -3..-9, UI -8..-13, footsteps -9, ambient loops -7..-14 |
+| SFX (89) | `assets/audio/sfx/` | 44.1 kHz mono 16-bit PCM | peak-normalised per category: impacts -1 dBFS, most hits/spells -2..-5, creatures -3..-9, UI -8..-13, footsteps -9, ambient loops -7..-14 |
 | Music (6) | `assets/audio/music/` | 32 kHz mono 16-bit PCM | peaks ≈ -3..-5 dBFS, integrated loudness capped at -20 LUFS so music sits under the SFX |
 
 Non-looping SFX are DC-free, trimmed of silence and have 5 ms / 10 ms
@@ -58,7 +58,7 @@ chunk with one forward loop over the whole file.
 |---|---|
 | `synth.py` | DSP toolkit: oscillators (polyBLEP saw/pulse with PWM, triangle, additive with per-harmonic swept lowpass / formants), coloured noise, envelopes, RBJ biquads, time-varying SVF, FFT filters, modal resonators, FM, Karplus-Strong, convolution reverb with synthetic IRs, circular delay/chorus, mastering and WAV I/O |
 | `instruments.py` | instrument voices shared by music and jingles: harp, pluck, lead, chip, bass, pad, choir, glock, bell, celesta, twinkle, brass, soft_sine, plus drums |
-| `sfx.py` | the 87 SFX recipes, registered with `@sfx(name, peak_dbfs, category, loop=...)` |
+| `sfx.py` | the 89 SFX recipes, registered with `@sfx(name, peak_dbfs, category, loop=...)` |
 | `music.py` | step sequencer, melody notation, voice leading, and the six cues |
 | `analyze.py` | levels, approximate BS.1770 loudness, DC/NaN/clip/edge checks, loop-seam metrics, spectrogram PNGs |
 | `build.py` | entry point (parallel, deterministic) |

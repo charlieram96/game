@@ -54,6 +54,7 @@ func test_focus_blocks_movement_attacks_and_dash() -> void:
 	var f := H.place(sim, 0, Vector2(0, 0))
 	H.place(sim, 1, Vector2(12, 8))
 	f.stamina = 30.0
+	H.full_surge(sim)
 	H.run(sim, 20, _focus_cmd())
 	assert_eq(f.state, SM.FOCUSING, "focusing")
 	var pos := f.pos
@@ -61,7 +62,8 @@ func test_focus_blocks_movement_attacks_and_dash() -> void:
 	H.run(sim, 10, H.dash_cmd(H.E, 2, all, InputCommand.ATTACK | InputCommand.ABILITY_1))
 	assert_eq(f.state, SM.FOCUSING, "still focusing")
 	assert_eq(f.pos, pos, "rooted")
-	assert_eq(f.cooldown_of(f.stats.abilities[0]), 0, "no ability fired")
+	assert_eq(int(f.usage_for(f.stats.abilities[0].id)["uses"]), 0, "no ability fired")
+	assert_near(f.surge, SurgeSystem.max_surge(), 0.0001, "no Surge spent")
 
 
 func test_stamina_never_exceeds_maximum() -> void:
@@ -87,8 +89,8 @@ func test_recovery_rates_differ_by_creature() -> void:
 		var before := f.stamina
 		H.run(sim, 60, _focus_cmd())
 		gains[path] = f.stamina - before
-	assert_near(gains[H.EMBERLYN], 50.0, 0.6, "Emberlyn 50/s")
-	assert_near(gains[H.STONEBACK], 40.0, 0.6, "Stoneback 40/s")
+	assert_near(gains[H.EMBERLYN], 37.0, 0.6, "Emberlyn 37/s")
+	assert_near(gains[H.STONEBACK], 30.0, 0.6, "Stoneback 30/s")
 
 
 func test_quickfoot_passive_shortens_focus_commitment() -> void:
@@ -102,6 +104,7 @@ func test_damage_interrupts_focus() -> void:
 	var sim := H.make_sim(H.EMBERLYN, H.STONEBACK)
 	var e := H.place(sim, 0, Vector2(0, 0))
 	H.place(sim, 1, Vector2(4, 0), Vector2.LEFT)
+	H.full_surge(sim)
 	e.stamina = 0.0
 	H.run(sim, 30, _focus_cmd())
 	assert_eq(e.state, SM.FOCUSING, "focusing")

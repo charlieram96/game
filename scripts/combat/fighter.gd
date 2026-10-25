@@ -36,7 +36,8 @@ var state_duration: int = 0
 # --- Resources -------------------------------------------------------------------
 var hp: float = 100.0
 var stamina: float = 100.0
-var cooldowns: Dictionary = {}  # ability id -> ticks remaining
+## Surge banked for specials (SurgeSystem), 0..400 = four stages.
+var surge: float = 0.0
 var focus_released: bool = false
 
 # --- Current action ------------------------------------------------------------
@@ -98,6 +99,8 @@ var record := {
 	"hits": 0,
 	"dashes": 0,
 	"dash_throughs": 0,
+	"surge_gained": 0.0,
+	"surge_spent": 0,
 	"perfect_guards": 0,
 	"blocks": 0,
 	"focus_ticks": 0,
@@ -145,10 +148,8 @@ func ability_in_slot(slot: int) -> AbilityDefinition:
 	return null
 
 
-func cooldown_of(ability: AbilityDefinition) -> int:
-	if ability == null:
-		return 0
-	return int(cooldowns.get(ability.id, 0))
+func surge_stages() -> int:
+	return SurgeSystem.stages(self)
 
 
 func has_status(status_id: StringName) -> bool:
@@ -189,5 +190,5 @@ func snapshot() -> Dictionary:
 		"hp": snappedf(hp, 0.001),
 		"stamina": snappedf(stamina, 0.001),
 		"facing": [snappedf(facing.x, 0.001), snappedf(facing.y, 0.001)],
-		"cooldowns": cooldowns.duplicate(),
+		"surge": snappedf(surge, 0.001),
 	}

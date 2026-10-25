@@ -1143,6 +1143,33 @@ def focus_full(rng):
     return verb(lay((0.0, ding, 1.0), (0.0, under, 0.5), (0.0, sp, 0.22)), 1.0, 0.22)
 
 
+@sfx("surge_stage", -7.0, "combat")
+def surge_stage(rng):
+    """A Surge stage fills: a rising two-note chime on a short bright swell
+    (the game pitches it up a step for each stage)."""
+    a = I.celesta(S.hz("E6"), 0.4, 0.8, SR, rng, t60=0.45)
+    b = I.celesta(S.hz("B6"), 0.4, 0.9, SR, rng, t60=0.6)
+    sw = whoosh(rng, 0.22, 900.0, 5200.0, 7000.0, peak=0.8, q=1.4, color=0.5, rise=1.6, fall=2.5, air=0.4)
+    sp = glints(rng, 0.5, 10, 5000.0, 11000.0, (0.04, 0.16), 0.06, 0.4, level=0.5)
+    return verb(lay((0.0, nz(sw), 0.3), (0.05, a, 0.8), (0.12, b, 1.0), (0.1, sp, 0.25)), 0.8, 0.2)
+
+
+@sfx("surge_release", -4.0, "spell")
+def surge_release(rng):
+    """A big special spends its Surge: a low swell rising into a bright burst."""
+    n = N(0.7)
+    f = S.curve([(0.0, 70.0), (0.32, 210.0), (0.7, 160.0)], n, SR, "exp")
+    swell = S.fm(f, n, SR, 2.0, 1.6) * S.swell(n, SR, 0.3, 0.38)
+    rise = whoosh(rng, 0.42, 300.0, 4200.0, 2000.0, peak=0.85, q=0.9, color=1.0, rise=2.2, fall=1.4, air=0.3)
+    burst = thump(420.0, 110.0, 0.02, 0.22)
+    chord = lay((0.0, I.bell(S.hz("A5"), 0.6, 0.8, SR, rng, t60=0.9), 0.6),
+                (0.0, I.celesta(S.hz("E6"), 0.5, 0.9, SR, rng, t60=0.7), 0.5))
+    sp = glints(rng, 0.6, 18, 4000.0, 11000.0, (0.05, 0.25), 0.0, 0.5, level=0.6)
+    y = lay((0.0, nz(swell), 0.55), (0.0, nz(rise), 0.6), (0.36, nz(burst), 0.7), (0.36, nz(chord), 0.45),
+            (0.38, sp, 0.25))
+    return verb(S.softclip(nz(y), 1.1), 1.1, 0.22)
+
+
 @sfx("stamina_empty", -10.0, "combat")
 def stamina_empty(rng):
     def blip(f, dur):

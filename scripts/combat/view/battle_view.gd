@@ -285,11 +285,29 @@ func _handle(e: BattleEvent) -> void:
 			var sfx: StringName = e.data.get("sfx", &"")
 			if String(sfx).ends_with("_charge"):
 				Audio.sfx(sfx, -1.0)
+			if f and int(e.data.get("surge", 0)) >= 3:
+				# A big special spends its Surge: a swell, a gold flash, a punch-in.
+				Audio.sfx(&"surge_release", -2.0 if is_friendly(f.team) else -4.0)
+				_fv(f.id).flash(0.45, UiTheme.SURGE)
+				_zoom_punch(0.03 * float(int(e.data["surge"]) - 2))
+		BattleEvent.SURGE_STAGE:
+			if f:
+				var st := int(e.data.get("stages", 1))
+				var mine := is_friendly(f.team) and _is_local_input(f.team)
+				# Each stage rings a step higher (a rising arpeggio to full).
+				Audio.sfx(&"surge_stage", -3.0 if mine else -10.0, 0.0, 60, [1.0, 1.122, 1.26, 1.498][clampi(st - 1, 0, 3)])
+				_fv(f.id).flash(0.3, UiTheme.SURGE)
+				if bool(e.data.get("full", false)):
+					popup(_pos3(f.pos, f.species.visual_height + 0.35), "Surge full!", UiTheme.SURGE, 0.8)
 		BattleEvent.ABILITY_ACTIVE:
 			_on_ability_active(f, e)
 		BattleEvent.ABILITY_DENIED:
 			if f and f.team == local_team:
 				feedback.emit(&"denied", e.data)
+				if e.data.get("reason", &"") == &"surge":
+					var need := int(e.data.get("surge", 0))
+					Audio.sfx(&"stamina_empty", -6.0, 0.0, 250, 1.25)
+					popup(_pos3(f.pos, f.species.visual_height + 0.3), "Needs %d Surge" % need, UiTheme.SURGE, 0.7)
 		BattleEvent.TELEGRAPH:
 			_spawn_telegraph(f, e.data)
 		BattleEvent.VOLUME_SPAWN:

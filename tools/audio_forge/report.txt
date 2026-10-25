@@ -71,6 +71,8 @@ guard_break.wav                      0.533     -1.00    -20.55   -17.9   -20.5 +
 focus_start.wav                      0.672     -6.00    -20.75   -19.0   -21.7 -0.00000    0  
 focus_loop.wav                       1.000    -14.00    -23.89   -23.9   -25.4 -0.00000    0  loop seam: jump 0.00613 (x0.41 of local step), 20ms level step -1.0 dB (elsewhere p99 1.8, max 1.9)
 focus_full.wav                       0.785     -6.00    -22.95   -18.4   -22.0 +0.00000    0  
+surge_stage.wav                      0.754     -7.00    -23.09   -18.6   -21.0 -0.00000    0  
+surge_release.wav                    1.364     -4.00    -21.48   -16.8   -19.9 +0.00000    0  
 stamina_empty.wav                    0.200    -10.00    -15.55   -19.1   -19.1 -0.00000    0  
 ember_bolt_cast.wav                  0.340     -5.00    -17.45   -16.5   -16.5 -0.00000    0  
 ember_bolt_impact.wav                0.248     -3.00    -20.75   -22.9   -22.9 -0.00000    0  
@@ -109,7 +111,7 @@ Checks: all passed (NaN, clipping, DC > 0.002, peak > -1 dBFS, edge samples > 0.
 
 SFX loudness by category (min / median / max LUFS-M; peak range dBFS)
 ----------------------------------------------------------------------
-combat     n=30   LUFS-M  -30.5 /  -21.1 /  -16.6   peak  -14.0 ..   -1.0
+combat     n=31   LUFS-M  -30.5 /  -21.1 /  -16.6   peak  -14.0 ..   -1.0
 creature   n= 5   LUFS-M  -25.1 /  -18.7 /  -17.6   peak   -9.0 ..   -3.0
 crowd      n= 2   LUFS-M  -18.5 /  -17.4 /  -17.4   peak   -7.0 ..   -5.0
 explore    n= 7   LUFS-M  -27.8 /  -18.2 /  -15.7   peak   -8.0 ..   -3.0
@@ -117,8 +119,8 @@ impact     n= 7   LUFS-M  -21.1 /  -17.1 /  -14.8   peak   -3.0 ..   -1.0
 jingle     n= 2   LUFS-M  -17.8 /  -17.7 /  -17.7   peak   -7.0 ..   -3.0
 loop       n= 3   LUFS-M  -28.6 /  -26.4 /  -23.9   peak  -14.0 ..   -7.0
 magic      n= 1   LUFS-M  -15.7 /  -15.7 /  -15.7   peak   -5.0 ..   -5.0
-spell      n= 8   LUFS-M  -30.2 /  -17.6 /  -16.4   peak   -8.0 ..   -1.0
+spell      n= 9   LUFS-M  -30.2 /  -17.6 /  -16.4   peak   -8.0 ..   -1.0
 step       n=12   LUFS-M  -32.7 /  -31.4 /  -29.6   peak   -9.0 ..   -9.0
 ui         n=10   LUFS-M  -37.5 /  -27.9 /  -20.4   peak  -13.0 ..   -8.0
 
-Totals: 87 SFX (60.7 s), 6 music files (227.2 s).
+Totals: 89 SFX (62.8 s), 6 music files (227.2 s).

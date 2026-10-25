@@ -48,7 +48,7 @@ dash_through_stun_mult = 1.2
 [sub_resource type="Resource" id="Resource_wup8l"]
 script = ExtResource("11_24jg2")
 max_stamina = 130.0
-focus_rate = 40.0
+focus_rate = 30.0
 guard_stamina_factor = 0.8
 
 [resource]
@@ -58,7 +58,7 @@ display_name = "Stoneback"
 description = "A stubborn, moss-covered kith whose back is a shield of overlapping stone plates."
 element = &"stone"
 archetype = "Heavy"
-base_hp = 170.0
+base_hp = 155.0
 base_attack = 12.5
 base_defense = 12.0
 movement = SubResource("Resource_ik5w7")

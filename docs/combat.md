@@ -35,7 +35,7 @@ Presentation is in `scripts/combat/view/`.
 
 1. Inputs -> buffers and aim.
 2. Each on-field fighter: timers, statuses, phase advance, new actions,
-   state logic, knockback. Benched fighters tick cooldowns and regenerate
+   state logic, knockback. Benched fighters keep their Surge and regenerate
    stamina.
 3. Body separation.
 4. Hit volumes move, then projectile clashes.
@@ -155,10 +155,11 @@ itself, and the dasher hasn't already passed it this dash:
 ## Stamina and Focus
 
 * Stamina **never regenerates on its own**. It can't go below 0 or above
-  the maximum. Uses: dashes, some specials, and guard (blocked damage drains
-  it).
+  the maximum. Uses: dashes and guard (blocked damage drains it). Specials
+  are paid for with Surge instead (below).
 * **Focus** (hold): FOCUS_ENTER (7 ticks / ~117 ms of commitment, no regen)
-  -> FOCUSING (regen at the species rate) -> FOCUS_EXIT (7 ticks). The
+  -> FOCUSING (regen at the species rate: Emberlyn 37/s, Stoneback 30/s,
+  about a quarter slower than before Surge) -> FOCUS_EXIT (7 ticks). The
   creature is rooted and can't attack, dash or guard. Releasing during the
   enter phase still plays the whole enter and exit.
 * **Any damage interrupts Focus**, including burn ticks. A hit that stuns
@@ -183,15 +184,46 @@ itself, and the dasher hasn't already passed it this dash:
 * After releasing guard there is a 6-tick lockout before guarding again, so
   you can't mash perfect guards.
 
+## Surge
+
+Specials have **no cooldowns**. They are paid for with **Surge**, a meter of
+**four stages** (100 points each, 400 in all) shown in gold under each
+stamina bar.
+
+* **Costs:** every special costs whole stages, the stronger the move the
+  more: Ember Bolt 1, Cinder Arc 2, Flash Strike 3, Heat Ring 4; Ground
+  Pound 1, Boulder Toss 2, Stone Guard 3, Fault Line 4. Basic attacks are
+  free. A special can be used as often as it can be paid for, back to back.
+* **Earning it:** fighting fills it.
+
+  | Source | Surge |
+  | --- | --- |
+  | A basic hit that connects (each hit of a string) | 40 |
+  | A special hit that connects | 15 |
+  | A ram that connects (dash through a foe) | 120 |
+  | Any dash | 4 |
+
+  Blocked hits, burn ticks and getting hit earn nothing. Emberlyn's
+  Quickfoot passive earns 45% more of everything (it hits fast but light,
+  so it lives on its specials).
+* A battle starts with **no Surge**; it caps at four stages and never
+  drains on its own. A benched creature keeps its Surge.
+* **Feedback:** each stage that fills rings a chime a step higher than the
+  last and flashes the creature gold ("Surge full!" at four). Ability
+  slots and touch buttons show their cost as diamonds, lit when affordable;
+  the share still to earn darkens the slot and sweeps away as the meter
+  climbs. A 3- or 4-stage special swells, flashes gold and punches the
+  camera in when it starts. Pressing one you can't pay for shakes its slot,
+  pulses the meter red and says how many stages it needs.
+
 ## Attacks and abilities
 
 * Each creature has a basic attack string, four equipped specials, a
   passive, a dash, Focus and guard.
 * Shared phase model: **startup** (wind-up, telegraphed for big moves) ->
-  **active** (hitbox live) -> **recovery** (vulnerable). The **cooldown**
-  starts when the ability is activated, and stamina is paid then too. If the
-  ability isn't ready it is denied (cooldown, stamina or status) and its HUD
-  slot shakes.
+  **active** (hitbox live) -> **recovery** (vulnerable). Surge (and any
+  stamina cost) is paid when the ability starts. If it can't be paid it is
+  denied (Surge, stamina or status) and its HUD slot shakes.
 * **Attacks follow the board.** The aim picks a row or column (its dominant
   axis, with the same hysteresis as dashes), so projectiles, lunges, cones
   and lines always point east, south, west or north.
@@ -246,7 +278,7 @@ damage = power x mastery_mult x (ATK / DEF) x element_mult x ruleset.damage_scal
 
 | Effect | Rule |
 | --- | --- |
-| Hitstop | Freezes the target for the hit's hitstop ticks (max 10). It also freezes the attacker for attached melee, which gives melee its weight. Frozen fighters' timers and cooldowns pause, and an attached hitbox doesn't age while its owner is frozen. Hits with hitstop >= 5 count as "heavy" for feedback. |
+| Hitstop | Freezes the target for the hit's hitstop ticks (max 10). It also freezes the attacker for attached melee, which gives melee its weight. Frozen fighters' timers pause, and an attached hitbox doesn't age while its owner is frozen. Hits with hitstop >= 5 count as "heavy" for feedback. |
 | Hitstun | The hit's hitstun x the target's passive (Bedrock 0.8), applied as a stun through the stun rules below. Skipped if the target is flinch-immune (Stone Guard, ARMORED dash, ability armor). |
 | Knockback | Distance = knockback x status mult x passive mult (x0.3 if flinch-immune, none during an armored dash). It is spread over 8 ticks with geometric decay 0.85 per tick (the first tick covers ~21% of the distance) and stops at walls. Always along a row or column: the hitbox's direction, or for radial hits (static circles are always radial) the dominant axis from its centre to the target. Starting a dash ends any knockback still sliding the creature. A KO blow pushes at least 0.8. |
 | Chip | Blocked hits only: 15% of raw damage, can't KO. |
@@ -378,8 +410,8 @@ on (tests only in v0):
 * A switch takes 30 ticks (500 ms) and can be interrupted by a hit.
 * The incoming creature can't switch again for 300 ticks (5 s).
 * The outgoing creature loses its statuses and dash immunity.
-* Cooldowns persist and keep ticking on the bench, and benched creatures
-  regenerate stamina at 25% of their Focus rate.
+* A benched creature keeps its Surge and regenerates stamina at 25% of its
+  Focus rate.
 * Victory requires knocking out the whole opposing team.
 
 The brief targets 3-5 minute matches once full teams exist (Planned).
@@ -388,7 +420,7 @@ The brief targets 3-5 minute matches once full teams exist (Planned).
 
 `CombatAI` plays by the same rules as a human: it only emits InputCommands,
 sees the opponent through a reaction-time delay, aims with error and
-manages stamina with Focus. Each tick it:
+manages stamina with Focus and Surge for its specials. Each tick it:
 
 1. Perceives the delayed opponent state.
 2. Reacts to threats (dodge-dash, guard, step away, or nothing). The
@@ -396,16 +428,27 @@ manages stamina with Focus. Each tick it:
 3. Manages Focus (it focuses when low and safe, and stops near 88% or on
    danger).
 4. Continues basic strings.
-5. Picks an offensive option by utility every decision interval.
+5. Picks an offensive option by utility every decision interval. It sets
+   itself a Surge goal after each special (1 stage 35%, 2 30%, 3 20%,
+   4 15%) and keeps that much banked for a move of that cost, spending on
+   cheaper ones only above it (or on a vulnerable foe); after 6 s at the
+   goal without an opening it settles for less. Rams score higher while it
+   has nothing to shoot with, since a ram earns more than a stage.
 6. Holds its preferred range band with planned dashes (it never walks
-   either): Agile 3.0-5.5 u (kite), Heavy 0.9-2.1 u (brawl), anything else
-   1.5-4.0 u. It backs off to 4.5-7.5 u when it needs to Focus. Candidate
+   either): Agile 3.0-5.5 u (kite) when it can pay for a ranged special,
+   otherwise 2.5 u to its dash reach (hunting rams); Heavy 0.9-2.1 u
+   (brawl); anything else 1.5-4.0 u. It backs off to 4.5-7.5 u when it needs
+   to Focus (below its threshold, or when any dash would dip under a 25%
+   stamina reserve). Candidate
    landing cells are scored by the band, by the best attack it could throw
    from there (attacks run along rows and columns, so it lines up on the
    foe's row or column), lanes the foe could ram, edges and corners, and
    the stamina the dash costs; it dodges with short dashes and takes rams
    when a plan shows one. An attack is only chosen when its hitbox, swung
    down that lane, would reach the foe.
+7. Breaks stand-offs: after 2 s without attacking, impatience builds over
+   4 s, weighting attack lanes up and the fear of ram lanes and the stamina
+   reserve down, until it attacks or Focuses even in a ram lane.
 
 | Preset | Reaction | Decision | Aim error | Lead | Dodge | Guard | Dash-through | Aggression | Focus below | Mistakes | Combo skill | Patience |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -506,7 +549,9 @@ Everything below is cosmetic and never changes the simulation.
   * HP bars with delayed "ghost" damage;
   * stamina bars segmented by dash cost;
   * status icons and the match timer;
-  * an ability bar with cooldown sweeps and key hints;
+  * a four-stage Surge meter under each stamina bar;
+  * an ability bar with Surge cost diamonds (the share still to earn sweeps
+    away as the meter fills) and key hints;
   * big centre messages (3-2-1, FIGHT!, K.O.!, VICTORY/DEFEAT).
 * **Debug:** F3 draws hurtboxes, hitboxes and the logical cell grid.
 

@@ -6,7 +6,8 @@ extends Resource
 ## lunge, targeted area, self area, line wave, self status). Every ability
 ## shares the same phase model:
 ##   startup (telegraphed windup) -> active (can hit) -> recovery (vulnerable)
-## and a cooldown that starts when the ability is activated.
+## Nothing has a cooldown: specials are paid for in stages of Surge (see
+## SurgeSystem), basic attacks are free.
 
 enum Kind { BASIC, SPECIAL }
 
@@ -28,7 +29,8 @@ enum AimMode {
 @export var startup_ticks: int = 6
 @export var active_ticks: int = 3
 @export var recovery_ticks: int = 10
-@export var cooldown_ticks: int = 60
+## Surge stages spent to use it (0-4; 0 = free, like basic attacks).
+@export_range(0, 4) var surge_stages: int = 0
 @export var stamina_cost: float = 0.0
 ## Max aim distance for TARGET_POINT abilities; informational for others.
 @export var max_range: float = 6.0

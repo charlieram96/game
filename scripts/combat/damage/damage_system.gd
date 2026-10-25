@@ -90,6 +90,7 @@ static func apply_hit(sim: BattleSim, v: HitVolume, target: Fighter) -> void:
 			attacker.usage_for(v.ability.id)["hits"] += 1
 			if v.ability == attacker.current_ability:
 				attacker.ability_hit_landed = true
+		SurgeSystem.on_hit(sim, attacker, v.ability)
 	# Hitstop: always on the target; on the attacker only for attached melee.
 	var stop := mini(hit.hitstop_ticks, CombatConst.MAX_HITSTOP_TICKS)
 	target.hitstop = maxi(target.hitstop, stop)

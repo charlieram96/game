@@ -54,6 +54,18 @@ const KNOCKBACK_TICKS: int = 8
 const MAX_HITSTOP_TICKS: int = 10
 const MIN_DAMAGE: float = 1.0
 
+# --- Surge ------------------------------------------------------------------
+## Specials are paid for in stages of Surge instead of waiting on cooldowns.
+const SURGE_PER_STAGE: float = 100.0
+const SURGE_STAGES: int = 4
+## Earned by fighting: every hit that connects (basic hits most, so quick
+## strings build it fastest), every ram that connects (a whole stage), and
+## a trickle for every dash.
+const SURGE_PER_BASIC_HIT: float = 40.0
+const SURGE_PER_SPECIAL_HIT: float = 15.0
+const SURGE_PER_RAM: float = 120.0
+const SURGE_PER_DASH: float = 4.0
+
 # --- Match flow -------------------------------------------------------------
 const COUNTDOWN_TICKS: int = 180
 const KO_SETTLE_TICKS: int = 90

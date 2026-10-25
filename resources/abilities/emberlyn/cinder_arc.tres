@@ -15,7 +15,7 @@ duration_ticks = 120
 
 [sub_resource type="Resource" id="Resource_p2pv8"]
 script = ExtResource("2_l1h0v")
-power = 10.0
+power = 22.0
 knockback = 0.9
 hitstun_ticks = 14
 hitstop_ticks = 4
@@ -34,6 +34,7 @@ visual = &"cinder_arc"
 [resource]
 script = ExtResource("6_2lpnm")
 id = &"cinder_arc"
+surge_stages = 2
 display_name = "Cinder Arc"
 description = "A short-range cone of embers that leaves a Burn."
 element = &"ember"
@@ -41,8 +42,6 @@ icon_path = "res://assets/ui/icons/ability_cinder_arc.png"
 startup_ticks = 9
 active_ticks = 4
 recovery_ticks = 16
-cooldown_ticks = 210
-stamina_cost = 8.0
 max_range = 2.4
 components = Array[ExtResource("1_78mo5")]([SubResource("Resource_cv08x")])
 cast_sfx = &"cinder_arc"

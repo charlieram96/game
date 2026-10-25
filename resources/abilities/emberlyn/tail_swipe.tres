@@ -10,7 +10,7 @@
 
 [sub_resource type="Resource" id="Resource_nsdxj"]
 script = ExtResource("3_4ww8q")
-power = 4.0
+power = 4.5
 knockback = 0.35
 hitstun_ticks = 11
 
@@ -32,7 +32,6 @@ kind = 0
 icon_path = "res://assets/ui/icons/ability_tail_swipe.png"
 startup_ticks = 5
 recovery_ticks = 11
-cooldown_ticks = 0
 dash_cancel_from_recovery_tick = 5
 chain_next = ExtResource("1_0ded6")
 chain_window_ticks = 9

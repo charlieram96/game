@@ -1,8 +1,8 @@
 class_name AbilitySystem
 extends RefCounted
 ## Runs abilities through startup -> active -> recovery, triggers their
-## components, enforces cooldowns, stamina costs, cancel rules and combo
-## chains, and advances live hit volumes.
+## components, enforces Surge and stamina costs, cancel rules and combo
+## chains, and advances live hit volumes. Nothing waits on a cooldown.
 
 const SM := FighterSM.State
 const Trigger := AbilityComponent.Trigger
@@ -11,8 +11,8 @@ const Trigger := AbilityComponent.Trigger
 static func check_usable(f: Fighter, ability: AbilityDefinition) -> StringName:
 	if ability == null:
 		return &"empty"
-	if f.cooldown_of(ability) > 0:
-		return &"cooldown"
+	if not SurgeSystem.can_afford(f, ability.surge_stages):
+		return &"surge"
 	if not StaminaSystem.can_afford(f, ability.stamina_cost):
 		return &"stamina"
 	if f.status_flag("prevents_attacks"):
@@ -25,11 +25,10 @@ static func try_start(sim: BattleSim, f: Fighter, slot: int) -> bool:
 	var reason := check_usable(f, ability)
 	if reason != &"":
 		if ability != null:
-			sim.emit(BattleEvent.ABILITY_DENIED, f, -1, f.pos, {"ability": ability.id, "reason": reason, "slot": slot})
+			sim.emit(BattleEvent.ABILITY_DENIED, f, -1, f.pos, {"ability": ability.id, "reason": reason, "slot": slot, "surge": ability.surge_stages, "have": SurgeSystem.stages(f)})
 		return false
 	StaminaSystem.spend(f, ability.stamina_cost)
-	if ability.cooldown_ticks > 0:
-		f.cooldowns[ability.id] = ability.cooldown_ticks
+	SurgeSystem.spend(f, ability.surge_stages)
 	start(sim, f, ability, slot)
 	return true
 
@@ -46,6 +45,7 @@ static func start(sim: BattleSim, f: Fighter, ability: AbilityDefinition, slot: 
 	sim.emit(BattleEvent.ABILITY_START, f, -1, f.pos, {
 		"ability": ability.id,
 		"slot": slot,
+		"surge": ability.surge_stages if slot >= 0 else 0,
 		"dir": f.ability_dir,
 		"point": f.ability_point,
 		"startup": ability.startup_ticks,

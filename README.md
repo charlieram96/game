@@ -38,9 +38,13 @@ arena games like Nindou. No code or assets come from them.
   longer the drag, the more cells you cross. Every dash costs stamina.
 - Dash *through* a foe to **ram** it: damage, a short daze and a freeze-frame
   impact. A rammed kith is protected for a moment afterwards, so rams never chain.
-- **Aim** abilities with the mouse, right stick or touch.
+- Nothing moves diagonally, attacks included: **aim** with the mouse, right
+  stick or touch, and every attack fires along the row or column you point at.
 - **Stamina** comes back only while you hold **Focus**. Focusing roots you in place, so every recovery is a gamble.
 - **Basic attack** plus **four specials**, each with readable startup, active and recovery frames, and a telegraph.
+- Specials have no cooldowns. They cost **Surge**, a four-stage meter you fill
+  by landing hits and rams (a dash adds a sliver). The stronger the move, the
+  more stages it takes: from 1 for Ember Bolt to all 4 for Heat Ring.
 - **Guard** with a perfect-guard window. Guards can be broken, and projectiles clash.
 - Hits have hitstop, knockback, screen shake, hit flashes, damage numbers and layered sound.
 
@@ -55,7 +59,7 @@ combat frame data, progression, architecture and roadmap.
 | Cancel a dash | Drag back to the start, or right click | Guard or Focus | Drag back to the start |
 | Aim | Mouse | Right stick | Drag an ability button |
 | Basic attack | Click (or J) | RT | Tap the arena, or the attack button |
-| Specials | Q / E / R / F | A / B / X / Y | Ability buttons (tap to auto-aim) |
+| Specials (cost 1-4 stages of Surge) | Q / E / R / F | A / B / X / Y | Ability buttons (tap to auto-aim) |
 | Guard | Hold Space or the right mouse button | LB | Guard button |
 | Focus (regain stamina) | Hold Shift | LT | Press and hold still on the arena, or the Focus button |
 | Walk (exploring) | WASD | Left stick | Left thumb |
@@ -137,7 +141,7 @@ the web they live in the browser's IndexedDB.
    | `--demo` | `scenes/combat/battle.tscn` | Runs an AI-vs-AI battle. |
    | `--shot=<file.png>` | title, world and battle scenes | Saves a screenshot and quits. |
 
-The test suite has 89 tests, including an end-to-end Chapter 1 playthrough
+The test suite has 119 tests, including an end-to-end Chapter 1 playthrough
 test. It covers the following:
 
 - movement and dashing

@@ -217,6 +217,10 @@ func script_set_stamina(f: Fighter, value: float) -> void:
 	f.stamina = clampf(value, 0.0, f.max_stamina())
 
 
+func script_set_surge(f: Fighter, value: float) -> void:
+	f.surge = clampf(value, 0.0, SurgeSystem.max_surge())
+
+
 func knock_out(f: Fighter, by: Fighter) -> void:
 	if f.is_ko():
 		return
@@ -386,17 +390,11 @@ func _step_benched(f: Fighter) -> void:
 	f.prev_pos = f.pos
 	if f.is_ko():
 		return
-	for key in f.cooldowns.keys():
-		f.cooldowns[key] = maxi(0, int(f.cooldowns[key]) - 1)
 	f.switch_cooldown = maxi(0, f.switch_cooldown - 1)
 	StaminaSystem.bench_regen(f)
 
 
 func _tick_timers(f: Fighter) -> void:
-	for key in f.cooldowns.keys():
-		var left := int(f.cooldowns[key])
-		if left > 0:
-			f.cooldowns[key] = left - 1
 	if f.dash_through_immunity > 0:
 		f.dash_through_immunity -= 1
 	if f.wakeup_grace > 0:

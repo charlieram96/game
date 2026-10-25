@@ -13,6 +13,8 @@ const PARCHMENT := Color(0.96, 0.91, 0.8)
 const GOLD := Color(0.95, 0.78, 0.36)
 const TEAL := Color(0.35, 0.9, 0.95)
 const DANGER := Color(1.0, 0.45, 0.38)
+## Surge, the meter specials are paid from.
+const SURGE := Color(1.0, 0.72, 0.2)
 
 static var _theme: Theme = null
 static var _icons: Dictionary = {}
@@ -168,3 +170,37 @@ static func place(c: Control, anchor: Vector2, offset: Vector2, size: Vector2) -
 static func element_color(element: StringName) -> Color:
 	var chart := ElementChart.get_default()
 	return chart.colors.get(String(element), PARCHMENT)
+
+
+## A special's Surge cost on a round button: one diamond per stage along the
+## top of the rim, lit when it is affordable.
+static func draw_surge_pips(ci: CanvasItem, center: Vector2, radius: float, cost: int, lit: bool) -> void:
+	if cost <= 0:
+		return
+	var d := clampf(radius * 0.15, 4.0, 7.0)
+	var gap := d * 2.4
+	var x0 := center.x - gap * float(cost - 1) * 0.5
+	var y := center.y - radius + d * 0.4
+	for i in cost:
+		var c := Vector2(x0 + gap * i, y)
+		ci.draw_colored_polygon(_diamond(c, d + 2.0), INK)
+		ci.draw_colored_polygon(_diamond(c, d), SURGE if lit else Color(0.46, 0.37, 0.26))
+		if lit:
+			ci.draw_colored_polygon(_diamond(c - Vector2(0, d * 0.35), d * 0.4), Color(1.0, 0.96, 0.78))
+
+
+## Darkens the share of a round button that is still waiting (0..1); it
+## sweeps away clockwise from the top as the wait runs down.
+static func draw_wait_sweep(ci: CanvasItem, center: Vector2, radius: float, share: float) -> void:
+	if share <= 0.0:
+		return
+	var pts := PackedVector2Array([center])
+	var steps := 32
+	for i in steps + 1:
+		var a := -PI * 0.5 + TAU * share * float(i) / steps
+		pts.append(center + Vector2(cos(a), sin(a)) * radius)
+	ci.draw_colored_polygon(pts, Color(0.02, 0.02, 0.05, 0.68))
+
+
+static func _diamond(c: Vector2, r: float) -> PackedVector2Array:
+	return PackedVector2Array([c + Vector2(0, -r), c + Vector2(r, 0), c + Vector2(0, r), c + Vector2(-r, 0)])

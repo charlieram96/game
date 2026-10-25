@@ -45,12 +45,16 @@ through Milestone 3.
   gamepad
 * [x] Progression: levels, mastery, variants, Ranked / Casual / PvE rulesets
 * [x] Fully generated original art, SFX and music
-* [x] 92 automated tests, including an end-to-end Chapter 1 playthrough, and
-  an AI-vs-AI balance harness
+* [x] Drag-to-dash on a 20 x 12 board, with every attack along a row or
+  column, and Surge: a four-stage meter, filled by hits and rams, that pays
+  for specials in place of cooldowns
+* [x] 119 automated tests, including an end-to-end Chapter 1 playthrough, a
+  no-diagonal-motion invariant, and an AI-vs-AI balance harness
 * [x] Shareable builds: export presets for Web, Windows, Linux and macOS,
   a branded web loading page, a gzipped ~15 MB web package for itch.io or
   any static host (`tools/export.sh`), and a CI workflow that tests, builds
-  and deploys to GitHub Pages. The workflow has not run on GitHub yet.
+  builds the web version on every push (GitHub Pages deploy is opt-in;
+  Vercel serves the committed `public/` folder).
 
 ## Known gaps and limitations
 
@@ -70,14 +74,14 @@ through Milestone 3.
 
 **Balance and feel (AI-vs-AI data, n = 150; see architecture.md)**
 
-* The Stoneback mirror averages ~84 s and half its matches time out.
-  Options: more chip pressure, a stamina drain on long guards, or a
-  sudden-death rule.
-* Emberlyn vs Stoneback is 55/45 overall with no side bias (the Emberlyn
-  mirror splits 74 / 74).
-* A new-player proxy (Easy AI) beats story Corin 32% of the time after
-  softening his profile. The "go a little easier" retry exists, but
-  first-duel difficulty should be checked with real players.
+* With Surge, Emberlyn vs Stoneback is 48/52 overall with no side bias,
+  matches last 20-42 s, and 2-10% time out.
+* A Stoneback earns only about 4 stages of Surge a match and almost never
+  reaches Fault Line (4 stages); its kit plays as Shell Bash plus Ground
+  Pound. Worth a look: a Surge bonus on Bedrock, or Surge for hits taken.
+* A new-player proxy (Easy AI) beats story Corin 25% of the time. The "go
+  a little easier" retry exists, but first-duel difficulty should be
+  checked with real players.
 
 **Fixed since the first docs pass**
 

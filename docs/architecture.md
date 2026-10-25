@@ -140,7 +140,7 @@ docs/                these documents
 | **D. Persistence** | Accounts, creature ownership, progression, inventory, transactional match rewards. PostgreSQL for persistent data, Redis for ephemeral sessions and matchmaking. | **Planned.** `PlayerProfile.to_dict()` is the intended schema. |
 
 **Authority rule for B-D:** the server decides positions, dash direction and
-stamina, attack legality, hits, damage, stuns, cooldowns, outcomes, XP and
+stamina, Surge, attack legality, hits, damage, stuns, outcomes, XP and
 rewards. It never trusts client-provided inventory, XP, damage or results.
 
 ## Rendering (HD-2D)
@@ -202,7 +202,7 @@ Coverage of the 20 test categories required by the brief:
 | 10 | Dash-through landing | `test_dash.test_landing_is_about_one_cell_beyond_and_never_overlapping`, `..._landing_blocked_by_wall_finds_safe_spot`, `..._landing_blocked_by_stone_never_clips` |
 | 11 | Boundaries and obstacles | `test_movement.test_cannot_leave_arena_bounds`, `..._obstacles_block_walking`, `..._box_obstacle_sweep_is_exact`, `test_dash.test_dash_stops_at_walls`, `test_abilities.test_projectiles_are_blocked_by_stones` |
 | 12 | Stun duration and immunity | `test_stun_and_states.*` (exact duration, chained diminishing returns and Steadfast, wake-up grace, guard break, perfect guard), `test_dash.test_dash_through_never_guarantees_a_follow_up` |
-| 13 | Attack cooldowns | `test_abilities.test_cooldown_blocks_reuse_until_expired` |
+| 13 | Attack costs (Surge, no cooldowns) | `test_abilities.test_specials_cost_surge_and_have_no_cooldown`, `..._hits_rams_and_dashes_fill_surge` |
 | 14 | Ability hit detection | `test_abilities.*`: one test per special, plus strings, variants and the FAST-dash evade |
 | 15 | Knockouts | `test_ko_and_match.test_knockout_ends_battle_with_winner`, `..._knocked_out_creature_ignores_input`, `..._timeout_decides_by_health_ratio` |
 | 16 | AI behaviour | `test_ai.*`: beats a passive foe, AI-vs-AI completes, focuses when empty, uses its whole kit, hard AI dodges projectiles |
@@ -233,33 +233,38 @@ ONLY=easy-story N=150 godot --headless --path . -s res://tests/tools/balance_sim
 
 The harness runs N AI-vs-AI matches per pairing (Ranked level 50, the
 Ringstones, 120 s limit, fixed seeds) and prints win rates, average length,
-timeouts, damage and per-ability hit rates. `ONLY=<ai>-<ai>` restricts it to
-pairings with those two AI profiles. Results measured on 2026-10-24 with
-drag-to-dash movement (n = 150 per row; wins are listed as team 0 / team 1
-/ draw):
+timeouts, damage, Surge earned and spent, rams and per-ability hit rates.
+`ONLY=<ai>-<ai>` restricts it to pairings with those two AI profiles.
+Results measured on 2026-10-25 on the 20 x 12 board with board-aligned
+attacks and Surge (n = 150 per row; wins are listed as team 0 / team 1 /
+draw; Surge per match is team 0 / team 1):
 
-| Pairing (AI profile) | Wins | Avg length | Timeouts |
-| --- | --- | --- | --- |
-| Emberlyn (normal) vs Stoneback (normal) | 90 / 60 / 0 | 28.5 s | 5 |
-| Stoneback (normal) vs Emberlyn (normal) | 54 / 96 / 0 | 25.3 s | 2 |
-| Emberlyn vs Emberlyn (normal) | 80 / 69 / 1 | 25.7 s | 8 |
-| Stoneback vs Stoneback (normal) | 62 / 88 / 0 | 66.0 s | 39 |
-| Emberlyn (normal) vs Stoneback (story) | 122 / 28 / 0 | 25.2 s | 6 |
-| Emberlyn (easy) vs Stoneback (story) | 20 / 129 / 1 | 26.9 s | 6 |
+| Pairing (AI profile) | Wins | Avg length | Timeouts | Surge earned | Stages spent |
+| --- | --- | --- | --- | --- | --- |
+| Emberlyn (normal) vs Stoneback (normal) | 70 / 80 / 0 | 32.2 s | 15 | 1159 / 407 | 10.0 / 2.8 |
+| Stoneback (normal) vs Emberlyn (normal) | 76 / 74 / 0 | 29.7 s | 11 | 411 / 1168 | 3.0 / 10.0 |
+| Emberlyn vs Emberlyn (normal) | 67 / 83 / 0 | 20.2 s | 7 | 603 / 630 | 4.7 / 5.0 |
+| Stoneback vs Stoneback (normal) | 70 / 80 / 0 | 42.3 s | 4 | 783 / 773 | 6.5 / 6.4 |
+| Emberlyn (normal) vs Stoneback (story) | 128 / 22 / 0 | 25.3 s | 4 | 1229 / 325 | 10.7 / 2.4 |
+| Emberlyn (easy) vs Stoneback (story) | 37 / 113 / 0 | 24.4 s | 3 | 985 / 421 | 8.3 / 3.2 |
 
 How to read it:
 
-* Across both sides Emberlyn beats Stoneback **62%** of the time (186 of
-  300): 60% from the left spawn and 64% from the right. With every move a
-  dash, the agile kiter has the edge at equal AI skill.
-* The Emberlyn mirror splits 80 / 69 (within noise). The Stoneback mirror
-  splits 62 / 88, about two standard deviations from even, so a small side
-  bias in the AI's lane choices is possible; it also runs long and a quarter
-  of its matches time out (a known v0 issue).
+* Across both sides Emberlyn beats Stoneback **48%** of the time (144 of
+  300): 47% from the left spawn and 49% from the right. Getting there took
+  Quickfoot's +45% Surge (Emberlyn hits fast but light and lives on its
+  specials), Stoneback's HP from 170 to 155 and a softer Shell Bash. A
+  Stoneback spends about 3 stages a match (mostly Ground Pound), an
+  Emberlyn about 10.
+* Both mirrors are within noise. The Stoneback mirror is the longest
+  (42 s), and only 4 of its 150 matches time out (it was 39 before the AI
+  learned to break stand-offs).
 * An Easy-profile Emberlyn, standing in for a weak player, beats story Corin
-  13% of the time; a Normal-profile one 81%. The Story profile was softened
-  for drag-to-dash, and the story duel also offers a "go a little easier"
-  retry that switches Corin to the Easy profile.
+  25% of the time; a Normal-profile one 85%. The story duel also offers a
+  "go a little easier" retry that switches Corin to the Easy profile.
+* The AIs rarely reach their 4-stage moves (Heat Ring about once every
+  eight matches, Fault Line almost never); human players save up on
+  purpose.
 
 These are AI proxies, not human playtests.
 
@@ -276,7 +281,7 @@ a provenance record.
 | --- | --- | --- |
 | `tools/sprite_forge` | Characters, kith and props (shaded volumetric parts, rigs per character family, 1 px material outlines, binary alpha), plus fallback portraits it never writes over art_forge ones | `python3 tools/sprite_forge/build.py` |
 | `tools/env_forge` | 48x48 seamless textures, foliage, props, the Dawncrane mural, VFX sheets, UI icons and 9-slice panels | `python3 tools/env_forge/build.py` |
-| `tools/audio_forge` | 87 SFX (44.1 kHz mono) and 6 music cues (32 kHz mono; loops carry `smpl` loop points and are rendered circularly) | `python3 tools/audio_forge/build.py` |
+| `tools/audio_forge` | 89 SFX (44.1 kHz mono) and 6 music cues (32 kHz mono; loops carry `smpl` loop points and are rendered circularly) | `python3 tools/audio_forge/build.py` |
 
 `tools/art_forge` adds generated art through the OpenRouter Image API. It
 writes prompts from the briefs in `briefs.json`, checks each request against

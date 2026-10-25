@@ -9,7 +9,7 @@
 
 [sub_resource type="Resource" id="Resource_l6phx"]
 script = ExtResource("2_s2qdw")
-power = 8.5
+power = 7.5
 knockback = 1.6
 hitstun_ticks = 18
 hitstop_ticks = 7
@@ -34,7 +34,6 @@ icon_path = "res://assets/ui/icons/ability_shell_bash.png"
 startup_ticks = 9
 active_ticks = 5
 recovery_ticks = 20
-cooldown_ticks = 0
 dash_cancel_from_recovery_tick = 10
 components = Array[ExtResource("1_128h3")]([SubResource("Resource_qlpxv")])
 anim = &"melee"

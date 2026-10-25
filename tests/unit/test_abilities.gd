@@ -1,6 +1,7 @@
 extends WBTestCase
-## Spec tests 13 and 14: cooldowns and per-ability hit detection for all
-## eight specials (plus basics, clashes, armor).
+## Spec tests 13 and 14: Surge costs (specials have no cooldowns) and
+## per-ability hit detection for all eight specials (plus basics, clashes,
+## armor).
 
 const H := preload("res://tests/sim_helpers.gd")
 const SM := FighterSM.State
@@ -27,10 +28,12 @@ func _hits_on(events: Array[BattleEvent], target_id: int) -> int:
 	return n
 
 
+## Both sides start with full Surge, so these test what specials do.
 func _ember_vs(target_pos: Vector2) -> BattleSim:
 	var sim := H.make_sim(H.EMBERLYN, H.STONEBACK)
 	H.place(sim, 0, Vector2(0, 0), Vector2.RIGHT)
 	H.place(sim, 1, target_pos)
+	H.full_surge(sim)
 	return sim
 
 
@@ -38,22 +41,65 @@ func _stone_vs(target_pos: Vector2) -> BattleSim:
 	var sim := H.make_sim(H.STONEBACK, H.EMBERLYN)
 	H.place(sim, 0, Vector2(0, 0), Vector2.RIGHT)
 	H.place(sim, 1, target_pos)
+	H.full_surge(sim)
 	return sim
 
 
-func test_cooldown_blocks_reuse_until_expired() -> void:
-	var sim := _ember_vs(Vector2(8, 6))
-	var f := sim.active_fighter(0)
-	var bolt := f.stats.abilities[0]
-	_cast(sim, 0, Vector2.RIGHT, 5.0, 20)
-	var left := f.cooldown_of(bolt)
-	assert_gt(float(left), 0.0, "cooldown running")
-	var events := _cast(sim, 0, Vector2.RIGHT, 5.0, 1)
-	assert_eq(H.events_of(events, BattleEvent.ABILITY_DENIED).size(), 1, "denied while cooling down")
-	assert_eq(f.cooldown_of(bolt), left - 2, "ticks down every tick")
-	H.run(sim, left, H.idle())
-	var events2 := _cast(sim, 0, Vector2.RIGHT, 5.0, 2)
-	assert_eq(H.events_of(events2, BattleEvent.ABILITY_START).size(), 1, "usable again")
+func test_specials_cost_surge_and_have_no_cooldown() -> void:
+	var sim := H.make_sim(H.EMBERLYN, H.STONEBACK)
+	var f := H.place(sim, 0, Vector2(0, 0), Vector2.RIGHT)
+	H.place(sim, 1, Vector2(8, 6))
+	assert_near(f.surge, 0.0, 0.0001, "a battle starts with no Surge")
+	var denied := H.events_of(_cast(sim, 0, Vector2.RIGHT, 5.0, 1), BattleEvent.ABILITY_DENIED)
+	assert_eq(denied.size(), 1, "denied without Surge")
+	assert_eq(denied[0].data["reason"], &"surge", "denied for Surge")
+	# Two stages buy two Ember Bolts (1 stage each), back to back.
+	f.surge = 2.0 * CombatConst.SURGE_PER_STAGE
+	assert_eq(H.events_of(_cast(sim, 0, Vector2.RIGHT, 5.0, 20), BattleEvent.ABILITY_START).size(), 1, "first bolt")
+	assert_near(f.surge, CombatConst.SURGE_PER_STAGE, 0.001, "spent one stage")
+	assert_eq(H.events_of(_cast(sim, 0, Vector2.RIGHT, 5.0, 20), BattleEvent.ABILITY_START).size(), 1, "again at once: no cooldown")
+	assert_near(f.surge, 0.0, 0.001, "spent the second stage")
+	# The stronger the move, the more stages: Heat Ring needs all four.
+	var costs: Array[int] = []
+	for a in f.stats.abilities:
+		costs.append(a.surge_stages)
+	assert_eq(costs, [1, 2, 3, 4] as Array[int], "Emberlyn's specials cost 1-4 stages")
+	f.surge = 3.0 * CombatConst.SURGE_PER_STAGE
+	assert_eq(AbilitySystem.check_usable(f, f.stats.abilities[3]), &"surge", "three stages are not enough")
+	f.surge = 4.0 * CombatConst.SURGE_PER_STAGE
+	assert_eq(AbilitySystem.check_usable(f, f.stats.abilities[3]), &"", "four are")
+	f.surge = 0.0
+	assert_eq(AbilitySystem.check_usable(f, f.stats.basic), &"", "basic attacks are free")
+
+
+func test_hits_rams_and_dashes_fill_surge() -> void:
+	# Stoneback's passive leaves Surge as it is.
+	var sim := H.make_sim(H.STONEBACK, H.EMBERLYN)
+	var f := H.place(sim, 0, Vector2(0, 0), Vector2.RIGHT)
+	H.place(sim, 1, Vector2(1, 0), Vector2.LEFT)
+	assert_eq(_hits_on(_cast(sim, -1, Vector2.RIGHT, 1.0, 30), 1), 1, "shell bash landed")
+	assert_near(f.surge, CombatConst.SURGE_PER_BASIC_HIT, 0.001, "a basic hit")
+	# A dash adds a trickle.
+	var before := f.surge
+	H.dash_and_settle(sim, 0, H.N, 1)
+	assert_near(f.surge - before, CombatConst.SURGE_PER_DASH, 0.001, "a dash adds a little")
+	# A ram adds a lot (Emberlyn's Quickfoot earns Surge faster), and the
+	# stage it fills is announced.
+	var ram := H.make_sim(H.EMBERLYN, H.STONEBACK)
+	var r := H.place(ram, 0, Vector2(-2, 0))
+	H.place(ram, 1, Vector2(0, 0), Vector2.LEFT)
+	var mult := r.stats.passive.surge_gain_mult
+	assert_gt(mult, 1.0, "Quickfoot builds Surge faster")
+	var events := H.dash_and_settle(ram, 0, H.E, 3)
+	assert_eq(H.events_of(events, BattleEvent.DASH_THROUGH).size(), 1, "rammed")
+	assert_near(r.surge, (CombatConst.SURGE_PER_DASH + CombatConst.SURGE_PER_RAM) * mult, 0.001, "ram + dash")
+	var stage := H.events_of(events, BattleEvent.SURGE_STAGE)
+	assert_eq(stage.size(), 1, "stage announced")
+	assert_eq(int(stage[0].data["stages"]), 1, "first stage")
+	# Surge tops out at four stages.
+	r.surge = SurgeSystem.max_surge() - 1.0
+	SurgeSystem.gain(ram, r, 500.0, &"test")
+	assert_near(r.surge, SurgeSystem.max_surge(), 0.0001, "capped at four stages")
 
 
 func test_ember_bolt_hits_in_line_and_misses_off_line() -> void:
@@ -118,6 +164,7 @@ func test_boulder_toss_hits_and_beats_ember_bolt() -> void:
 	var duel := H.make_sim(H.STONEBACK, H.EMBERLYN)
 	H.place(duel, 0, Vector2(-4, 0), Vector2.RIGHT)
 	H.place(duel, 1, Vector2(4, 0), Vector2.LEFT)
+	H.full_surge(duel)
 	var events: Array[BattleEvent] = []
 	duel.step({0: H.cmd(InputCommand.ABILITY_1, InputCommand.ABILITY_1, Vector2.RIGHT, 8.0)})
 	events.append_array(duel.events)
@@ -152,6 +199,7 @@ func test_ground_pound_has_startup_armor() -> void:
 	var sim := H.make_sim(H.STONEBACK, H.EMBERLYN)
 	var s := H.place(sim, 0, Vector2(0, 0), Vector2.RIGHT)
 	H.place(sim, 1, Vector2(1.4, 0), Vector2.LEFT)
+	H.full_surge(sim)
 	sim.step({0: H.cmd(InputCommand.ABILITY_2, InputCommand.ABILITY_2, Vector2.RIGHT, 1.0)})
 	H.run(sim, 2, H.idle())
 	# Emberlyn swipes during the windup: Stoneback takes damage but keeps going.
@@ -220,15 +268,16 @@ func test_variant_overrides_do_not_mutate_base() -> void:
 	var base_proj: ProjectileComponent = bolt.components[0]
 	var needle_proj: ProjectileComponent = needle.components[0]
 	assert_near(needle_proj.speed, 22.0, 0.001, "variant speed")
-	assert_near(needle_proj.hit.power, 5.5, 0.001, "variant power")
+	assert_near(needle_proj.hit.power, 9.0, 0.001, "variant power")
 	assert_near(base_proj.speed, 16.0, 0.001, "base speed untouched")
-	assert_near(base_proj.hit.power, 7.0, 0.001, "base power untouched")
+	assert_near(base_proj.hit.power, 13.0, 0.001, "base power untouched")
 
 
 func test_fast_dash_evades_projectiles() -> void:
 	var sim := H.make_sim(H.STONEBACK, H.EMBERLYN)
 	H.place(sim, 0, Vector2(-3, 0), Vector2.RIGHT)
 	var e := H.place(sim, 1, Vector2(1.0, 0), Vector2.LEFT)
+	H.full_surge(sim)
 	sim.step({0: H.cmd(InputCommand.ABILITY_1, InputCommand.ABILITY_1, Vector2.RIGHT, 4.0)})
 	var events: Array[BattleEvent] = []
 	# Wait until the boulder is close, then phase-step through it (dash west).

@@ -15,7 +15,7 @@ duration_ticks = 150
 
 [sub_resource type="Resource" id="Resource_vbme8"]
 script = ExtResource("2_8ji2a")
-power = 17.0
+power = 44.0
 knockback = 1.1
 knockback_mode = 1
 hitstun_ticks = 20
@@ -33,6 +33,7 @@ visual = &"heat_ring"
 [resource]
 script = ExtResource("6_1kiv4")
 id = &"heat_ring"
+surge_stages = 4
 display_name = "Heat Ring"
 description = "Marks a spot that erupts in flame after a short delay."
 element = &"ember"
@@ -41,8 +42,6 @@ icon_path = "res://assets/ui/icons/ability_heat_ring.png"
 startup_ticks = 10
 active_ticks = 1
 recovery_ticks = 14
-cooldown_ticks = 420
-stamina_cost = 15.0
 max_range = 7.0
 components = Array[ExtResource("1_lmcrg")]([SubResource("Resource_sdlek")])
 cast_sfx = &"heat_ring_charge"

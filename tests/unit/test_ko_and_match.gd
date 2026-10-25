@@ -130,7 +130,7 @@ func test_team_switching_rules() -> void:
 	setup.add_creature(1, foe["creature"], foe["species"])
 	var sim := BattleSim.new(setup)
 	var first := sim.active_fighter(0)
-	first.cooldowns[&"ember_bolt"] = 100
+	first.surge = 230.0
 	# Can't switch while stunned.
 	StunRules.apply(sim, first, 20, &"hit")
 	H.run(sim, 2, H.cmd(InputCommand.SWITCH_2, InputCommand.SWITCH_2))
@@ -144,6 +144,6 @@ func test_team_switching_rules() -> void:
 	assert_eq(second.species.id, &"stoneback", "the selected slot")
 	assert_gt(float(second.switch_cooldown), 0.0, "switch cooldown")
 	assert_eq(H.events_of(events, BattleEvent.SWITCH_IN).size(), 1, "event")
-	assert_lt(float(first.cooldown_of(first.stats.abilities[0])), 100.0, "benched cooldowns keep ticking")
+	assert_near(first.surge, 230.0, 0.0001, "a benched creature keeps its Surge")
 	H.tap(sim, 0, InputCommand.SWITCH_1)
 	assert_ne(second.state, SM.SWITCHING, "switch on cooldown")

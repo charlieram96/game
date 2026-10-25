@@ -9,7 +9,7 @@
 
 [sub_resource type="Resource" id="Resource_lqcu8"]
 script = ExtResource("2_ypxqi")
-power = 6.5
+power = 7.5
 knockback = 1.3
 hitstun_ticks = 18
 hitstop_ticks = 6
@@ -35,7 +35,6 @@ icon_path = "res://assets/ui/icons/ability_tail_swipe.png"
 startup_ticks = 7
 active_ticks = 4
 recovery_ticks = 16
-cooldown_ticks = 0
 dash_cancel_from_recovery_tick = 8
 components = Array[ExtResource("1_aoww6")]([SubResource("Resource_2bbbh")])
 anim = &"melee"

@@ -252,15 +252,11 @@ func _draw_button(tb: TouchButton, f: Fighter) -> void:
 	else:
 		var tw := UiTheme.FONT_BOLD.get_string_size(tb.label, HORIZONTAL_ALIGNMENT_LEFT, -1, 18).x
 		draw_string(UiTheme.FONT_BOLD, c + Vector2(-tw * 0.5, 6), tb.label, HORIZONTAL_ALIGNMENT_LEFT, -1, 18, Color(0.98, 0.94, 0.85))
-	if f and tb.ability and tb.ability.cooldown_ticks > 0:
-		var left := f.cooldown_of(tb.ability)
-		if left > 0:
-			var ratio := float(left) / float(tb.ability.cooldown_ticks)
-			var pts := PackedVector2Array([c])
-			for i in 25:
-				var a := -PI * 0.5 + TAU * ratio * float(i) / 24.0
-				pts.append(c + Vector2(cos(a), sin(a)) * (tb.radius - 2.0))
-			draw_colored_polygon(pts, Color(0, 0, 0, 0.6))
+	if f and tb.ability and tb.ability.surge_stages > 0:
+		var need := float(tb.ability.surge_stages) * SurgeSystem.PER_STAGE
+		var wait := clampf(1.0 - f.surge / need, 0.0, 1.0)
+		UiTheme.draw_wait_sweep(self, c, tb.radius - 2.0, wait)
+		UiTheme.draw_surge_pips(self, c, tb.radius, tb.ability.surge_stages, wait <= 0.0)
 	if tb.aimable and tb.touch != -2 and tb.drag.length() > 22.0:
 		var dir := tb.drag.normalized()
 		draw_line(c, c + dir * (tb.radius + 70.0), Color(1.0, 0.85, 0.4, 0.9), 5.0)

@@ -109,6 +109,13 @@ static func events_of(events: Array[BattleEvent], type: StringName) -> Array[Bat
 	return out
 
 
+## Fills every fighter's Surge, for tests of what a special does rather
+## than of what it costs.
+static func full_surge(sim: BattleSim) -> void:
+	for f in sim.fighters:
+		f.surge = SurgeSystem.max_surge()
+
+
 static func place(sim: BattleSim, team: int, pos: Vector2, facing: Vector2 = Vector2.ZERO) -> Fighter:
 	var f := sim.active_fighter(team)
 	f.pos = pos

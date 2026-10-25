@@ -2,7 +2,7 @@ class_name BattleHUD
 extends CanvasLayer
 ## Battle HUD: creature panels (HP with delayed "ghost" damage, stamina
 ## segmented by dash cost, status icons), match timer, ability bar with
-## cooldown sweeps and key hints, big centre messages, tutorial tips.
+## Surge costs and key hints, big centre messages, tutorial tips.
 ## All layout is anchor-based so it adapts from 16:9 to tall-phone aspect
 ## ratios; the root Control can be sized directly for tests.
 
@@ -261,6 +261,8 @@ func on_feedback(kind: StringName, data: Dictionary) -> void:
 		&"no_stamina":
 			(panels[local_team] as FighterPanel).pulse_stamina()
 		&"denied":
+			if data.get("reason", &"") == &"surge":
+				(panels[local_team] as FighterPanel).pulse_surge()
 			for s in slots:
 				var slot := s as AbilitySlot
 				if slot.ability and slot.ability.id == data.get("ability", &""):
@@ -293,6 +295,10 @@ class FighterPanel:
 	var cost_preview := 0.0
 	var cost_ok := true
 	var _stamina_pulse := 0.0
+	var _surge_pulse := 0.0
+	var _surge_flash := 0.0
+	var _flash_stage := -1
+	var _last_stages := 0
 	var _name_label: Label
 	var _level_label: Label
 	var _status_box: HBoxContainer
@@ -316,10 +322,14 @@ class FighterPanel:
 			fighter = f
 			ghost_hp = f.hp_ratio()
 			shown_hp = f.hp_ratio()
+			_last_stages = SurgeSystem.stages(f)
 		sim_ref = s
 
 	func pulse_stamina() -> void:
 		_stamina_pulse = 1.0
+
+	func pulse_surge() -> void:
+		_surge_pulse = 1.0
 
 	func tick(delta: float) -> void:
 		if fighter == null:
@@ -331,6 +341,13 @@ class FighterPanel:
 		else:
 			ghost_hp = target
 		_stamina_pulse = maxf(0.0, _stamina_pulse - delta * 2.5)
+		_surge_pulse = maxf(0.0, _surge_pulse - delta * 2.5)
+		_surge_flash = maxf(0.0, _surge_flash - delta * 2.2)
+		var stages := SurgeSystem.stages(fighter)
+		if stages > _last_stages:
+			_surge_flash = 1.0
+			_flash_stage = stages - 1
+		_last_stages = stages
 		_name_label.text = fighter.label
 		_level_label.text = "Lv.%d" % fighter.stats.level_used
 		var name_w := _name_label.get_combined_minimum_size().x
@@ -369,7 +386,8 @@ class FighterPanel:
 			else:
 				var l := UiTheme.label(id.substr(0, 4).to_upper(), 12, Color(1, 0.9, 0.6))
 				_status_box.add_child(l)
-		_status_box.position = Vector2(size.x - 56 - _status_box.get_combined_minimum_size().x if not mirrored else 56, 72) if not mirrored else Vector2(56, 72)
+		# Top row, on the side away from the emblem (the Surge meter is below).
+		_status_box.position = Vector2(4, 2) if mirrored else Vector2(size.x - 4 - _status_box.get_combined_minimum_size().x, 2)
 
 	func _draw() -> void:
 		if fighter == null:
@@ -423,6 +441,46 @@ class FighterPanel:
 				if mirrored:
 					fx = st_rect.end.x - st_rect.size.x * (cost * i / fighter.max_stamina())
 				draw_rect(Rect2(fx - 1, st_rect.position.y, 2, st_rect.size.y), UiTheme.INK)
+		# Surge: four stages that pay for specials.
+		_surge_meter(Rect2(st_rect.position.x, 69, st_rect.size.x, 9))
+
+	func _surge_meter(r: Rect2) -> void:
+		var n := CombatConst.SURGE_STAGES
+		var level := fighter.surge / SurgeSystem.PER_STAGE
+		var gap := 5.0
+		var seg_w := (r.size.x - gap * (n - 1)) / n
+		var t := Time.get_ticks_msec() * 0.001
+		var full := level >= float(n) - 0.0001
+		for i in n:
+			# Stage 1 sits nearest the emblem; mirrored panels fill leftwards.
+			var k := n - 1 - i if mirrored else i
+			var seg := Rect2(r.position.x + (seg_w + gap) * k, r.position.y, seg_w, r.size.y)
+			draw_rect(seg.grow(2), UiTheme.INK)
+			draw_rect(seg, Color(0.15, 0.11, 0.1).lerp(Color(0.6, 0.12, 0.08), _surge_pulse))
+			var fill := clampf(level - i, 0.0, 1.0)
+			if fill <= 0.0:
+				continue
+			var col := UiTheme.SURGE if fill >= 1.0 else UiTheme.SURGE.darkened(0.5)
+			if full:
+				col = col.lerp(Color(1.0, 0.97, 0.8), 0.2 + 0.2 * sin(t * 6.0 + i * 0.9))
+			if i == _flash_stage and _surge_flash > 0.0:
+				col = col.lerp(Color.WHITE, _surge_flash)
+			var fw := seg_w * fill
+			var fx := seg.end.x - fw if mirrored else seg.position.x
+			draw_rect(Rect2(fx, seg.position.y, fw, seg.size.y), col)
+			if fill >= 1.0:
+				draw_rect(Rect2(fx, seg.position.y, fw, 2), col.lightened(0.5))
+				draw_rect(Rect2(fx, seg.end.y - 2, fw, 2), col.darkened(0.3))
+		if _surge_flash > 0.0 and _flash_stage >= 0:
+			var k2 := n - 1 - _flash_stage if mirrored else _flash_stage
+			var seg2 := Rect2(r.position.x + (seg_w + gap) * k2, r.position.y, seg_w, r.size.y)
+			draw_rect(seg2.grow(2.0 + 4.0 * (1.0 - _surge_flash)), Color(1.0, 0.9, 0.55, 0.6 * _surge_flash), false, 2.0)
+		var font := UiTheme.FONT_BOLD
+		var tag := "SURGE"
+		var tw := font.get_string_size(tag, HORIZONTAL_ALIGNMENT_LEFT, -1, 11).x
+		var at := Vector2(r.position.x - 7.0 - tw if mirrored else r.end.x + 7.0, r.end.y + 1.0)
+		draw_string_outline(font, at, tag, HORIZONTAL_ALIGNMENT_LEFT, -1, 11, 3, UiTheme.INK)
+		draw_string(font, at, tag, HORIZONTAL_ALIGNMENT_LEFT, -1, 11, UiTheme.SURGE)
 
 	func _span(r: Rect2, from: float, to: float, col: Color, from_right: bool) -> void:
 		var a := clampf(from, 0.0, 1.0) * r.size.x
@@ -453,8 +511,8 @@ class AbilitySlot:
 	var utility := ""
 	var key_hint := ""
 	var small := false
-	var _cd_ratio := 0.0
-	var _cd_secs := 0.0
+	var _cost := 0  # Surge stages
+	var _wait := 0.0  # share of the Surge cost still to earn
 	var _ready_flash := 0.0
 	var _no_cost := false
 	var _shake := 0.0
@@ -477,15 +535,15 @@ class AbilitySlot:
 	func update_from(f: Fighter) -> void:
 		if f == null:
 			return
-		var was := _cd_ratio
+		var was := _wait
 		if ability:
-			var left := f.cooldown_of(ability)
-			_cd_ratio = float(left) / maxf(1.0, float(ability.cooldown_ticks)) if ability.cooldown_ticks > 0 else 0.0
-			_cd_secs = float(left) / 60.0
-			_no_cost = f.stamina < ability.stamina_cost
+			_cost = ability.surge_stages if slot >= 0 else 0
+			var need := float(_cost) * SurgeSystem.PER_STAGE
+			_wait = clampf(1.0 - f.surge / need, 0.0, 1.0) if need > 0.0 else 0.0
+			_no_cost = f.stamina < ability.stamina_cost or _wait > 0.0
 			_active = f.current_ability != null and (f.current_ability == ability or (slot == -1 and f.current_slot == -1))
 		else:
-			_cd_ratio = 0.0
+			_wait = 0.0
 			match utility:
 				"dash":
 					_no_cost = f.stamina < f.stats.dash.min_cost()
@@ -496,7 +554,7 @@ class AbilitySlot:
 				"guard":
 					_no_cost = f.stamina <= 0.0
 					_active = f.state == FighterSM.State.GUARDING
-		if was > 0.0 and _cd_ratio <= 0.0:
+		if was > 0.0 and _wait <= 0.0:
 			_ready_flash = 1.0
 		_ready_flash = maxf(0.0, _ready_flash - get_process_delta_time() * 3.0)
 		_shake = maxf(0.0, _shake - get_process_delta_time() * 4.0)
@@ -525,20 +583,11 @@ class AbilitySlot:
 			var fz := 12 if small else 14
 			var tw := UiTheme.FONT_BOLD.get_string_size(txt, HORIZONTAL_ALIGNMENT_LEFT, -1, fz).x
 			draw_string(UiTheme.FONT_BOLD, c + Vector2(-tw * 0.5, 5), txt, HORIZONTAL_ALIGNMENT_LEFT, -1, fz, UiTheme.PARCHMENT)
-		if _cd_ratio > 0.0:
-			var pts := PackedVector2Array([c])
-			var steps := 32
-			for i in steps + 1:
-				var a := -PI * 0.5 + TAU * _cd_ratio * float(i) / steps
-				pts.append(c + Vector2(cos(a), sin(a)) * (rad - 3.0))
-			draw_colored_polygon(pts, Color(0.02, 0.02, 0.05, 0.72))
-			var secs := "%.1f" % _cd_secs if _cd_secs < 1.0 else str(int(ceil(_cd_secs)))
-			var fz2 := 18 if not small else 14
-			var tw2 := UiTheme.FONT_BOLD.get_string_size(secs, HORIZONTAL_ALIGNMENT_LEFT, -1, fz2).x
-			draw_string_outline(UiTheme.FONT_BOLD, c + Vector2(-tw2 * 0.5, 7), secs, HORIZONTAL_ALIGNMENT_LEFT, -1, fz2, 4, UiTheme.INK)
-			draw_string(UiTheme.FONT_BOLD, c + Vector2(-tw2 * 0.5, 7), secs, HORIZONTAL_ALIGNMENT_LEFT, -1, fz2, UiTheme.PARCHMENT)
+		# Still earning its Surge: the missing share sweeps away as the meter climbs.
+		UiTheme.draw_wait_sweep(self, c, rad - 3.0, _wait)
 		if _ready_flash > 0.0:
-			draw_arc(c, rad + 1.0, 0, TAU, 32, Color(1, 1, 0.8, _ready_flash), 3.0)
+			draw_arc(c, rad + 1.0, 0, TAU, 32, Color(1, 0.9, 0.55, _ready_flash), 3.0)
+		UiTheme.draw_surge_pips(self, c, rad, _cost, _wait <= 0.0)
 		if _no_cost and ability and ability.stamina_cost > 0.0:
 			draw_arc(c, rad - 1.0, 0, TAU, 32, Color(1, 0.35, 0.3, 0.9), 2.0)
 		# Key hint badge

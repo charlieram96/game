@@ -13,3 +13,5 @@ extends Resource
 @export var dash_through_stun_mult: float = 1.0
 ## Extra dash speed (fraction) while stamina is below 30%.
 @export var low_stamina_speed_bonus: float = 0.0
+## Multiplies the Surge this creature earns.
+@export var surge_gain_mult: float = 1.0

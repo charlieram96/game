@@ -17,13 +17,14 @@ var _markers: Array = []
 var _counter := 0
 var _used: Dictionary = {}
 var _advance_at := -1
+var _refill_at := -1
 var _done := false
 
 const STEPS := [
 	{"id": "move", "short": "Drag along a row or column to dash · land on all 3 marks", "tip": "[b]Dash to move[/b] — creatures don't walk. [b]Drag[/b] from anywhere along a row or column and let go: the longer the drag, the more cells you cross. Land on all three glowing marks. [color=#6b5134](Keys: hold a direction, release to dash.)[/color]"},
 	{"id": "dash", "short": "Dash 3 more times · longer dashes cost more stamina", "tip": "[b]Stamina[/b] — every dash costs stamina, more for longer ones: the lane shows the cost and the ring under you drains. Dash 3 more times. Drag back to where you started to cancel."},
-	{"id": "basic", "short": "Dash next to the totem, then click or tap it 3 times", "tip": "[b]Strike[/b] — dash next to the totem, then [b]click[/b] (or tap) toward it three times to land a three-hit string."},
-	{"id": "specials", "short": "Use all four specials: Q · E · R · F", "tip": "[b]Specials[/b] — use all four: [b]Q[/b] Ember Bolt, [b]E[/b] Cinder Arc, [b]R[/b] Flash Strike, [b]F[/b] Heat Ring. They aim at the pointer."},
+	{"id": "basic", "short": "Dash next to the totem, then click or tap it 3 times", "tip": "[b]Strike[/b] — dash next to the totem, then [b]click[/b] (or tap) toward it three times to land a three-hit string. Attacks go along rows and columns too, and every hit fills your [b]Surge[/b]: the gold bar under your stamina."},
+	{"id": "specials", "short": "Use all four specials: Q · E · R · F · each costs Surge", "tip": "[b]Specials cost Surge[/b] — 1 to 4 of its stages: the stronger the move, the more it takes. Hits and rams fill Surge, and each dash adds a little. Yours is topped up for this lesson: use all four, [b]Q[/b] Ember Bolt (1), [b]E[/b] Cinder Arc (2), [b]R[/b] Flash Strike (3), [b]F[/b] Heat Ring (4). They fire along the row or column you point at."},
 	{"id": "focus", "short": "Hold Shift (or press and hold still) until the ring is full", "tip": "[b]Focus[/b] — stamina never refills on its own. Hold [b]Shift[/b] (or press and hold still on the arena) until the ring under you is full. You're open while you focus!"},
 	{"id": "dash_through", "short": "Ram: dash straight through the totem", "tip": "[b]Ram[/b] — dash straight [b]through[/b] the totem: its tile turns gold and [b]RAM![/b] shows when you'll hit. A rammed foe is dazed, then protected for a moment."},
 	{"id": "guard", "short": "Hold Space or Right Click to guard · block 2 acorns", "tip": "[b]Guard[/b] — the totem throws acorns now. Hold [b]Space[/b] or [b]Right Click[/b] to guard your front. Guard right before impact for a [b]Perfect Guard[/b]. Block 2 acorns."},
@@ -57,6 +58,8 @@ func _next_step() -> void:
 		"move":
 			for p in MOVE_MARKS:
 				_add_marker(p)
+		"specials":
+			sim.script_set_surge(_player(), SurgeSystem.max_surge())
 		"focus":
 			sim.script_set_stamina(_player(), minf(_player().stamina, 12.0))
 		"guard":
@@ -118,6 +121,11 @@ func on_tick(events: Array[BattleEvent]) -> void:
 			for e in events:
 				if e.type == BattleEvent.ABILITY_START and e.fighter_id == me.id and int(e.data.get("slot", -1)) >= 0:
 					_used[e.data["ability"]] = true
+					_refill_at = sim.tick + 45
+			# Let the meter visibly drain, then top it back up.
+			if _refill_at >= 0 and sim.tick >= _refill_at:
+				_refill_at = -1
+				sim.script_set_surge(me, SurgeSystem.max_surge())
 			if _used.size() >= 4:
 				_complete()
 			elif not _used.is_empty():

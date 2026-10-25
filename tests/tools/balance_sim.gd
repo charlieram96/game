@@ -20,6 +20,9 @@ func _go() -> void:
 		var total_ticks := 0
 		var timeouts := 0
 		var dmg := [0.0, 0.0]
+		var surge := [0.0, 0.0]
+		var spent := [0.0, 0.0]
+		var rams := [0.0, 0.0]
 		var usage := {}
 		for i in n:
 			var setup := BattleSetup.new()
@@ -43,6 +46,9 @@ func _go() -> void:
 			for k in 2:
 				var f: Fighter = tr.sim.active_fighter(k)
 				dmg[k] += float(f.record["damage_dealt"])
+				surge[k] += float(f.record["surge_gained"])
+				spent[k] += float(f.record["surge_spent"])
+				rams[k] += float(f.record["dash_throughs"])
 				for a in (f.record["ability_usage"] as Dictionary).keys():
 					var u: Dictionary = f.record["ability_usage"][a]
 					var key := "%d:%s" % [k, a]
@@ -52,5 +58,6 @@ func _go() -> void:
 		for k in usage.keys():
 			acc.append("%s %d/%d" % [k, usage[k][1], usage[k][0]])
 		print("%s(%s) vs %s(%s): wins %s  avg %.1fs  timeouts %d  avgdmg %.0f/%.0f" % [pair[0].id, pair[2], pair[1].id, pair[3], wins, float(total_ticks) / n / 60.0, timeouts, dmg[0]/n, dmg[1]/n])
+		print("   surge gained %.0f/%.0f  stages spent %.1f/%.1f  rams %.1f/%.1f (per match)" % [surge[0]/n, surge[1]/n, spent[0]/n, spent[1]/n, rams[0]/n, rams[1]/n])
 		print("   hits/uses: ", ", ".join(acc))
 	quit()

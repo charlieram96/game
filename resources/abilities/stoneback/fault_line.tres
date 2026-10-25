@@ -9,7 +9,7 @@
 
 [sub_resource type="Resource" id="Resource_jikf1"]
 script = ExtResource("2_2sur5")
-power = 16.0
+power = 44.0
 knockback = 0.6
 hitstun_ticks = 26
 hitstop_ticks = 5
@@ -24,6 +24,7 @@ visual = &"fault_spike"
 [resource]
 script = ExtResource("5_7eee7")
 id = &"fault_line"
+surge_stages = 4
 display_name = "Fault Line"
 description = "Cracks the earth in a line; after a moment, stone spikes erupt along it."
 element = &"stone"
@@ -31,8 +32,6 @@ icon_path = "res://assets/ui/icons/ability_fault_line.png"
 startup_ticks = 12
 active_ticks = 1
 recovery_ticks = 18
-cooldown_ticks = 480
-stamina_cost = 18.0
 max_range = 9.0
 components = Array[ExtResource("1_sach8")]([SubResource("Resource_nwn4t")])
 cast_sfx = &"fault_line_charge"

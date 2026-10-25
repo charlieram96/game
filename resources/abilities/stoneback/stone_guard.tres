@@ -19,6 +19,7 @@ status = SubResource("Resource_ojwf6")
 [resource]
 script = ExtResource("5_521tf")
 id = &"stone_guard"
+surge_stages = 3
 display_name = "Stone Guard"
 description = "Hardens its plates for a moment: much less damage, no flinching, and dashes bounce off."
 element = &"stone"
@@ -26,8 +27,6 @@ aim_mode = 2
 icon_path = "res://assets/ui/icons/ability_stone_guard.png"
 active_ticks = 1
 recovery_ticks = 6
-cooldown_ticks = 720
-stamina_cost = 20.0
 max_range = 0.0
 components = Array[ExtResource("1_cjsw0")]([SubResource("Resource_sfgsu")])
 anim = &"guard"

@@ -136,7 +136,7 @@ play**. The rule for every online feature:
 
 * The client only ever sends `InputCommand`s. The battle server runs the
   same `BattleSim` and decides positions, dash direction and stamina,
-  attack legality, hits, damage, stuns, cooldowns and outcomes.
+  attack legality, Surge, hits, damage, stuns and outcomes.
 * XP, mastery and rewards are granted by the server from the server's own
   battle record (`Fighter.record`), transactionally, and stored
   server-side. `PlayerProfile.to_dict()` is the intended shared schema.

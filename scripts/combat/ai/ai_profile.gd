@@ -19,7 +19,8 @@ extends Resource
 @export var focus_threshold: float = 0.35
 @export var mistake_chance: float = 0.08
 @export var combo_skill: float = 0.6
-## Multiplies how long cooldown-free abilities are held back.
+## Multiplies how long the AI holds back: the bar an attack must clear and
+## the gaps between repositioning dashes.
 @export var patience: float = 1.0
 
 

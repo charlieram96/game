@@ -10,7 +10,7 @@
 
 [sub_resource type="Resource" id="Resource_pepui"]
 script = ExtResource("3_kehs0")
-power = 6.0
+power = 5.5
 knockback = 0.7
 hitstun_ticks = 13
 hitstop_ticks = 4
@@ -32,7 +32,6 @@ icon_path = "res://assets/ui/icons/ability_shell_bash.png"
 startup_ticks = 8
 active_ticks = 4
 recovery_ticks = 14
-cooldown_ticks = 0
 dash_cancel_from_recovery_tick = 7
 chain_next = ExtResource("1_x34il")
 chain_window_ticks = 10

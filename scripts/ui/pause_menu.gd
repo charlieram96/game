@@ -11,7 +11,8 @@ Drag back to the start or right click — cancel the dash      Click — basic a
 Hold W/A/S/D, release — dash with keys (hold longer to go farther)
 Dash THROUGH a foe to ram it (damage + daze)      Every dash costs stamina
 Shift (hold) — Focus: recover stamina (you're rooted while focusing)
-Q / E / R / F — specials (aim with the mouse)      Space or right button (hold) — guard
+Q / E / R / F — specials along the pointed row or column; each costs 1-4 stages of Surge
+Surge (the gold bar) fills from hits and rams, a little per dash      Space or right button (hold) — guard
 F3 — show hitboxes and logical cells
 
 [b]Exploring[/b]

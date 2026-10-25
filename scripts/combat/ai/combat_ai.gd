@@ -2,8 +2,9 @@ class_name CombatAI
 extends InputSource
 ## Opponent AI. It plays by the same rules as a human: it only emits
 ## InputCommands, sees its opponent through a reaction-time delay, aims with
-## error, and must manage stamina with Focus. Like the player it cannot
-## walk: every move is a planned dash along a board lane.
+## error, and must manage stamina with Focus and Surge for its specials.
+## Like the player it cannot walk: every move is a planned dash along a
+## board lane, and every attack runs along a row or column.
 ##
 ## Each tick: perceive (delayed) -> react to threats (sidestep dash / guard)
 ## -> manage stamina -> pick an offensive option by utility (abilities or a
@@ -12,6 +13,8 @@ extends InputSource
 ## can ram from where it stands), walls and stamina cost.
 
 const SM := FighterSM.State
+## Stamina it keeps for dodging when it repositions (share of the maximum).
+const RESERVE := 0.25
 
 var profile: AIProfile
 var rng := RandomNumberGenerator.new()
@@ -26,6 +29,13 @@ var _guard_aim := Vector2.ZERO
 var _reactions: Dictionary = {}  # threat id -> chosen reaction
 var _prev_held := 0
 var _hold_attack_until := -1
+## Surge stages to bank before spending on cheaper specials (re-rolled after
+## each special), so it sometimes saves up for its big moves.
+var _surge_goal := 1
+var _goal_ready_tick := -1
+## Last tick it attacked or rammed: the longer it goes without, the more
+## risk it takes to line up (see _pressure).
+var _last_offense_tick := 0
 
 
 func _init(p_profile: AIProfile = null, seed_value: int = 7) -> void:
@@ -44,6 +54,9 @@ func reset() -> void:
 	_reactions.clear()
 	_prev_held = 0
 	_hold_attack_until = -1
+	_surge_goal = _roll_surge_goal()
+	_goal_ready_tick = -1
+	_last_offense_tick = 0
 
 
 func get_command(sim: BattleSim, team: int) -> InputCommand:
@@ -107,9 +120,13 @@ func get_command(sim: BattleSim, team: int) -> InputCommand:
 			_focusing = false
 		else:
 			return _finish(cmd, aim, aim_dist, InputCommand.FOCUS, 0)
-	elif FighterSM.is_actionable(me.state) and me.stamina_ratio() < profile.focus_threshold and threat.is_empty():
-		var safe := not _in_ram_lane(sim, me.pos, foe, seen)
-		if (dist > 3.5 and safe) or (vulnerable and seen["state"] != SM.FOCUSING):
+	elif FighterSM.is_actionable(me.state) and _low_stamina(me) and threat.is_empty():
+		# Same danger test as above, so it never starts a Focus it would drop
+		# on the next tick (two creatures doing that side by side deadlock).
+		# (After a long stand-off it takes the risk of Focusing in a ram lane.)
+		var safe := dist >= 2.2 and (_pressure(sim) >= 0.85 or not _in_ram_lane(sim, me.pos, foe, seen))
+		var stranded := me.stamina < me.stats.dash.min_cost()  # can't even dash away
+		if safe and (dist > 3.5 or stranded or (vulnerable and not FighterSM.is_focusing(seen["state"]))):
 			_focusing = true
 			return _finish(cmd, aim, aim_dist, InputCommand.FOCUS, InputCommand.FOCUS)
 
@@ -122,6 +139,7 @@ func get_command(sim: BattleSim, team: int) -> InputCommand:
 		_next_decision = sim.tick + maxi(1, profile.decision_interval + rng.randi_range(-1, 2))
 		var choice := _choose_offense(sim, me, foe, seen, vulnerable)
 		if not choice.is_empty():
+			_last_offense_tick = sim.tick
 			if choice["kind"] == &"ram":
 				_next_move = sim.tick + _move_gap()
 				return _finish(cmd, aim, aim_dist, held, 0, choice["dash"])
@@ -150,6 +168,13 @@ func _finish(cmd: InputCommand, aim: Vector2, aim_dist: float, held: int, press:
 	if dash.x >= 0:
 		cmd.set_dash(dash.x, dash.y)
 	return cmd
+
+
+## Time to Focus: below the profile's threshold, or unable to reposition
+## without dipping into the reserve (otherwise it could stall in between,
+## too full to Focus and too empty to move).
+func _low_stamina(me: Fighter) -> bool:
+	return me.stamina_ratio() < profile.focus_threshold or me.stamina - me.stats.dash.min_cost() < me.max_stamina() * RESERVE
 
 
 ## Ticks between voluntary repositioning dashes.
@@ -313,6 +338,14 @@ func _escape_score(p: Vector2, me: Fighter, threat: Dictionary) -> float:
 # --- Offense -------------------------------------------------------------------------
 
 func _choose_offense(sim: BattleSim, me: Fighter, foe: Fighter, seen: Dictionary, vulnerable: bool) -> Dictionary:
+	# Saved up too long (the big move never lined up): settle for less.
+	if _surge_goal > 1 and SurgeSystem.stages(me) >= _surge_goal:
+		if _goal_ready_tick < 0:
+			_goal_ready_tick = sim.tick
+		elif sim.tick - _goal_ready_tick > 360:
+			_surge_goal = 1
+	else:
+		_goal_ready_tick = -1
 	var best := {}
 	var best_score := 0.42 * profile.patience
 	# Specials and basic attack
@@ -320,24 +353,64 @@ func _choose_offense(sim: BattleSim, me: Fighter, foe: Fighter, seen: Dictionary
 		var ability := me.ability_in_slot(slot)
 		if ability == null or AbilitySystem.check_usable(me, ability) != &"":
 			continue
+		if _saving_for_more(me, ability) and not vulnerable:
+			continue
 		var score := _score_ability(sim, me, me.pos, seen["pos"], ability, vulnerable)
 		if score <= 0.0:
 			continue
 		score *= lerpf(0.7, 1.15, profile.aggression)
-		score += rng.randf_range(-0.12, 0.12)
+		score += 0.04 * ability.surge_stages + rng.randf_range(-0.12, 0.12)
 		if score > best_score:
 			best_score = score
 			var bit: int = InputCommand.ATTACK if slot < 0 else InputCommand.ABILITY_BITS[slot]
-			best = {"kind": &"ability", "bit": bit, "aim": _aim_for(me, seen, ability)}
-	# Ram opportunity
+			best = {"kind": &"ability", "bit": bit, "aim": _aim_for(me, seen, ability), "surge": ability.surge_stages if slot >= 0 else 0}
+	# Ram opportunity (the surest way to earn Surge)
 	var ram := _ram_option(sim, me, foe, seen)
 	if ram.x >= 0:
+		var hungry := not _can_shoot(me)
 		var s := 0.55 + profile.dash_through_chance * 0.5 + rng.randf_range(-0.1, 0.1)
 		if vulnerable:
 			s += 0.2
-		if s > best_score and rng.randf() < profile.dash_through_chance + 0.2:
+		if hungry:
+			s += 0.15
+		if s > best_score and rng.randf() < profile.dash_through_chance + (0.45 if hungry else 0.2):
 			best = {"kind": &"ram", "dash": ram}
+	if int(best.get("surge", 0)) > 0:
+		_surge_goal = _roll_surge_goal()
+		_goal_ready_tick = -1
 	return best
+
+
+## How many stages to bank before spending: mostly one or two, sometimes
+## the whole meter for the biggest move.
+func _roll_surge_goal() -> int:
+	var r := rng.randf()
+	if r < 0.35:
+		return 1
+	if r < 0.65:
+		return 2
+	if r < 0.85:
+		return 3
+	return 4
+
+
+## Saving up: `_surge_goal` stages stay banked for a move that costs that
+## much; a cheaper special may only spend what is above that reserve.
+func _saving_for_more(me: Fighter, ability: AbilityDefinition) -> bool:
+	var cost := ability.surge_stages
+	return cost > 0 and cost < _surge_goal and SurgeSystem.stages(me) - cost < _surge_goal
+
+
+## Has a ranged special it can pay for and is willing to spend on.
+func _can_shoot(me: Fighter) -> bool:
+	for slot in 4:
+		var ability := me.ability_in_slot(slot)
+		if ability == null or AbilitySystem.check_usable(me, ability) != &"" or _saving_for_more(me, ability):
+			continue
+		for c in ability.components:
+			if c is ProjectileComponent or c is LineWaveComponent or c is TargetedAreaComponent:
+				return true
+	return false
 
 
 ## What using `ability` from `from` on a foe seen at `target` is worth
@@ -401,16 +474,36 @@ func _melee_reaches(m: MeleeComponent, from: Vector2, lane: Vector2, target: Vec
 	return m.reaches(from + lane * lunge, lane, target, r)
 
 
-## The best attack the AI could throw from `from` (buffs don't count: they
-## don't care where it stands).
+## The best attack the AI would throw from `from`: ones it can pay for and
+## isn't saving Surge on (buffs don't count: they don't care where it stands).
 func _strike_value(sim: BattleSim, me: Fighter, from: Vector2, seen: Dictionary) -> float:
 	var best := 0.0
 	for slot in range(-1, 4):
 		var ability := me.ability_in_slot(slot)
-		if ability == null or _is_buff(ability) or AbilitySystem.check_usable(me, ability) != &"":
+		if ability == null or _is_buff(ability) or AbilitySystem.check_usable(me, ability) != &"" or _saving_for_more(me, ability):
 			continue
 		best = maxf(best, _score_ability(sim, me, from, seen["pos"], ability, false))
+	if _ram_lane_from(sim, me, from, seen):
+		best = maxf(best, 0.62 if _can_shoot(me) else 0.8)
 	return best
+
+
+## Could it ram the foe from `from`: lined up within dash reach, a clear
+## lane, and the foe open to it (geometry only, for scoring landing cells).
+func _ram_lane_from(sim: BattleSim, me: Fighter, from: Vector2, seen: Dictionary) -> bool:
+	var foe := sim.opponent_of(me)
+	if foe == null or me.stats.dash.max_cells <= 0 or foe.dash_through_immunity > 0 or foe.steadfast > 0:
+		return false
+	var to: Vector2 = (seen["pos"] as Vector2) - from
+	var lane := Cardinal.snap(to)
+	if absf(to.dot(CombatConst.perpendicular(lane))) > me.radius() + foe.radius() - 0.2:
+		return false
+	var along := to.dot(lane)
+	if along < 0.75 or along > float(DashSystem.max_cells(me)) - 0.25:
+		return false
+	if bool(seen["guarding"]) and (seen["facing"] as Vector2).dot(-lane) > 0.0:
+		return false
+	return not sim.geometry.sweep(from, to, 0.3).hit
 
 
 func _is_buff(ability: AbilityDefinition) -> bool:
@@ -457,20 +550,27 @@ func _ram_option(sim: BattleSim, me: Fighter, foe: Fighter, seen: Dictionary) ->
 	# Don't dash into a guard facing us.
 	if bool(seen["guarding"]) and (seen["facing"] as Vector2).dot(-card) > 0.0:
 		return Vector2i(-1, 0)
-	var p := DashSystem.plan(sim, me, dir, cells)
-	if not p.ok() or not p.rams.has(foe.id) or me.stamina - p.cost < 6.0:
-		return Vector2i(-1, 0)
-	return Vector2i(dir, cells)
+	# A foe knocked off-centre can straddle two cells: one more cell may be
+	# what carries the dash through it.
+	for n in [cells, cells + 1]:
+		if n > DashSystem.max_cells(me):
+			break
+		var p := DashSystem.plan(sim, me, dir, n)
+		if p.ok() and p.rams.has(foe.id) and me.stamina - p.cost >= 6.0:
+			return Vector2i(dir, n)
+	return Vector2i(-1, 0)
 
 
 # --- Repositioning ----------------------------------------------------------------------
 
 func _style(me: Fighter) -> Vector2:
-	if me.stamina_ratio() < profile.focus_threshold:
+	if _low_stamina(me):
 		return Vector2(4.5, 7.5)  # back off to make room to Focus
 	match me.species.archetype:
 		"Agile":
-			return Vector2(3.0, 5.5)
+			# A kiter needs Surge to shoot with: without it, it hunts for rams
+			# (and the odd string) to earn some.
+			return Vector2(3.0, 5.5) if _can_shoot(me) else Vector2(2.5, float(DashSystem.max_cells(me)) + 0.4)
 		"Heavy":
 			return Vector2(0.9, 2.1)
 	return Vector2(1.5, 4.0)
@@ -488,7 +588,11 @@ func _band_score(me: Fighter, p: Vector2, seen: Dictionary) -> float:
 ## Scores standing still against every legal dash and returns the best dash
 ## if it beats staying put by a margin.
 func _reposition(sim: BattleSim, me: Fighter, foe: Fighter, seen: Dictionary, dist: float) -> Vector2i:
-	var reserve := me.max_stamina() * (0.25 if me.stamina_ratio() > profile.focus_threshold else 0.05)
+	# Impatience eats into the reserve too, so a long stand-off always ends;
+	# and anything goes to get out of a lane the foe can ram.
+	var reserve := me.max_stamina() * (0.05 if _low_stamina(me) else RESERVE * (1.0 - _pressure(sim)))
+	if _in_ram_lane(sim, me.pos, foe, seen):
+		reserve = 0.0
 	var stay := _spot_score(sim, me, foe, seen, me.pos)
 	var best := Vector2i(-1, 0)
 	var best_score := stay + 0.06 + 0.06 * profile.patience
@@ -510,10 +614,12 @@ func _reposition(sim: BattleSim, me: Fighter, foe: Fighter, seen: Dictionary, di
 
 func _spot_score(sim: BattleSim, me: Fighter, foe: Fighter, seen: Dictionary, p: Vector2) -> float:
 	var score := _band_score(me, p, seen)
-	# Lined up to strike (a row or column the foe is on, in range).
-	score += _strike_value(sim, me, p, seen) * 0.35
+	var pressure := _pressure(sim)
+	# Lined up to strike (a row or column the foe is on, in range)...
+	score += _strike_value(sim, me, p, seen) * (0.45 + 0.35 * pressure)
+	# ...which usually means standing in the foe's ram lane too.
 	if _in_ram_lane(sim, p, foe, seen):
-		score -= 0.45 * (1.15 - profile.aggression * 0.5)
+		score -= 0.45 * (1.15 - profile.aggression * 0.5) * (1.0 - pressure)
 	# Room to manoeuvre: edges and corners are traps.
 	var b := sim.geometry.bounds
 	var edge := minf(minf(p.x - b.position.x, b.end.x - p.x), minf(p.y - b.position.y, b.end.y - p.y))
@@ -522,6 +628,12 @@ func _spot_score(sim: BattleSim, me: Fighter, foe: Fighter, seen: Dictionary, p:
 	if edge < 1.0 and minf(p.x - b.position.x, b.end.x - p.x) < 1.0 and minf(p.y - b.position.y, b.end.y - p.y) < 1.0:
 		score -= 0.2
 	return score
+
+
+## 0 -> 0.85 as the AI goes 2 to 6 seconds without attacking: impatience
+## that breaks stand-offs where lining up looks too risky.
+func _pressure(sim: BattleSim) -> float:
+	return clampf(float(sim.tick - _last_offense_tick - 120) / 240.0, 0.0, 0.85)
 
 
 func _line_clear(sim: BattleSim, from: Vector2, to: Vector2, radius: float) -> bool:

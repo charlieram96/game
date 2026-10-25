@@ -175,6 +175,7 @@ static func try_start(sim: BattleSim, f: Fighter, dir_index: int, cells: int) ->
 	f.cardinal_facing = p.dir
 	sim.set_state(f, SM.DASH_START, maxi(1, prof.startup_ticks))
 	f.record["dashes"] += 1
+	SurgeSystem.gain(sim, f, CombatConst.SURGE_PER_DASH, &"dash")
 	sim.emit(BattleEvent.DASH_START, f, -1, f.pos, {
 		"dir": p.dir, "cells": p.cells, "from": p.home, "to": p.target,
 		"windup": prof.startup_ticks, "travel": p.travel_ticks, "type": prof.dash_type, "extended": p.extended,
@@ -324,6 +325,7 @@ static func _pass_through(sim: BattleSim, f: Fighter, o: Fighter) -> void:
 		damage = _ram_damage(sim, f, o)
 		o.dash_through_immunity = CombatConst.DASH_THROUGH_IMMUNITY_TICKS
 		f.record["dash_throughs"] += 1
+		SurgeSystem.gain(sim, f, CombatConst.SURGE_PER_RAM, &"ram")
 		if not o.is_ko():
 			var mult := f.stats.passive.dash_through_stun_mult if f.stats.passive else 1.0
 			applied = StunRules.apply(sim, o, int(round(prof.dash_through_stun_ticks * mult)), &"dash")

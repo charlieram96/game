@@ -87,7 +87,7 @@ func show_results(result: Dictionary, setup: BattleSetup) -> void:
 	var reason: StringName = result.get("reason", &"")
 	subtitle.text = "Knockout" if reason == &"ko" else ("Time up — decided on remaining health" if reason == &"timeout" else "")
 	if setup.mode == BattleSetup.Mode.STORY and w != local:
-		subtitle.text = "Tip: dash THROUGH Stoneback from behind its guard, then strike while it's dazed."
+		subtitle.text = "Tip: ram Stoneback (dash THROUGH it, away from its guard): every ram earns over a stage of Surge for your specials."
 	for c in stats_grid.get_children():
 		c.queue_free()
 	var rec: Dictionary = result.get("record", {})
@@ -95,6 +95,7 @@ func show_results(result: Dictionary, setup: BattleSetup) -> void:
 		["Damage dealt", str(int(round(float(rec.get("damage_dealt", 0.0)))))],
 		["Hits landed", str(int(rec.get("hits", 0)))],
 		["Rams", str(int(rec.get("dash_throughs", 0)))],
+		["Surge spent", "%d stages" % int(rec.get("surge_spent", 0))],
 		["Perfect guards", str(int(rec.get("perfect_guards", 0)))],
 		["Blocks", str(int(rec.get("blocks", 0)))],
 		["Battle time", "%.1f s" % float(result.get("duration_sec", 0.0))],
