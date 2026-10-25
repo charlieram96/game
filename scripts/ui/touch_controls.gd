@@ -258,6 +258,7 @@ func _draw_button(tb: TouchButton, f: Fighter) -> void:
 		UiTheme.draw_wait_sweep(self, c, tb.radius - 2.0, wait)
 		UiTheme.draw_surge_pips(self, c, tb.radius, tb.ability.surge_stages, wait <= 0.0)
 	if tb.aimable and tb.touch != -2 and tb.drag.length() > 22.0:
-		var dir := tb.drag.normalized()
+		# Attacks run along a row or column: show the lane the drag picks.
+		var dir := Cardinal.snap(tb.drag)
 		draw_line(c, c + dir * (tb.radius + 70.0), Color(1.0, 0.85, 0.4, 0.9), 5.0)
 		draw_circle(c + dir * (tb.radius + 70.0), 9, Color(1.0, 0.85, 0.4, 0.9))
