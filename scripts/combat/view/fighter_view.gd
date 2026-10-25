@@ -53,7 +53,8 @@ func setup(f: Fighter, color: Color) -> void:
 	fighter = f
 	team_color = color
 	name = "Fighter%d" % f.id
-	shadow = EnvKit.blob_shadow(self, f.radius() * 1.45, 0.5)
+	# A soft contact blob under the sun-cast shadow (the sprite casts one too).
+	shadow = EnvKit.blob_shadow(self, f.radius() * 1.45, 0.3)
 	ring = MeshInstance3D.new()
 	var pm := PlaneMesh.new()
 	pm.size = Vector2.ONE * (f.radius() * 2.0 + 0.55)
@@ -76,7 +77,7 @@ func setup(f: Fighter, color: Color) -> void:
 	add_child(guard_arc)
 	sprite = PixelSprite3D.new()
 	sprite.load_manifest(f.species.sprite_manifest)
-	sprite.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	sprite.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON
 	sprite.set_param("emission_strength", 1.8)
 	add_child(sprite)
 	_dir = "e" if f.facing.x >= 0.0 else "w"
