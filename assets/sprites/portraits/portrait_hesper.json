@@ -2,16 +2,16 @@
  "version": 1,
  "image": "portrait_hesper.png",
  "frame_size": [
-  64,
-  64
+  128,
+  128
  ],
  "columns": 3,
  "frame_count": 3,
  "pivot": [
-  32,
-  63
+  64,
+  126
  ],
- "pixels_per_unit": 24,
+ "pixels_per_unit": 48,
  "animations": {
   "neutral_s": {
    "frames": [
@@ -37,6 +37,8 @@
  },
  "meta": {
   "kind": "portrait",
-  "generator": "tools/sprite_forge/portraits.py"
+  "generator": "tools/art_forge/forge.py",
+  "scale": 2,
+  "provenance": "tools/art_forge/provenance/portrait_hesper.json"
  }
 }

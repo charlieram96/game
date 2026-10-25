@@ -265,21 +265,26 @@ These are AI proxies, not human playtests.
 
 ## Asset pipeline
 
-All art and audio is generated from code. There are no source art files,
-no samples and no borrowed melodies. Builds are deterministic (seeded per
-asset name), and each forge validates its own output.
+All audio and nearly all art is generated from code. There are no source
+art files, no samples and no borrowed melodies. Builds are deterministic
+(seeded per asset name), and each forge validates its own output. The
+exceptions are the dialogue portraits and the web loading key art: image-model
+paintings rebuilt as palette-locked pixel art by `tools/art_forge`, each with
+a provenance record.
 
 | Forge | Produces | Command |
 | --- | --- | --- |
-| `tools/sprite_forge` | Characters, kith, props and portraits (shaded volumetric parts, rigs per character family, 1 px material outlines, binary alpha) | `python3 tools/sprite_forge/build.py` |
+| `tools/sprite_forge` | Characters, kith and props (shaded volumetric parts, rigs per character family, 1 px material outlines, binary alpha), plus fallback portraits it never writes over art_forge ones | `python3 tools/sprite_forge/build.py` |
 | `tools/env_forge` | 48x48 seamless textures, foliage, props, the Dawncrane mural, VFX sheets, UI icons and 9-slice panels | `python3 tools/env_forge/build.py` |
 | `tools/audio_forge` | 87 SFX (44.1 kHz mono) and 6 music cues (32 kHz mono; loops carry `smpl` loop points and are rendered circularly) | `python3 tools/audio_forge/build.py` |
 
 `tools/art_forge` adds generated art through the OpenRouter Image API. It
 writes prompts from the briefs in `briefs.json`, checks each request against
 the model's published parameters and records provenance. `pixelize.py` turns
-the paintings into palette-locked pixel art in the same sheet contract. The
-API key is read from `OPENROUTER_API_KEY` and never stored. See its README.
+the paintings into palette-locked pixel art in the same sheet contract. It
+made the 128x128 dialogue portraits (`assets/sprites/portraits/`) and the
+web loading key art (`export/web/keyart.png`). The API key is read from
+`OPENROUTER_API_KEY` and never stored. See its README.
 
 Shared palette and sheet-contract code is in `tools/common/`. See each
 forge's README for details. The music is stored as WAV in the repository;

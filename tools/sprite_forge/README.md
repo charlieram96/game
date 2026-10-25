@@ -107,7 +107,7 @@ unit) as long as frame size and pivot are the 1x values times k.
 | `assets/sprites/characters/` | explorer, hesper, corin, villager_farmer, villager_baker, sigilbinder, crowd, crowd_back |
 | `assets/sprites/kith/` | emberlyn (2x), stoneback (2x), mossling, lanternmoth |
 | `assets/sprites/props/` | training_totem (2x) |
-| `assets/sprites/portraits/` | portrait_hesper, portrait_corin, portrait_player, portrait_emberlyn |
+| `assets/sprites/portraits/` | portrait_hesper, portrait_corin, portrait_player, portrait_emberlyn (procedural fallback; the shipped 128x128 portraits come from `tools/art_forge`, and `build.py` keeps any sheet art_forge installed) |
 
 Kith battle set (Emberlyn and Stoneback, all of `_s/_n/_e`): `ready` (battle
 stance, 6 frames, loops; the calmer `idle` stays for the overworld),

@@ -117,10 +117,11 @@ through Milestone 3.
    * whether players understand the befriending without hints.
 2. **Address the Stoneback-mirror timeouts** and anything playtesting turns
    up.
-3. **Art pass with `tools/art_forge`** once `OPENROUTER_API_KEY` is set:
-   * pick models with a bake-off;
+3. **Art pass with `tools/art_forge`**:
+   * pick models with a bake-off (done for portraits: `openai/gpt-image-2`);
    * lock each character and kith design with a concept sheet;
-   * generate portraits, props and the mural;
+   * generate props and the mural (the 128x128 dialogue portraits and the
+     web loading key art are done);
    * retune the sprite rigs to the approved designs.
 4. **Teams of three:** switching UI on the HUD and touch, a team-select
    screen, and the 3-5 minute match target from the brief.

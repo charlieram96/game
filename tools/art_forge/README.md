@@ -34,6 +34,9 @@ python3 tools/art_forge/forge.py gen hesper_portrait --expr stern --ref <approve
 python3 tools/art_forge/forge.py bakeoff emberlyn --models google/gemini-3-pro-image,openai/gpt-5.4-image-2,black-forest-labs/flux-3-image
 python3 tools/art_forge/forge.py review emberlyn                # tools/art_forge/_out/emberlyn/review.png
 python3 tools/art_forge/forge.py pixelize <candidate.png> --brief emberlyn --out assets/...png
+python3 tools/art_forge/forge.py composite <neutral.png> <smile.png> --face 300,360,690,700   # -> smile.composite.png
+python3 tools/art_forge/forge.py pixelize <smile.composite.png> --brief hesper_portrait --out assets/sprites/portraits/portrait_hesper.png --frame 1
+python3 tools/art_forge/forge.py pixelize <scene.png> --brief title_keyart --out export/web/keyart.png   # opaque brief
 ```
 
 Useful flags:
@@ -42,6 +45,15 @@ Useful flags:
 - `--force` regenerates even when the exact request is cached.
 - `--background transparent` works on models that support it.
 - `--quality` and `--resolution` are passed through when the model accepts them.
+- `pixelize --frame N` installs the result as frame N of a one-row sheet at
+  `--out`, keeping its other frames (a sheet with another frame size is
+  started afresh). Its provenance record lists every frame.
+- `pixelize --despeckle` (default for briefs with `"despeckle": true`)
+  replaces tiny low-contrast specks of a stray ramp, such as gold flecks in
+  grey hair. Catchlights and accents stand out in brightness and stay.
+- `pixelize --opaque` (default for briefs with `"opaque": true`) treats the
+  picture as a whole scene: nothing is keyed out, it is centre-cropped to the
+  brief's `size` and saved as a palette PNG with no border.
 
 Every request is checked against the model's published parameters before it
 is sent.
@@ -55,12 +67,17 @@ is sent.
    Pick one and keep it as the reference.
 3. **Derive everything else from it.** Pass the approved image as `--ref`
    for the other views (`n`, `e`) and portrait expressions, so the design
-   stays the same.
+   stays the same. For portraits, `composite` then blends only the face of
+   each expression into the locked neutral painting (registered by scale and
+   shift, colour-matched), so hair, clothes and outline stay pixel-identical
+   across the sheet and only the face changes. Its sidecar records both
+   generations and the face regions.
 4. **Review.** `review` puts each painting next to its pixelized result at
    game size. Judge the pixelized result: that is what ships.
 5. **Install.** `pixelize --out assets/...` writes the sprite into its
    frame (feet on the pivot row, 1px transparent border). It also records the
    prompt, model, parameters and source in `tools/art_forge/provenance/`.
+   Note any hand clean-up after installing in the record's `cleanup` list.
 6. **Animate.** The game's sheets need idle, walk, dash and cast frames per
    direction. Two routes:
    - Retune the `sprite_forge` rigs (colours, proportions, silhouettes) to
@@ -95,6 +112,24 @@ Only curated, pixelized results and their provenance records are committed.
   `subject`, plus a target `size`, `pivot` and palette `ramps` where the
   result goes into the game. The current colours and silhouettes come from
   the existing sprites, so new art fits beside old.
+
+## Installed art
+
+- **Dialogue portraits** (`assets/sprites/portraits/portrait_*`, briefs
+  `wren_portrait`, `hesper_portrait`, `corin_portrait`, `emberlyn_portrait`):
+  128x128 frames at 2x (48 px per unit, pivot 64,126), one frame per
+  expression in a row, painted by `openai/gpt-image-2`. It won a bake-off
+  against `google/gemini-3-pro-image` and `bytedance-seed/seedream-4.5`: it
+  paints a near-even 7-8 px grid at 1024 px, about 128 cells across, so it
+  pixelizes to 128 cleanly. It also kept the flat backdrop and the
+  established designs best, and cost the least. Each neutral was locked with
+  the old procedural portrait (softened) as a reference, and the expressions
+  were made with `--ref` and `composite`. `tools/sprite_forge/build.py`
+  leaves these sheets alone.
+- **Web loading key art** (`export/web/keyart.png`, brief `title_keyart`):
+  480x270, opaque, palette PNG, shown behind the loading text by
+  `export/web/shell.html` and copied next to `index.html` by
+  `tools/package_web.py`.
 
 ## Tests
 

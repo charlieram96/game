@@ -1,0 +1,238 @@
+{
+ "asset": "assets/sprites/portraits/portrait_emberlyn.png",
+ "frames": {
+  "0": {
+   "source_image": "scared_r0_gpt-image-2_1cfcc4daa8f1_0.composite.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Dialogue portrait in crisp, high-detail pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: a head-and-shoulders bust facing the viewer with the head turned very slightly toward the right of the image, an expressive and readable face with clear eyes, brows and mouth, a soft key light from the upper left, a limited palette with smooth hand-placed shading and clean outlines that are never pure black. The head is large and fills most of the picture; the shoulders are cut off by the bottom edge, with a narrow margin of background above the hair and at both sides. Flat solid magenta (#FF00FF) background with no shadow, glow or gradient. No text, watermark or frame. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature, its head and chest: a stoat-like face with russet fur on the head and shoulders and a cream chest, cheeks and muzzle, a dark soot band across the eyes like a mask, small round russet ears, big amber eyes and a small dark nose. Its long bushy russet tail curls up behind one shoulder, and a ring of cream fur at the tip cradles a glowing ember flame. Expression: wide, frightened eyes with small pupils, ears pressed back, mouth slightly open, a bead of sweat at the brow. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "tools/art_forge/_out/emberlyn_portrait/neutral_r0_gpt-image-2_a93e1f605277_1.png",
+      "sha256": "5255119d7a2cf96f3fae83b55a81b4eb7b911d072daec93dd8792f8b86c284de"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2718,
+     "completion_tokens": 391,
+     "total_tokens": 3109,
+     "cost": 0.031464,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.031464,
+      "upstream_inference_prompt_cost": 0.019734,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 12.7,
+    "created": "2026-10-25T02:49:25Z",
+    "index": 0,
+    "composite": {
+     "base": "neutral_r0_gpt-image-2_a93e1f605277_1.png",
+     "base_generation": {
+      "model": "openai/gpt-image-2",
+      "prompt": "Dialogue portrait in crisp, high-detail pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: a head-and-shoulders bust facing the viewer with the head turned very slightly toward the right of the image, an expressive and readable face with clear eyes, brows and mouth, a soft key light from the upper left, a limited palette with smooth hand-placed shading and clean outlines that are never pure black. The head is large and fills most of the picture; the shoulders are cut off by the bottom edge, with a narrow margin of background above the hair and at both sides. Flat solid magenta (#FF00FF) background with no shadow, glow or gradient. No text, watermark or frame. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature, its head and chest: a stoat-like face with russet fur on the head and shoulders and a cream chest, cheeks and muzzle, a dark soot band across the eyes like a mask, small round russet ears, big amber eyes and a small dark nose. Its long bushy russet tail curls up behind one shoulder, and a ring of cream fur at the tip cradles a glowing ember flame. Expression: alert and curious. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+      "params": {
+       "n": 3,
+       "aspect_ratio": "1:1"
+      },
+      "references": [
+       {
+        "file": "tools/art_forge/_out/refs/emberlyn_kith_idle.png",
+        "sha256": "c859d9c9a9a6b700251eb818d4cfae5fed66860a1666e51b79018d5635943cce"
+       }
+      ],
+      "usage": {
+       "prompt_tokens": 4017,
+       "completion_tokens": 586,
+       "total_tokens": 4603,
+       "cost": 0.046881,
+       "is_byok": false,
+       "prompt_tokens_details": {
+        "cached_tokens": 0
+       },
+       "cost_details": {
+        "upstream_inference_cost": 0.046881,
+        "upstream_inference_prompt_cost": 0.029301,
+        "upstream_inference_completions_cost": 0.01758
+       },
+       "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 586
+       }
+      },
+      "seconds": 14.0,
+      "created": "2026-10-25T02:30:59Z",
+      "index": 1
+     },
+     "face_from": "scared_r0_gpt-image-2_1cfcc4daa8f1_0.png",
+     "scale": 0.95,
+     "dx": 10.0,
+     "dy": -12.0,
+     "regions": [
+      [
+       170,
+       450,
+       660,
+       800
+      ]
+     ],
+     "feather": 14.0,
+     "colour_shift": [
+      2.5,
+      0.6,
+      1.3
+     ]
+    }
+   },
+   "pixelize": {
+    "brief": "emberlyn_portrait",
+    "height": 125,
+    "width": 126,
+    "outline": false,
+    "ramps": [
+     "fur_russet",
+     "cream",
+     "soot",
+     "ember",
+     "cloth_red",
+     "water",
+     "ink"
+    ],
+    "tolerance": 48.0,
+    "opaque": false,
+    "despeckle": true
+   },
+   "installed": "2026-10-25T03:10:04Z",
+   "cleanup": [
+    "hand fix: drew a 5x6 sweat bead (water ramp) at x 61-65, y 52-57, the brief's 'bead of sweat' that the face-only composite leaves out"
+   ]
+  },
+  "1": {
+   "source_image": "happy_r0_gpt-image-2_4b5db2b57ffa_1.composite.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Dialogue portrait in crisp, high-detail pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: a head-and-shoulders bust facing the viewer with the head turned very slightly toward the right of the image, an expressive and readable face with clear eyes, brows and mouth, a soft key light from the upper left, a limited palette with smooth hand-placed shading and clean outlines that are never pure black. The head is large and fills most of the picture; the shoulders are cut off by the bottom edge, with a narrow margin of background above the hair and at both sides. Flat solid magenta (#FF00FF) background with no shadow, glow or gradient. No text, watermark or frame. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature, its head and chest: a stoat-like face with russet fur on the head and shoulders and a cream chest, cheeks and muzzle, a dark soot band across the eyes like a mask, small round russet ears, big amber eyes and a small dark nose. Its long bushy russet tail curls up behind one shoulder, and a ring of cream fur at the tip cradles a glowing ember flame. Expression: eyes squeezed shut in a big happy smile, mouth open, cheeks flushed, the tail ember burning brighter. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "tools/art_forge/_out/emberlyn_portrait/neutral_r0_gpt-image-2_a93e1f605277_1.png",
+      "sha256": "5255119d7a2cf96f3fae83b55a81b4eb7b911d072daec93dd8792f8b86c284de"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2712,
+     "completion_tokens": 878,
+     "total_tokens": 3590,
+     "cost": 0.046044,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.046044,
+      "upstream_inference_prompt_cost": 0.019704,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 17.8,
+    "created": "2026-10-25T02:49:31Z",
+    "index": 1,
+    "composite": {
+     "base": "neutral_r0_gpt-image-2_a93e1f605277_1.png",
+     "base_generation": {
+      "model": "openai/gpt-image-2",
+      "prompt": "Dialogue portrait in crisp, high-detail pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: a head-and-shoulders bust facing the viewer with the head turned very slightly toward the right of the image, an expressive and readable face with clear eyes, brows and mouth, a soft key light from the upper left, a limited palette with smooth hand-placed shading and clean outlines that are never pure black. The head is large and fills most of the picture; the shoulders are cut off by the bottom edge, with a narrow margin of background above the hair and at both sides. Flat solid magenta (#FF00FF) background with no shadow, glow or gradient. No text, watermark or frame. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature, its head and chest: a stoat-like face with russet fur on the head and shoulders and a cream chest, cheeks and muzzle, a dark soot band across the eyes like a mask, small round russet ears, big amber eyes and a small dark nose. Its long bushy russet tail curls up behind one shoulder, and a ring of cream fur at the tip cradles a glowing ember flame. Expression: alert and curious. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+      "params": {
+       "n": 3,
+       "aspect_ratio": "1:1"
+      },
+      "references": [
+       {
+        "file": "tools/art_forge/_out/refs/emberlyn_kith_idle.png",
+        "sha256": "c859d9c9a9a6b700251eb818d4cfae5fed66860a1666e51b79018d5635943cce"
+       }
+      ],
+      "usage": {
+       "prompt_tokens": 4017,
+       "completion_tokens": 586,
+       "total_tokens": 4603,
+       "cost": 0.046881,
+       "is_byok": false,
+       "prompt_tokens_details": {
+        "cached_tokens": 0
+       },
+       "cost_details": {
+        "upstream_inference_cost": 0.046881,
+        "upstream_inference_prompt_cost": 0.029301,
+        "upstream_inference_completions_cost": 0.01758
+       },
+       "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 586
+       }
+      },
+      "seconds": 14.0,
+      "created": "2026-10-25T02:30:59Z",
+      "index": 1
+     },
+     "face_from": "happy_r0_gpt-image-2_4b5db2b57ffa_1.png",
+     "scale": 0.975,
+     "dx": -2.0,
+     "dy": 14.0,
+     "regions": [
+      [
+       170,
+       450,
+       660,
+       800
+      ]
+     ],
+     "feather": 14.0,
+     "colour_shift": [
+      -1.0,
+      7.4,
+      10.3
+     ]
+    }
+   },
+   "pixelize": {
+    "brief": "emberlyn_portrait",
+    "height": 125,
+    "width": 126,
+    "outline": false,
+    "ramps": [
+     "fur_russet",
+     "cream",
+     "soot",
+     "ember",
+     "cloth_red",
+     "water",
+     "ink"
+    ],
+    "tolerance": 48.0,
+    "opaque": false,
+    "despeckle": true
+   },
+   "installed": "2026-10-25T03:10:05Z"
+  }
+ }
+}

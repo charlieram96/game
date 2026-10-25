@@ -1,0 +1,353 @@
+{
+ "asset": "assets/sprites/portraits/portrait_corin.png",
+ "frames": {
+  "0": {
+   "source_image": "grin_r0_gpt-image-2_dde089723165_1.composite.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Dialogue portrait in crisp, high-detail pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: a head-and-shoulders bust facing the viewer with the head turned very slightly toward the right of the image, an expressive and readable face with clear eyes, brows and mouth, a soft key light from the upper left, a limited palette with smooth hand-placed shading and clean outlines that are never pure black. The head is large and fills most of the picture; the shoulders are cut off by the bottom edge, with a narrow margin of background above the hair and at both sides. Flat solid magenta (#FF00FF) background with no shadow, glow or gradient. No text, watermark or frame. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Corin, a fourteen-year-old apprentice with a cocky, energetic look: deep brown skin, bright green eyes, a shock of spiky copper-orange hair standing up in flame-like points above a red cloth headband whose knotted tails hang at the right side of the head, a mustard-yellow vest with rounded padded shoulders over a slate-grey shirt with a dark high collar. Expression: a big, boastful grin showing teeth, eyes squeezed shut with laughter. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "tools/art_forge/_out/corin_portrait/neutral_r0_gpt-image-2_68d9cecb0ea7_2.png",
+      "sha256": "5ff27074639f72205bee346f756fff7792b7737cdd1382c01a0b2afcf8456f93"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2664,
+     "completion_tokens": 878,
+     "total_tokens": 3542,
+     "cost": 0.045804,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.045804,
+      "upstream_inference_prompt_cost": 0.019464,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 17.1,
+    "created": "2026-10-25T02:31:02Z",
+    "index": 1,
+    "composite": {
+     "base": "neutral_r0_gpt-image-2_68d9cecb0ea7_2.png",
+     "base_generation": {
+      "model": "openai/gpt-image-2",
+      "prompt": "Dialogue portrait in crisp, high-detail pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: a head-and-shoulders bust facing the viewer with the head turned very slightly toward the right of the image, an expressive and readable face with clear eyes, brows and mouth, a soft key light from the upper left, a limited palette with smooth hand-placed shading and clean outlines that are never pure black. The head is large and fills most of the picture; the shoulders are cut off by the bottom edge, with a narrow margin of background above the hair and at both sides. Flat solid magenta (#FF00FF) background with no shadow, glow or gradient. No text, watermark or frame. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Corin, a fourteen-year-old apprentice with a cocky, energetic look: deep brown skin, bright green eyes, a shock of spiky copper-orange hair standing up in flame-like points above a red cloth headband whose knotted tails hang at the right side of the head, a mustard-yellow vest with rounded padded shoulders over a slate-grey shirt with a dark high collar. Expression: a cocky half-grin. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+      "params": {
+       "n": 3,
+       "aspect_ratio": "1:1"
+      },
+      "references": [
+       {
+        "file": "tools/art_forge/_out/refs/corin_old_determined.png",
+        "sha256": "ea1d30c80cfe6e94cab78016e9325daea861a20f2a254f440fcb17dd17e18527"
+       }
+      ],
+      "usage": {
+       "prompt_tokens": 3972,
+       "completion_tokens": 1317,
+       "total_tokens": 5289,
+       "cost": 0.068586,
+       "is_byok": false,
+       "prompt_tokens_details": {
+        "cached_tokens": 0
+       },
+       "cost_details": {
+        "upstream_inference_cost": 0.068586,
+        "upstream_inference_prompt_cost": 0.029076,
+        "upstream_inference_completions_cost": 0.03951
+       },
+       "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 1317
+       }
+      },
+      "seconds": 15.1,
+      "created": "2026-10-25T02:29:03Z",
+      "index": 2
+     },
+     "face_from": "grin_r0_gpt-image-2_dde089723165_1.png",
+     "scale": 0.935,
+     "dx": 4.0,
+     "dy": -12.0,
+     "regions": [
+      [
+       310,
+       420,
+       690,
+       730
+      ]
+     ],
+     "feather": 14.0,
+     "colour_shift": [
+      -8.4,
+      1.5,
+      6.8
+     ]
+    }
+   },
+   "pixelize": {
+    "brief": "corin_portrait",
+    "height": 125,
+    "width": 126,
+    "outline": false,
+    "ramps": [
+     "skin_deep",
+     "hair_copper",
+     "cloth_red",
+     "cloth_mustard",
+     "stone",
+     "leaf",
+     "cloth_cream",
+     "ink"
+    ],
+    "tolerance": 48.0,
+    "opaque": false,
+    "despeckle": true
+   },
+   "installed": "2026-10-25T03:10:00Z"
+  },
+  "1": {
+   "source_image": "determined_r0_gpt-image-2_df54d6d7bfb3_1.composite.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Dialogue portrait in crisp, high-detail pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: a head-and-shoulders bust facing the viewer with the head turned very slightly toward the right of the image, an expressive and readable face with clear eyes, brows and mouth, a soft key light from the upper left, a limited palette with smooth hand-placed shading and clean outlines that are never pure black. The head is large and fills most of the picture; the shoulders are cut off by the bottom edge, with a narrow margin of background above the hair and at both sides. Flat solid magenta (#FF00FF) background with no shadow, glow or gradient. No text, watermark or frame. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Corin, a fourteen-year-old apprentice with a cocky, energetic look: deep brown skin, bright green eyes, a shock of spiky copper-orange hair standing up in flame-like points above a red cloth headband whose knotted tails hang at the right side of the head, a mustard-yellow vest with rounded padded shoulders over a slate-grey shirt with a dark high collar. Expression: jaw set and brows lowered, a fierce, determined stare. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "tools/art_forge/_out/corin_portrait/neutral_r0_gpt-image-2_68d9cecb0ea7_2.png",
+      "sha256": "5ff27074639f72205bee346f756fff7792b7737cdd1382c01a0b2afcf8456f93"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2658,
+     "completion_tokens": 878,
+     "total_tokens": 3536,
+     "cost": 0.045774,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.045774,
+      "upstream_inference_prompt_cost": 0.019434,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 17.1,
+    "created": "2026-10-25T02:31:02Z",
+    "index": 1,
+    "composite": {
+     "base": "neutral_r0_gpt-image-2_68d9cecb0ea7_2.png",
+     "base_generation": {
+      "model": "openai/gpt-image-2",
+      "prompt": "Dialogue portrait in crisp, high-detail pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: a head-and-shoulders bust facing the viewer with the head turned very slightly toward the right of the image, an expressive and readable face with clear eyes, brows and mouth, a soft key light from the upper left, a limited palette with smooth hand-placed shading and clean outlines that are never pure black. The head is large and fills most of the picture; the shoulders are cut off by the bottom edge, with a narrow margin of background above the hair and at both sides. Flat solid magenta (#FF00FF) background with no shadow, glow or gradient. No text, watermark or frame. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Corin, a fourteen-year-old apprentice with a cocky, energetic look: deep brown skin, bright green eyes, a shock of spiky copper-orange hair standing up in flame-like points above a red cloth headband whose knotted tails hang at the right side of the head, a mustard-yellow vest with rounded padded shoulders over a slate-grey shirt with a dark high collar. Expression: a cocky half-grin. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+      "params": {
+       "n": 3,
+       "aspect_ratio": "1:1"
+      },
+      "references": [
+       {
+        "file": "tools/art_forge/_out/refs/corin_old_determined.png",
+        "sha256": "ea1d30c80cfe6e94cab78016e9325daea861a20f2a254f440fcb17dd17e18527"
+       }
+      ],
+      "usage": {
+       "prompt_tokens": 3972,
+       "completion_tokens": 1317,
+       "total_tokens": 5289,
+       "cost": 0.068586,
+       "is_byok": false,
+       "prompt_tokens_details": {
+        "cached_tokens": 0
+       },
+       "cost_details": {
+        "upstream_inference_cost": 0.068586,
+        "upstream_inference_prompt_cost": 0.029076,
+        "upstream_inference_completions_cost": 0.03951
+       },
+       "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 1317
+       }
+      },
+      "seconds": 15.1,
+      "created": "2026-10-25T02:29:03Z",
+      "index": 2
+     },
+     "face_from": "determined_r0_gpt-image-2_df54d6d7bfb3_1.png",
+     "scale": 0.945,
+     "dx": 14.0,
+     "dy": -8.0,
+     "regions": [
+      [
+       310,
+       420,
+       690,
+       730
+      ]
+     ],
+     "feather": 14.0,
+     "colour_shift": [
+      -6.5,
+      2.4,
+      12.1
+     ]
+    }
+   },
+   "pixelize": {
+    "brief": "corin_portrait",
+    "height": 125,
+    "width": 126,
+    "outline": false,
+    "ramps": [
+     "skin_deep",
+     "hair_copper",
+     "cloth_red",
+     "cloth_mustard",
+     "stone",
+     "leaf",
+     "cloth_cream",
+     "ink"
+    ],
+    "tolerance": 48.0,
+    "opaque": false,
+    "despeckle": true
+   },
+   "installed": "2026-10-25T03:10:01Z"
+  },
+  "2": {
+   "source_image": "sulk_r0_gpt-image-2_1f7e33a03655_0.composite.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Dialogue portrait in crisp, high-detail pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: a head-and-shoulders bust facing the viewer with the head turned very slightly toward the right of the image, an expressive and readable face with clear eyes, brows and mouth, a soft key light from the upper left, a limited palette with smooth hand-placed shading and clean outlines that are never pure black. The head is large and fills most of the picture; the shoulders are cut off by the bottom edge, with a narrow margin of background above the hair and at both sides. Flat solid magenta (#FF00FF) background with no shadow, glow or gradient. No text, watermark or frame. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Corin, a fourteen-year-old apprentice with a cocky, energetic look: deep brown skin, bright green eyes, a shock of spiky copper-orange hair standing up in flame-like points above a red cloth headband whose knotted tails hang at the right side of the head, a mustard-yellow vest with rounded padded shoulders over a slate-grey shirt with a dark high collar. Expression: a sulky pout, brows drawn together, eyes glancing aside. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "tools/art_forge/_out/corin_portrait/neutral_r0_gpt-image-2_68d9cecb0ea7_2.png",
+      "sha256": "5ff27074639f72205bee346f756fff7792b7737cdd1382c01a0b2afcf8456f93"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2662,
+     "completion_tokens": 878,
+     "total_tokens": 3540,
+     "cost": 0.045794,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.045794,
+      "upstream_inference_prompt_cost": 0.019454,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 15.5,
+    "created": "2026-10-25T02:31:00Z",
+    "index": 0,
+    "composite": {
+     "base": "neutral_r0_gpt-image-2_68d9cecb0ea7_2.png",
+     "base_generation": {
+      "model": "openai/gpt-image-2",
+      "prompt": "Dialogue portrait in crisp, high-detail pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: a head-and-shoulders bust facing the viewer with the head turned very slightly toward the right of the image, an expressive and readable face with clear eyes, brows and mouth, a soft key light from the upper left, a limited palette with smooth hand-placed shading and clean outlines that are never pure black. The head is large and fills most of the picture; the shoulders are cut off by the bottom edge, with a narrow margin of background above the hair and at both sides. Flat solid magenta (#FF00FF) background with no shadow, glow or gradient. No text, watermark or frame. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Corin, a fourteen-year-old apprentice with a cocky, energetic look: deep brown skin, bright green eyes, a shock of spiky copper-orange hair standing up in flame-like points above a red cloth headband whose knotted tails hang at the right side of the head, a mustard-yellow vest with rounded padded shoulders over a slate-grey shirt with a dark high collar. Expression: a cocky half-grin. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+      "params": {
+       "n": 3,
+       "aspect_ratio": "1:1"
+      },
+      "references": [
+       {
+        "file": "tools/art_forge/_out/refs/corin_old_determined.png",
+        "sha256": "ea1d30c80cfe6e94cab78016e9325daea861a20f2a254f440fcb17dd17e18527"
+       }
+      ],
+      "usage": {
+       "prompt_tokens": 3972,
+       "completion_tokens": 1317,
+       "total_tokens": 5289,
+       "cost": 0.068586,
+       "is_byok": false,
+       "prompt_tokens_details": {
+        "cached_tokens": 0
+       },
+       "cost_details": {
+        "upstream_inference_cost": 0.068586,
+        "upstream_inference_prompt_cost": 0.029076,
+        "upstream_inference_completions_cost": 0.03951
+       },
+       "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 1317
+       }
+      },
+      "seconds": 15.1,
+      "created": "2026-10-25T02:29:03Z",
+      "index": 2
+     },
+     "face_from": "sulk_r0_gpt-image-2_1f7e33a03655_0.png",
+     "scale": 0.97,
+     "dx": 8.0,
+     "dy": -6.0,
+     "regions": [
+      [
+       310,
+       420,
+       690,
+       730
+      ]
+     ],
+     "feather": 14.0,
+     "colour_shift": [
+      -7.4,
+      -1.2,
+      4.3
+     ]
+    }
+   },
+   "pixelize": {
+    "brief": "corin_portrait",
+    "height": 125,
+    "width": 126,
+    "outline": false,
+    "ramps": [
+     "skin_deep",
+     "hair_copper",
+     "cloth_red",
+     "cloth_mustard",
+     "stone",
+     "leaf",
+     "cloth_cream",
+     "ink"
+    ],
+    "tolerance": 48.0,
+    "opaque": false,
+    "despeckle": true
+   },
+   "installed": "2026-10-25T03:10:03Z"
+  }
+ }
+}

@@ -1,0 +1,99 @@
+{
+ "asset": "export/web/keyart.png",
+ "source_image": "r0_gpt-image-2_df28deb92afe_0.teal.png",
+ "generation": {
+  "model": "openai/gpt-image-2",
+  "prompt": "Key art for a cozy pixel-art fantasy role-playing game: rich, detailed pixel art with soft modern lighting and depth, painterly glow from light sources, a warm storybook mood. No text or logo. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: A young apprentice in a teal cloak and red scarf sits by a campfire in a forest clearing at dusk beside a small russet fox-like fire creature whose bushy tail holds a glowing ember; a large gentle moth with a softly glowing golden body rests on a branch nearby. Warm firelight against cool blue night, fireflies. Wide, calm composition: the campfire group is small and centred in the lower third of the picture, framed by tall dark tree trunks at the left and right edges, and the upper half is a quiet, dark dusky sky seen through the canopy with a few stars. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+  "params": {
+   "n": 2,
+   "aspect_ratio": "16:9"
+  },
+  "references": [
+   {
+    "file": "tools/art_forge/_out/wren_portrait/neutral_r0_gpt-image-2_2ee2b02a5a41_1.png",
+    "sha256": "120dbbab3ee8a301bd94a1f06cd0a31400d24a5bad8c16917112714ab6f7ac85"
+   },
+   {
+    "file": "tools/art_forge/_out/emberlyn_portrait/neutral_r0_gpt-image-2_a93e1f605277_1.png",
+    "sha256": "5255119d7a2cf96f3fae83b55a81b4eb7b911d072daec93dd8792f8b86c284de"
+   },
+   {
+    "file": "tools/art_forge/_out/refs/lanternmoth_sprite.png",
+    "sha256": "b0f2ee787c133bb413422dfbc95de327e9b56b85af227e1d8f60038922ebd0f6"
+   }
+  ],
+  "usage": {
+   "prompt_tokens": 6602,
+   "completion_tokens": 400,
+   "total_tokens": 7002,
+   "cost": 0.063442,
+   "is_byok": false,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   },
+   "cost_details": {
+    "upstream_inference_cost": 0.063442,
+    "upstream_inference_prompt_cost": 0.051442,
+    "upstream_inference_completions_cost": 0.012
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0,
+    "image_tokens": 400
+   }
+  },
+  "seconds": 19.5,
+  "created": "2026-10-25T02:54:04Z",
+  "index": 0,
+  "retouch": {
+   "from": "r0_gpt-image-2_df28deb92afe_0.png",
+   "box": [
+    730,
+    530,
+    1010,
+    800
+   ],
+   "hue_range": [
+    60,
+    130
+   ],
+   "hue_shift": 22,
+   "pixels": 11617,
+   "note": "Wren's cloak hue-rotated from green toward the brief's teal (hand retouch before pixelize)"
+  }
+ },
+ "pixelize": {
+  "brief": "title_keyart",
+  "height": 270,
+  "width": 480,
+  "outline": false,
+  "ramps": [
+   "night",
+   "sky_dusk",
+   "aether",
+   "leaf",
+   "moss",
+   "glow_moss",
+   "bark",
+   "wood",
+   "earth",
+   "stone",
+   "ember",
+   "gold",
+   "cloth_teal",
+   "cloth_red",
+   "cloth_cream",
+   "cloth_plum",
+   "fur_russet",
+   "cream",
+   "soot",
+   "skin_tan",
+   "hair_brown",
+   "water",
+   "ink"
+  ],
+  "tolerance": 48.0,
+  "opaque": true,
+  "despeckle": false
+ },
+ "installed": "2026-10-25T03:02:30Z"
+}

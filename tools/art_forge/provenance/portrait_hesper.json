@@ -1,0 +1,296 @@
+{
+ "asset": "assets/sprites/portraits/portrait_hesper.png",
+ "frames": {
+  "0": {
+   "source_image": "neutral_r0_gpt-image-2_6f317f0146fc_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Dialogue portrait in crisp, high-detail pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: a head-and-shoulders bust facing the viewer with the head turned very slightly toward the right of the image, an expressive and readable face with clear eyes, brows and mouth, a soft key light from the upper left, a limited palette with smooth hand-placed shading and clean outlines that are never pure black. The head is large and fills most of the picture; the shoulders are cut off by the bottom edge, with a narrow margin of background above the hair and at both sides. Flat solid magenta (#FF00FF) background with no shadow, glow or gradient. No text, watermark or frame. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Warden Hesper, a woman in her sixties: silver-grey hair pulled up into a neat round bun high on the back of the head with a few loose strands at the temples, light skin with laugh lines, sharp kind blue-grey eyes behind small round gold-rimmed spectacles, a high-collared plum coat over a cream blouse with a soft ruffled collar, and a small gold clasp at the throat. Expression: composed, a hint of a smile. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "tools/art_forge/_out/refs/hesper_old_neutral.png",
+      "sha256": "3d79b3df322e890c6a0e1f54055c2560a5749f27dc95fb6c6f59e16ff67cbb61"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2668,
+     "completion_tokens": 391,
+     "total_tokens": 3059,
+     "cost": 0.031214,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.031214,
+      "upstream_inference_prompt_cost": 0.019484,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 11.9,
+    "created": "2026-10-25T02:25:38Z",
+    "index": 0
+   },
+   "pixelize": {
+    "brief": "hesper_portrait",
+    "height": 125,
+    "width": 126,
+    "outline": false,
+    "ramps": [
+     "skin_light",
+     "hair_grey",
+     "cloth_plum",
+     "cloth_cream",
+     "gold",
+     "water",
+     "ink"
+    ],
+    "tolerance": 48.0,
+    "opaque": false,
+    "despeckle": true
+   },
+   "installed": "2026-10-25T03:27:09Z"
+  },
+  "1": {
+   "source_image": "smile_r0_gpt-image-2_fa12e643133c_0.composite.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Dialogue portrait in crisp, high-detail pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: a head-and-shoulders bust facing the viewer with the head turned very slightly toward the right of the image, an expressive and readable face with clear eyes, brows and mouth, a soft key light from the upper left, a limited palette with smooth hand-placed shading and clean outlines that are never pure black. The head is large and fills most of the picture; the shoulders are cut off by the bottom edge, with a narrow margin of background above the hair and at both sides. Flat solid magenta (#FF00FF) background with no shadow, glow or gradient. No text, watermark or frame. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Warden Hesper, a woman in her sixties: silver-grey hair pulled up into a neat round bun high on the back of the head with a few loose strands at the temples, light skin with laugh lines, sharp kind blue-grey eyes behind small round gold-rimmed spectacles, a high-collared plum coat over a cream blouse with a soft ruffled collar, and a small gold clasp at the throat. Expression: a warm, knowing smile. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "tools/art_forge/_out/hesper_portrait/neutral_r0_gpt-image-2_6f317f0146fc_0.png",
+      "sha256": "a377ddc2948777660ba4ae6f418d4f112c210f8af539f403d79a816a11237c3b"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2664,
+     "completion_tokens": 878,
+     "total_tokens": 3542,
+     "cost": 0.045804,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.045804,
+      "upstream_inference_prompt_cost": 0.019464,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 15.2,
+    "created": "2026-10-25T02:29:02Z",
+    "index": 0,
+    "composite": {
+     "base": "neutral_r0_gpt-image-2_6f317f0146fc_0.png",
+     "base_generation": {
+      "model": "openai/gpt-image-2",
+      "prompt": "Dialogue portrait in crisp, high-detail pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: a head-and-shoulders bust facing the viewer with the head turned very slightly toward the right of the image, an expressive and readable face with clear eyes, brows and mouth, a soft key light from the upper left, a limited palette with smooth hand-placed shading and clean outlines that are never pure black. The head is large and fills most of the picture; the shoulders are cut off by the bottom edge, with a narrow margin of background above the hair and at both sides. Flat solid magenta (#FF00FF) background with no shadow, glow or gradient. No text, watermark or frame. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Warden Hesper, a woman in her sixties: silver-grey hair pulled up into a neat round bun high on the back of the head with a few loose strands at the temples, light skin with laugh lines, sharp kind blue-grey eyes behind small round gold-rimmed spectacles, a high-collared plum coat over a cream blouse with a soft ruffled collar, and a small gold clasp at the throat. Expression: composed, a hint of a smile. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+      "params": {
+       "n": 2,
+       "aspect_ratio": "1:1"
+      },
+      "references": [
+       {
+        "file": "tools/art_forge/_out/refs/hesper_old_neutral.png",
+        "sha256": "3d79b3df322e890c6a0e1f54055c2560a5749f27dc95fb6c6f59e16ff67cbb61"
+       }
+      ],
+      "usage": {
+       "prompt_tokens": 2668,
+       "completion_tokens": 391,
+       "total_tokens": 3059,
+       "cost": 0.031214,
+       "is_byok": false,
+       "prompt_tokens_details": {
+        "cached_tokens": 0
+       },
+       "cost_details": {
+        "upstream_inference_cost": 0.031214,
+        "upstream_inference_prompt_cost": 0.019484,
+        "upstream_inference_completions_cost": 0.01173
+       },
+       "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 391
+       }
+      },
+      "seconds": 11.9,
+      "created": "2026-10-25T02:25:38Z",
+      "index": 0
+     },
+     "face_from": "smile_r0_gpt-image-2_fa12e643133c_0.png",
+     "scale": 0.945,
+     "dx": -2.0,
+     "dy": -16.0,
+     "regions": [
+      [
+       300,
+       360,
+       690,
+       700
+      ]
+     ],
+     "feather": 14.0,
+     "colour_shift": [
+      1.6,
+      5.3,
+      8.1
+     ]
+    }
+   },
+   "pixelize": {
+    "brief": "hesper_portrait",
+    "height": 125,
+    "width": 126,
+    "outline": false,
+    "ramps": [
+     "skin_light",
+     "hair_grey",
+     "cloth_plum",
+     "cloth_cream",
+     "gold",
+     "water",
+     "ink"
+    ],
+    "tolerance": 48.0,
+    "opaque": false,
+    "despeckle": true
+   },
+   "installed": "2026-10-25T03:09:54Z"
+  },
+  "2": {
+   "source_image": "stern_r0_gpt-image-2_cb5dac8273ca_0.composite.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Dialogue portrait in crisp, high-detail pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: a head-and-shoulders bust facing the viewer with the head turned very slightly toward the right of the image, an expressive and readable face with clear eyes, brows and mouth, a soft key light from the upper left, a limited palette with smooth hand-placed shading and clean outlines that are never pure black. The head is large and fills most of the picture; the shoulders are cut off by the bottom edge, with a narrow margin of background above the hair and at both sides. Flat solid magenta (#FF00FF) background with no shadow, glow or gradient. No text, watermark or frame. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Warden Hesper, a woman in her sixties: silver-grey hair pulled up into a neat round bun high on the back of the head with a few loose strands at the temples, light skin with laugh lines, sharp kind blue-grey eyes behind small round gold-rimmed spectacles, a high-collared plum coat over a cream blouse with a soft ruffled collar, and a small gold clasp at the throat. Expression: one eyebrow raised, stern. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "tools/art_forge/_out/hesper_portrait/neutral_r0_gpt-image-2_6f317f0146fc_0.png",
+      "sha256": "a377ddc2948777660ba4ae6f418d4f112c210f8af539f403d79a816a11237c3b"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2664,
+     "completion_tokens": 878,
+     "total_tokens": 3542,
+     "cost": 0.045804,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.045804,
+      "upstream_inference_prompt_cost": 0.019464,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 18.8,
+    "created": "2026-10-25T02:29:06Z",
+    "index": 0,
+    "composite": {
+     "base": "neutral_r0_gpt-image-2_6f317f0146fc_0.png",
+     "base_generation": {
+      "model": "openai/gpt-image-2",
+      "prompt": "Dialogue portrait in crisp, high-detail pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: a head-and-shoulders bust facing the viewer with the head turned very slightly toward the right of the image, an expressive and readable face with clear eyes, brows and mouth, a soft key light from the upper left, a limited palette with smooth hand-placed shading and clean outlines that are never pure black. The head is large and fills most of the picture; the shoulders are cut off by the bottom edge, with a narrow margin of background above the hair and at both sides. Flat solid magenta (#FF00FF) background with no shadow, glow or gradient. No text, watermark or frame. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Warden Hesper, a woman in her sixties: silver-grey hair pulled up into a neat round bun high on the back of the head with a few loose strands at the temples, light skin with laugh lines, sharp kind blue-grey eyes behind small round gold-rimmed spectacles, a high-collared plum coat over a cream blouse with a soft ruffled collar, and a small gold clasp at the throat. Expression: composed, a hint of a smile. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+      "params": {
+       "n": 2,
+       "aspect_ratio": "1:1"
+      },
+      "references": [
+       {
+        "file": "tools/art_forge/_out/refs/hesper_old_neutral.png",
+        "sha256": "3d79b3df322e890c6a0e1f54055c2560a5749f27dc95fb6c6f59e16ff67cbb61"
+       }
+      ],
+      "usage": {
+       "prompt_tokens": 2668,
+       "completion_tokens": 391,
+       "total_tokens": 3059,
+       "cost": 0.031214,
+       "is_byok": false,
+       "prompt_tokens_details": {
+        "cached_tokens": 0
+       },
+       "cost_details": {
+        "upstream_inference_cost": 0.031214,
+        "upstream_inference_prompt_cost": 0.019484,
+        "upstream_inference_completions_cost": 0.01173
+       },
+       "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "image_tokens": 391
+       }
+      },
+      "seconds": 11.9,
+      "created": "2026-10-25T02:25:38Z",
+      "index": 0
+     },
+     "face_from": "stern_r0_gpt-image-2_cb5dac8273ca_0.png",
+     "scale": 0.965,
+     "dx": 8.0,
+     "dy": -4.0,
+     "regions": [
+      [
+       315,
+       340,
+       655,
+       700
+      ]
+     ],
+     "feather": 14.0,
+     "colour_shift": [
+      -2.0,
+      2.1,
+      8.3
+     ]
+    }
+   },
+   "pixelize": {
+    "brief": "hesper_portrait",
+    "height": 125,
+    "width": 126,
+    "outline": false,
+    "ramps": [
+     "skin_light",
+     "hair_grey",
+     "cloth_plum",
+     "cloth_cream",
+     "gold",
+     "water",
+     "ink"
+    ],
+    "tolerance": 48.0,
+    "opaque": false,
+    "despeckle": true
+   },
+   "installed": "2026-10-25T03:09:55Z",
+   "cleanup": [
+    "hand fix: 11 px of a stray hair strand (cloth_cream) across the forehead at x 39-42, y 50-53 filled with the surrounding skin_light shade"
+   ]
+  }
+ }
+}

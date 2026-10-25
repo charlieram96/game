@@ -139,6 +139,95 @@ class PixelizeTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             PX.fit_into_frame(sprite, 16, 16, (8, 14))
 
+    def test_opaque_scene_fills_the_exact_size_with_palette_colours(self) -> None:
+        # A 16:10 "painting" (a dark sky over a lit ground, a bright fire) for a 16:9 target:
+        # nothing is keyed out, the centre is kept and every cell is filled.
+        scene = Image.new("RGBA", (640, 400), P.ramp("night", 1))
+        d = ImageDraw.Draw(scene)
+        d.rectangle((0, 250, 639, 399), fill=P.ramp("moss", 2))
+        d.ellipse((300, 220, 340, 260), fill=P.ramp("ember", 5))
+        d.rectangle((0, 0, 19, 399), fill=(255, 0, 255, 255))  # cropped away by the 16:9 centre crop
+        arr = np.array(scene.filter(ImageFilter.GaussianBlur(1.0)))
+        result = np.array(PX.pixelize(arr, height=36, width=64, ramps=["night", "moss", "ember"], opaque=True))
+        self.assertEqual(result.shape[:2], (36, 64))
+        self.assertTrue((result[..., 3] == 255).all(), "fully opaque, no border")
+        allowed = {c[:3] for name in ("night", "moss", "ember") for c in P.RAMPS[name]}
+        self.assertTrue({tuple(c) for c in result[..., :3].reshape(-1, 3).tolist()} <= allowed, "only the chosen ramps")
+        self.assertEqual(tuple(result[2, 32, :3]), P.ramp("night", 1)[:3], "sky on top")
+        self.assertEqual(tuple(result[33, 32, :3]), P.ramp("moss", 2)[:3], "ground below")
+        self.assertEqual(tuple(result[21, 32, :3]), P.ramp("ember", 5)[:3], "the fire survives")
+
+    def test_save_indexed_is_lossless(self) -> None:
+        import tempfile
+
+        img = PX.pixelize(painted(make_sprite()), height=30, width=20, opaque=True)
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "scene.png"
+            PX.save_indexed(img, path)
+            back = Image.open(path)
+            self.assertEqual(back.mode, "P")
+            self.assertTrue((np.array(back.convert("RGB")) == np.array(img.convert("RGB"))).all())
+
+
+class DespeckleTest(unittest.TestCase):
+    def test_removes_low_contrast_specks_but_keeps_catchlights(self) -> None:
+        ramps = ["hair_grey", "gold", "water", "cloth_cream"]
+        pal, owners = PX.palette_for(ramps)
+        index = {(name, i): owners.index(name) + i for name in ramps for i in range(len(P.RAMPS[name]))}
+        grid = np.full((12, 20), index[("hair_grey", 4)])
+        grid[3, 4] = index[("gold", 4)]  # a gold fleck in grey hair, about as bright as the hair
+        grid[:, 12:] = index[("water", 1)]  # a dark iris...
+        grid[6, 15] = index[("cloth_cream", 5)]  # ...with a bright catchlight
+        grid[8:10, 2:9] = index[("gold", 3)]  # a gold clasp: big enough to stay
+        opaque = np.ones(grid.shape, dtype=bool)
+        out, fixed = PX.despeckle(grid.copy(), opaque, pal, owners)
+        self.assertEqual(owners[out[3, 4]], "hair_grey", "the fleck takes the hair's ramp")
+        self.assertEqual(out[6, 15], index[("cloth_cream", 5)], "the catchlight stays")
+        self.assertTrue((out[8:10, 2:9] == index[("gold", 3)]).all(), "the clasp stays")
+        self.assertEqual(fixed, 1)
+
+
+class CompositeTest(unittest.TestCase):
+    def test_register_finds_scale_and_shift(self) -> None:
+        import composite as CP
+
+        base = Image.new("RGBA", (320, 320), (255, 0, 255, 255))
+        d = ImageDraw.Draw(base)
+        d.ellipse((90, 60, 230, 200), fill=P.ramp("skin_tan", 3))
+        d.rectangle((70, 190, 250, 319), fill=P.ramp("cloth_teal", 3))
+        d.ellipse((120, 110, 140, 130), fill=P.ramp("ink", 0))
+        d.ellipse((180, 110, 200, 130), fill=P.ramp("ink", 0))
+        b = np.array(base)
+        fill = np.array([255, 0, 255, 255], np.uint8)
+        # The "expression" painting: the same figure 5% smaller, moved 10 px left and 6 px down.
+        other = CP.warp(b, 1 / 1.05, -10 / 1.05, 6 / 1.05, (320, 320), fill)
+        bm = PX.foreground_mask(b)
+        om = PX.foreground_mask(other)
+        s, dx, dy = CP.register(b, other, bm, om, work=80)
+        self.assertAlmostEqual(s, 1.05, delta=0.02)
+        self.assertAlmostEqual(dx, 10, delta=4)
+        self.assertAlmostEqual(dy, -6, delta=4)
+
+
+class SheetInstallTest(unittest.TestCase):
+    def test_frames_install_into_a_row_and_replace_an_older_sheet(self) -> None:
+        import tempfile
+
+        import forge
+
+        a = Image.new("RGBA", (8, 8), (10, 20, 30, 255))
+        b = Image.new("RGBA", (8, 8), (40, 50, 60, 255))
+        with tempfile.TemporaryDirectory() as tmp:
+            sheet = Path(tmp) / "sheet.png"
+            Image.new("RGBA", (12, 4), (1, 2, 3, 255)).save(sheet)  # an older sheet with another frame size
+            forge.install_frame(b, sheet, 1, 8, 8).save(sheet)
+            got = forge.install_frame(a, sheet, 0, 8, 8)
+            self.assertEqual(got.size, (16, 8))
+            self.assertEqual(got.getpixel((0, 0)), (10, 20, 30, 255))
+            self.assertEqual(got.getpixel((8, 0)), (40, 50, 60, 255))
+            with self.assertRaises(ValueError):
+                forge.install_frame(Image.new("RGBA", (4, 4)), sheet, 0, 8, 8)
+
 
 if __name__ == "__main__":
     unittest.main()

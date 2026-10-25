@@ -17,6 +17,10 @@ a clean sprite:
 5. Binary alpha, stray single pixels and pinholes removed, an optional 1px
    selective outline (darkest shade of the neighbouring ramp, never pure
    black) and the 1px transparent border the sheet contract requires.
+
+Whole scenes (key art, backdrops) use `opaque=True` instead: nothing is keyed
+out or cropped to a subject, the picture is centre-cropped to the target's
+aspect ratio and every cell is filled, with no border.
 """
 
 from __future__ import annotations
@@ -94,6 +98,18 @@ def _foreground(img: np.ndarray, tolerance: float) -> tuple[np.ndarray, np.ndarr
     background = flood_from_border(distance < tolerance)
     small = ~background
     return np.repeat(np.repeat(small, step, axis=0), step, axis=1)[:h, :w], background_color
+
+
+def crop_to_aspect(img: np.ndarray, aspect: float) -> np.ndarray:
+    """The centre of `img` with width / height == `aspect`."""
+    h, w = img.shape[:2]
+    if w / h > aspect:
+        cw = max(1, round(h * aspect))
+        x0 = (w - cw) // 2
+        return img[:, x0:x0 + cw]
+    ch = max(1, round(w / aspect))
+    y0 = (h - ch) // 2
+    return img[y0:y0 + ch]
 
 
 def crop_to_mask(img: np.ndarray, mask: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
@@ -199,6 +215,63 @@ def _clean(indices: np.ndarray, opaque: np.ndarray) -> np.ndarray:
     return opaque
 
 
+LUMA = np.array([0.3, 0.59, 0.11], dtype=np.float32)
+NEIGHBOURS_8 = [(dy, dx) for dy in (-1, 0, 1) for dx in (-1, 0, 1) if dy or dx]
+
+
+def despeckle(indices: np.ndarray, opaque: np.ndarray, pal: np.ndarray, owners: list[str], max_size: int = 2, contrast: float = 40.0) -> tuple[np.ndarray, int]:
+    """Replaces tiny specks of a stray ramp (gold flecks in grey hair, plum dots in skin).
+
+    A speck is an 8-connected group of at most `max_size` pixels of one ramp,
+    surrounded only by other ramps and within `contrast` (0-255 luma) of the
+    surrounding colour: colour noise from snapping tints to the palette.
+    Catchlights, pupils and accents stand out in brightness or are bigger, so
+    they stay. Each speck pixel takes the shade of the surrounding ramp
+    closest to its own brightness. Returns the new indices and the count.
+    """
+    h, w = indices.shape
+    names = sorted(set(owners))
+    ramp_of = np.array([names.index(o) for o in owners])
+    luma = (pal * LUMA).sum(-1)
+    by_ramp = {r: np.nonzero(ramp_of == r)[0] for r in range(len(names))}
+    ramp = np.where(opaque, ramp_of[indices], -1)
+    out = indices.copy()
+    labelled = np.zeros((h, w), dtype=bool)
+    fixed = 0
+    for y, x in zip(*np.nonzero(opaque)):
+        if labelled[y, x]:
+            continue
+        # the whole 8-connected group of this ramp, so a pocket of a big region is never taken for a speck
+        r = ramp[y, x]
+        group, stack = [(y, x)], [(y, x)]
+        labelled[y, x] = True
+        while stack:
+            cy, cx = stack.pop()
+            for dy, dx in NEIGHBOURS_8:
+                ny, nx = cy + dy, cx + dx
+                if 0 <= ny < h and 0 <= nx < w and not labelled[ny, nx] and ramp[ny, nx] == r:
+                    labelled[ny, nx] = True
+                    group.append((ny, nx))
+                    stack.append((ny, nx))
+        if len(group) > max_size:
+            continue
+        members = set(group)
+        ring = {(gy + dy, gx + dx) for gy, gx in group for dy, dx in NEIGHBOURS_8} - members
+        ring = [(ry, rx) for ry, rx in ring if 0 <= ry < h and 0 <= rx < w and opaque[ry, rx]]
+        if len(ring) < 3:
+            continue
+        ring_ramps = [ramp[p] for p in ring]
+        dominant = max(set(ring_ramps), key=ring_ramps.count)
+        around = np.mean([luma[indices[p]] for p, rr in zip(ring, ring_ramps) if rr == dominant])
+        if abs(np.mean([luma[indices[p]] for p in group]) - around) > contrast:
+            continue
+        shades = by_ramp[dominant]
+        for p in group:
+            out[p] = shades[np.abs(luma[shades] - luma[indices[p]]).argmin()]
+            fixed += 1
+    return out, fixed
+
+
 def _outline(indices: np.ndarray, opaque: np.ndarray, pal: np.ndarray, owners: list[str]) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Adds a 1px outline outside the silhouette: the darkest shade of the darkest neighbour's ramp."""
     rgb = pal[indices]
@@ -237,14 +310,22 @@ def pixelize(
     outline: bool = False,
     tolerance: float = 48.0,
     align_grid: bool = True,
+    opaque: bool = False,
+    clean_specks: bool = False,
 ) -> Image.Image:
     """Clean pixel art from a generated image.
 
     height/width set the subject's size in game pixels (the outline, when
     requested, is included in it); with neither, the image's own pixel grid
     is used. The result has a 1px transparent border on every side.
+
+    With `opaque`, the whole picture is the subject (a scene, not a sprite):
+    the result is exactly width x height, fully opaque and borderless.
+    `clean_specks` runs `despeckle` (before the outline).
     """
     img = source if isinstance(source, np.ndarray) else load_rgba(source)
+    if opaque:
+        return _pixelize_scene(img, height, width, ramps, align_grid)
     mask, background = _foreground(img, tolerance)
     img, mask = crop_to_mask(img, mask)
     h, w = mask.shape
@@ -263,11 +344,37 @@ def pixelize(
         phase = (_best_phase(_edge_signal(img, mask, 1), w / out_w), _best_phase(_edge_signal(img, mask, 0), h / out_h))
     indices, coverage = resample(img, mask, out_w, out_h, pal, phase, background=background, tolerance=tolerance)
     opaque = _clean(indices, coverage >= 0.5)
+    if clean_specks:
+        indices, _ = despeckle(indices, opaque, pal, owners)
     if outline:
         indices = np.pad(indices, 1)
         opaque = np.pad(opaque, 1)
         indices, opaque, _ = _outline(indices, opaque, pal, owners)
     return to_image(indices, opaque, pal)
+
+
+def _pixelize_scene(img: np.ndarray, height: int | None, width: int | None, ramps: list[str] | None, align_grid: bool) -> Image.Image:
+    if not (height and width):
+        raise ValueError("an opaque scene needs both a height and a width")
+    img = crop_to_aspect(img, width / height)
+    mask = np.ones(img.shape[:2], dtype=bool)
+    pal, _ = palette_for(ramps)
+    phase = (0.0, 0.0)
+    if align_grid:
+        phase = (_best_phase(_edge_signal(img, mask, 1), img.shape[1] / width), _best_phase(_edge_signal(img, mask, 0), img.shape[0] / height))
+    indices, _ = resample(img, mask, width, height, pal, phase)
+    return to_image(indices, np.ones((height, width), dtype=bool), pal, border=0)
+
+
+def save_indexed(image: Image.Image, path: str | Path) -> None:
+    """Saves an opaque image as a palette PNG: lossless, and far smaller for big scenes (at most 256 colours)."""
+    rgb = np.array(image.convert("RGB"))
+    colors, inverse = np.unique(rgb.reshape(-1, 3), axis=0, return_inverse=True)
+    if len(colors) > 256:
+        raise ValueError(f"{len(colors)} colours do not fit a palette PNG")
+    out = Image.fromarray(inverse.reshape(rgb.shape[:2]).astype(np.uint8), "P")
+    out.putpalette(colors.astype(np.uint8).flatten().tolist())
+    out.save(path, optimize=True)
 
 
 def fit_into_frame(sprite: Image.Image, frame_w: int, frame_h: int, pivot: tuple[int, int]) -> Image.Image:

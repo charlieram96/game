@@ -8,6 +8,8 @@
     python3 tools/art_forge/forge.py bakeoff emberlyn --models google/gemini-3-pro-image,openai/gpt-5.4-image-2
     python3 tools/art_forge/forge.py review emberlyn              # contact sheet: painting + pixelized result
     python3 tools/art_forge/forge.py pixelize <candidate.png> --brief emberlyn --out assets/...png
+    python3 tools/art_forge/forge.py composite <neutral.png> <expr.png> --face x0,y0,x1,y1   # face onto the locked neutral
+    python3 tools/art_forge/forge.py pixelize <expr.composite.png> --brief hesper_portrait --out <sheet.png> --frame 1
 
 Candidates land in tools/art_forge/_out/<brief>/ (gitignored) with a JSON
 sidecar each. Only curated, pixelized results go into assets/, and each one
@@ -147,7 +149,11 @@ def _pixel_preview(path: Path, brief: dict, scale: int) -> Image.Image | None:
     if "size" not in brief:
         return None
     try:
-        sprite = PX.pixelize(path, height=content_height(brief), width=brief["size"][0] - 2, ramps=brief.get("ramps"))
+        if brief.get("opaque"):
+            sprite = PX.pixelize(path, height=brief["size"][1], width=brief["size"][0], ramps=brief.get("ramps"), opaque=True)
+            scale = max(1, scale // 2)
+        else:
+            sprite = PX.pixelize(path, height=content_height(brief), width=brief["size"][0] - 2, ramps=brief.get("ramps"), clean_specks=bool(brief.get("despeckle")))
     except ValueError:
         return None
     return sprite.resize((sprite.width * scale, sprite.height * scale), Image.NEAREST)
@@ -197,32 +203,97 @@ def cmd_review(args: argparse.Namespace) -> None:
         print(f"  [{i}] {path.relative_to(ROOT)}")
 
 
+def cmd_composite(args: argparse.Namespace) -> None:
+    import composite as CP
+
+    base, expr = Path(args.base), Path(args.expr)
+    regions = [tuple(int(v) for v in r.split(",")) for r in args.face]
+    image, info = CP.composite(str(base), str(expr), regions, feather=args.feather, tolerance=args.tolerance, colour=not args.keep_colour)
+    out = Path(args.out) if args.out else expr.with_name(expr.stem + ".composite.png")
+    out.parent.mkdir(parents=True, exist_ok=True)
+    image.save(out)
+    # The sidecar is the expression's generation record plus how it was combined, so
+    # `pixelize --out` puts the whole story in the provenance record.
+    sidecar = lambda p: json.loads(p.with_suffix(".json").read_text()) if p.with_suffix(".json").exists() else None  # noqa: E731
+    record = sidecar(expr) or {}
+    record["composite"] = {"base": base.name, "base_generation": sidecar(base), "face_from": expr.name, **info}
+    out.with_suffix(".json").write_text(json.dumps(record, indent=1))
+    print(f"{out} (expression scaled {info['scale']}, shifted {info['dx']}, {info['dy']} px onto the base)")
+
+
+def install_frame(sprite: Image.Image, sheet_path: Path, frame: int, frame_w: int, frame_h: int) -> Image.Image:
+    """The sheet at `sheet_path` (frames in one row) with `sprite` as frame `frame`.
+
+    The other frames of a sheet with this frame size are kept; a sheet with a
+    different frame size (an older version of the asset) is started afresh.
+    """
+    if sprite.size != (frame_w, frame_h):
+        raise ValueError(f"a {sprite.width}x{sprite.height} image is not a {frame_w}x{frame_h} frame")
+    old = Image.open(sheet_path).convert("RGBA") if sheet_path.exists() else None
+    if old is not None and (old.height != frame_h or old.width % frame_w):
+        old = None
+    sheet = Image.new("RGBA", (max(frame_w * (frame + 1), old.width if old else 0), frame_h), (0, 0, 0, 0))
+    if old is not None:
+        sheet.paste(old, (0, 0))
+    sheet.paste(sprite, (frame * frame_w, 0))
+    return sheet
+
+
+def write_provenance(out: Path, record: dict, frame: int | None) -> None:
+    """One record per installed file; a sheet keeps one entry per frame."""
+    PROVENANCE.mkdir(exist_ok=True)
+    path = PROVENANCE / (out.stem + ".json")
+    if frame is not None:
+        old = json.loads(path.read_text()) if path.exists() else {}
+        frames = old.get("frames", {}) if old.get("asset") == record["asset"] else {}
+        frames[str(frame)] = {k: v for k, v in record.items() if k != "asset"}
+        record = {"asset": record["asset"], "frames": {k: frames[k] for k in sorted(frames, key=int)}}
+    path.write_text(json.dumps(record, indent=1))
+
+
 def cmd_pixelize(args: argparse.Namespace) -> None:
     briefs = load_briefs()
     brief = get_brief(briefs, args.brief)
     source = Path(args.image)
-    height = args.height or (content_height(brief) if "size" in brief else None)
-    width = args.width or (brief["size"][0] - 2 if "size" in brief else None)
-    sprite = PX.pixelize(source, height=height, width=width, ramps=None if args.all_colors else brief.get("ramps"), outline=args.outline, tolerance=args.tolerance)
-    if "pivot" in brief and not args.no_frame:
+    opaque = args.opaque or bool(brief.get("opaque"))
+    if args.frame is not None and not args.out:
+        sys.exit("--frame needs --out: the sheet to install the frame into")
+    if opaque:
+        height = args.height or (brief["size"][1] if "size" in brief else None)
+        width = args.width or (brief["size"][0] if "size" in brief else None)
+    else:
+        height = args.height or (content_height(brief) if "size" in brief else None)
+        width = args.width or (brief["size"][0] - 2 if "size" in brief else None)
+    ramps = None if args.all_colors else brief.get("ramps")
+    despeckle = args.despeckle or bool(brief.get("despeckle"))
+    sprite = PX.pixelize(source, height=height, width=width, ramps=ramps, outline=args.outline, tolerance=args.tolerance, opaque=opaque, clean_specks=despeckle)
+    if "pivot" in brief and not args.no_frame and not opaque:
         sprite = PX.fit_into_frame(sprite, brief["size"][0], brief["size"][1], tuple(brief["pivot"]))
     out = Path(args.out) if args.out else source.with_name(source.stem + ".pixel.png")
     out.parent.mkdir(parents=True, exist_ok=True)
-    sprite.save(out)
-    preview = out.with_name(out.stem + ".x4.png") if not args.out else OUT / args.brief / (out.stem + ".x4.png")
+    if args.frame is not None:
+        frame_w, frame_h = brief["size"] if "size" in brief else sprite.size
+        install_frame(sprite, out, args.frame, frame_w, frame_h).save(out)
+    elif opaque:
+        PX.save_indexed(sprite, out)
+    else:
+        sprite.save(out)
+    stem = out.stem + (f".f{args.frame}" if args.frame is not None else "")
+    preview = out.with_name(stem + ".x4.png") if not args.out else OUT / args.brief / (stem + ".x4.png")
+    preview.parent.mkdir(parents=True, exist_ok=True)
     sprite.resize((sprite.width * 4, sprite.height * 4), Image.NEAREST).save(preview)
-    print(f"{out} ({sprite.width}x{sprite.height}); preview {preview}")
+    where = f" frame {args.frame}" if args.frame is not None else ""
+    print(f"{out}{where} ({sprite.width}x{sprite.height}); preview {preview}")
     if args.out:
         sidecar = source.with_suffix(".json")
         record = {
             "asset": str(out.resolve().relative_to(ROOT)) if out.resolve().is_relative_to(ROOT) else str(out),
             "source_image": source.name,
             "generation": json.loads(sidecar.read_text()) if sidecar.exists() else None,
-            "pixelize": {"brief": args.brief, "height": height, "width": width, "outline": args.outline, "ramps": None if args.all_colors else brief.get("ramps"), "tolerance": args.tolerance},
+            "pixelize": {"brief": args.brief, "height": height, "width": width, "outline": args.outline, "ramps": ramps, "tolerance": args.tolerance, "opaque": opaque, "despeckle": despeckle},
             "installed": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         }
-        PROVENANCE.mkdir(exist_ok=True)
-        (PROVENANCE / (out.stem + ".json")).write_text(json.dumps(record, indent=1))
+        write_provenance(out, record, args.frame)
 
 
 def main() -> None:
@@ -278,7 +349,20 @@ def main() -> None:
     p.add_argument("--all-colors", action="store_true", help="use the whole master palette, not just the brief's ramps")
     p.add_argument("--tolerance", type=float, default=48.0, help="background key tolerance")
     p.add_argument("--no-frame", action="store_true", help="don't place the sprite in the brief's frame")
+    p.add_argument("--frame", type=int, help="install as frame N of the one-row sheet at --out (other frames are kept)")
+    p.add_argument("--opaque", action="store_true", help="a whole scene (key art): no keying, exact brief size, no border, palette PNG")
+    p.add_argument("--despeckle", action="store_true", help="remove tiny low-contrast specks of a stray ramp (on by default for briefs with \"despeckle\")")
     p.set_defaults(func=cmd_pixelize)
+
+    p = sub.add_parser("composite", help="blend an expression's face into the locked neutral painting (before pixelize)")
+    p.add_argument("base", help="the locked neutral painting")
+    p.add_argument("expr", help="the expression painting, generated with the neutral as --ref")
+    p.add_argument("--face", action="append", required=True, help="x0,y0,x1,y1 ellipse in base pixels; repeat for more regions")
+    p.add_argument("--feather", type=float, default=14.0)
+    p.add_argument("--keep-colour", action="store_true", help="don't colour-match the expression to the base")
+    p.add_argument("--tolerance", type=float, default=48.0, help="background key tolerance")
+    p.add_argument("--out")
+    p.set_defaults(func=cmd_composite)
 
     args = ap.parse_args()
     try:

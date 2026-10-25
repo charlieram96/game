@@ -7,9 +7,9 @@
       "model": "google/gemini-3-pro-image"
     },
     "portrait": {
-      "style": "Dialogue portrait in crisp pixel art for a 16-bit-era-inspired role-playing game: head and shoulders, three-quarter view turned slightly to the left, an expressive and readable face, a soft key light from the upper left, a limited palette and clean outlines that are never pure black. Flat solid magenta (#FF00FF) background. No text, watermark or frame.",
+      "style": "Dialogue portrait in crisp, high-detail pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: a head-and-shoulders bust facing the viewer with the head turned very slightly toward the right of the image, an expressive and readable face with clear eyes, brows and mouth, a soft key light from the upper left, a limited palette with smooth hand-placed shading and clean outlines that are never pure black. The head is large and fills most of the picture; the shoulders are cut off by the bottom edge, with a narrow margin of background above the hair and at both sides. Flat solid magenta (#FF00FF) background with no shadow, glow or gradient. No text, watermark or frame.",
       "aspect_ratio": "1:1",
-      "model": "google/gemini-3-pro-image"
+      "model": "openai/gpt-image-2"
     },
     "prop": {
       "style": "A single game prop in crisp pixel art for a cozy fantasy role-playing game, three-quarter top-down view, a soft key light from the upper left, a limited palette and clean outlines that are never pure black. Centred with a generous margin on a flat solid magenta (#FF00FF) background with no shadow or floor. No text or watermark.",
@@ -47,10 +47,12 @@
     },
     "wren_portrait": {
       "kind": "portrait",
-      "size": [64, 64],
-      "ramps": ["skin_tan", "hair_brown", "cloth_teal", "cloth_cream", "cloth_red", "leather", "ink"],
-      "subject": "Wren, a fourteen-year-old apprentice warden: tousled brown hair, warm tan skin, big earnest eyes, a teal hooded cloak and a red scarf.",
-      "expressions": {"neutral": "calm and attentive", "smile": "a bright, open smile", "worried": "brows raised, worried"}
+      "size": [128, 128],
+      "pivot": [64, 126],
+      "despeckle": true,
+      "ramps": ["skin_tan", "hair_brown", "cloth_teal", "cloth_cream", "cloth_red", "leather", "earth", "ink"],
+      "subject": "Wren, a fourteen-year-old apprentice warden with a gentle, youthful face: a mop of tousled brown hair with a few spiky tufts on top and a soft fringe over the forehead, warm tan skin, big earnest brown eyes, a teal hooded cloak with the hood down around the shoulders, a red scarf wrapped at the neck, the collar of a cream tunic and a thin brown leather satchel strap across the chest.",
+      "expressions": {"neutral": "calm and attentive, a faint friendly smile", "smile": "a bright, open smile, eyes crinkled with joy", "determined": "brows lowered and eyes narrowed with resolve, a small confident smile"}
     },
     "hesper": {
       "kind": "sprite",
@@ -61,9 +63,11 @@
     },
     "hesper_portrait": {
       "kind": "portrait",
-      "size": [64, 64],
-      "ramps": ["skin_light", "hair_grey", "cloth_plum", "cloth_cream", "ink"],
-      "subject": "Warden Hesper, a woman in her sixties: silver-grey hair in a low bun with loose strands, light skin with laugh lines, sharp kind eyes, a high-collared plum coat over a cream blouse.",
+      "size": [128, 128],
+      "pivot": [64, 126],
+      "despeckle": true,
+      "ramps": ["skin_light", "hair_grey", "cloth_plum", "cloth_cream", "gold", "water", "ink"],
+      "subject": "Warden Hesper, a woman in her sixties: silver-grey hair pulled up into a neat round bun high on the back of the head with a few loose strands at the temples, light skin with laugh lines, sharp kind blue-grey eyes behind small round gold-rimmed spectacles, a high-collared plum coat over a cream blouse with a soft ruffled collar, and a small gold clasp at the throat.",
       "expressions": {"neutral": "composed, a hint of a smile", "smile": "a warm, knowing smile", "stern": "one eyebrow raised, stern"}
     },
     "corin": {
@@ -75,10 +79,12 @@
     },
     "corin_portrait": {
       "kind": "portrait",
-      "size": [64, 64],
-      "ramps": ["skin_deep", "hair_copper", "cloth_red", "cloth_mustard", "stone", "ink"],
-      "subject": "Corin, a fourteen-year-old apprentice: deep brown skin, spiky copper-red hair under a red headband, a mustard-yellow vest over a grey shirt.",
-      "expressions": {"neutral": "a cocky half-grin", "grin": "a big, boastful grin", "determined": "jaw set, determined"}
+      "size": [128, 128],
+      "pivot": [64, 126],
+      "despeckle": true,
+      "ramps": ["skin_deep", "hair_copper", "cloth_red", "cloth_mustard", "stone", "leaf", "cloth_cream", "ink"],
+      "subject": "Corin, a fourteen-year-old apprentice with a cocky, energetic look: deep brown skin, bright green eyes, a shock of spiky copper-orange hair standing up in flame-like points above a red cloth headband whose knotted tails hang at the right side of the head, a mustard-yellow vest with rounded padded shoulders over a slate-grey shirt with a dark high collar.",
+      "expressions": {"neutral": "a cocky half-grin", "grin": "a big, boastful grin showing teeth, eyes squeezed shut with laughter", "determined": "jaw set and brows lowered, a fierce, determined stare", "sulk": "a sulky pout, brows drawn together, eyes glancing aside"}
     },
     "wynn": {
       "kind": "sprite",
@@ -133,6 +139,15 @@
       "kind": "concept",
       "subject": "Emberlyn, a small fire-element woodland creature: a long, low, stoat-like body with russet fur on the back and a cream underside and muzzle, a dark soot band across the eyes like a mask, soot-dark paws, small round ears, big amber eyes, and a long bushy tail that cradles a glowing ember coal in a ring of fur at its tip."
     },
+    "emberlyn_portrait": {
+      "kind": "portrait",
+      "size": [128, 128],
+      "pivot": [64, 126],
+      "despeckle": true,
+      "ramps": ["fur_russet", "cream", "soot", "ember", "cloth_red", "water", "ink"],
+      "subject": "Emberlyn, a small fire-element woodland creature, its head and chest: a stoat-like face with russet fur on the head and shoulders and a cream chest, cheeks and muzzle, a dark soot band across the eyes like a mask, small round russet ears, big amber eyes and a small dark nose. Its long bushy russet tail curls up behind one shoulder, and a ring of cream fur at the tip cradles a glowing ember flame.",
+      "expressions": {"neutral": "alert and curious", "scared": "wide, frightened eyes with small pupils, ears pressed back, mouth slightly open, a bead of sweat at the brow", "happy": "eyes squeezed shut in a big happy smile, mouth open, cheeks flushed, the tail ember burning brighter"}
+    },
     "stoneback_concept": {
       "kind": "concept",
       "subject": "Stoneback, a heavy stone-element creature: a compact, low, pangolin-like quadruped with overlapping slate-grey stone plates, a mossy spine ridge with tiny white flowers, stubby warm-brown legs, a broad blunt snout, small glowing amber eyes under a heavy stone brow and a short tail ending in a stone club."
@@ -176,7 +191,10 @@
     },
     "title_keyart": {
       "kind": "keyart",
-      "subject": "A young apprentice in a teal cloak and red scarf sits by a campfire in a forest clearing at dusk beside a small russet fox-like fire creature whose bushy tail holds a glowing ember; a large gentle moth with a softly glowing golden body rests on a branch nearby. Warm firelight against cool blue night, fireflies."
+      "size": [480, 270],
+      "opaque": true,
+      "ramps": ["night", "sky_dusk", "aether", "leaf", "moss", "glow_moss", "bark", "wood", "earth", "stone", "ember", "gold", "cloth_teal", "cloth_red", "cloth_cream", "cloth_plum", "fur_russet", "cream", "soot", "skin_tan", "hair_brown", "water", "ink"],
+      "subject": "A young apprentice in a teal cloak and red scarf sits by a campfire in a forest clearing at dusk beside a small russet fox-like fire creature whose bushy tail holds a glowing ember; a large gentle moth with a softly glowing golden body rests on a branch nearby. Warm firelight against cool blue night, fireflies. Wide, calm composition: the campfire group is small and centred in the lower third of the picture, framed by tall dark tree trunks at the left and right edges, and the upper half is a quiet, dark dusky sky seen through the canopy with a few stars."
     }
   }
 }

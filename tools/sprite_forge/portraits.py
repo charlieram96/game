@@ -2,11 +2,17 @@
 
 Same designs as the sprites, drawn with the full ramps: head volume from an
 ellipsoid, hand-authored eyes/brows/mouths per expression, hair built from locks.
+
+These are the procedural fallback. The shipped portraits are 128x128 sheets
+made with tools/art_forge (briefs *_portrait); `build` never overwrites a
+sheet whose manifest says art_forge generated it.
 """
 
 from __future__ import annotations
 
+import json
 import math
+import os
 import sys
 
 import numpy as np
@@ -464,6 +470,16 @@ def emberlyn(expr: str):
 # build
 
 
+def installed_by_art_forge(out_dir: str, name: str) -> bool:
+    """True when the sheet in `out_dir` was installed by tools/art_forge (keep it)."""
+    try:
+        with open(os.path.join(out_dir, f"{name}.json")) as fh:
+            generator = json.load(fh).get("meta", {}).get("generator", "")
+    except (OSError, ValueError):
+        return False
+    return str(generator).startswith("tools/art_forge")
+
+
 def build(out_dir: str):
     sheets = []
     specs = [
@@ -473,6 +489,9 @@ def build(out_dir: str):
         ("portrait_emberlyn", emberlyn, ["scared", "happy"]),
     ]
     for name, fn, exprs in specs:
+        if installed_by_art_forge(out_dir, name):
+            print(f"  portraits   {name:20s} kept (installed by tools/art_forge)")
+            continue
         sb = SheetBuilder(name, W, H, PIVOT, columns=4, meta={"kind": "portrait", "generator": "tools/sprite_forge/portraits.py"})
         for e in exprs:
             f = fn(e)

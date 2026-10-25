@@ -7,6 +7,11 @@ is told to inflate them in the browser (see export/web/shell.html). The
 result works on any static host (itch.io, GitHub Pages, a plain web server)
 and is also zipped to build/dist/wildbound-web.zip for an itch.io upload.
 
+Files the loading page itself shows (the key art behind the progress bar)
+live in export/web/ beside the shell and are copied next to index.html. That
+folder is outside the Godot project (export/.gdignore), so they are never
+imported into the game or packed into index.pck.
+
 Usage: python3 tools/package_web.py [export_dir] [out_dir]
 """
 import gzip
@@ -18,6 +23,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 MARKER = "[/*WB_GZ*/]"
 COMPRESS = ("index.wasm", "index.pck")
+SHELL_DIR = ROOT / "export" / "web"
+PAGE_ASSETS = ("keyart.png",)  # loaded by export/web/shell.html, next to index.html
 
 
 def main() -> int:
@@ -42,6 +49,12 @@ def main() -> int:
                 shutil.copyfileobj(fin, fout)
         else:
             shutil.copy2(f, out / f.name)
+    for name in PAGE_ASSETS:
+        asset = SHELL_DIR / name
+        if asset.exists():
+            shutil.copy2(asset, out / name)
+        else:
+            print(f"warning: {asset} is missing; the loading page shows its plain gradient")
     listed = ", ".join(f'"{n}"' for n in COMPRESS)
     (out / "index.html").write_text(html.replace(MARKER, f"[{listed}]"), encoding="utf-8")
 
