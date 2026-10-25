@@ -1,0 +1,2736 @@
+{
+ "asset": "tools/art_forge/keys/emberlyn/",
+ "keys": {
+  "cast_e": {
+   "source_image": "cast_e_r0_gpt-image-2_e2bec7083614_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: breathing a burst of fire: standing firm, head thrust forward, mouth wide open with a small ball of bright flame at the mouth, the tail ember blazing brightly. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_e_r0_gpt-image-2_8132923c2bda_0.png",
+      "sha256": "8b6fa77316b3d5e1413e52af130a401562725f093fb26f7b667eb67fa0ac7668"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2982,
+     "completion_tokens": 635,
+     "total_tokens": 3617,
+     "cost": 0.040104,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.040104,
+      "upstream_inference_prompt_cost": 0.021054,
+      "upstream_inference_completions_cost": 0.01905
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 635
+     }
+    },
+    "seconds": 15.0,
+    "created": "2026-10-25T03:53:40Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_emberlyn_0",
+     "hd_emberlyn_1",
+     "hd_emberlyn_2",
+     "hd_emberlyn_3"
+    ]
+   },
+   "installed": "2026-10-25T04:49:22Z",
+   "cleanup": [],
+   "source_path": "emberlyn_hd/cast_e_r0_gpt-image-2_e2bec7083614_1.png"
+  },
+  "cast_n": {
+   "source_image": "cast_n_r0_gpt-image-2_baf27d7e32d9_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature is seen from behind, facing away from the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: breathing a burst of fire: standing firm, head thrust forward, mouth wide open with a small ball of bright flame at the mouth, the tail ember blazing brightly. Seen from directly behind, facing away from the viewer, exactly like the reference image: we see the back of the head with both round ears, the back and rump, the hind paws and the big bushy tail; the face, eyes, mask and muzzle are hidden on the far side and must not be visible at all. Drawn at exactly the same scale as the reference, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_n_r0_gpt-image-2_d5fd29ddb3b3_1.png",
+      "sha256": "9299257e36ab68267f5432c892ec79c28613281a9425dadb4b111469cfd89092"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3086,
+     "completion_tokens": 391,
+     "total_tokens": 3477,
+     "cost": 0.033304,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.033304,
+      "upstream_inference_prompt_cost": 0.021574,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 13.4,
+    "created": "2026-10-25T04:12:06Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_emberlyn_0",
+     "hd_emberlyn_1",
+     "hd_emberlyn_2",
+     "hd_emberlyn_3"
+    ]
+   },
+   "installed": "2026-10-25T04:49:34Z",
+   "cleanup": [],
+   "source_path": "emberlyn_hd/cast_n_r0_gpt-image-2_baf27d7e32d9_1.png"
+  },
+  "cast_s": {
+   "source_image": "cast_s_r0_gpt-image-2_7d418cf067b3_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: breathing a burst of fire: standing firm, head thrust forward, mouth wide open with a small ball of bright flame at the mouth, the tail ember blazing brightly. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_44196981d784_0.png",
+      "sha256": "20e1558fc2e8e42eb122c57abbed8eb91783b9c4730a1ad2cd296c25adcfe30b"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2988,
+     "completion_tokens": 635,
+     "total_tokens": 3623,
+     "cost": 0.040134,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.040134,
+      "upstream_inference_prompt_cost": 0.021084,
+      "upstream_inference_completions_cost": 0.01905
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 635
+     }
+    },
+    "seconds": 13.0,
+    "created": "2026-10-25T03:53:31Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_emberlyn_0",
+     "hd_emberlyn_1",
+     "hd_emberlyn_2",
+     "hd_emberlyn_3"
+    ]
+   },
+   "installed": "2026-10-25T04:48:59Z",
+   "cleanup": [],
+   "source_path": "emberlyn_hd/cast_s_r0_gpt-image-2_7d418cf067b3_1.png"
+  },
+  "cast_wind_e": {
+   "source_image": "cast_wind_e_r0_gpt-image-2_43097f99df77_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: drawing a deep breath before breathing fire: chest puffed out, head pulled back a little, eyes narrowed, the tail ember glowing brighter. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_e_r0_gpt-image-2_8132923c2bda_0.png",
+      "sha256": "8b6fa77316b3d5e1413e52af130a401562725f093fb26f7b667eb67fa0ac7668"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2972,
+     "completion_tokens": 391,
+     "total_tokens": 3363,
+     "cost": 0.032734,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.032734,
+      "upstream_inference_prompt_cost": 0.021004,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 12.3,
+    "created": "2026-10-25T03:53:24Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_emberlyn_0",
+     "hd_emberlyn_1",
+     "hd_emberlyn_2",
+     "hd_emberlyn_3"
+    ]
+   },
+   "installed": "2026-10-25T04:49:21Z",
+   "cleanup": [],
+   "source_path": "emberlyn_hd/cast_wind_e_r0_gpt-image-2_43097f99df77_0.png"
+  },
+  "cast_wind_n": {
+   "source_image": "cast_wind_n_r0_gpt-image-2_e829b0471242_1.png",
+   "source_path": "emberlyn_hd/cast_wind_n_r0_gpt-image-2_e829b0471242_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature is seen from behind, facing away from the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: drawing a deep breath before breathing fire: chest puffed out, head pulled back a little, eyes narrowed, the tail ember glowing brighter. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_n_r0_gpt-image-2_d5fd29ddb3b3_1.png",
+      "sha256": "9299257e36ab68267f5432c892ec79c28613281a9425dadb4b111469cfd89092"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2976,
+     "completion_tokens": 391,
+     "total_tokens": 3367,
+     "cost": 0.032754,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.032754,
+      "upstream_inference_prompt_cost": 0.021024,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 22.8,
+    "created": "2026-10-25T03:53:34Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0
+   },
+   "installed": "2026-10-25T05:37:10Z",
+   "cleanup": []
+  },
+  "cast_wind_s": {
+   "source_image": "cast_wind_s_r0_gpt-image-2_32ae0924082a_1.png",
+   "source_path": "emberlyn_hd/cast_wind_s_r0_gpt-image-2_32ae0924082a_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: drawing a deep breath before breathing fire: chest puffed out, head pulled back a little, eyes narrowed, the tail ember glowing brighter. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_44196981d784_0.png",
+      "sha256": "20e1558fc2e8e42eb122c57abbed8eb91783b9c4730a1ad2cd296c25adcfe30b"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2978,
+     "completion_tokens": 878,
+     "total_tokens": 3856,
+     "cost": 0.047374,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.047374,
+      "upstream_inference_prompt_cost": 0.021034,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 13.6,
+    "created": "2026-10-25T03:53:24Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 7.35,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 1.05,
+    "matched_to": "stand_s"
+   },
+   "installed": "2026-10-25T05:36:22Z",
+   "cleanup": []
+  },
+  "cower_s": {
+   "source_image": "cower_s_r0_gpt-image-2_395d160971a7_0.png",
+   "source_path": "emberlyn_hd/cower_s_r0_gpt-image-2_395d160971a7_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: frightened and cowering: crouched low and small, ears pressed back, wide frightened eyes, trembling, the tail tucked around itself, the ember small and weak. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_44196981d784_0.png",
+      "sha256": "20e1558fc2e8e42eb122c57abbed8eb91783b9c4730a1ad2cd296c25adcfe30b"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2988,
+     "completion_tokens": 391,
+     "total_tokens": 3379,
+     "cost": 0.032814,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.032814,
+      "upstream_inference_prompt_cost": 0.021084,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 10.7,
+    "created": "2026-10-25T03:54:18Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.77,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 1.11,
+    "matched_to": "stand_s"
+   },
+   "installed": "2026-10-25T05:36:26Z",
+   "cleanup": []
+  },
+  "crouch_e": {
+   "source_image": "crouch_e_r0_gpt-image-2_acea3f3cdd32_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: coiled to spring forward: crouched very low on deeply bent legs, chest close to the floor, rump and tail raised, head low with narrowed eyes, every muscle tense. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_e_r0_gpt-image-2_8132923c2bda_0.png",
+      "sha256": "8b6fa77316b3d5e1413e52af130a401562725f093fb26f7b667eb67fa0ac7668"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2988,
+     "completion_tokens": 391,
+     "total_tokens": 3379,
+     "cost": 0.032814,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.032814,
+      "upstream_inference_prompt_cost": 0.021084,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 12.4,
+    "created": "2026-10-25T03:52:57Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_emberlyn_0",
+     "hd_emberlyn_1",
+     "hd_emberlyn_2",
+     "hd_emberlyn_3"
+    ]
+   },
+   "installed": "2026-10-25T04:49:16Z",
+   "cleanup": [],
+   "source_path": "emberlyn_hd/crouch_e_r0_gpt-image-2_acea3f3cdd32_0.png"
+  },
+  "crouch_n": {
+   "source_image": "crouch_n_r0_gpt-image-2_28bfb1b8f014_1.png",
+   "source_path": "emberlyn_hd/crouch_n_r0_gpt-image-2_28bfb1b8f014_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature is seen from behind, facing away from the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: coiled to spring forward: crouched very low on deeply bent legs, chest close to the floor, rump and tail raised, head low with narrowed eyes, every muscle tense. Seen from directly behind, facing away from the viewer, exactly like the reference image: we see the back of the head with both round ears, the back and rump, the hind paws and the big bushy tail; the face, eyes, mask and muzzle are hidden on the far side and must not be visible at all. Drawn at exactly the same scale as the reference, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_n_r0_gpt-image-2_d5fd29ddb3b3_1.png",
+      "sha256": "9299257e36ab68267f5432c892ec79c28613281a9425dadb4b111469cfd89092"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3092,
+     "completion_tokens": 391,
+     "total_tokens": 3483,
+     "cost": 0.033334,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.033334,
+      "upstream_inference_prompt_cost": 0.021604,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 12.1,
+    "created": "2026-10-25T04:12:02Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 6.79,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 0.97,
+    "matched_to": "stand_n"
+   },
+   "installed": "2026-10-25T05:36:37Z",
+   "cleanup": []
+  },
+  "crouch_s": {
+   "source_image": "crouch_s_r0_gpt-image-2_0d61a5e5d5b5_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: coiled to spring forward: crouched very low on deeply bent legs, chest close to the floor, rump and tail raised, head low with narrowed eyes, every muscle tense. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_44196981d784_0.png",
+      "sha256": "20e1558fc2e8e42eb122c57abbed8eb91783b9c4730a1ad2cd296c25adcfe30b"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2994,
+     "completion_tokens": 391,
+     "total_tokens": 3385,
+     "cost": 0.032844,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.032844,
+      "upstream_inference_prompt_cost": 0.021114,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 9.7,
+    "created": "2026-10-25T03:52:53Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_emberlyn_0",
+     "hd_emberlyn_1",
+     "hd_emberlyn_2",
+     "hd_emberlyn_3"
+    ]
+   },
+   "installed": "2026-10-25T04:48:55Z",
+   "cleanup": [],
+   "source_path": "emberlyn_hd/crouch_s_r0_gpt-image-2_0d61a5e5d5b5_0.png"
+  },
+  "curl_s": {
+   "source_image": "curl_s_r0_gpt-image-2_1720acb60441_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: curled up asleep in a tight ball on the floor with its bushy tail wrapped around itself like a blanket, eyes peacefully shut, the ember glowing softly at the tail tip. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_44196981d784_0.png",
+      "sha256": "20e1558fc2e8e42eb122c57abbed8eb91783b9c4730a1ad2cd296c25adcfe30b"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2992,
+     "completion_tokens": 391,
+     "total_tokens": 3383,
+     "cost": 0.032834,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.032834,
+      "upstream_inference_prompt_cost": 0.021104,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 11.6,
+    "created": "2026-10-25T03:54:29Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_emberlyn_0",
+     "hd_emberlyn_1",
+     "hd_emberlyn_2",
+     "hd_emberlyn_3"
+    ]
+   },
+   "installed": "2026-10-25T04:49:10Z",
+   "cleanup": [],
+   "source_path": "emberlyn_hd/curl_s_r0_gpt-image-2_1720acb60441_0.png"
+  },
+  "dizzy_s": {
+   "source_image": "dizzy_s_r0_gpt-image-2_6a3953be953a_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: dazed and dizzy: sitting back on its haunches with swirly, unfocused eyes, head tilted, mouth hanging open, the ember sputtering weakly. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_44196981d784_0.png",
+      "sha256": "20e1558fc2e8e42eb122c57abbed8eb91783b9c4730a1ad2cd296c25adcfe30b"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2992,
+     "completion_tokens": 635,
+     "total_tokens": 3627,
+     "cost": 0.040154,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.040154,
+      "upstream_inference_prompt_cost": 0.021104,
+      "upstream_inference_completions_cost": 0.01905
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 635
+     }
+    },
+    "seconds": 15.5,
+    "created": "2026-10-25T03:54:18Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_emberlyn_0",
+     "hd_emberlyn_1",
+     "hd_emberlyn_2",
+     "hd_emberlyn_3"
+    ]
+   },
+   "installed": "2026-10-25T04:49:06Z",
+   "cleanup": [],
+   "source_path": "emberlyn_hd/dizzy_s_r0_gpt-image-2_6a3953be953a_0.png"
+  },
+  "focus_e": {
+   "source_image": "focus_e_r0_gpt-image-2_5b8f40d7d5b8_1.png",
+   "source_path": "emberlyn_hd/focus_e_r0_gpt-image-2_5b8f40d7d5b8_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: sitting upright with the eyes closed in calm concentration, front paws together, the tail curled up beside the body, the ember glowing big, bright and steady. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_e_r0_gpt-image-2_8132923c2bda_0.png",
+      "sha256": "8b6fa77316b3d5e1413e52af130a401562725f093fb26f7b667eb67fa0ac7668"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2978,
+     "completion_tokens": 878,
+     "total_tokens": 3856,
+     "cost": 0.047374,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.047374,
+      "upstream_inference_prompt_cost": 0.021034,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 15.6,
+    "created": "2026-10-25T03:54:03Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 8.05,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 1.15,
+    "matched_to": "stand_e"
+   },
+   "installed": "2026-10-25T05:36:33Z",
+   "cleanup": []
+  },
+  "focus_n": {
+   "source_image": "focus_n_r0_gpt-image-2_5bb06f4633de_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature is seen from behind, facing away from the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: sitting upright with the eyes closed in calm concentration, front paws together, the tail curled up beside the body, the ember glowing big, bright and steady. Seen from directly behind, facing away from the viewer, exactly like the reference image: we see the back of the head with both round ears, the back and rump, the hind paws and the big bushy tail; the face, eyes, mask and muzzle are hidden on the far side and must not be visible at all. Drawn at exactly the same scale as the reference, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_n_r0_gpt-image-2_d5fd29ddb3b3_1.png",
+      "sha256": "9299257e36ab68267f5432c892ec79c28613281a9425dadb4b111469cfd89092"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3082,
+     "completion_tokens": 635,
+     "total_tokens": 3717,
+     "cost": 0.040604,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.040604,
+      "upstream_inference_prompt_cost": 0.021554,
+      "upstream_inference_completions_cost": 0.01905
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 635
+     }
+    },
+    "seconds": 13.3,
+    "created": "2026-10-25T04:12:16Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_emberlyn_0",
+     "hd_emberlyn_1",
+     "hd_emberlyn_2",
+     "hd_emberlyn_3"
+    ]
+   },
+   "installed": "2026-10-25T04:49:36Z",
+   "cleanup": [],
+   "source_path": "emberlyn_hd/focus_n_r0_gpt-image-2_5bb06f4633de_0.png"
+  },
+  "focus_s": {
+   "source_image": "focus_s_r0_gpt-image-2_80e29870a77a_0.png",
+   "source_path": "emberlyn_hd/focus_s_r0_gpt-image-2_80e29870a77a_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: sitting upright with the eyes closed in calm concentration, front paws together, the tail curled up beside the body, the ember glowing big, bright and steady. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_44196981d784_0.png",
+      "sha256": "20e1558fc2e8e42eb122c57abbed8eb91783b9c4730a1ad2cd296c25adcfe30b"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2984,
+     "completion_tokens": 391,
+     "total_tokens": 3375,
+     "cost": 0.032794,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.032794,
+      "upstream_inference_prompt_cost": 0.021064,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 11.3,
+    "created": "2026-10-25T03:53:52Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.28,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 1.04,
+    "matched_to": "stand_s"
+   },
+   "installed": "2026-10-25T05:36:25Z",
+   "cleanup": []
+  },
+  "guard_e": {
+   "source_image": "guard_e_r0_gpt-image-2_834525811624_0.png",
+   "source_path": "emberlyn_hd/guard_e_r0_gpt-image-2_834525811624_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: bracing defensively: crouched low behind its raised bushy tail, which it curls around the front of its body like a shield, eyes peeking over the tail, ears flat. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_e_r0_gpt-image-2_8132923c2bda_0.png",
+      "sha256": "8b6fa77316b3d5e1413e52af130a401562725f093fb26f7b667eb67fa0ac7668"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2992,
+     "completion_tokens": 878,
+     "total_tokens": 3870,
+     "cost": 0.047444,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.047444,
+      "upstream_inference_prompt_cost": 0.021104,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 13.7,
+    "created": "2026-10-25T03:54:06Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.7,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 1.1,
+    "matched_to": "stand_e"
+   },
+   "installed": "2026-10-25T05:36:34Z",
+   "cleanup": []
+  },
+  "guard_n": {
+   "source_image": "guard_n_r0_gpt-image-2_e3889a76ab6b_0.png",
+   "source_path": "emberlyn_hd/guard_n_r0_gpt-image-2_e3889a76ab6b_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature is seen from behind, facing away from the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: bracing defensively: crouched low behind its raised bushy tail, which it curls around the front of its body like a shield, eyes peeking over the tail, ears flat. Seen from directly behind, facing away from the viewer, exactly like the reference image: we see the back of the head with both round ears, the back and rump, the hind paws and the big bushy tail; the face, eyes, mask and muzzle are hidden on the far side and must not be visible at all. Drawn at exactly the same scale as the reference, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_n_r0_gpt-image-2_d5fd29ddb3b3_1.png",
+      "sha256": "9299257e36ab68267f5432c892ec79c28613281a9425dadb4b111469cfd89092"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3096,
+     "completion_tokens": 391,
+     "total_tokens": 3487,
+     "cost": 0.033354,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.033354,
+      "upstream_inference_prompt_cost": 0.021624,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 10.5,
+    "created": "2026-10-25T04:12:14Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.28,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 1.04,
+    "matched_to": "stand_n"
+   },
+   "installed": "2026-10-25T05:36:45Z",
+   "cleanup": []
+  },
+  "guard_s": {
+   "source_image": "guard_s_r0_gpt-image-2_2cc9d81b3edd_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: bracing defensively: crouched low behind its raised bushy tail, which it curls around the front of its body like a shield, eyes peeking over the tail, ears flat. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_44196981d784_0.png",
+      "sha256": "20e1558fc2e8e42eb122c57abbed8eb91783b9c4730a1ad2cd296c25adcfe30b"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2998,
+     "completion_tokens": 391,
+     "total_tokens": 3389,
+     "cost": 0.032864,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.032864,
+      "upstream_inference_prompt_cost": 0.021134,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 13.6,
+    "created": "2026-10-25T03:54:02Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_emberlyn_0",
+     "hd_emberlyn_1",
+     "hd_emberlyn_2",
+     "hd_emberlyn_3"
+    ]
+   },
+   "installed": "2026-10-25T04:49:03Z",
+   "cleanup": [],
+   "source_path": "emberlyn_hd/guard_s_r0_gpt-image-2_2cc9d81b3edd_0.png"
+  },
+  "happy_s": {
+   "source_image": "happy_s_r0_gpt-image-2_a61d5068c7ce_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: jumping for joy: a happy little hop with all four paws off the floor, eyes squeezed shut in a big smile, mouth open, tail wagging, the ember blazing. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_44196981d784_0.png",
+      "sha256": "20e1558fc2e8e42eb122c57abbed8eb91783b9c4730a1ad2cd296c25adcfe30b"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2992,
+     "completion_tokens": 878,
+     "total_tokens": 3870,
+     "cost": 0.047444,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.047444,
+      "upstream_inference_prompt_cost": 0.021104,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 15.3,
+    "created": "2026-10-25T03:54:34Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_emberlyn_0",
+     "hd_emberlyn_1",
+     "hd_emberlyn_2",
+     "hd_emberlyn_3"
+    ]
+   },
+   "installed": "2026-10-25T04:49:11Z",
+   "cleanup": [],
+   "source_path": "emberlyn_hd/happy_s_r0_gpt-image-2_a61d5068c7ce_1.png"
+  },
+  "hurt_e": {
+   "source_image": "hurt_e_r0_gpt-image-2_1f57f145d0e5_0.png",
+   "source_path": "emberlyn_hd/hurt_e_r0_gpt-image-2_1f57f145d0e5_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: recoiling from a hit: flinching back with the eyes squeezed shut, ears flat back, the body twisted away, fur ruffled, the ember flickering. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. Its ears keep their small rounded shape, pressed flat back. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_e_r0_gpt-image-2_8132923c2bda_0.png",
+      "sha256": "8b6fa77316b3d5e1413e52af130a401562725f093fb26f7b667eb67fa0ac7668"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3008,
+     "completion_tokens": 391,
+     "total_tokens": 3399,
+     "cost": 0.032914,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.032914,
+      "upstream_inference_prompt_cost": 0.021184,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 11.9,
+    "created": "2026-10-25T04:12:27Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.56,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 1.08,
+    "matched_to": "stand_e"
+   },
+   "installed": "2026-10-25T05:36:35Z",
+   "cleanup": []
+  },
+  "hurt_n": {
+   "source_image": "hurt_n_r0_gpt-image-2_918deaddbdbc_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature is seen from behind, facing away from the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: recoiling from a hit: flinching back with the eyes squeezed shut, ears flat back, the body twisted away, fur ruffled, the ember flickering. Seen from directly behind, facing away from the viewer, exactly like the reference image: we see the back of the head with both round ears, the back and rump, the hind paws and the big bushy tail; the face, eyes, mask and muzzle are hidden on the far side and must not be visible at all. Drawn at exactly the same scale as the reference, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_n_r0_gpt-image-2_d5fd29ddb3b3_1.png",
+      "sha256": "9299257e36ab68267f5432c892ec79c28613281a9425dadb4b111469cfd89092"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3088,
+     "completion_tokens": 391,
+     "total_tokens": 3479,
+     "cost": 0.033314,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.033314,
+      "upstream_inference_prompt_cost": 0.021584,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 12.0,
+    "created": "2026-10-25T04:12:16Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_emberlyn_0",
+     "hd_emberlyn_1",
+     "hd_emberlyn_2",
+     "hd_emberlyn_3"
+    ]
+   },
+   "installed": "2026-10-25T04:49:38Z",
+   "cleanup": [],
+   "source_path": "emberlyn_hd/hurt_n_r0_gpt-image-2_918deaddbdbc_0.png"
+  },
+  "hurt_s": {
+   "source_image": "hurt_s_r0_gpt-image-2_f20b57e71eff_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: recoiling from a hit: flinching back with the eyes squeezed shut, ears flat back, the body twisted away, fur ruffled, the ember flickering. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_44196981d784_0.png",
+      "sha256": "20e1558fc2e8e42eb122c57abbed8eb91783b9c4730a1ad2cd296c25adcfe30b"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2990,
+     "completion_tokens": 391,
+     "total_tokens": 3381,
+     "cost": 0.032824,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.032824,
+      "upstream_inference_prompt_cost": 0.021094,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 12.4,
+    "created": "2026-10-25T03:54:06Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_emberlyn_0",
+     "hd_emberlyn_1",
+     "hd_emberlyn_2",
+     "hd_emberlyn_3"
+    ]
+   },
+   "installed": "2026-10-25T04:49:05Z",
+   "cleanup": [],
+   "source_path": "emberlyn_hd/hurt_s_r0_gpt-image-2_f20b57e71eff_1.png"
+  },
+  "ko_fall_s": {
+   "source_image": "ko_fall_s_r0_gpt-image-2_175a9bab5cc7_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: knocked out and toppling over onto its side, legs folding, eyes shut, the ember dimming. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_44196981d784_0.png",
+      "sha256": "20e1558fc2e8e42eb122c57abbed8eb91783b9c4730a1ad2cd296c25adcfe30b"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2964,
+     "completion_tokens": 391,
+     "total_tokens": 3355,
+     "cost": 0.032694,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.032694,
+      "upstream_inference_prompt_cost": 0.020964,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 12.1,
+    "created": "2026-10-25T03:54:16Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_emberlyn_0",
+     "hd_emberlyn_1",
+     "hd_emberlyn_2",
+     "hd_emberlyn_3"
+    ]
+   },
+   "installed": "2026-10-25T04:49:07Z",
+   "cleanup": [],
+   "source_path": "emberlyn_hd/ko_fall_s_r0_gpt-image-2_175a9bab5cc7_1.png"
+  },
+  "ko_lie_s": {
+   "source_image": "ko_lie_s_r0_gpt-image-2_f7ba238c57b3_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: knocked out, lying flat on its side on the floor with the legs limp and the eyes shut, the ember only a faint glow. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_44196981d784_0.png",
+      "sha256": "20e1558fc2e8e42eb122c57abbed8eb91783b9c4730a1ad2cd296c25adcfe30b"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2976,
+     "completion_tokens": 391,
+     "total_tokens": 3367,
+     "cost": 0.032754,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.032754,
+      "upstream_inference_prompt_cost": 0.021024,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 12.3,
+    "created": "2026-10-25T03:54:19Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_emberlyn_0",
+     "hd_emberlyn_1",
+     "hd_emberlyn_2",
+     "hd_emberlyn_3"
+    ]
+   },
+   "installed": "2026-10-25T04:49:07Z",
+   "cleanup": [],
+   "source_path": "emberlyn_hd/ko_lie_s_r0_gpt-image-2_f7ba238c57b3_0.png"
+  },
+  "land_e": {
+   "source_image": "land_e_r0_gpt-image-2_d44cc5487d6c_1.png",
+   "source_path": "emberlyn_hd/land_e_r0_gpt-image-2_d44cc5487d6c_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: skidding to a stop after a leap: front legs braced stiffly forward, hind legs bent under the body, body tilted back, head up, the tail swinging forward over the back. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_e_r0_gpt-image-2_8132923c2bda_0.png",
+      "sha256": "8b6fa77316b3d5e1413e52af130a401562725f093fb26f7b667eb67fa0ac7668"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2994,
+     "completion_tokens": 391,
+     "total_tokens": 3385,
+     "cost": 0.032844,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.032844,
+      "upstream_inference_prompt_cost": 0.021114,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 12.3,
+    "created": "2026-10-25T03:53:11Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 7.28,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 1.04,
+    "matched_to": "stand_e"
+   },
+   "installed": "2026-10-25T05:36:30Z",
+   "cleanup": []
+  },
+  "land_n": {
+   "source_image": "land_n_r0_gpt-image-2_16966d00d142_1.png",
+   "source_path": "emberlyn_hd/land_n_r0_gpt-image-2_16966d00d142_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature is seen from behind, facing away from the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: skidding to a stop after a leap: front legs braced stiffly forward, hind legs bent under the body, body tilted back, head up, the tail swinging forward over the back. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_n_r0_gpt-image-2_d5fd29ddb3b3_1.png",
+      "sha256": "9299257e36ab68267f5432c892ec79c28613281a9425dadb4b111469cfd89092"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2998,
+     "completion_tokens": 391,
+     "total_tokens": 3389,
+     "cost": 0.032864,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.032864,
+      "upstream_inference_prompt_cost": 0.021134,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 11.5,
+    "created": "2026-10-25T03:53:10Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 6.65,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 0.95,
+    "matched_to": "stand_n"
+   },
+   "installed": "2026-10-25T05:36:40Z",
+   "cleanup": []
+  },
+  "land_s": {
+   "source_image": "land_s_r0_gpt-image-2_20e8d4d7e344_0.png",
+   "source_path": "emberlyn_hd/land_s_r0_gpt-image-2_20e8d4d7e344_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: skidding to a stop after a leap: front legs braced stiffly forward, hind legs bent under the body, body tilted back, head up, the tail swinging forward over the back. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_44196981d784_0.png",
+      "sha256": "20e1558fc2e8e42eb122c57abbed8eb91783b9c4730a1ad2cd296c25adcfe30b"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3000,
+     "completion_tokens": 391,
+     "total_tokens": 3391,
+     "cost": 0.032874,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.032874,
+      "upstream_inference_prompt_cost": 0.021144,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 11.7,
+    "created": "2026-10-25T03:53:09Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.42,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 1.06,
+    "matched_to": "stand_s"
+   },
+   "installed": "2026-10-25T05:36:21Z",
+   "cleanup": []
+  },
+  "leap_e": {
+   "source_image": "leap_e_r0_gpt-image-2_6fdfd0438dcc_0.png",
+   "source_path": "emberlyn_hd/leap_e_r0_gpt-image-2_6fdfd0438dcc_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: leaping forward at full speed, all four paws off the floor: the body stretched out long, front legs reaching forward, hind legs kicked back, ears flat, the tail streaming back with the ember flame flaring and trailing sparks. It leaps to the right. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_e_r0_gpt-image-2_8132923c2bda_0.png",
+      "sha256": "8b6fa77316b3d5e1413e52af130a401562725f093fb26f7b667eb67fa0ac7668"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3022,
+     "completion_tokens": 878,
+     "total_tokens": 3900,
+     "cost": 0.047594,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.047594,
+      "upstream_inference_prompt_cost": 0.021254,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 14.1,
+    "created": "2026-10-25T03:53:10Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0
+   },
+   "installed": "2026-10-25T05:37:11Z",
+   "cleanup": []
+  },
+  "leap_n": {
+   "source_image": "leap_n_r0_gpt-image-2_7d9662e6b178_0.png",
+   "source_path": "emberlyn_hd/leap_n_r0_gpt-image-2_7d9662e6b178_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature is seen from behind, facing away from the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: leaping forward at full speed, all four paws off the floor: the body stretched out long, front legs reaching forward, hind legs kicked back, ears flat, the tail streaming back with the ember flame flaring and trailing sparks. It leaps straight away from the viewer: we see its back, the hind paws kicked back toward us, the tail streaming back toward us over the body. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_n_r0_gpt-image-2_d5fd29ddb3b3_1.png",
+      "sha256": "9299257e36ab68267f5432c892ec79c28613281a9425dadb4b111469cfd89092"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3076,
+     "completion_tokens": 635,
+     "total_tokens": 3711,
+     "cost": 0.040574,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.040574,
+      "upstream_inference_prompt_cost": 0.021524,
+      "upstream_inference_completions_cost": 0.01905
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 635
+     }
+    },
+    "seconds": 13.8,
+    "created": "2026-10-25T03:53:08Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0
+   },
+   "installed": "2026-10-25T05:37:08Z",
+   "cleanup": []
+  },
+  "leap_s": {
+   "source_image": "leap_s_r0_gpt-image-2_81465e3ace10_0.png",
+   "source_path": "emberlyn_hd/leap_s_r0_gpt-image-2_81465e3ace10_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: leaping forward at full speed, all four paws off the floor: the body stretched out long, front legs reaching forward, hind legs kicked back, ears flat, the tail streaming back with the ember flame flaring and trailing sparks. It leaps straight toward the viewer, so the body is strongly foreshortened: the head and reaching front paws are closest, the tail streams up and back behind it. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_44196981d784_0.png",
+      "sha256": "20e1558fc2e8e42eb122c57abbed8eb91783b9c4730a1ad2cd296c25adcfe30b"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3086,
+     "completion_tokens": 391,
+     "total_tokens": 3477,
+     "cost": 0.033304,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.033304,
+      "upstream_inference_prompt_cost": 0.021574,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 11.4,
+    "created": "2026-10-25T03:53:05Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.63,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 1.09,
+    "matched_to": "stand_s"
+   },
+   "installed": "2026-10-25T05:36:20Z",
+   "cleanup": []
+  },
+  "melee_e": {
+   "source_image": "melee_e_r0_gpt-image-2_b6258913edc1_0.png",
+   "source_path": "emberlyn_hd/melee_e_r0_gpt-image-2_b6258913edc1_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: a fast claw swipe: lunging forward with one front paw slashing down and across, claws out, teeth bared, ears back. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_e_r0_gpt-image-2_8132923c2bda_0.png",
+      "sha256": "8b6fa77316b3d5e1413e52af130a401562725f093fb26f7b667eb67fa0ac7668"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2972,
+     "completion_tokens": 391,
+     "total_tokens": 3363,
+     "cost": 0.032734,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.032734,
+      "upstream_inference_prompt_cost": 0.021004,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 12.9,
+    "created": "2026-10-25T03:53:51Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.91,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 1.13,
+    "matched_to": "stand_e"
+   },
+   "installed": "2026-10-25T05:36:33Z",
+   "cleanup": []
+  },
+  "melee_n": {
+   "source_image": "melee_n_r0_gpt-image-2_8d495f22f3c8_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature is seen from behind, facing away from the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: a fast claw swipe: lunging forward with one front paw slashing down and across, claws out, teeth bared, ears back. Seen from directly behind, facing away from the viewer, exactly like the reference image: we see the back of the head with both round ears, the back and rump, the hind paws and the big bushy tail; the face, eyes, mask and muzzle are hidden on the far side and must not be visible at all. Drawn at exactly the same scale as the reference, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_n_r0_gpt-image-2_d5fd29ddb3b3_1.png",
+      "sha256": "9299257e36ab68267f5432c892ec79c28613281a9425dadb4b111469cfd89092"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3076,
+     "completion_tokens": 391,
+     "total_tokens": 3467,
+     "cost": 0.033254,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.033254,
+      "upstream_inference_prompt_cost": 0.021524,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 12.0,
+    "created": "2026-10-25T04:12:12Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_emberlyn_0",
+     "hd_emberlyn_1",
+     "hd_emberlyn_2",
+     "hd_emberlyn_3"
+    ]
+   },
+   "installed": "2026-10-25T04:49:39Z",
+   "cleanup": [],
+   "source_path": "emberlyn_hd/melee_n_r0_gpt-image-2_8d495f22f3c8_0.png"
+  },
+  "melee_s": {
+   "source_image": "melee_s_r0_gpt-image-2_f891af7b4516_0.png",
+   "source_path": "emberlyn_hd/melee_s_r0_gpt-image-2_f891af7b4516_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: a fast claw swipe: lunging forward with one front paw slashing down and across, claws out, teeth bared, ears back. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_44196981d784_0.png",
+      "sha256": "20e1558fc2e8e42eb122c57abbed8eb91783b9c4730a1ad2cd296c25adcfe30b"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2978,
+     "completion_tokens": 391,
+     "total_tokens": 3369,
+     "cost": 0.032764,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.032764,
+      "upstream_inference_prompt_cost": 0.021034,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 11.9,
+    "created": "2026-10-25T03:53:47Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.77,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 1.11,
+    "matched_to": "stand_s"
+   },
+   "installed": "2026-10-25T05:36:24Z",
+   "cleanup": []
+  },
+  "melee_wind_e": {
+   "source_image": "melee_wind_e_r0_gpt-image-2_4fd188bff8e7_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: winding up a claw swipe: weight shifted back onto the hind legs, one front paw raised high and pulled back, claws out, head low, teeth bared. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_e_r0_gpt-image-2_8132923c2bda_0.png",
+      "sha256": "8b6fa77316b3d5e1413e52af130a401562725f093fb26f7b667eb67fa0ac7668"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2982,
+     "completion_tokens": 878,
+     "total_tokens": 3860,
+     "cost": 0.047394,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.047394,
+      "upstream_inference_prompt_cost": 0.021054,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 14.3,
+    "created": "2026-10-25T03:53:46Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_emberlyn_0",
+     "hd_emberlyn_1",
+     "hd_emberlyn_2",
+     "hd_emberlyn_3"
+    ]
+   },
+   "installed": "2026-10-25T04:49:23Z",
+   "cleanup": [],
+   "source_path": "emberlyn_hd/melee_wind_e_r0_gpt-image-2_4fd188bff8e7_0.png"
+  },
+  "melee_wind_n": {
+   "source_image": "melee_wind_n_r0_gpt-image-2_02085f4d1f4c_0.png",
+   "source_path": "emberlyn_hd/melee_wind_n_r0_gpt-image-2_02085f4d1f4c_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature is seen from behind, facing away from the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: winding up a claw swipe: weight shifted back onto the hind legs, one front paw raised high and pulled back, claws out, head low, teeth bared. Seen from directly behind, facing away from the viewer, exactly like the reference image: we see the back of the head with both round ears, the back and rump, the hind paws and the big bushy tail; the face, eyes, mask and muzzle are hidden on the far side and must not be visible at all. Drawn at exactly the same scale as the reference, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_n_r0_gpt-image-2_d5fd29ddb3b3_1.png",
+      "sha256": "9299257e36ab68267f5432c892ec79c28613281a9425dadb4b111469cfd89092"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3086,
+     "completion_tokens": 391,
+     "total_tokens": 3477,
+     "cost": 0.033304,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.033304,
+      "upstream_inference_prompt_cost": 0.021574,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 12.4,
+    "created": "2026-10-25T04:12:09Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.65,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 0.95,
+    "matched_to": "stand_n"
+   },
+   "installed": "2026-10-25T05:36:43Z",
+   "cleanup": []
+  },
+  "melee_wind_s": {
+   "source_image": "melee_wind_s_r0_gpt-image-2_290851588147_0.png",
+   "source_path": "emberlyn_hd/melee_wind_s_r0_gpt-image-2_290851588147_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: winding up a claw swipe: weight shifted back onto the hind legs, one front paw raised high and pulled back, claws out, head low, teeth bared. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_44196981d784_0.png",
+      "sha256": "20e1558fc2e8e42eb122c57abbed8eb91783b9c4730a1ad2cd296c25adcfe30b"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2988,
+     "completion_tokens": 878,
+     "total_tokens": 3866,
+     "cost": 0.047424,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.047424,
+      "upstream_inference_prompt_cost": 0.021084,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 15.2,
+    "created": "2026-10-25T03:53:41Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.28,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 1.04,
+    "matched_to": "stand_s"
+   },
+   "installed": "2026-10-25T05:36:23Z",
+   "cleanup": []
+  },
+  "ram_e": {
+   "source_image": "ram_e_r0_gpt-image-2_efc974c3ee1f_0.png",
+   "source_path": "emberlyn_hd/ram_e_r0_gpt-image-2_efc974c3ee1f_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: the moment of a head-first ram: shoulders hunched, head down butting forward, eyes squeezed shut, ears flat back, the body squashed short and compact, the tail whipped up with sparks flying from the ember. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_e_r0_gpt-image-2_8132923c2bda_0.png",
+      "sha256": "8b6fa77316b3d5e1413e52af130a401562725f093fb26f7b667eb67fa0ac7668"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3006,
+     "completion_tokens": 878,
+     "total_tokens": 3884,
+     "cost": 0.047514,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.047514,
+      "upstream_inference_prompt_cost": 0.021174,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 15.2,
+    "created": "2026-10-25T03:53:25Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.56,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 1.08,
+    "matched_to": "stand_e"
+   },
+   "installed": "2026-10-25T05:36:31Z",
+   "cleanup": []
+  },
+  "ram_n": {
+   "source_image": "ram_n_r0_gpt-image-2_ec8ae42b9755_0.png",
+   "source_path": "emberlyn_hd/ram_n_r0_gpt-image-2_ec8ae42b9755_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature is seen from behind, facing away from the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: the moment of a head-first ram: shoulders hunched, head down butting forward, eyes squeezed shut, ears flat back, the body squashed short and compact, the tail whipped up with sparks flying from the ember. Seen from directly behind, facing away from the viewer, exactly like the reference image: we see the back of the head with both round ears, the back and rump, the hind paws and the big bushy tail; the face, eyes, mask and muzzle are hidden on the far side and must not be visible at all. Drawn at exactly the same scale as the reference, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_n_r0_gpt-image-2_d5fd29ddb3b3_1.png",
+      "sha256": "9299257e36ab68267f5432c892ec79c28613281a9425dadb4b111469cfd89092"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3110,
+     "completion_tokens": 391,
+     "total_tokens": 3501,
+     "cost": 0.033424,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.033424,
+      "upstream_inference_prompt_cost": 0.021694,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 12.1,
+    "created": "2026-10-25T04:12:03Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0
+   },
+   "installed": "2026-10-25T05:37:09Z",
+   "cleanup": []
+  },
+  "ram_s": {
+   "source_image": "ram_s_r0_gpt-image-2_37702c0491d2_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: the moment of a head-first ram: shoulders hunched, head down butting forward, eyes squeezed shut, ears flat back, the body squashed short and compact, the tail whipped up with sparks flying from the ember. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_44196981d784_0.png",
+      "sha256": "20e1558fc2e8e42eb122c57abbed8eb91783b9c4730a1ad2cd296c25adcfe30b"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3012,
+     "completion_tokens": 391,
+     "total_tokens": 3403,
+     "cost": 0.032934,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.032934,
+      "upstream_inference_prompt_cost": 0.021204,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 11.0,
+    "created": "2026-10-25T03:53:17Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_emberlyn_0",
+     "hd_emberlyn_1",
+     "hd_emberlyn_2",
+     "hd_emberlyn_3"
+    ]
+   },
+   "installed": "2026-10-25T04:48:58Z",
+   "cleanup": [],
+   "source_path": "emberlyn_hd/ram_s_r0_gpt-image-2_37702c0491d2_0.png"
+  },
+  "ready_e": {
+   "source_image": "ready_e_r0_gpt-image-2_53009a70fc46_2.png",
+   "source_path": "emberlyn_hd/ready_e_r0_gpt-image-2_53009a70fc46_2.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: a low, springy battle stance on all four paws: front legs spread and braced, shoulders lowered, head held low and forward with the eyes fixed on a foe, ears forward, the bushy tail raised high and tense behind it with the ember blazing. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. Keep the pose compact: the legs stay under the body and the bushy tail rises straight up from the rump, close against the back, so the whole creature is no wider than in the reference. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 3,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_e_r0_gpt-image-2_8132923c2bda_0.png",
+      "sha256": "8b6fa77316b3d5e1413e52af130a401562725f093fb26f7b667eb67fa0ac7668"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 4653,
+     "completion_tokens": 830,
+     "total_tokens": 5483,
+     "cost": 0.057381,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.057381,
+      "upstream_inference_prompt_cost": 0.032481,
+      "upstream_inference_completions_cost": 0.0249
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 830
+     }
+    },
+    "seconds": 14.0,
+    "created": "2026-10-25T04:12:21Z",
+    "index": 2
+   },
+   "pixelize": {
+    "cell": 7.28,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 1.04,
+    "matched_to": "stand_e"
+   },
+   "installed": "2026-10-25T05:36:27Z",
+   "cleanup": []
+  },
+  "ready_n": {
+   "source_image": "ready_n_r0_gpt-image-2_ed80b09423e5_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature is seen from behind, facing away from the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: a low, springy battle stance on all four paws: front legs spread and braced, shoulders lowered, head held low and forward with the eyes fixed on a foe, ears forward, the bushy tail raised high and tense behind it with the ember blazing. Seen from directly behind, facing away from the viewer, exactly like the reference image: we see the back of the head with both round ears, the back and rump, the hind paws and the big bushy tail; the face, eyes, mask and muzzle are hidden on the far side and must not be visible at all. Drawn at exactly the same scale as the reference, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_n_r0_gpt-image-2_d5fd29ddb3b3_1.png",
+      "sha256": "9299257e36ab68267f5432c892ec79c28613281a9425dadb4b111469cfd89092"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3126,
+     "completion_tokens": 391,
+     "total_tokens": 3517,
+     "cost": 0.033504,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.033504,
+      "upstream_inference_prompt_cost": 0.021774,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 12.4,
+    "created": "2026-10-25T04:12:02Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_emberlyn_0",
+     "hd_emberlyn_1",
+     "hd_emberlyn_2",
+     "hd_emberlyn_3"
+    ]
+   },
+   "installed": "2026-10-25T04:49:43Z",
+   "cleanup": [],
+   "source_path": "emberlyn_hd/ready_n_r0_gpt-image-2_ed80b09423e5_0.png"
+  },
+  "ready_s": {
+   "source_image": "ready_s_r0_gpt-image-2_4c910cfec1aa_0.png",
+   "source_path": "emberlyn_hd/ready_s_r0_gpt-image-2_4c910cfec1aa_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: a low, springy battle stance on all four paws: front legs spread and braced, shoulders lowered, head held low and forward with the eyes fixed on a foe, ears forward, the bushy tail raised high and tense behind it with the ember blazing. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_44196981d784_0.png",
+      "sha256": "20e1558fc2e8e42eb122c57abbed8eb91783b9c4730a1ad2cd296c25adcfe30b"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3028,
+     "completion_tokens": 878,
+     "total_tokens": 3906,
+     "cost": 0.047624,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.047624,
+      "upstream_inference_prompt_cost": 0.021284,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 14.3,
+    "created": "2026-10-25T03:52:42Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.28,
+    "scale": 1.0,
+    "tolerance": 48.0
+   },
+   "installed": "2026-10-25T06:22:55Z",
+   "cleanup": []
+  },
+  "stand_e": {
+   "source_image": "stand_e_r0_gpt-image-2_8132923c2bda_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: standing calmly on all four paws, relaxed and alert, head up, ears up, the bushy tail curving up behind the back with the ember burning softly at the top. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "r0_gpt-image-2_096ca166e1b6_1.png",
+      "sha256": "c1f3b2343d0c0003f278834d0a8add02dd76e827a7c2a1f0a8199ac29b9ebb4b"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3940,
+     "completion_tokens": 635,
+     "total_tokens": 4575,
+     "cost": 0.047966,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.047966,
+      "upstream_inference_prompt_cost": 0.028916,
+      "upstream_inference_completions_cost": 0.01905
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 635
+     }
+    },
+    "seconds": 14.9,
+    "created": "2026-10-25T03:49:27Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_emberlyn_0",
+     "hd_emberlyn_1",
+     "hd_emberlyn_2",
+     "hd_emberlyn_3"
+    ]
+   },
+   "installed": "2026-10-25T04:49:12Z",
+   "cleanup": [],
+   "source_path": "emberlyn_hd/stand_e_r0_gpt-image-2_8132923c2bda_0.png"
+  },
+  "stand_n": {
+   "source_image": "stand_n_r0_gpt-image-2_d5fd29ddb3b3_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature is seen from behind, facing away from the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: standing calmly on all four paws, relaxed and alert, head up, ears up, the bushy tail curving up behind the back with the ember burning softly at the top. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "r0_gpt-image-2_096ca166e1b6_1.png",
+      "sha256": "c1f3b2343d0c0003f278834d0a8add02dd76e827a7c2a1f0a8199ac29b9ebb4b"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3944,
+     "completion_tokens": 391,
+     "total_tokens": 4335,
+     "cost": 0.040666,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.040666,
+      "upstream_inference_prompt_cost": 0.028936,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 11.5,
+    "created": "2026-10-25T03:49:24Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_emberlyn_0",
+     "hd_emberlyn_1",
+     "hd_emberlyn_2",
+     "hd_emberlyn_3"
+    ]
+   },
+   "installed": "2026-10-25T04:49:28Z",
+   "cleanup": [],
+   "source_path": "emberlyn_hd/stand_n_r0_gpt-image-2_d5fd29ddb3b3_1.png"
+  },
+  "stand_s": {
+   "source_image": "stand_s_r0_gpt-image-2_44196981d784_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: standing calmly on all four paws, relaxed and alert, head up, ears up, the bushy tail curving up behind the back with the ember burning softly at the top. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "r0_gpt-image-2_096ca166e1b6_1.png",
+      "sha256": "c1f3b2343d0c0003f278834d0a8add02dd76e827a7c2a1f0a8199ac29b9ebb4b"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3946,
+     "completion_tokens": 391,
+     "total_tokens": 4337,
+     "cost": 0.040676,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.040676,
+      "upstream_inference_prompt_cost": 0.028946,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 12.0,
+    "created": "2026-10-25T03:49:24Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_emberlyn_0",
+     "hd_emberlyn_1",
+     "hd_emberlyn_2",
+     "hd_emberlyn_3"
+    ]
+   },
+   "installed": "2026-10-25T04:48:51Z",
+   "cleanup": [],
+   "source_path": "emberlyn_hd/stand_s_r0_gpt-image-2_44196981d784_0.png"
+  },
+  "victory_s": {
+   "source_image": "victory_s_r0_gpt-image-2_913a9f19b6c2_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: celebrating a win: sitting up proudly on its hind legs with the chest puffed out and both front paws raised, eyes happily closed and mouth open in a cheer, the ember blazing big and bright. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_44196981d784_0.png",
+      "sha256": "20e1558fc2e8e42eb122c57abbed8eb91783b9c4730a1ad2cd296c25adcfe30b"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3002,
+     "completion_tokens": 391,
+     "total_tokens": 3393,
+     "cost": 0.032884,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.032884,
+      "upstream_inference_prompt_cost": 0.021154,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 11.3,
+    "created": "2026-10-25T03:54:18Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_emberlyn_0",
+     "hd_emberlyn_1",
+     "hd_emberlyn_2",
+     "hd_emberlyn_3"
+    ]
+   },
+   "installed": "2026-10-25T04:49:08Z",
+   "cleanup": [],
+   "source_path": "emberlyn_hd/victory_s_r0_gpt-image-2_913a9f19b6c2_0.png"
+  },
+  "walk_a_e": {
+   "source_image": "walk_a_e_r0_gpt-image-2_771ccb298437_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: trotting, mid-stride: the near front paw and the far hind paw reach forward while the other two push back, head up, the tail bobbing behind. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. Keep the pose compact: the legs stay under the body and the bushy tail rises straight up from the rump, close against the back, so the whole creature is no wider than in the reference. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_e_r0_gpt-image-2_8132923c2bda_0.png",
+      "sha256": "8b6fa77316b3d5e1413e52af130a401562725f093fb26f7b667eb67fa0ac7668"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3064,
+     "completion_tokens": 878,
+     "total_tokens": 3942,
+     "cost": 0.047804,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.047804,
+      "upstream_inference_prompt_cost": 0.021464,
+      "upstream_inference_completions_cost": 0.02634
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 878
+     }
+    },
+    "seconds": 14.6,
+    "created": "2026-10-25T04:12:24Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_emberlyn_0",
+     "hd_emberlyn_1",
+     "hd_emberlyn_2",
+     "hd_emberlyn_3"
+    ]
+   },
+   "installed": "2026-10-25T04:49:14Z",
+   "cleanup": [],
+   "source_path": "emberlyn_hd/walk_a_e_r0_gpt-image-2_771ccb298437_1.png"
+  },
+  "walk_a_n": {
+   "source_image": "walk_a_n_r0_gpt-image-2_b2e10070f7c8_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature is seen from behind, facing away from the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: trotting, mid-stride: the near front paw and the far hind paw reach forward while the other two push back, head up, the tail bobbing behind. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_n_r0_gpt-image-2_d5fd29ddb3b3_1.png",
+      "sha256": "9299257e36ab68267f5432c892ec79c28613281a9425dadb4b111469cfd89092"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2988,
+     "completion_tokens": 391,
+     "total_tokens": 3379,
+     "cost": 0.032814,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.032814,
+      "upstream_inference_prompt_cost": 0.021084,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 14.3,
+    "created": "2026-10-25T03:52:42Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_emberlyn_0",
+     "hd_emberlyn_1",
+     "hd_emberlyn_2",
+     "hd_emberlyn_3"
+    ]
+   },
+   "installed": "2026-10-25T04:49:29Z",
+   "cleanup": [],
+   "source_path": "emberlyn_hd/walk_a_n_r0_gpt-image-2_b2e10070f7c8_0.png"
+  },
+  "walk_a_s": {
+   "source_image": "walk_a_s_r0_gpt-image-2_376b1557b083_0.png",
+   "source_path": "emberlyn_hd/walk_a_s_r0_gpt-image-2_376b1557b083_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: trotting, mid-stride: the near front paw and the far hind paw reach forward while the other two push back, head up, the tail bobbing behind. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_44196981d784_0.png",
+      "sha256": "20e1558fc2e8e42eb122c57abbed8eb91783b9c4730a1ad2cd296c25adcfe30b"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2990,
+     "completion_tokens": 391,
+     "total_tokens": 3381,
+     "cost": 0.032824,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.032824,
+      "upstream_inference_prompt_cost": 0.021094,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 12.6,
+    "created": "2026-10-25T03:52:40Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.42,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 1.06,
+    "matched_to": "stand_s"
+   },
+   "installed": "2026-10-25T05:36:18Z",
+   "cleanup": []
+  },
+  "walk_b_e": {
+   "source_image": "walk_b_e_r0_gpt-image-2_48dbc217eea3_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: trotting, mid-stride: the far front paw and the near hind paw reach forward while the other two push back, head up, the tail bobbing behind. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. Keep the pose compact: the legs stay under the body and the bushy tail rises straight up from the rump, close against the back, so the whole creature is no wider than in the reference. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_e_r0_gpt-image-2_8132923c2bda_0.png",
+      "sha256": "8b6fa77316b3d5e1413e52af130a401562725f093fb26f7b667eb67fa0ac7668"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3064,
+     "completion_tokens": 391,
+     "total_tokens": 3455,
+     "cost": 0.033194,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.033194,
+      "upstream_inference_prompt_cost": 0.021464,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 10.9,
+    "created": "2026-10-25T04:12:24Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_emberlyn_0",
+     "hd_emberlyn_1",
+     "hd_emberlyn_2",
+     "hd_emberlyn_3"
+    ]
+   },
+   "installed": "2026-10-25T04:49:15Z",
+   "cleanup": [],
+   "source_path": "emberlyn_hd/walk_b_e_r0_gpt-image-2_48dbc217eea3_0.png"
+  },
+  "walk_b_n": {
+   "source_image": "walk_b_n_r0_gpt-image-2_271589e46427_0.png",
+   "source_path": "emberlyn_hd/walk_b_n_r0_gpt-image-2_271589e46427_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature is seen from behind, facing away from the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: trotting, mid-stride: the far front paw and the near hind paw reach forward while the other two push back, head up, the tail bobbing behind. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_n_r0_gpt-image-2_d5fd29ddb3b3_1.png",
+      "sha256": "9299257e36ab68267f5432c892ec79c28613281a9425dadb4b111469cfd89092"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2988,
+     "completion_tokens": 391,
+     "total_tokens": 3379,
+     "cost": 0.032814,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.032814,
+      "upstream_inference_prompt_cost": 0.021084,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 11.7,
+    "created": "2026-10-25T03:52:53Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.28,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 1.04,
+    "matched_to": "stand_n"
+   },
+   "installed": "2026-10-25T05:36:37Z",
+   "cleanup": []
+  },
+  "walk_b_s": {
+   "source_image": "walk_b_s_r0_gpt-image-2_ef8fe38e4a68_0.png",
+   "source_path": "emberlyn_hd/walk_b_s_r0_gpt-image-2_ef8fe38e4a68_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Emberlyn, a small fire-element woodland creature with a compact, rounded body that fits inside a square: a large rounded head with big amber eyes with white catchlights, a dark soot-grey band across the eyes like a mask, a cream muzzle, cheeks and chest, a small dark nose, and small rounded ears with cream inner fur; russet-orange fur on the head, back and legs with deeper russet shading; short sturdy legs ending in soot-dark paws; and a big bushy russet tail that sweeps up behind the back like a rising flame, about as tall as the body, ending in a ring of cream fur that cradles a glowing ember flame at the very top. Alert, quick and a little timid. Pose: trotting, mid-stride: the far front paw and the near hind paw reach forward while the other two push back, head up, the tail bobbing behind. Use the reference image as the model sheet: the very same creature with the same colours and markings, drawn at exactly the same scale, with its paws on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_s_r0_gpt-image-2_44196981d784_0.png",
+      "sha256": "20e1558fc2e8e42eb122c57abbed8eb91783b9c4730a1ad2cd296c25adcfe30b"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2990,
+     "completion_tokens": 391,
+     "total_tokens": 3381,
+     "cost": 0.032824,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.032824,
+      "upstream_inference_prompt_cost": 0.021094,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 13.2,
+    "created": "2026-10-25T03:52:55Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.28,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 1.04,
+    "matched_to": "stand_s"
+   },
+   "installed": "2026-10-25T05:36:19Z",
+   "cleanup": []
+  }
+ },
+ "grades": [
+  {
+   "light": -0.025,
+   "chroma": 0.84,
+   "hue": -3.0,
+   "keep_vivid": 0.165,
+   "max_light": 0.78,
+   "reason": "match the approved dialogue portrait's russet fur (portrait chroma 0.121 vs 0.149); flame colours kept",
+   "date": "2026-10-25T04:49:44Z"
+  }
+ ],
+ "palette": {
+  "sources": [
+   "stand_s_r0_gpt-image-2_44196981d784_0.png",
+   "stand_e_r0_gpt-image-2_8132923c2bda_0.png",
+   "stand_n_r0_gpt-image-2_d5fd29ddb3b3_1.png",
+   "cast_s_r0_gpt-image-2_7d418cf067b3_1.png",
+   "cast_e_r0_gpt-image-2_e2bec7083614_1.png",
+   "leap_e_r0_gpt-image-2_6fdfd0438dcc_0.png",
+   "focus_s_r0_gpt-image-2_80e29870a77a_0.png",
+   "hurt_s_r0_gpt-image-2_f20b57e71eff_1.png",
+   "dizzy_s_r0_gpt-image-2_6a3953be953a_0.png",
+   "ram_s_r0_gpt-image-2_37702c0491d2_0.png",
+   "melee_s_r0_gpt-image-2_f891af7b4516_0.png",
+   "victory_s_r0_gpt-image-2_913a9f19b6c2_0.png",
+   "curl_s_r0_gpt-image-2_1720acb60441_0.png",
+   "ko_lie_s_r0_gpt-image-2_f7ba238c57b3_0.png",
+   "guard_s_r0_gpt-image-2_2cc9d81b3edd_0.png"
+  ],
+  "k": 48,
+  "ramps": [
+   [
+    "#331f18",
+    "#442417",
+    "#522918",
+    "#5f2d18",
+    "#6b3218",
+    "#753518",
+    "#7d3818",
+    "#873b18",
+    "#913f18",
+    "#9b4318",
+    "#a44919",
+    "#ae4e1a",
+    "#c13716",
+    "#e34915",
+    "#f26211"
+   ],
+   [
+    "#895835",
+    "#b8541b",
+    "#9f6b3f",
+    "#c15b1c",
+    "#c9611e",
+    "#b27c49",
+    "#d1681f",
+    "#d76f21",
+    "#dd7623",
+    "#c38c53",
+    "#e27d25",
+    "#e68527",
+    "#f97c11",
+    "#e88b2b",
+    "#d29c5f",
+    "#f29327",
+    "#e0ac6c",
+    "#fba51d",
+    "#ecbb7b"
+   ],
+   [
+    "#fcbd2a",
+    "#f6cb8d",
+    "#fdd344",
+    "#fcdca4",
+    "#fde387",
+    "#fdebbe"
+   ],
+   [
+    "#120e17",
+    "#241a17",
+    "#322b27",
+    "#3f3531",
+    "#4e413b",
+    "#5d4e46",
+    "#6b5b54",
+    "#7c695f"
+   ]
+  ]
+ }
+}

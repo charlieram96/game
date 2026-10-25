@@ -201,8 +201,11 @@ instead of the short description.
    components (projectile, melee, lunge, targeted area, self area, line
    wave, self status). Combat code changes are only needed for a genuinely
    new component type.
-3. Generate sprites through `tools/sprite_forge` (the manifest contract is
-   in architecture.md).
+3. Make its HD sheet with `tools/art_forge` (a turnaround to lock the
+   design, key poses per view, then a recipe in `tools/art_forge/sheets/`
+   built by `animate.py`; see its README), or a procedural rig in
+   `tools/sprite_forge` (the manifest contract is in architecture.md). A kith
+   stands inside one board cell: at most about 0.9 cells wide and 1.25 tall.
 4. Add it to the Free Battle species list (`SPECIES` in
    `scripts/ui/title_screen.gd`) and the journal order (`ORDER` in
    `scripts/ui/journal_screen.gd`).

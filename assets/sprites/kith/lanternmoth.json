@@ -1,29 +1,20 @@
 {
  "version": 1,
  "image": "lanternmoth.png",
+ "normal_map": "lanternmoth_normal.png",
  "frame_size": [
-  48,
-  48
+  128,
+  144
  ],
  "columns": 8,
  "frame_count": 8,
  "pivot": [
-  24,
-  46
+  64,
+  138
  ],
- "pixels_per_unit": 24,
+ "pixels_per_unit": 112,
  "animations": {
   "hover_e": {
-   "frames": [
-    4,
-    5,
-    6,
-    7
-   ],
-   "fps": 8,
-   "loop": true
-  },
-  "hover_s": {
    "frames": [
     0,
     1,
@@ -32,12 +23,31 @@
    ],
    "fps": 8,
    "loop": true
+  },
+  "hover_s": {
+   "frames": [
+    4,
+    5,
+    6,
+    7
+   ],
+   "fps": 8,
+   "loop": true
   }
+ },
+ "lighting": {
+  "shade_floor": 0.3,
+  "rim_strength": 1.2,
+  "rim_power": 3.0
  },
  "meta": {
   "kind": "kith",
   "element": "light",
   "partner_of": "hesper",
-  "generator": "tools/sprite_forge/lanternmoth.py"
+  "route": "art_forge (gpt-image-2 key poses)",
+  "generator": "tools/art_forge/animate.py",
+  "recipe": "tools/art_forge/sheets/lanternmoth.py",
+  "keys": "tools/art_forge/keys/lanternmoth/",
+  "provenance": "tools/art_forge/provenance/keys_lanternmoth.json"
  }
 }

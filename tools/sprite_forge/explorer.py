@@ -21,6 +21,7 @@ from pix import col
 
 sys.path.insert(0, "/home/user/game/tools")
 from common.sheet import SheetBuilder  # noqa: E402
+from portraits import installed_by_art_forge  # noqa: E402
 
 SKIN, HAIR = "skin_tan", "hair_brown"
 CLOAK, TUNIC, TROUS, BOOT = "cloth_teal", "cloth_cream", "earth", "soot"
@@ -454,7 +455,10 @@ ORDER = ["idle_s", "idle_n", "idle_e", "walk_s", "walk_n", "walk_e", "sneak_s", 
          "interact_s", "interact_n", "interact_e", "sit_s", "sit_e", "cheer_s", "surprised_s"]
 
 
-def build(out_dir: str) -> SheetBuilder:
+def build(out_dir: str):
+    if installed_by_art_forge(out_dir, "explorer"):
+        print("  characters  explorer             kept (HD sheet from tools/art_forge)")
+        return []
     A = animations()
     assert set(A) == set(ORDER), set(A) ^ set(ORDER)
     sb = SheetBuilder("explorer", W, H, PIVOT, columns=8, meta={"kind": "character", "role": "player",

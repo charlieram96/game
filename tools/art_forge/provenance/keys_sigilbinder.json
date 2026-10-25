@@ -1,0 +1,251 @@
+{
+ "asset": "tools/art_forge/keys/sigilbinder/",
+ "keys": {
+  "idle_e": {
+   "source_image": "idle_e_r0_gpt-image-2_99801a6987c0_0.png",
+   "source_path": "sigilbinder_hd/idle_e_r0_gpt-image-2_99801a6987c0_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: A Sigilbinder: a silent hooded figure in a long, tattered ink-black cloak, the face lost in the hood's shadow except for two faint glowing eyes, with a glowing magenta chain of interlocking rune links wound around the right arm. Pose: standing perfectly still and upright, menacing and silent, arms hidden in the cloak except the chained right arm hanging at the side. The reference is the character's turnaround sheet: draw this figure exactly as in the right view (the profile), alone and larger, with the same design and colours. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "r0_gpt-image-2_7a17b459b971_0.png",
+      "sha256": "5777ed81179ee9c65ddbaf0a3482a21e2d71df33b818a582cd1c8e6aa3859422"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3822,
+     "completion_tokens": 501,
+     "total_tokens": 4323,
+     "cost": 0.043356,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.043356,
+      "upstream_inference_prompt_cost": 0.028326,
+      "upstream_inference_completions_cost": 0.01503
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 501
+     }
+    },
+    "seconds": 14.5,
+    "created": "2026-10-25T06:00:29Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.714,
+    "scale": 1.0,
+    "tolerance": 48.0
+   },
+   "installed": "2026-10-25T06:09:58Z",
+   "cleanup": []
+  },
+  "idle_s": {
+   "source_image": "idle_s_r0_gpt-image-2_e1fbb116c44d_0.png",
+   "source_path": "sigilbinder_hd/idle_s_r0_gpt-image-2_e1fbb116c44d_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: A Sigilbinder: a silent hooded figure in a long, tattered ink-black cloak, the face lost in the hood's shadow except for two faint glowing eyes, with a glowing magenta chain of interlocking rune links wound around the right arm. Pose: standing perfectly still and upright, menacing and silent, arms hidden in the cloak except the chained right arm hanging at the side. The reference is the character's turnaround sheet: draw this figure exactly as in the left view (the front), alone and larger, with the same design and colours. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "r0_gpt-image-2_7a17b459b971_0.png",
+      "sha256": "5777ed81179ee9c65ddbaf0a3482a21e2d71df33b818a582cd1c8e6aa3859422"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3828,
+     "completion_tokens": 501,
+     "total_tokens": 4329,
+     "cost": 0.043386,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.043386,
+      "upstream_inference_prompt_cost": 0.028356,
+      "upstream_inference_completions_cost": 0.01503
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 501
+     }
+    },
+    "seconds": 12.8,
+    "created": "2026-10-25T06:00:26Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.714,
+    "scale": 1.0,
+    "tolerance": 48.0
+   },
+   "installed": "2026-10-25T06:09:57Z",
+   "cleanup": []
+  },
+  "run_a_e": {
+   "source_image": "run_a_e_r0_gpt-image-2_87600771ef40_0.png",
+   "source_path": "sigilbinder_hd/run_a_e_r0_gpt-image-2_87600771ef40_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: A Sigilbinder: a silent hooded figure in a long, tattered ink-black cloak, the face lost in the hood's shadow except for two faint glowing eyes, with a glowing magenta chain of interlocking rune links wound around the right arm. Pose: running away fast, leaning forward, the left leg striding forward and the tattered cloak streaming out behind. The reference is the character's turnaround sheet: the very same figure as its right view (the profile), alone and larger, running to the right. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "r0_gpt-image-2_7a17b459b971_0.png",
+      "sha256": "5777ed81179ee9c65ddbaf0a3482a21e2d71df33b818a582cd1c8e6aa3859422"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3808,
+     "completion_tokens": 315,
+     "total_tokens": 4123,
+     "cost": 0.037706,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.037706,
+      "upstream_inference_prompt_cost": 0.028256,
+      "upstream_inference_completions_cost": 0.00945
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 315
+     }
+    },
+    "seconds": 13.3,
+    "created": "2026-10-25T06:00:32Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 5.995,
+    "scale": 1.0,
+    "tolerance": 48.0
+   },
+   "installed": "2026-10-25T06:11:47Z",
+   "cleanup": []
+  },
+  "run_b_e": {
+   "source_image": "run_b_e_r0_gpt-image-2_f2ffd113d3bb_0.png",
+   "source_path": "sigilbinder_hd/run_b_e_r0_gpt-image-2_f2ffd113d3bb_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: A Sigilbinder: a silent hooded figure in a long, tattered ink-black cloak, the face lost in the hood's shadow except for two faint glowing eyes, with a glowing magenta chain of interlocking rune links wound around the right arm. Pose: running away fast, leaning forward, the right leg striding forward and the tattered cloak streaming out behind. The reference is the character's turnaround sheet: the very same figure as its right view (the profile), alone and larger, running to the right. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "r0_gpt-image-2_7a17b459b971_0.png",
+      "sha256": "5777ed81179ee9c65ddbaf0a3482a21e2d71df33b818a582cd1c8e6aa3859422"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3808,
+     "completion_tokens": 315,
+     "total_tokens": 4123,
+     "cost": 0.037706,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.037706,
+      "upstream_inference_prompt_cost": 0.028256,
+      "upstream_inference_completions_cost": 0.00945
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 315
+     }
+    },
+    "seconds": 12.2,
+    "created": "2026-10-25T06:00:31Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 5.995,
+    "scale": 1.0,
+    "tolerance": 48.0
+   },
+   "installed": "2026-10-25T06:11:49Z",
+   "cleanup": []
+  }
+ },
+ "palette": {
+  "sources": [
+   "idle_s_r0_gpt-image-2_e1fbb116c44d_0.png",
+   "idle_e_r0_gpt-image-2_99801a6987c0_0.png",
+   "run_a_e_r0_gpt-image-2_87600771ef40_0.png",
+   "run_b_e_r0_gpt-image-2_f2ffd113d3bb_0.png"
+  ],
+  "k": 40,
+  "ramps": [
+   [
+    "#311123",
+    "#4e1c2f",
+    "#6a253e",
+    "#8c2d4d",
+    "#b42a51",
+    "#bd5669",
+    "#da305d",
+    "#eb456c",
+    "#f45d7b",
+    "#cf8990",
+    "#f8758a",
+    "#fa8e9b"
+   ],
+   [
+    "#fba5aa",
+    "#fbc5c1"
+   ],
+   [
+    "#302c3d",
+    "#443c53"
+   ],
+   [
+    "#580a53",
+    "#413343",
+    "#4b374a",
+    "#513c51",
+    "#5a4156"
+   ],
+   [
+    "#120e17",
+    "#141314",
+    "#19161e",
+    "#191719",
+    "#1d1a20",
+    "#201e23",
+    "#252028",
+    "#29242d",
+    "#302731",
+    "#2c2838",
+    "#312c34",
+    "#362a37",
+    "#3a2e3b",
+    "#473d49",
+    "#4b414e",
+    "#564e5d"
+   ]
+  ]
+ }
+}

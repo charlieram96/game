@@ -1,0 +1,444 @@
+{
+ "asset": "tools/art_forge/keys/mossling/",
+ "keys": {
+  "alert_s": {
+   "source_image": "alert_s_r0_gpt-image-2_c1dddbdb5233_0.png",
+   "source_path": "mossling_hd/alert_s_r0_gpt-image-2_c1dddbdb5233_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Mossling, a tiny shy grove-element creature: a round moss-covered puffball with long floppy leaf-shaped ears like a lop-eared rabbit, a tiny two-leaf sprout on its head, stubby feet, shiny dark eyes and a pinkish nose. Pose: startled and alert: standing up tall on its stubby feet, the long leaf ears pointing straight up, eyes wide open. The reference is the creature's turnaround sheet: the very same creature as its left view (the front), alone and larger, with the same design and colours. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "r0_gpt-image-2_75252a31976c_0.png",
+      "sha256": "73f60ca56f88bbd90a2af162e3985729b0b85a942d4b055c3e59465a72087f65"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3796,
+     "completion_tokens": 635,
+     "total_tokens": 4431,
+     "cost": 0.047246,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.047246,
+      "upstream_inference_prompt_cost": 0.028196,
+      "upstream_inference_completions_cost": 0.01905
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 635
+     }
+    },
+    "seconds": 16.2,
+    "created": "2026-10-25T06:00:18Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 12.015,
+    "scale": 1.0,
+    "tolerance": 48.0
+   },
+   "installed": "2026-10-25T06:09:13Z",
+   "cleanup": []
+  },
+  "hop_e": {
+   "source_image": "hop_e_r1_gpt-image-2_c4e000c0af12_0.png",
+   "source_path": "mossling_hd/hop_e_r1_gpt-image-2_c4e000c0af12_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Mossling, a tiny shy grove-element creature: a round moss-covered puffball with long floppy leaf-shaped ears like a lop-eared rabbit, a tiny two-leaf sprout on its head, stubby feet, shiny dark eyes and a pinkish nose. Pose: in the middle of a happy little hop, its round body stretched a little taller, both feet off the floor and tucked under, the leaf ears flying up and back. The reference is the creature's turnaround sheet: the very same creature as its right view (the profile), alone and larger, with the same design and colours. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "r0_gpt-image-2_75252a31976c_0.png",
+      "sha256": "73f60ca56f88bbd90a2af162e3985729b0b85a942d4b055c3e59465a72087f65"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 1904,
+     "completion_tokens": 196,
+     "total_tokens": 2100,
+     "cost": 0.020008,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.020008,
+      "upstream_inference_prompt_cost": 0.014128,
+      "upstream_inference_completions_cost": 0.00588
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 196
+     }
+    },
+    "seconds": 11.5,
+    "created": "2026-10-25T06:00:12Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 10.213,
+    "scale": 1.0,
+    "tolerance": 48.0
+   },
+   "installed": "2026-10-25T06:11:50Z",
+   "cleanup": []
+  },
+  "hop_n": {
+   "source_image": "hop_n_r0_gpt-image-2_752f2136858a_0.png",
+   "source_path": "mossling_hd/hop_n_r0_gpt-image-2_752f2136858a_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature is seen from behind, facing away from the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Mossling, a tiny shy grove-element creature: a round moss-covered puffball with long floppy leaf-shaped ears like a lop-eared rabbit, a tiny two-leaf sprout on its head, stubby feet, shiny dark eyes and a pinkish nose. Pose: in the middle of a happy little hop, its round body stretched a little taller, both feet off the floor and tucked under, the leaf ears flying up and back. Use the reference image as the model sheet: the same little creature seen from the back, with the same colours, drawn at the same scale, now bouncing up into the air. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "stand_n_r0_gpt-image-2_c93e120e93c0_0.png",
+      "sha256": "3698a8d6f5a8d195a7366220b2295c875c1d19ad98c4fb2f5c1fcde7c7454f90"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 2796,
+     "completion_tokens": 391,
+     "total_tokens": 3187,
+     "cost": 0.031854,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.031854,
+      "upstream_inference_prompt_cost": 0.020124,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 13.6,
+    "created": "2026-10-25T06:07:38Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 11.05,
+    "scale": 1.0,
+    "tolerance": 48.0
+   },
+   "installed": "2026-10-25T06:12:04Z",
+   "cleanup": []
+  },
+  "hop_s": {
+   "source_image": "hop_s_r0_gpt-image-2_521da6576e06_1.png",
+   "source_path": "mossling_hd/hop_s_r0_gpt-image-2_521da6576e06_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Mossling, a tiny shy grove-element creature: a round moss-covered puffball with long floppy leaf-shaped ears like a lop-eared rabbit, a tiny two-leaf sprout on its head, stubby feet, shiny dark eyes and a pinkish nose. Pose: in the middle of a happy little hop, its round body stretched a little taller, both feet off the floor and tucked under, the leaf ears flying up and back. The reference is the creature's turnaround sheet: the very same creature as its left view (the front), alone and larger, with the same design and colours. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "r0_gpt-image-2_75252a31976c_0.png",
+      "sha256": "73f60ca56f88bbd90a2af162e3985729b0b85a942d4b055c3e59465a72087f65"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3814,
+     "completion_tokens": 391,
+     "total_tokens": 4205,
+     "cost": 0.040016,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.040016,
+      "upstream_inference_prompt_cost": 0.028286,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 12.4,
+    "created": "2026-10-25T06:00:01Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 11.174,
+    "scale": 1.0,
+    "tolerance": 48.0
+   },
+   "installed": "2026-10-25T06:11:51Z",
+   "cleanup": []
+  },
+  "sleep_s": {
+   "source_image": "sleep_s_r0_gpt-image-2_51daa4b6beb9_0.png",
+   "source_path": "mossling_hd/sleep_s_r0_gpt-image-2_51daa4b6beb9_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Mossling, a tiny shy grove-element creature: a round moss-covered puffball with long floppy leaf-shaped ears like a lop-eared rabbit, a tiny two-leaf sprout on its head, stubby feet, shiny dark eyes and a pinkish nose. Pose: fast asleep, settled flat and round on the floor with its feet tucked in, the leaf ears draped over its sides, eyes peacefully shut. The reference is the creature's turnaround sheet: the very same creature as its left view (the front), alone and larger, with the same design and colours. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "r0_gpt-image-2_75252a31976c_0.png",
+      "sha256": "73f60ca56f88bbd90a2af162e3985729b0b85a942d4b055c3e59465a72087f65"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 1902,
+     "completion_tokens": 196,
+     "total_tokens": 2098,
+     "cost": 0.019998,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.019998,
+      "upstream_inference_prompt_cost": 0.014118,
+      "upstream_inference_completions_cost": 0.00588
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 196
+     }
+    },
+    "seconds": 11.4,
+    "created": "2026-10-25T06:00:14Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 12.015,
+    "scale": 1.0,
+    "tolerance": 48.0
+   },
+   "installed": "2026-10-25T06:09:14Z",
+   "cleanup": []
+  },
+  "stand_e": {
+   "source_image": "stand_e_r0_gpt-image-2_2fd414e88ec7_0.png",
+   "source_path": "mossling_hd/stand_e_r0_gpt-image-2_2fd414e88ec7_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Mossling, a tiny shy grove-element creature: a round moss-covered puffball with long floppy leaf-shaped ears like a lop-eared rabbit, a tiny two-leaf sprout on its head, stubby feet, shiny dark eyes and a pinkish nose. Pose: sitting calmly on its stubby feet, the long leaf ears drooping down at its sides, looking curious. The reference is the creature's turnaround sheet: draw it exactly as in the right view (the profile), alone and larger, with the same design, colours and proportions. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "r0_gpt-image-2_75252a31976c_0.png",
+      "sha256": "73f60ca56f88bbd90a2af162e3985729b0b85a942d4b055c3e59465a72087f65"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3788,
+     "completion_tokens": 391,
+     "total_tokens": 4179,
+     "cost": 0.039886,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.039886,
+      "upstream_inference_prompt_cost": 0.028156,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 13.3,
+    "created": "2026-10-25T06:00:02Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 12.015,
+    "scale": 1.0,
+    "tolerance": 48.0
+   },
+   "installed": "2026-10-25T06:09:11Z",
+   "cleanup": []
+  },
+  "stand_n": {
+   "source_image": "stand_n_r0_gpt-image-2_c93e120e93c0_0.png",
+   "source_path": "mossling_hd/stand_n_r0_gpt-image-2_c93e120e93c0_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature is seen from behind, facing away from the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Mossling, a tiny shy grove-element creature: a round moss-covered puffball with long floppy leaf-shaped ears like a lop-eared rabbit, a tiny two-leaf sprout on its head, stubby feet, shiny dark eyes and a pinkish nose. Pose: sitting calmly on its stubby feet, the long leaf ears drooping down at its sides, looking curious. The reference is the creature's turnaround sheet: draw it exactly as in the middle view (the back), alone and larger, with the same design, colours and proportions. Seen from directly behind: the face is hidden and must not be visible. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "r0_gpt-image-2_75252a31976c_0.png",
+      "sha256": "73f60ca56f88bbd90a2af162e3985729b0b85a942d4b055c3e59465a72087f65"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 1911,
+     "completion_tokens": 196,
+     "total_tokens": 2107,
+     "cost": 0.020043,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.020043,
+      "upstream_inference_prompt_cost": 0.014163,
+      "upstream_inference_completions_cost": 0.00588
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 196
+     }
+    },
+    "seconds": 11.9,
+    "created": "2026-10-25T06:00:01Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 12.015,
+    "scale": 1.0,
+    "tolerance": 48.0
+   },
+   "installed": "2026-10-25T06:09:10Z",
+   "cleanup": []
+  },
+  "stand_s": {
+   "source_image": "stand_s_r0_gpt-image-2_1a94caab7cd1_0.png",
+   "source_path": "mossling_hd/stand_s_r0_gpt-image-2_1a94caab7cd1_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the body real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One creature only, full body, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. When it stands, the creature fills about four fifths of the picture height; in every pose it is drawn at that same scale. The creature faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Mossling, a tiny shy grove-element creature: a round moss-covered puffball with long floppy leaf-shaped ears like a lop-eared rabbit, a tiny two-leaf sprout on its head, stubby feet, shiny dark eyes and a pinkish nose. Pose: sitting calmly on its stubby feet, the long leaf ears drooping down at its sides, looking curious. The reference is the creature's turnaround sheet: draw it exactly as in the left view (the front), alone and larger, with the same design, colours and proportions. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "1:1"
+    },
+    "references": [
+     {
+      "file": "r0_gpt-image-2_75252a31976c_0.png",
+      "sha256": "73f60ca56f88bbd90a2af162e3985729b0b85a942d4b055c3e59465a72087f65"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3794,
+     "completion_tokens": 391,
+     "total_tokens": 4185,
+     "cost": 0.039916,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.039916,
+      "upstream_inference_prompt_cost": 0.028186,
+      "upstream_inference_completions_cost": 0.01173
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 391
+     }
+    },
+    "seconds": 11.9,
+    "created": "2026-10-25T06:00:01Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 12.015,
+    "scale": 1.0,
+    "tolerance": 48.0
+   },
+   "installed": "2026-10-25T06:09:10Z",
+   "cleanup": []
+  }
+ },
+ "palette": {
+  "sources": [
+   "stand_s_r0_gpt-image-2_1a94caab7cd1_0.png",
+   "stand_n_r0_gpt-image-2_c93e120e93c0_0.png",
+   "stand_e_r0_gpt-image-2_2fd414e88ec7_0.png",
+   "hop_s_r0_gpt-image-2_521da6576e06_1.png",
+   "hop_n_r0_gpt-image-2_752f2136858a_0.png",
+   "hop_e_r1_gpt-image-2_c4e000c0af12_0.png",
+   "alert_s_r0_gpt-image-2_c1dddbdb5233_0.png",
+   "sleep_s_r0_gpt-image-2_51daa4b6beb9_0.png"
+  ],
+  "k": 40,
+  "ramps": [
+   [
+    "#cd4a4e",
+    "#ec6565",
+    "#f69586"
+   ],
+   [
+    "#50612b",
+    "#677730",
+    "#809136",
+    "#64a537",
+    "#7aaf3d",
+    "#86b73f",
+    "#91bf41",
+    "#a2c949",
+    "#bbd559",
+    "#caeeb6"
+   ],
+   [
+    "#092415",
+    "#0d311c",
+    "#113b1f",
+    "#1e4928",
+    "#2b5630",
+    "#25672a",
+    "#2e772d",
+    "#277558",
+    "#328462",
+    "#3c8632",
+    "#328e67",
+    "#499235",
+    "#3c9c70",
+    "#559c35",
+    "#52a777",
+    "#51af7d",
+    "#60b882",
+    "#65c088",
+    "#70c691",
+    "#81c38e",
+    "#81d094",
+    "#a6dfa2"
+   ],
+   [
+    "#24654e"
+   ],
+   [
+    "#120e17",
+    "#403031",
+    "#f9faf7"
+   ]
+  ]
+ }
+}

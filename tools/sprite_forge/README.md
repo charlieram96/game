@@ -5,6 +5,13 @@ portrait sprite sheets. Everything is drawn from code (no source art), using
 the shared palette (`tools/common/palette.py`) and written through the shared
 sheet contract (`tools/common/sheet.py` -> `<name>.png` + `<name>.json`).
 
+**The shipped kith, people and training totem are HD sheets from
+`tools/art_forge`** (112 px per world unit, with normal maps; see its README).
+`build.py` keeps every sheet whose manifest says art_forge made it (the
+`installed_by_art_forge` check in each builder), so the rigs here are the
+procedural fallback for those sheets and the source of the crowd sheets.
+Delete an HD sheet's `.json` and `.png` to get the procedural one back.
+
 ## Regenerate
 
 ```
@@ -104,15 +111,27 @@ unit) as long as frame size and pivot are the 1x values times k.
 
 | folder | sheets |
 | --- | --- |
-| `assets/sprites/characters/` | explorer, hesper, corin, villager_farmer, villager_baker, sigilbinder, crowd, crowd_back |
-| `assets/sprites/kith/` | emberlyn (2x), stoneback (2x), mossling, lanternmoth |
-| `assets/sprites/props/` | training_totem (2x) |
+| `assets/sprites/characters/` | crowd, crowd_back; fallbacks for explorer, hesper, corin, villager_farmer, villager_baker, sigilbinder (shipped as art_forge HD sheets) |
+| `assets/sprites/kith/` | fallbacks for emberlyn (2x), stoneback (2x), mossling, lanternmoth (shipped as art_forge HD sheets) |
+| `assets/sprites/props/` | fallback for training_totem (2x) (shipped as an art_forge HD sheet) |
 | `assets/sprites/portraits/` | portrait_hesper, portrait_corin, portrait_player, portrait_emberlyn (procedural fallback; the shipped 128x128 portraits come from `tools/art_forge`, and `build.py` keeps any sheet art_forge installed) |
 
 Kith battle set (Emberlyn and Stoneback, all of `_s/_n/_e`): `ready` (battle
 stance, 6 frames, loops; the calmer `idle` stays for the overworld),
-`dash_windup` (2, 12 fps), `dash` (3, 18 fps, loops), `dash_land` (3, 14 fps),
-`ram` (2, 16 fps), plus Stoneback's `roll_s`.
+`dash_windup` (2, 12 fps), `dash` (3, 18 fps, loops; the HD Stoneback rolls
+4 frames at 24 fps), `dash_land` (3, 14 fps), `ram` (2, 16 fps), plus
+Stoneback's `roll_s`. `validate.py` checks these names and counts for both
+the procedural and the HD sheets.
 
 Ground shadows are not baked in (the engine places blob shadows under
-billboards); glow light is baked only onto the sprite's own pixels.
+billboards, and sprites can cast real shadows); glow light is baked only onto
+the sprite's own pixels.
+
+## Validation of HD sheets
+
+`validate.py` also covers the art_forge HD sheets: a spec entry with
+`"geometry"` checks their exact frame size, pivot and pixels per unit (112)
+instead of the resolution-factor rule, requires a normal map in the sheet's
+layout (unit normals facing the camera, emission alpha 128-255), and a
+`"footprint"` checks how many board cells the listed animations cover (a kith
+inside one cell: at most 0.92 wide and 1.25 tall; people 1.5-1.95 tall).

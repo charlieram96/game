@@ -1,0 +1,217 @@
+{
+ "asset": "tools/art_forge/keys/training_totem/",
+ "keys": {
+  "hit_back_s": {
+   "source_image": "hit_back_s_r0_gpt-image-2_70856d303bc4_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game prop sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives it real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One object only, whole, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Upright, the object fills about seven tenths of the picture height; in every pose it is drawn at that same scale. It faces the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: A training dummy for young creature tamers: a stout wooden post set in a heavy wooden foot, a short wooden crossbar for arms with rounded ends, a plump body of tied straw wrapped in a weathered burlap sack bound with twisted rope at the waist and neck, loose straw tufts poking out at the hem, a round burlap sack head with two stitched X eyes, and a painted red and cream bullseye target on the chest. Sturdy, homely and well used. Pose: knocked back by a hit: the whole dummy tilts backward and to the right on its post, straw bits and dust burst from the chest. Use the reference image as the model sheet: the very same dummy with the same colours, drawn at exactly the same scale, with its wooden foot in the same place on the floor line; only the post bends and tilts above the foot. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_s_r0_gpt-image-2_b7a43f9eb8e8_2.png",
+      "sha256": "22ca521775aba9cb166ff17414e8ede5ef38fea2bbcc8d664198b59c0f5fafa4"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3914,
+     "completion_tokens": 501,
+     "total_tokens": 4415,
+     "cost": 0.043816,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.043816,
+      "upstream_inference_prompt_cost": 0.028786,
+      "upstream_inference_completions_cost": 0.01503
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 501
+     }
+    },
+    "seconds": 16.2,
+    "created": "2026-10-25T04:52:39Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 9.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_training_totem_0",
+     "hd_training_totem_1",
+     "hd_training_totem_2"
+    ]
+   },
+   "installed": "2026-10-25T04:54:07Z",
+   "cleanup": [],
+   "source_path": "training_totem_hd/hit_back_s_r0_gpt-image-2_70856d303bc4_1.png"
+  },
+  "hit_forward_s": {
+   "source_image": "hit_forward_s_r0_gpt-image-2_4d0dfb162072_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game prop sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives it real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One object only, whole, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Upright, the object fills about seven tenths of the picture height; in every pose it is drawn at that same scale. It faces the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: A training dummy for young creature tamers: a stout wooden post set in a heavy wooden foot, a short wooden crossbar for arms with rounded ends, a plump body of tied straw wrapped in a weathered burlap sack bound with twisted rope at the waist and neck, loose straw tufts poking out at the hem, a round burlap sack head with two stitched X eyes, and a painted red and cream bullseye target on the chest. Sturdy, homely and well used. Pose: springing back after a hit: the whole dummy tilts forward and to the left on its post, a few loose straw bits still in the air. Use the reference image as the model sheet: the very same dummy with the same colours, drawn at exactly the same scale, with its wooden foot in the same place on the floor line; only the post bends and tilts above the foot. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_s_r0_gpt-image-2_b7a43f9eb8e8_2.png",
+      "sha256": "22ca521775aba9cb166ff17414e8ede5ef38fea2bbcc8d664198b59c0f5fafa4"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3918,
+     "completion_tokens": 686,
+     "total_tokens": 4604,
+     "cost": 0.049386,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.049386,
+      "upstream_inference_prompt_cost": 0.028806,
+      "upstream_inference_completions_cost": 0.02058
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 686
+     }
+    },
+    "seconds": 15.9,
+    "created": "2026-10-25T04:52:39Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 9.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_training_totem_0",
+     "hd_training_totem_1",
+     "hd_training_totem_2"
+    ]
+   },
+   "installed": "2026-10-25T04:54:08Z",
+   "cleanup": [],
+   "source_path": "training_totem_hd/hit_forward_s_r0_gpt-image-2_4d0dfb162072_0.png"
+  },
+  "idle_s": {
+   "source_image": "idle_s_r0_gpt-image-2_b7a43f9eb8e8_2.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game prop sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives it real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One object only, whole, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Upright, the object fills about seven tenths of the picture height; in every pose it is drawn at that same scale. It faces the viewer. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: A training dummy for young creature tamers: a stout wooden post set in a heavy wooden foot, a short wooden crossbar for arms with rounded ends, a plump body of tied straw wrapped in a weathered burlap sack bound with twisted rope at the waist and neck, loose straw tufts poking out at the hem, a round burlap sack head with two stitched X eyes, and a painted red and cream bullseye target on the chest. Sturdy, homely and well used. Pose: standing upright and still. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 3,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "totem_old.png",
+      "sha256": "94586ccf36ee3afbd704c37a25fee88cb17a3f169cd0cdbc8727a9b6b43de273"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3252,
+     "completion_tokens": 472,
+     "total_tokens": 3724,
+     "cost": 0.037044,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.037044,
+      "upstream_inference_prompt_cost": 0.022884,
+      "upstream_inference_completions_cost": 0.01416
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 472
+     }
+    },
+    "seconds": 14.9,
+    "created": "2026-10-25T04:51:14Z",
+    "index": 2
+   },
+   "pixelize": {
+    "cell": 9.0,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_training_totem_0",
+     "hd_training_totem_1",
+     "hd_training_totem_2"
+    ]
+   },
+   "installed": "2026-10-25T04:54:06Z",
+   "cleanup": [],
+   "source_path": "training_totem_hd/idle_s_r0_gpt-image-2_b7a43f9eb8e8_2.png"
+  }
+ },
+ "palette": {
+  "sources": [
+   "idle_s_r0_gpt-image-2_b7a43f9eb8e8_2.png",
+   "hit_back_s_r0_gpt-image-2_70856d303bc4_1.png",
+   "hit_forward_s_r0_gpt-image-2_4d0dfb162072_0.png"
+  ],
+  "k": 40,
+  "ramps": [
+   [
+    "#7b2010",
+    "#962511",
+    "#b12f14",
+    "#ca441b",
+    "#dc6124"
+   ],
+   [
+    "#261709",
+    "#301d0f",
+    "#3e2411",
+    "#4c2b16",
+    "#5b2d15",
+    "#61381b",
+    "#723818",
+    "#6d4b28",
+    "#81421b",
+    "#904c1f",
+    "#7e5a30",
+    "#9f5925",
+    "#8d6739",
+    "#96703f",
+    "#ae672c",
+    "#a37840",
+    "#bc7735",
+    "#ac844c",
+    "#ba8d4c",
+    "#cb873c"
+   ],
+   [
+    "#997c53",
+    "#b19467",
+    "#c39858",
+    "#d09f56",
+    "#c2a677",
+    "#d6ac65",
+    "#cfb485",
+    "#deb872",
+    "#dac193",
+    "#e7c683",
+    "#e6ce9f",
+    "#f1d599",
+    "#f0dcb3",
+    "#f4e7cb",
+    "#fbeabe"
+   ]
+  ]
+ }
+}

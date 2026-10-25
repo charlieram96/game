@@ -20,6 +20,7 @@ from pix import col
 
 sys.path.insert(0, "/home/user/game/tools")
 from common.sheet import SheetBuilder  # noqa: E402
+from portraits import installed_by_art_forge  # noqa: E402
 
 SKIN, HAIR, COAT, SHOE, WOOD = "skin_light", "hair_grey", "cloth_plum", "leather", "wood"
 BLOUSE = "cloth_cream"
@@ -249,7 +250,10 @@ def animations():
 ORDER = ["idle_s", "idle_n", "idle_e", "walk_s", "walk_n", "walk_e", "talk_s", "point_e"]
 
 
-def build(out_dir: str) -> SheetBuilder:
+def build(out_dir: str):
+    if installed_by_art_forge(out_dir, "hesper"):
+        print("  characters  hesper               kept (HD sheet from tools/art_forge)")
+        return []
     A = animations()
     assert set(A) == set(ORDER), set(A) ^ set(ORDER)
     sb = SheetBuilder("hesper", W, H, PIVOT, columns=8, meta={"kind": "character", "role": "mentor",

@@ -1,22 +1,23 @@
 {
  "version": 1,
  "image": "villager_baker.png",
+ "normal_map": "villager_baker_normal.png",
  "frame_size": [
-  32,
-  48
+  128,
+  240
  ],
  "columns": 8,
- "frame_count": 20,
+ "frame_count": 17,
  "pivot": [
-  16,
-  45
+  64,
+  232
  ],
- "pixels_per_unit": 24,
+ "pixels_per_unit": 112,
  "animations": {
   "idle_e": {
    "frames": [
-    4,
-    5
+    0,
+    1
    ],
    "fps": 2,
    "loop": true
@@ -31,54 +32,63 @@
   },
   "idle_s": {
    "frames": [
-    0,
-    1
+    4,
+    5
    ],
    "fps": 2,
    "loop": true
   },
   "talk_s": {
    "frames": [
-    18,
-    19
+    6,
+    7
    ],
    "fps": 4,
    "loop": true
   },
   "walk_e": {
    "frames": [
-    14,
-    15,
-    16,
-    17
+    8,
+    9,
+    10,
+    9
    ],
    "fps": 6,
    "loop": true
   },
   "walk_n": {
    "frames": [
-    10,
     11,
     12,
-    13
+    13,
+    12
    ],
    "fps": 6,
    "loop": true
   },
   "walk_s": {
    "frames": [
-    6,
-    7,
-    8,
-    9
+    14,
+    15,
+    16,
+    15
    ],
    "fps": 6,
    "loop": true
   }
  },
+ "lighting": {
+  "shade_floor": 0.3,
+  "rim_strength": 1.2,
+  "rim_power": 3.0
+ },
  "meta": {
   "kind": "character",
+  "route": "art_forge (gpt-image-2 key poses)",
   "role": "villager",
-  "generator": "tools/sprite_forge/villagers.py"
+  "generator": "tools/art_forge/animate.py",
+  "recipe": "tools/art_forge/sheets/villager_baker.py",
+  "keys": "tools/art_forge/keys/villager_baker/",
+  "provenance": "tools/art_forge/provenance/keys_villager_baker.json"
  }
 }

@@ -1,0 +1,715 @@
+{
+ "asset": "tools/art_forge/keys/corin/",
+ "keys": {
+  "cheer_s": {
+   "source_image": "cheer_s_r0_gpt-image-2_d724ae66a35b_0.png",
+   "source_path": "corin_hd/cheer_s_r0_gpt-image-2_d724ae66a35b_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Corin, a fourteen-year-old apprentice with a cocky, energetic look: deep brown skin, bright green eyes, a shock of spiky copper-orange hair standing up in flame-like points above a red cloth headband whose knotted tails hang at one side, a mustard-yellow vest with rounded padded shoulders over a slate-grey shirt, blue trousers, brown leather boots and fingerless leather gloves. Boastful but good-hearted. Pose: cheering: one fist pumped high in the air, a big boastful grin. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_s_r0_gpt-image-2_606371f5b15b_0.png",
+      "sha256": "989dcee352280698ba819edd90dcf6c0cdb4bd58ab1d085d37c4fa092b2db693"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3886,
+     "completion_tokens": 686,
+     "total_tokens": 4572,
+     "cost": 0.049226,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.049226,
+      "upstream_inference_prompt_cost": 0.028646,
+      "upstream_inference_completions_cost": 0.02058
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 686
+     }
+    },
+    "seconds": 12.9,
+    "created": "2026-10-25T05:10:55Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.65,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 0.94,
+    "matched_to": "idle_s"
+   },
+   "installed": "2026-10-25T05:41:03Z",
+   "cleanup": []
+  },
+  "idle_e": {
+   "source_image": "idle_e_r0_gpt-image-2_9b0524b85615_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Corin, a fourteen-year-old apprentice with a cocky, energetic look: deep brown skin, bright green eyes, a shock of spiky copper-orange hair standing up in flame-like points above a red cloth headband whose knotted tails hang at one side, a mustard-yellow vest with rounded padded shoulders over a slate-grey shirt, blue trousers, brown leather boots and fingerless leather gloves. Boastful but good-hearted. Pose: standing relaxed, arms at the sides, weight on both feet. The reference is the character's turnaround sheet: draw this character exactly as in the right view (the profile), alone and larger, with the same outfit, colours and proportions. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "r0_gpt-image-2_a92b0362d577_0.png",
+      "sha256": "f75391832d078ed9b4e2402255f385c14f745390c0e80b6504485839841936f4"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3868,
+     "completion_tokens": 501,
+     "total_tokens": 4369,
+     "cost": 0.043586,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.043586,
+      "upstream_inference_prompt_cost": 0.028556,
+      "upstream_inference_completions_cost": 0.01503
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 501
+     }
+    },
+    "seconds": 14.1,
+    "created": "2026-10-25T05:03:18Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.742,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_corin_0",
+     "hd_corin_1",
+     "hd_corin_2",
+     "hd_corin_3",
+     "hd_corin_4",
+     "hd_corin_5"
+    ]
+   },
+   "installed": "2026-10-25T05:31:55Z",
+   "cleanup": [],
+   "source_path": "corin_hd/idle_e_r0_gpt-image-2_9b0524b85615_0.png"
+  },
+  "idle_n": {
+   "source_image": "idle_n_r0_gpt-image-2_329d9d20551c_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character is seen from directly behind, facing away from the viewer; the face is hidden. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Corin, a fourteen-year-old apprentice with a cocky, energetic look: deep brown skin, bright green eyes, a shock of spiky copper-orange hair standing up in flame-like points above a red cloth headband whose knotted tails hang at one side, a mustard-yellow vest with rounded padded shoulders over a slate-grey shirt, blue trousers, brown leather boots and fingerless leather gloves. Boastful but good-hearted. Pose: standing relaxed, arms at the sides, weight on both feet. The reference is the character's turnaround sheet: draw this character exactly as in the middle view (the back), alone and larger, with the same outfit, colours and proportions. Seen from directly behind: the face is hidden and must not be visible. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "r0_gpt-image-2_a92b0362d577_0.png",
+      "sha256": "f75391832d078ed9b4e2402255f385c14f745390c0e80b6504485839841936f4"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3914,
+     "completion_tokens": 315,
+     "total_tokens": 4229,
+     "cost": 0.038236,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.038236,
+      "upstream_inference_prompt_cost": 0.028786,
+      "upstream_inference_completions_cost": 0.00945
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 315
+     }
+    },
+    "seconds": 13.9,
+    "created": "2026-10-25T05:03:18Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.853,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_corin_0",
+     "hd_corin_1",
+     "hd_corin_2",
+     "hd_corin_3",
+     "hd_corin_4",
+     "hd_corin_5"
+    ]
+   },
+   "installed": "2026-10-25T05:31:54Z",
+   "cleanup": [],
+   "source_path": "corin_hd/idle_n_r0_gpt-image-2_329d9d20551c_0.png"
+  },
+  "idle_s": {
+   "source_image": "idle_s_r0_gpt-image-2_606371f5b15b_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Corin, a fourteen-year-old apprentice with a cocky, energetic look: deep brown skin, bright green eyes, a shock of spiky copper-orange hair standing up in flame-like points above a red cloth headband whose knotted tails hang at one side, a mustard-yellow vest with rounded padded shoulders over a slate-grey shirt, blue trousers, brown leather boots and fingerless leather gloves. Boastful but good-hearted. Pose: standing relaxed, arms at the sides, weight on both feet. The reference is the character's turnaround sheet: draw this character exactly as in the left view (the front), alone and larger, with the same outfit, colours and proportions. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "r0_gpt-image-2_a92b0362d577_0.png",
+      "sha256": "f75391832d078ed9b4e2402255f385c14f745390c0e80b6504485839841936f4"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3874,
+     "completion_tokens": 686,
+     "total_tokens": 4560,
+     "cost": 0.049166,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.049166,
+      "upstream_inference_prompt_cost": 0.028586,
+      "upstream_inference_completions_cost": 0.02058
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 686
+     }
+    },
+    "seconds": 15.0,
+    "created": "2026-10-25T05:03:19Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.074,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_corin_0",
+     "hd_corin_1",
+     "hd_corin_2",
+     "hd_corin_3",
+     "hd_corin_4",
+     "hd_corin_5"
+    ]
+   },
+   "installed": "2026-10-25T05:31:53Z",
+   "cleanup": [],
+   "source_path": "corin_hd/idle_s_r0_gpt-image-2_606371f5b15b_0.png"
+  },
+  "slump_s": {
+   "source_image": "slump_s_r0_gpt-image-2_f2e55b865ece_0.png",
+   "source_path": "corin_hd/slump_s_r0_gpt-image-2_f2e55b865ece_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Corin, a fourteen-year-old apprentice with a cocky, energetic look: deep brown skin, bright green eyes, a shock of spiky copper-orange hair standing up in flame-like points above a red cloth headband whose knotted tails hang at one side, a mustard-yellow vest with rounded padded shoulders over a slate-grey shirt, blue trousers, brown leather boots and fingerless leather gloves. Boastful but good-hearted. Pose: slumped in defeat: shoulders drooping, head hanging low, arms limp. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_s_r0_gpt-image-2_606371f5b15b_0.png",
+      "sha256": "989dcee352280698ba819edd90dcf6c0cdb4bd58ab1d085d37c4fa092b2db693"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3886,
+     "completion_tokens": 686,
+     "total_tokens": 4572,
+     "cost": 0.049226,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.049226,
+      "upstream_inference_prompt_cost": 0.028646,
+      "upstream_inference_completions_cost": 0.02058
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 686
+     }
+    },
+    "seconds": 14.9,
+    "created": "2026-10-25T05:10:57Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.437,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 0.91,
+    "matched_to": "idle_s"
+   },
+   "installed": "2026-10-25T05:41:04Z",
+   "cleanup": []
+  },
+  "talk_s": {
+   "source_image": "talk_s_r0_gpt-image-2_644869b48f19_1.png",
+   "source_path": "corin_hd/talk_s_r0_gpt-image-2_644869b48f19_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Corin, a fourteen-year-old apprentice with a cocky, energetic look: deep brown skin, bright green eyes, a shock of spiky copper-orange hair standing up in flame-like points above a red cloth headband whose knotted tails hang at one side, a mustard-yellow vest with rounded padded shoulders over a slate-grey shirt, blue trousers, brown leather boots and fingerless leather gloves. Boastful but good-hearted. Pose: talking with a confident grin, one hand on the hip and the other jabbing a thumb at his own chest. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_s_r0_gpt-image-2_606371f5b15b_0.png",
+      "sha256": "989dcee352280698ba819edd90dcf6c0cdb4bd58ab1d085d37c4fa092b2db693"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3900,
+     "completion_tokens": 686,
+     "total_tokens": 4586,
+     "cost": 0.049296,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.049296,
+      "upstream_inference_prompt_cost": 0.028716,
+      "upstream_inference_completions_cost": 0.02058
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 686
+     }
+    },
+    "seconds": 14.2,
+    "created": "2026-10-25T05:10:55Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 6.579,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 0.93,
+    "matched_to": "idle_s"
+   },
+   "installed": "2026-10-25T05:41:05Z",
+   "cleanup": []
+  },
+  "walk_a_e": {
+   "source_image": "walk_a_e_r0_gpt-image-2_c9a4054e7960_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Corin, a fourteen-year-old apprentice with a cocky, energetic look: deep brown skin, bright green eyes, a shock of spiky copper-orange hair standing up in flame-like points above a red cloth headband whose knotted tails hang at one side, a mustard-yellow vest with rounded padded shoulders over a slate-grey shirt, blue trousers, brown leather boots and fingerless leather gloves. Boastful but good-hearted. Pose: walking, mid-stride: the left leg steps forward and the right arm swings forward. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_e_r0_gpt-image-2_9b0524b85615_0.png",
+      "sha256": "88b7690505bab11bead65d93abf8bcc183c0b2c559e95c0bbcb1fede0b337acf"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3884,
+     "completion_tokens": 686,
+     "total_tokens": 4570,
+     "cost": 0.049216,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.049216,
+      "upstream_inference_prompt_cost": 0.028636,
+      "upstream_inference_completions_cost": 0.02058
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 686
+     }
+    },
+    "seconds": 14.3,
+    "created": "2026-10-25T05:10:41Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.742,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_corin_0",
+     "hd_corin_1",
+     "hd_corin_2",
+     "hd_corin_3",
+     "hd_corin_4",
+     "hd_corin_5"
+    ]
+   },
+   "installed": "2026-10-25T05:32:02Z",
+   "cleanup": [],
+   "source_path": "corin_hd/walk_a_e_r0_gpt-image-2_c9a4054e7960_0.png"
+  },
+  "walk_a_n": {
+   "source_image": "walk_a_n_r0_gpt-image-2_c73bf2a97451_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character is seen from directly behind, facing away from the viewer; the face is hidden. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Corin, a fourteen-year-old apprentice with a cocky, energetic look: deep brown skin, bright green eyes, a shock of spiky copper-orange hair standing up in flame-like points above a red cloth headband whose knotted tails hang at one side, a mustard-yellow vest with rounded padded shoulders over a slate-grey shirt, blue trousers, brown leather boots and fingerless leather gloves. Boastful but good-hearted. Pose: walking, mid-stride: the left leg steps forward and the right arm swings forward. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. Seen from directly behind: the face is hidden and must not be visible. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_n_r0_gpt-image-2_329d9d20551c_0.png",
+      "sha256": "03bc3c15a73f4ee1bd3b3e60f6e96fa480810b6ba812de40645fc53efdb303ed"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3930,
+     "completion_tokens": 501,
+     "total_tokens": 4431,
+     "cost": 0.043896,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.043896,
+      "upstream_inference_prompt_cost": 0.028866,
+      "upstream_inference_completions_cost": 0.01503
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 501
+     }
+    },
+    "seconds": 13.1,
+    "created": "2026-10-25T05:10:39Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.853,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_corin_0",
+     "hd_corin_1",
+     "hd_corin_2",
+     "hd_corin_3",
+     "hd_corin_4",
+     "hd_corin_5"
+    ]
+   },
+   "installed": "2026-10-25T05:31:59Z",
+   "cleanup": [],
+   "source_path": "corin_hd/walk_a_n_r0_gpt-image-2_c73bf2a97451_0.png"
+  },
+  "walk_a_s": {
+   "source_image": "walk_a_s_r0_gpt-image-2_74355665dedc_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Corin, a fourteen-year-old apprentice with a cocky, energetic look: deep brown skin, bright green eyes, a shock of spiky copper-orange hair standing up in flame-like points above a red cloth headband whose knotted tails hang at one side, a mustard-yellow vest with rounded padded shoulders over a slate-grey shirt, blue trousers, brown leather boots and fingerless leather gloves. Boastful but good-hearted. Pose: walking, mid-stride: the left leg steps forward and the right arm swings forward. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_s_r0_gpt-image-2_606371f5b15b_0.png",
+      "sha256": "989dcee352280698ba819edd90dcf6c0cdb4bd58ab1d085d37c4fa092b2db693"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3890,
+     "completion_tokens": 315,
+     "total_tokens": 4205,
+     "cost": 0.038116,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.038116,
+      "upstream_inference_prompt_cost": 0.028666,
+      "upstream_inference_completions_cost": 0.00945
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 315
+     }
+    },
+    "seconds": 14.9,
+    "created": "2026-10-25T05:10:41Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.074,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_corin_0",
+     "hd_corin_1",
+     "hd_corin_2",
+     "hd_corin_3",
+     "hd_corin_4",
+     "hd_corin_5"
+    ]
+   },
+   "installed": "2026-10-25T05:31:56Z",
+   "cleanup": [],
+   "source_path": "corin_hd/walk_a_s_r0_gpt-image-2_74355665dedc_0.png"
+  },
+  "walk_b_e": {
+   "source_image": "walk_b_e_r0_gpt-image-2_82141c6b64e2_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Corin, a fourteen-year-old apprentice with a cocky, energetic look: deep brown skin, bright green eyes, a shock of spiky copper-orange hair standing up in flame-like points above a red cloth headband whose knotted tails hang at one side, a mustard-yellow vest with rounded padded shoulders over a slate-grey shirt, blue trousers, brown leather boots and fingerless leather gloves. Boastful but good-hearted. Pose: walking, mid-stride: the right leg steps forward and the left arm swings forward. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_e_r0_gpt-image-2_9b0524b85615_0.png",
+      "sha256": "88b7690505bab11bead65d93abf8bcc183c0b2c559e95c0bbcb1fede0b337acf"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3884,
+     "completion_tokens": 501,
+     "total_tokens": 4385,
+     "cost": 0.043666,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.043666,
+      "upstream_inference_prompt_cost": 0.028636,
+      "upstream_inference_completions_cost": 0.01503
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 501
+     }
+    },
+    "seconds": 12.8,
+    "created": "2026-10-25T05:10:49Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.742,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_corin_0",
+     "hd_corin_1",
+     "hd_corin_2",
+     "hd_corin_3",
+     "hd_corin_4",
+     "hd_corin_5"
+    ]
+   },
+   "installed": "2026-10-25T05:32:03Z",
+   "cleanup": [],
+   "source_path": "corin_hd/walk_b_e_r0_gpt-image-2_82141c6b64e2_0.png"
+  },
+  "walk_b_n": {
+   "source_image": "walk_b_n_r0_gpt-image-2_ad71825220c2_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character is seen from directly behind, facing away from the viewer; the face is hidden. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Corin, a fourteen-year-old apprentice with a cocky, energetic look: deep brown skin, bright green eyes, a shock of spiky copper-orange hair standing up in flame-like points above a red cloth headband whose knotted tails hang at one side, a mustard-yellow vest with rounded padded shoulders over a slate-grey shirt, blue trousers, brown leather boots and fingerless leather gloves. Boastful but good-hearted. Pose: walking, mid-stride: the right leg steps forward and the left arm swings forward. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. Seen from directly behind: the face is hidden and must not be visible. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_n_r0_gpt-image-2_329d9d20551c_0.png",
+      "sha256": "03bc3c15a73f4ee1bd3b3e60f6e96fa480810b6ba812de40645fc53efdb303ed"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3930,
+     "completion_tokens": 315,
+     "total_tokens": 4245,
+     "cost": 0.038316,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.038316,
+      "upstream_inference_prompt_cost": 0.028866,
+      "upstream_inference_completions_cost": 0.00945
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 315
+     }
+    },
+    "seconds": 12.6,
+    "created": "2026-10-25T05:10:47Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.853,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_corin_0",
+     "hd_corin_1",
+     "hd_corin_2",
+     "hd_corin_3",
+     "hd_corin_4",
+     "hd_corin_5"
+    ]
+   },
+   "installed": "2026-10-25T05:32:00Z",
+   "cleanup": [],
+   "source_path": "corin_hd/walk_b_n_r0_gpt-image-2_ad71825220c2_0.png"
+  },
+  "walk_b_s": {
+   "source_image": "walk_b_s_r0_gpt-image-2_6557ef68c966_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Corin, a fourteen-year-old apprentice with a cocky, energetic look: deep brown skin, bright green eyes, a shock of spiky copper-orange hair standing up in flame-like points above a red cloth headband whose knotted tails hang at one side, a mustard-yellow vest with rounded padded shoulders over a slate-grey shirt, blue trousers, brown leather boots and fingerless leather gloves. Boastful but good-hearted. Pose: walking, mid-stride: the right leg steps forward and the left arm swings forward. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_s_r0_gpt-image-2_606371f5b15b_0.png",
+      "sha256": "989dcee352280698ba819edd90dcf6c0cdb4bd58ab1d085d37c4fa092b2db693"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3890,
+     "completion_tokens": 686,
+     "total_tokens": 4576,
+     "cost": 0.049246,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.049246,
+      "upstream_inference_prompt_cost": 0.028666,
+      "upstream_inference_completions_cost": 0.02058
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 686
+     }
+    },
+    "seconds": 15.1,
+    "created": "2026-10-25T05:10:43Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.074,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_corin_0",
+     "hd_corin_1",
+     "hd_corin_2",
+     "hd_corin_3",
+     "hd_corin_4",
+     "hd_corin_5"
+    ]
+   },
+   "installed": "2026-10-25T05:31:58Z",
+   "cleanup": [],
+   "source_path": "corin_hd/walk_b_s_r0_gpt-image-2_6557ef68c966_0.png"
+  }
+ },
+ "palette": {
+  "sources": [
+   "idle_s_r0_gpt-image-2_606371f5b15b_0.png",
+   "idle_n_r0_gpt-image-2_329d9d20551c_0.png",
+   "idle_e_r0_gpt-image-2_9b0524b85615_0.png",
+   "talk_s_r0_gpt-image-2_644869b48f19_1.png",
+   "cheer_s_r0_gpt-image-2_d724ae66a35b_0.png",
+   "slump_s_r0_gpt-image-2_f2e55b865ece_0.png"
+  ],
+  "k": 44,
+  "ramps": [
+   [
+    "#200f09",
+    "#301509",
+    "#431c0c",
+    "#55230e",
+    "#66290f",
+    "#862012",
+    "#a12a13",
+    "#c3281c",
+    "#b6400e",
+    "#cf520f",
+    "#df3921"
+   ],
+   [
+    "#743411",
+    "#833d13",
+    "#914714",
+    "#9f5018",
+    "#ab5a1a",
+    "#b66621",
+    "#c16f1e",
+    "#cd781b",
+    "#e56617",
+    "#d9841c",
+    "#f2811b",
+    "#e29317",
+    "#f29d20"
+   ],
+   [
+    "#fab537",
+    "#fdd06a"
+   ],
+   [
+    "#165f2a",
+    "#47b152"
+   ],
+   [
+    "#141e2f",
+    "#162a52",
+    "#1c396d",
+    "#254886",
+    "#2f599c",
+    "#416eb0",
+    "#6a8fc2"
+   ],
+   [
+    "#120e17",
+    "#303339",
+    "#44474e",
+    "#5a5c63",
+    "#6c6e73",
+    "#8a8b8f",
+    "#b0bbc9",
+    "#f4eede"
+   ]
+  ]
+ }
+}

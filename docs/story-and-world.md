@@ -135,7 +135,9 @@ yard, the arena gate or the shrine.
 Art and portraits: the explorer, Hesper, Corin, the villagers, the
 Sigilbinder and the crowd have sprite sheets. Hesper, Corin, the player and
 Emberlyn have dialogue portraits with expressions (Corin's include grin,
-determined and sulk). See `tools/sprite_forge/README.md`.
+determined and sulk). See `tools/art_forge/README.md` (the HD sheets and
+the portraits) and `tools/sprite_forge/README.md` (the crowd and the
+procedural fallbacks).
 
 ## Hooks for later chapters (Planned)
 

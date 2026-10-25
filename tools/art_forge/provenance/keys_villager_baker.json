@@ -1,0 +1,577 @@
+{
+ "asset": "tools/art_forge/keys/villager_baker/",
+ "keys": {
+  "idle_e": {
+   "source_image": "idle_e_r0_gpt-image-2_071bdfef16a8_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wynn, the cheerful village baker: a round-faced, rosy woman with brown hair tied up under a red kerchief with white polka dots, a red dress with the sleeves rolled up, a flour-dusted cream apron and brown shoes. Pose: standing relaxed, arms at the sides, weight on both feet. The reference is the character's turnaround sheet: draw this character exactly as in the right view (the profile), alone and larger, with the same outfit, colours and proportions. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "r0_gpt-image-2_674dbc7739c2_1.png",
+      "sha256": "b0858a542d3c64ae01681593272247bb08c42b589a39360b7834df8513366f29"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3792,
+     "completion_tokens": 686,
+     "total_tokens": 4478,
+     "cost": 0.048756,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.048756,
+      "upstream_inference_prompt_cost": 0.028176,
+      "upstream_inference_completions_cost": 0.02058
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 686
+     }
+    },
+    "seconds": 13.6,
+    "created": "2026-10-25T05:03:33Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 6.885,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_villager_baker_0",
+     "hd_villager_baker_1",
+     "hd_villager_baker_2"
+    ]
+   },
+   "installed": "2026-10-25T05:32:48Z",
+   "cleanup": [],
+   "source_path": "villager_baker_hd/idle_e_r0_gpt-image-2_071bdfef16a8_1.png"
+  },
+  "idle_n": {
+   "source_image": "idle_n_r0_gpt-image-2_a359abd2ce95_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character is seen from directly behind, facing away from the viewer; the face is hidden. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wynn, the cheerful village baker: a round-faced, rosy woman with brown hair tied up under a red kerchief with white polka dots, a red dress with the sleeves rolled up, a flour-dusted cream apron and brown shoes. Pose: standing relaxed, arms at the sides, weight on both feet. The reference is the character's turnaround sheet: draw this character exactly as in the middle view (the back), alone and larger, with the same outfit, colours and proportions. Seen from directly behind: the face is hidden and must not be visible. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "r0_gpt-image-2_674dbc7739c2_1.png",
+      "sha256": "b0858a542d3c64ae01681593272247bb08c42b589a39360b7834df8513366f29"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3838,
+     "completion_tokens": 686,
+     "total_tokens": 4524,
+     "cost": 0.048986,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.048986,
+      "upstream_inference_prompt_cost": 0.028406,
+      "upstream_inference_completions_cost": 0.02058
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 686
+     }
+    },
+    "seconds": 14.4,
+    "created": "2026-10-25T05:03:34Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.462,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_villager_baker_0",
+     "hd_villager_baker_1",
+     "hd_villager_baker_2"
+    ]
+   },
+   "installed": "2026-10-25T05:32:47Z",
+   "cleanup": [],
+   "source_path": "villager_baker_hd/idle_n_r0_gpt-image-2_a359abd2ce95_0.png"
+  },
+  "idle_s": {
+   "source_image": "idle_s_r0_gpt-image-2_87bddd32d6b1_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wynn, the cheerful village baker: a round-faced, rosy woman with brown hair tied up under a red kerchief with white polka dots, a red dress with the sleeves rolled up, a flour-dusted cream apron and brown shoes. Pose: standing relaxed, arms at the sides, weight on both feet. The reference is the character's turnaround sheet: draw this character exactly as in the left view (the front), alone and larger, with the same outfit, colours and proportions. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "r0_gpt-image-2_674dbc7739c2_1.png",
+      "sha256": "b0858a542d3c64ae01681593272247bb08c42b589a39360b7834df8513366f29"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3798,
+     "completion_tokens": 686,
+     "total_tokens": 4484,
+     "cost": 0.048786,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.048786,
+      "upstream_inference_prompt_cost": 0.028206,
+      "upstream_inference_completions_cost": 0.02058
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 686
+     }
+    },
+    "seconds": 13.5,
+    "created": "2026-10-25T05:03:32Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 7.462,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_villager_baker_0",
+     "hd_villager_baker_1",
+     "hd_villager_baker_2"
+    ]
+   },
+   "installed": "2026-10-25T05:32:46Z",
+   "cleanup": [],
+   "source_path": "villager_baker_hd/idle_s_r0_gpt-image-2_87bddd32d6b1_1.png"
+  },
+  "talk_s": {
+   "source_image": "talk_s_r0_gpt-image-2_73f92924cbc3_1.png",
+   "source_path": "villager_baker_hd/talk_s_r0_gpt-image-2_73f92924cbc3_1.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wynn, the cheerful village baker: a round-faced, rosy woman with brown hair tied up under a red kerchief with white polka dots, a red dress with the sleeves rolled up, a flour-dusted cream apron and brown shoes. Pose: talking cheerfully, one hand raised in a friendly gesture, mouth open mid-word. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_s_r0_gpt-image-2_87bddd32d6b1_1.png",
+      "sha256": "6fe1e4bda730c4606a484ddbf001590c56493aca24c3beb449665bf5254f1b91"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3812,
+     "completion_tokens": 315,
+     "total_tokens": 4127,
+     "cost": 0.037726,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.037726,
+      "upstream_inference_prompt_cost": 0.028276,
+      "upstream_inference_completions_cost": 0.00945
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 315
+     }
+    },
+    "seconds": 11.8,
+    "created": "2026-10-25T05:11:37Z",
+    "index": 1
+   },
+   "pixelize": {
+    "cell": 7.238,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 0.97,
+    "matched_to": "idle_s"
+   },
+   "installed": "2026-10-25T05:41:16Z",
+   "cleanup": []
+  },
+  "walk_a_e": {
+   "source_image": "walk_a_e_r0_gpt-image-2_94f71c98e53d_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wynn, the cheerful village baker: a round-faced, rosy woman with brown hair tied up under a red kerchief with white polka dots, a red dress with the sleeves rolled up, a flour-dusted cream apron and brown shoes. Pose: walking, mid-stride: the left leg steps forward and the right arm swings forward. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_e_r0_gpt-image-2_071bdfef16a8_1.png",
+      "sha256": "47e081aff89b76fa3d90a78805103e30513499ecbe3ed0d63b3d64e70ece210d"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3808,
+     "completion_tokens": 315,
+     "total_tokens": 4123,
+     "cost": 0.037706,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.037706,
+      "upstream_inference_prompt_cost": 0.028256,
+      "upstream_inference_completions_cost": 0.00945
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 315
+     }
+    },
+    "seconds": 14.5,
+    "created": "2026-10-25T05:11:25Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.885,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_villager_baker_0",
+     "hd_villager_baker_1",
+     "hd_villager_baker_2"
+    ]
+   },
+   "installed": "2026-10-25T05:32:53Z",
+   "cleanup": [],
+   "source_path": "villager_baker_hd/walk_a_e_r0_gpt-image-2_94f71c98e53d_0.png"
+  },
+  "walk_a_n": {
+   "source_image": "walk_a_n_r0_gpt-image-2_58a9ca593a14_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character is seen from directly behind, facing away from the viewer; the face is hidden. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wynn, the cheerful village baker: a round-faced, rosy woman with brown hair tied up under a red kerchief with white polka dots, a red dress with the sleeves rolled up, a flour-dusted cream apron and brown shoes. Pose: walking, mid-stride: the left leg steps forward and the right arm swings forward. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. Seen from directly behind: the face is hidden and must not be visible. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_n_r0_gpt-image-2_a359abd2ce95_0.png",
+      "sha256": "c93133bd0470652e72ecfce86fdcbd1ac0f024b0725dcc0127f27750097cc339"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3854,
+     "completion_tokens": 315,
+     "total_tokens": 4169,
+     "cost": 0.037936,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.037936,
+      "upstream_inference_prompt_cost": 0.028486,
+      "upstream_inference_completions_cost": 0.00945
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 315
+     }
+    },
+    "seconds": 13.3,
+    "created": "2026-10-25T05:11:22Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.462,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_villager_baker_0",
+     "hd_villager_baker_1",
+     "hd_villager_baker_2"
+    ]
+   },
+   "installed": "2026-10-25T05:32:51Z",
+   "cleanup": [],
+   "source_path": "villager_baker_hd/walk_a_n_r0_gpt-image-2_58a9ca593a14_0.png"
+  },
+  "walk_a_s": {
+   "source_image": "walk_a_s_r0_gpt-image-2_cfa515bdb5b2_0.png",
+   "source_path": "villager_baker_hd/walk_a_s_r0_gpt-image-2_cfa515bdb5b2_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wynn, the cheerful village baker: a round-faced, rosy woman with brown hair tied up under a red kerchief with white polka dots, a red dress with the sleeves rolled up, a flour-dusted cream apron and brown shoes. Pose: walking, mid-stride: the left leg steps forward and the right arm swings forward. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_s_r0_gpt-image-2_87bddd32d6b1_1.png",
+      "sha256": "6fe1e4bda730c4606a484ddbf001590c56493aca24c3beb449665bf5254f1b91"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3814,
+     "completion_tokens": 686,
+     "total_tokens": 4500,
+     "cost": 0.048866,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.048866,
+      "upstream_inference_prompt_cost": 0.028286,
+      "upstream_inference_completions_cost": 0.02058
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 686
+     }
+    },
+    "seconds": 15.4,
+    "created": "2026-10-25T05:11:24Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.164,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "matched_scale": 0.96,
+    "matched_to": "idle_s"
+   },
+   "installed": "2026-10-25T05:41:17Z",
+   "cleanup": []
+  },
+  "walk_b_e": {
+   "source_image": "walk_b_e_r0_gpt-image-2_8e86851fb2c3_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces to the right, seen in profile. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wynn, the cheerful village baker: a round-faced, rosy woman with brown hair tied up under a red kerchief with white polka dots, a red dress with the sleeves rolled up, a flour-dusted cream apron and brown shoes. Pose: walking, mid-stride: the right leg steps forward and the left arm swings forward. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_e_r0_gpt-image-2_071bdfef16a8_1.png",
+      "sha256": "47e081aff89b76fa3d90a78805103e30513499ecbe3ed0d63b3d64e70ece210d"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3808,
+     "completion_tokens": 315,
+     "total_tokens": 4123,
+     "cost": 0.037706,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.037706,
+      "upstream_inference_prompt_cost": 0.028256,
+      "upstream_inference_completions_cost": 0.00945
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 315
+     }
+    },
+    "seconds": 12.2,
+    "created": "2026-10-25T05:11:35Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 6.885,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_villager_baker_0",
+     "hd_villager_baker_1",
+     "hd_villager_baker_2"
+    ]
+   },
+   "installed": "2026-10-25T05:32:54Z",
+   "cleanup": [],
+   "source_path": "villager_baker_hd/walk_b_e_r0_gpt-image-2_8e86851fb2c3_0.png"
+  },
+  "walk_b_n": {
+   "source_image": "walk_b_n_r0_gpt-image-2_d7e8ec98c8d0_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character is seen from directly behind, facing away from the viewer; the face is hidden. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wynn, the cheerful village baker: a round-faced, rosy woman with brown hair tied up under a red kerchief with white polka dots, a red dress with the sleeves rolled up, a flour-dusted cream apron and brown shoes. Pose: walking, mid-stride: the right leg steps forward and the left arm swings forward. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. Seen from directly behind: the face is hidden and must not be visible. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_n_r0_gpt-image-2_a359abd2ce95_0.png",
+      "sha256": "c93133bd0470652e72ecfce86fdcbd1ac0f024b0725dcc0127f27750097cc339"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3854,
+     "completion_tokens": 315,
+     "total_tokens": 4169,
+     "cost": 0.037936,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.037936,
+      "upstream_inference_prompt_cost": 0.028486,
+      "upstream_inference_completions_cost": 0.00945
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 315
+     }
+    },
+    "seconds": 11.4,
+    "created": "2026-10-25T05:11:32Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.462,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_villager_baker_0",
+     "hd_villager_baker_1",
+     "hd_villager_baker_2"
+    ]
+   },
+   "installed": "2026-10-25T05:32:52Z",
+   "cleanup": [],
+   "source_path": "villager_baker_hd/walk_b_n_r0_gpt-image-2_d7e8ec98c8d0_0.png"
+  },
+  "walk_b_s": {
+   "source_image": "walk_b_s_r0_gpt-image-2_d2d2af90ca1b_0.png",
+   "generation": {
+    "model": "openai/gpt-image-2",
+    "prompt": "Game character sprite in crisp, high-detail HD pixel art for a 16-bit-era-inspired role-playing game remastered with soft modern lighting: small, even, square pixels; a rich but limited palette with four to six hand-placed shades per material; clear form shading that gives the figure real volume; a soft key light from the upper left; a clean dark outline one pixel wide that is never pure black. One character only, full body from head to feet, with stylized proportions about four and a half heads tall, seen from slightly above as in a three-quarter top-down game, standing on an invisible floor, centred with a margin on every side. Flat solid magenta (#FF00FF) background with no shadow, floor, gradient or scenery. No text, watermark or border. Standing, the character fills about seven eighths of the picture height; in every pose they are drawn at that same scale. The character faces the viewer, turned very slightly toward the lower right. Keep the exact design of the character in the reference image(s): the same proportions, colours, outfit and markings. Subject: Wynn, the cheerful village baker: a round-faced, rosy woman with brown hair tied up under a red kerchief with white polka dots, a red dress with the sleeves rolled up, a flour-dusted cream apron and brown shoes. Pose: walking, mid-stride: the right leg steps forward and the left arm swings forward. Use the reference image as the model sheet: the very same character with the same outfit, colours and proportions, drawn at exactly the same scale, with the feet on the same floor line. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+    "params": {
+     "n": 2,
+     "aspect_ratio": "2:3"
+    },
+    "references": [
+     {
+      "file": "idle_s_r0_gpt-image-2_87bddd32d6b1_1.png",
+      "sha256": "6fe1e4bda730c4606a484ddbf001590c56493aca24c3beb449665bf5254f1b91"
+     }
+    ],
+    "usage": {
+     "prompt_tokens": 3814,
+     "completion_tokens": 501,
+     "total_tokens": 4315,
+     "cost": 0.043316,
+     "is_byok": false,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     },
+     "cost_details": {
+      "upstream_inference_cost": 0.043316,
+      "upstream_inference_prompt_cost": 0.028286,
+      "upstream_inference_completions_cost": 0.01503
+     },
+     "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 501
+     }
+    },
+    "seconds": 15.2,
+    "created": "2026-10-25T05:11:28Z",
+    "index": 0
+   },
+   "pixelize": {
+    "cell": 7.462,
+    "scale": 1.0,
+    "tolerance": 48.0,
+    "ramps": [
+     "hd_villager_baker_0",
+     "hd_villager_baker_1",
+     "hd_villager_baker_2"
+    ]
+   },
+   "installed": "2026-10-25T05:32:50Z",
+   "cleanup": [],
+   "source_path": "villager_baker_hd/walk_b_s_r0_gpt-image-2_d2d2af90ca1b_0.png"
+  }
+ },
+ "palette": {
+  "sources": [
+   "idle_s_r0_gpt-image-2_87bddd32d6b1_1.png",
+   "idle_n_r0_gpt-image-2_a359abd2ce95_0.png",
+   "idle_e_r0_gpt-image-2_071bdfef16a8_1.png",
+   "talk_s_r0_gpt-image-2_73f92924cbc3_1.png"
+  ],
+  "k": 44,
+  "ramps": [
+   [
+    "#1e0b07",
+    "#271009",
+    "#360d08",
+    "#2f170e",
+    "#3a1b10",
+    "#46100b",
+    "#462012",
+    "#56120d",
+    "#522515",
+    "#64140e",
+    "#602c18",
+    "#731710",
+    "#821a11",
+    "#71351c",
+    "#931e13",
+    "#854021",
+    "#a42417",
+    "#9b4b26",
+    "#b62c1c",
+    "#c83924",
+    "#d64529",
+    "#e15331",
+    "#e9613a"
+   ],
+   [
+    "#5b483d",
+    "#705a4c",
+    "#856c5a",
+    "#af5a30",
+    "#9a7e68",
+    "#c76e3d",
+    "#ad8f77",
+    "#e18751",
+    "#c0a38a",
+    "#f1a26a",
+    "#d4b89e",
+    "#fabd85",
+    "#e3cab0",
+    "#f0dbc2"
+   ],
+   [
+    "#120e17",
+    "#392a24",
+    "#463831",
+    "#fcf0de"
+   ]
+  ]
+ }
+}
