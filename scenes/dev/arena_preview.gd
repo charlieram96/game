@@ -11,6 +11,7 @@ extends Node3D
 ##   --insets=<l>,<r>         side insets for the camera (canvas px), e.g. touch buttons
 ##   --stats                  print draw calls / objects / nodes after the frames
 ##   --highlight              light up a few cells (ArenaBuilder.set_cell_highlight)
+##   --nosun                  switch the sun and sky fill off (see the point lights alone)
 
 var _args := {}
 var _flags: Array[String] = []
@@ -32,6 +33,10 @@ func _ready() -> void:
 	ArenaBuilder.apply_post(post, def)
 	_spawn_kith(def)
 	_spawn_trainers(builder, def)
+	if _flags.has("nosun"):
+		# only the braziers, lanterns and ambient: check the point lights' pools
+		rig.sun.visible = false
+		rig.fill.visible = false
 	if _flags.has("guides"):
 		_add_guides(cam)
 	if _flags.has("highlight"):
@@ -96,6 +101,13 @@ func _spawn_trainers(builder: ArenaBuilder, def: ArenaDefinition) -> void:
 
 func _print_stats() -> void:
 	var rs := RenderingServer
+	var vp := get_viewport()
+	for t: Array in [["visible", Viewport.RENDER_INFO_TYPE_VISIBLE], ["shadow", Viewport.RENDER_INFO_TYPE_SHADOW], ["canvas", Viewport.RENDER_INFO_TYPE_CANVAS]]:
+		print("%s pass: %d draw calls, %d objects, %d primitives" % [t[0], vp.get_render_info(t[1], Viewport.RENDER_INFO_DRAW_CALLS_IN_FRAME), vp.get_render_info(t[1], Viewport.RENDER_INFO_OBJECTS_IN_FRAME), vp.get_render_info(t[1], Viewport.RENDER_INFO_PRIMITIVES_IN_FRAME)])
+	var lights := 0
+	for n in find_children("*", "OmniLight3D", true, false):
+		lights += 1
+	print("omni lights: ", lights)
 	print("draw calls: ", rs.get_rendering_info(RenderingServer.RENDERING_INFO_TOTAL_DRAW_CALLS_IN_FRAME))
 	print("objects: ", rs.get_rendering_info(RenderingServer.RENDERING_INFO_TOTAL_OBJECTS_IN_FRAME))
 	print("primitives: ", rs.get_rendering_info(RenderingServer.RENDERING_INFO_TOTAL_PRIMITIVES_IN_FRAME))
@@ -119,12 +131,31 @@ func _add_guides(cam: BattleCamera) -> void:
 	board.position = br.position
 	board.size = br.size
 	layer.add_child(board)
-	# a 1px guide on every cell boundary: it must sit on the grout lines
-	var n := Vector2(cam.arena_size)
-	for i in range(1, int(n.x)):
-		_rect(layer, Rect2(br.position.x + br.size.x * float(i) / n.x, br.position.y, 1.0, br.size.y), Color(0.0, 1.0, 1.0, 0.8))
-	for j in range(1, int(n.y)):
-		_rect(layer, Rect2(br.position.x, br.position.y + br.size.y * float(j) / n.y, br.size.x, 1.0), Color(0.0, 1.0, 1.0, 0.8))
+	# a 1px guide on every cell boundary, projected through the real camera:
+	# it must sit on the joints between the flagstones
+	var lines := Line2DLayer.new()
+	var h := cam.arena_size * 0.5
+	for i in range(0, int(cam.arena_size.x) + 1):
+		var x := -h.x + i
+		lines.segments.append([cam.rest_unproject(Vector3(x, 0, -h.y)), cam.rest_unproject(Vector3(x, 0, h.y))])
+	for j in range(0, int(cam.arena_size.y) + 1):
+		var z := -h.y + j
+		lines.segments.append([cam.rest_unproject(Vector3(-h.x, 0, z)), cam.rest_unproject(Vector3(h.x, 0, z))])
+	layer.add_child(lines)
+
+
+## Draws the projected cell boundaries as 1 px lines.
+class Line2DLayer:
+	extends Control
+	var segments: Array = []
+
+	func _ready() -> void:
+		set_anchors_preset(Control.PRESET_FULL_RECT)
+		mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	func _draw() -> void:
+		for s in segments:
+			draw_line(s[0], s[1], Color(0.0, 1.0, 1.0, 0.8), 1.0)
 
 
 func _rect(layer: CanvasLayer, r: Rect2, color: Color) -> void:

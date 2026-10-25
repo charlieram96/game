@@ -130,6 +130,14 @@ Only curated, pixelized results and their provenance records are committed.
   480x270, opaque, palette PNG, shown behind the loading text by
   `export/web/shell.html` and copied next to `index.html` by
   `tools/package_web.py`.
+- **Arena banners** (`assets/environments/textures/arena_banner_{teal,red,gold}.png`,
+  briefs `arena_banner_*`, kind `banner`): 64x100, binary alpha, painted by
+  `openai/gpt-image-2` at medium quality (two candidates per brief, about
+  $0.04 each) and pixelized to each banner's own ramps. The teal crane and
+  the red flame are the two teams' colours, the gold standing stones the
+  arena's own; `ArenaBuilder` hangs them on the back wall and the side poles
+  (`shaders/arena_cloth.gdshader` sways them). At 48 x 84 the designs broke
+  up, at 64 px they hold.
 
 ## Tests
 

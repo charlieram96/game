@@ -9,7 +9,7 @@ through Milestone 3.
 
 * [x] Working Godot project (4.7.2) that launches and is playable
 * [x] Organized, modular architecture (see architecture.md)
-* [x] Fixed-angle orthographic arena camera
+* [x] Fixed-angle arena camera (now a perspective HD-2D view, see below)
 * [x] Controllable creature with 8-direction movement
 * [x] Strict 4-direction dash with tie-break rules
 * [x] Collision and boundaries (exact swept circles, stones and walls)
@@ -51,6 +51,12 @@ through Milestone 3.
   a branded web loading page, a gzipped ~15 MB web package for itch.io or
   any static host (`tools/export.sh`), and a CI workflow that tests, builds
   and deploys to GitHub Pages. The workflow has not run on GitHub yet.
+* [x] HD-2D battle diorama: a perspective camera (48 deg, 25 deg FOV) that
+  fills the screen with the 20 x 12 board, a real 3D board of beveled
+  flagstones (or earth and timber in the training yard) with steps, walls,
+  pillars, braziers, banners and stands, a low warm sun with soft shadows,
+  flickering point lights, depth-aware tilt-shift, god rays, dust, bloom
+  and a filmic grade, at about a third of the old arena's draw calls.
 
 ## Known gaps and limitations
 
@@ -104,7 +110,9 @@ through Milestone 3.
 
 **Untested (no claims)**
 
-* Frame rate on real phones, browsers and low-end PCs.
+* Frame rate on real phones, browsers and low-end PCs. The battle's
+  depth-aware tilt-shift (high graphics only) is the costliest pass: 17 depth
+  and colour reads on the blurred pixels, about a third of the screen.
 * Touch controls on physical devices.
 * Anything networked: latency, packet loss, capacity.
 

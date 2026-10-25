@@ -1,0 +1,54 @@
+{
+ "asset": "assets/environments/textures/arena_banner_red.png",
+ "source_image": "r0_gpt-image-2_c7167db8e1d2_1.png",
+ "generation": {
+  "model": "openai/gpt-image-2",
+  "prompt": "A single hanging cloth banner for a cozy fantasy arena, seen perfectly straight on (flat front view, no perspective, no folds toward the viewer), in crisp, hand-placed pixel art: a limited palette, clean outlines one pixel wide that are never pure black, soft key light from the upper left, a short wooden rod across the top, a woven border and a swallowtail hem at the bottom. The banner fills the picture from top to bottom with a narrow margin. Flat solid magenta (#FF00FF) background with no shadow, wall or scenery. No text, letters, numbers or watermark. Subject: The banner of the defender's side: warm brick-red cloth with a cream border and small gold tassels, showing a single stylised golden flame curling upward like a leaf, in the middle of the banner. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+  "params": {
+   "n": 2,
+   "aspect_ratio": "2:3",
+   "quality": "medium"
+  },
+  "references": [],
+  "usage": {
+   "prompt_tokens": 414,
+   "completion_tokens": 2744,
+   "total_tokens": 3158,
+   "cost": 0.08439,
+   "is_byok": false,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   },
+   "cost_details": {
+    "upstream_inference_cost": 0.08439,
+    "upstream_inference_prompt_cost": 0.00207,
+    "upstream_inference_completions_cost": 0.08232
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0,
+    "image_tokens": 2744
+   }
+  },
+  "seconds": 28.1,
+  "created": "2026-10-25T04:48:29Z",
+  "index": 1
+ },
+ "pixelize": {
+  "brief": "arena_banner_red",
+  "height": 97,
+  "width": 62,
+  "outline": false,
+  "ramps": [
+   "cloth_red",
+   "cloth_cream",
+   "gold",
+   "ember",
+   "wood",
+   "ink"
+  ],
+  "tolerance": 48.0,
+  "opaque": false,
+  "despeckle": false
+ },
+ "installed": "2026-10-25T04:50:03Z"
+}

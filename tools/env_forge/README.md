@@ -10,7 +10,8 @@ python3 tools/env_forge/build.py fx ui        # only some groups (textures, foli
 python3 tools/env_forge/build.py --clean      # delete our known outputs first, then rebuild
 python3 tools/env_forge/build.py --check      # validate the files on disk only
 python3 tools/env_forge/textures.py grass_a   # any module can rebuild single assets by name
-python3 tools/env_forge/arena.py              # battle-arena art (+ board mock-ups); --check validates
+python3 tools/env_forge/arena_hd.py           # HD battle-arena art (48 texels/unit) + board mock-ups; --check validates
+python3 tools/env_forge/arena.py              # the earlier 24-texel arena art (unused by the battle now)
 ```
 
 Requires Python 3 + Pillow + numpy. Output is deterministic (seeded per asset name).
@@ -26,7 +27,8 @@ Requires Python 3 + Pillow + numpy. Output is deterministic (seeded per asset na
 | `mural.py` | C: `mural_dawncrane` + `_glow`, a carved relief built from an integer height field |
 | `fx.py` | D: VFX sheets -> `assets/effects/` |
 | `ui.py` | E: icons -> `assets/ui/icons/`, 9-slice panels, reticle, cursor -> `assets/ui/panels/` |
-| `arena.py` | battle board: floor tile atlases (stone, training yard; one 24x24 tile per cell, rows of plain / worn / mossy-or-sandy grout / special variants), rim slabs, sun-crane inlay, scorch decals, wall bay, ashlar, coping, paving, menhir, cloth banners -> `assets/environments/textures/arena_*` (writes next to its own checkout) |
+| `arena_hd.py` | the HD-2D battle diorama at 48 texels per unit (what the battle uses): flagstone and packed-earth face atlases (8 x 8 cells of 56 px: a 48 px face and a 4 px gutter that repeats its edge, so mipmaps never bleed; rows of tone A / tone B / worn / specials / rim pieces), seamless ashlar, dressed stone, paving, planks, timber and menhir textures, the sun-crane inlay and scorch decals -> `assets/environments/textures/arena_hd_*`. The board's joints and bevels are real geometry, so faces carry no grout. `--check` validates |
+| `arena.py` | the earlier 24-texel battle board (tile atlases with baked grout, rim slabs, inlay, decals, wall bay, banners); no longer used by the battle, kept for reference and for its `Pen` helper -> `assets/environments/textures/arena_*` |
 | `build.py` | runs everything and validates sizes, palette membership, alpha rules, borders, manifests |
 
 ## Conventions

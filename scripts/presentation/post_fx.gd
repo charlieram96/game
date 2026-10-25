@@ -2,11 +2,20 @@ class_name PostFX
 extends CanvasLayer
 ## Full-screen HD-2D pass (tilt-shift, grading, vignette) drawn over the 3D
 ## view and under the UI. Also used for fades and impact frames.
+##
+## Battle mode (ArenaBuilder.apply_post): the tilt-shift follows the board's
+## rows on screen, read from the current BattleCamera every frame, and is only
+## used when the arena's depth-aware pass is off (low graphics); with high
+## graphics this pass grades and adds god rays, film grain and a little
+## corner fringing (low graphics switches those three off).
 
 const SHADER := preload("res://shaders/post_hd2d.gdshader")
+## Battle-mode extras that low graphics switches off (and back on).
+const LOW_OFF: Array[String] = ["grain", "aberration", "shafts"]
 
 var rect: ColorRect
 var mat: ShaderMaterial
+var battle_mode := false
 var _impact_tween: Tween
 var _impact_flashing := false
 
@@ -25,7 +34,20 @@ func _ready() -> void:
 
 
 func _apply_settings() -> void:
-	mat.set_shader_parameter("blur_amount", 1.0 if Settings.tilt_shift and not Settings.graphics_low else 0.0)
+	if battle_mode:
+		# high graphics: the arena's depth pass blurs; low: the board band here
+		mat.set_shader_parameter("blur_amount", 1.0 if Settings.tilt_shift and Settings.graphics_low else 0.0)
+		for p: String in LOW_OFF:
+			mat.set_shader_parameter(p, 0.0 if Settings.graphics_low else float(mat.get_meta(p, 0.0)))
+	else:
+		mat.set_shader_parameter("blur_amount", 1.0 if Settings.tilt_shift and not Settings.graphics_low else 0.0)
+
+
+## Battle grading and the board-following tilt-shift band.
+func set_battle_mode(on: bool) -> void:
+	battle_mode = on
+	mat.set_shader_parameter("board_band", on)
+	_apply_settings()
 
 
 func set_focus(center: float, width: float) -> void:
@@ -34,7 +56,23 @@ func set_focus(center: float, width: float) -> void:
 
 
 func set_param(param: String, value: Variant) -> void:
+	if battle_mode and param in LOW_OFF:
+		# remembered so low graphics can switch them off and back on
+		mat.set_meta(param, value)
+		_apply_settings()
+		return
 	mat.set_shader_parameter(param, value)
+
+
+func _process(_delta: float) -> void:
+	if not battle_mode:
+		return
+	var cam := get_viewport().get_camera_3d()
+	if cam is BattleCamera:
+		var r := (cam as BattleCamera).board_screen_rect()
+		var h := maxf(1.0, get_viewport().get_visible_rect().size.y)
+		mat.set_shader_parameter("band_top", r.position.y / h)
+		mat.set_shader_parameter("band_bottom", r.end.y / h)
 
 
 func fade_to(amount: float, duration: float, color: Color = Color.BLACK) -> Tween:

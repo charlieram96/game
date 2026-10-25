@@ -30,6 +30,11 @@
       "style": "Key art for a cozy pixel-art fantasy role-playing game: rich, detailed pixel art with soft modern lighting and depth, painterly glow from light sources, a warm storybook mood. No text or logo.",
       "aspect_ratio": "16:9",
       "model": "openai/gpt-5.4-image-2"
+    },
+    "banner": {
+      "style": "A single hanging cloth banner for a cozy fantasy arena, seen perfectly straight on (flat front view, no perspective, no folds toward the viewer), in crisp, hand-placed pixel art: a limited palette, clean outlines one pixel wide that are never pure black, soft key light from the upper left, a short wooden rod across the top, a woven border and a swallowtail hem at the bottom. The banner fills the picture from top to bottom with a narrow margin. Flat solid magenta (#FF00FF) background with no shadow, wall or scenery. No text, letters, numbers or watermark.",
+      "aspect_ratio": "2:3",
+      "model": "openai/gpt-image-2"
     }
   },
   "views": {
@@ -195,6 +200,27 @@
       "opaque": true,
       "ramps": ["night", "sky_dusk", "aether", "leaf", "moss", "glow_moss", "bark", "wood", "earth", "stone", "ember", "gold", "cloth_teal", "cloth_red", "cloth_cream", "cloth_plum", "fur_russet", "cream", "soot", "skin_tan", "hair_brown", "water", "ink"],
       "subject": "A young apprentice in a teal cloak and red scarf sits by a campfire in a forest clearing at dusk beside a small russet fox-like fire creature whose bushy tail holds a glowing ember; a large gentle moth with a softly glowing golden body rests on a branch nearby. Warm firelight against cool blue night, fireflies. Wide, calm composition: the campfire group is small and centred in the lower third of the picture, framed by tall dark tree trunks at the left and right edges, and the upper half is a quiet, dark dusky sky seen through the canopy with a few stars."
+    },
+    "arena_banner_teal": {
+      "kind": "banner",
+      "size": [64, 100],
+      "pivot": [32, 98],
+      "ramps": ["cloth_teal", "cloth_cream", "gold", "wood", "ink"],
+      "subject": "The banner of the challenger's side: deep teal cloth with a cream border and small gold tassels, showing a stylised white crane with spread wings rising over a small golden sun disc, in the middle of the banner."
+    },
+    "arena_banner_red": {
+      "kind": "banner",
+      "size": [64, 100],
+      "pivot": [32, 98],
+      "ramps": ["cloth_red", "cloth_cream", "gold", "ember", "wood", "ink"],
+      "subject": "The banner of the defender's side: warm brick-red cloth with a cream border and small gold tassels, showing a single stylised golden flame curling upward like a leaf, in the middle of the banner."
+    },
+    "arena_banner_gold": {
+      "kind": "banner",
+      "size": [64, 100],
+      "pivot": [32, 98],
+      "ramps": ["cloth_mustard", "cloth_plum", "cloth_cream", "gold", "stone", "wood", "ink"],
+      "subject": "The arena's own banner: mustard-gold cloth with a plum border, showing three stacked round standing stones under a rising sun with short rays, in the middle of the banner."
     }
   }
 }

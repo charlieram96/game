@@ -35,7 +35,8 @@ scripts/
                      region builder, story/chapter_one.gd
   ui/                theme, HUDs, touch controls, dialogue, menus, journal
 resources/           creatures/, abilities/, status/, balance/ (element chart), dialogue/
-shaders/             pixel sprite, world, terrain, water, telegraph, post (tilt-shift), ...
+shaders/             pixel sprite, world, terrain, water, telegraph, arena (floor, stone,
+                     ground, depth of field, fire, cloth), post (tilt-shift, grade), ...
 assets/              generated sprites, environments, effects, UI, audio; Pixelify Sans font
 tests/               unit/, integration/, tools/balance_sim.gd, runner scene
 tools/               sprite_forge/, env_forge/, audio_forge/, common/, run_tests.sh
@@ -161,13 +162,46 @@ rewards. It never trusts client-provided inventory, XP, damage or results.
 * **World:** a triplanar pixel-textured world shader, splat-mapped terrain,
   MultiMesh foliage, water, blob shadows, directional sun shadows, and
   lighting presets (morning, day, golden, dusk, night) with fog and glow.
-* **Post:** tilt-shift depth of field, grading and vignette (tilt-shift can
-  be turned off in Settings).
-* **Cameras:** battle is orthographic at a 54 deg pitch, fixed, framed so
-  the board fills the screen between the HUD bands at any aspect ratio (side
-  insets keep it clear of the touch buttons). Shake is a translation; kicks
-  and zoom punches are added on top of the rest pose and never move the
-  aimed cell. The
+* **Battle arena (HD-2D diorama):** `ArenaBuilder` builds the board as real
+  geometry with `ArenaMesh`: one beveled flagstone per cell (the joints are
+  the cell lines; stone tops stay below 4 mm so the dash lanes at 26 mm and
+  the telegraphs always draw over them), a flush rim, steps down to a paved
+  lower ring, the back wall with banners and torches, corner pillars with
+  braziers, tripod braziers and banner poles on the side rings, tiered
+  stands with a MultiMesh crowd, the front row's backs, trees. Textures are
+  48 texels per unit (`tools/env_forge/arena_hd.py`; the banners come from
+  `tools/art_forge`), mip-mapped at load. Every static piece sharing a
+  material is merged into one mesh: a battle's 3D view is about 70 draw
+  calls with the creatures and trainers, the only shadowed light is the sun.
+  `shaders/arena_floor` (stones, inlay, scorch, highlights, contact shadows,
+  cloud shadows), `arena_stone` (triplanar pieces with floor-contact AO),
+  `arena_ground` (paving and lawn with footprint AO), `arena_dof` (below).
+  `test_arena_builder.gd` checks the stone heights, the joints, that nothing
+  but the standing stones rises inside the board, and the draw-call budget.
+* **Battle light:** the `arena_golden` / `arena_day` presets: a low warm sun
+  (31-38 deg) from the west-south-west with soft shadows in one orthographic
+  map fitted to the battle camera, a cool shadowless sky fill from the other
+  side, flickering brazier, torch and lantern omni lights (no shadows; four
+  of them on low graphics), glow on flames and emissive pixels, depth fog
+  past the stands, a filmic tonemap.
+* **Post:** on high graphics the battle's tilt-shift is `arena_dof`, a
+  depth-aware pass drawn right after the opaque geometry: it rebuilds each
+  pixel's world position and keeps everything over the board (and its rim,
+  steps and back wall) sharp, blurring the stands behind and the front row
+  in front with a 16-tap gather that never smears sharp things. Transparent
+  effects draw over it, sharp. On low graphics the screen pass blurs above
+  and below the board's rows on screen instead (cheap, mip-based). The
+  screen pass (`post_hd2d`) also grades (S-curve, split toning, vignette,
+  grain, slight corner fringing) and adds god rays from the upper left.
+  Tilt-shift can be turned off in Settings.
+* **Cameras:** battle is a fixed perspective camera, 48 deg pitch and a
+  25 deg vertical field of view, framed by bisection on its distance so the
+  board's floor is as large as possible between the HUD bands at any aspect
+  ratio (side insets keep it clear of the touch buttons; the back row is
+  about 0.77 the width of the front row). `ground_point()` is the exact
+  inverse of the projection at the rest pose (`test_battle_camera.gd`). Shake
+  is a translation; kicks and zoom punches (a field-of-view squeeze) are
+  added on top of the rest pose and never move the aimed cell. The
   overworld is a perspective follow camera at a 32 deg pitch, distance 23,
   FOV 30, with cutscene focus points.
 
