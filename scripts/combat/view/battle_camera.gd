@@ -1,57 +1,63 @@
 class_name BattleCamera
 extends Camera3D
-## Fixed overhead orthographic battle camera.
+## Fixed perspective battle camera: the HD-2D diorama view.
 ##
-## The view is angled for depth, but the camera never rotates during a match
-## and uses an orthographic projection, so creatures keep the same apparent
-## size everywhere and on-screen distances are uniform per axis.
+## A narrow field of view and a fixed pitch give the board real depth (the
+## back row is a little smaller than the front row, walls and pillars rise
+## out of it) while keeping distances easy to read. The camera never
+## rotates during a match.
 ##
-## Framing: the board fills as much of the screen as it can while the whole
-## floor stays between the HUD bands (top bar, ability bar), the top of the
-## back wall stays on screen and the trainers beside the board still fit.
-## Height is the limit at 16:9 and on wide phones, width on 4:3 tablets.
-## Side insets (e.g. the touch button cluster) push the board aside first and
-## only shrink it when it can't fit beside them.
+## Framing: the board (with its flush rim) is made as large as it can be
+## while its whole floor stays between the HUD bands (top bar, ability bar)
+## and clear of the side insets (e.g. the touch button cluster). The board is
+## centred between the bands and, horizontally, on the screen unless an inset
+## pushes it aside. Height is the limit on wide phones, width at 16:9 and on
+## 4:3 tablets. Everything is solved numerically from the real projection, so
+## board_screen_rect() and ground_point() are exact.
 ##
 ## Feel: shake (`add_trauma`) offsets the view, `kick` nudges the camera
-## along the ground and springs back, `zoom_punch` briefly tightens the ortho
-## size. All three are recomputed from the rest pose every frame, so they
-## compose freely and can never drift.
+## along the ground and springs back, `zoom_punch` briefly narrows the field
+## of view. All three are recomputed from the rest pose every frame, so they
+## compose freely and can never drift; aiming always uses the rest pose.
 
-const PITCH_DEG := 54.0
+## Angle of the view below the horizon. Read by Vfx.screen_angle() and used
+## for the upright-sprite stretch (global shader parameter `sprite_stretch`).
+const PITCH_DEG := 48.0
+## Vertical field of view (the horizontal one follows the aspect ratio).
+const FOV_DEG := 25.0
 ## HUD bands in canvas pixels (the canvas is 720 px tall at 16:9 and wider).
 const HUD_TOP := 86.0
 const HUD_BOTTOM := 98.0
-const DISTANCE := 24.0
+## Canvas pixels kept between the board's floor and the HUD bands.
+const BAND_PAD := 4.0
+## World units kept visible beside the board's floor (the rim, a little stone).
+const SIDE_ROOM := 0.35
 ## Room kept between the board and a side inset (world units: the rim plus a little).
 const INSET_ROOM := 0.6
+const NEAR := 6.0
+const FAR := 150.0
 const KICK_RISE := 0.03
 const KICK_TIME := 0.14
 const PUNCH_RISE := 0.05
 const PUNCH_TIME := 0.26
 
-var arena_size := Vector2(16, 10)
-## Room kept visible around the board: x = world units beside it on each side
-## (the trainers' podiums), y = screen height in world units above its back
-## edge (rim + the top of the back wall).
-var margin := Vector2(1.75, 1.0)
+var arena_size := Vector2(20, 12)
 var focus := Vector3.ZERO
 ## Screen strips (canvas pixels) on the left and right that UI covers.
 var side_insets := Vector2.ZERO
 var _trauma := 0.0
 var _shake_time := 0.0
-var _rest_position := Vector3.ZERO
-var _rest_size := 10.0
+var _rest := Transform3D(Basis.from_euler(Vector3(-deg_to_rad(PITCH_DEG), 0.0, 0.0)), Vector3(0.0, 20.0, 18.0))
 var _kicks: Array[Dictionary] = []  # {"offset": Vector2, "t": float}
 var _punches: Array[Dictionary] = []  # {"amount": float, "t": float}
 
 
 func _ready() -> void:
-	projection = PROJECTION_ORTHOGONAL
+	projection = PROJECTION_PERSPECTIVE
 	keep_aspect = KEEP_HEIGHT
-	near = 0.1
-	far = DISTANCE * 3.0
-	rotation = Vector3(-pitch(), 0.0, 0.0)
+	fov = FOV_DEG
+	near = NEAR
+	far = FAR
 	get_viewport().size_changed.connect(_reframe)
 	_reframe()
 	RenderingServer.global_shader_parameter_set("sprite_stretch", 1.0 / cos(pitch()))
@@ -60,6 +66,10 @@ func _ready() -> void:
 
 static func pitch() -> float:
 	return deg_to_rad(PITCH_DEG)
+
+
+static func rest_basis() -> Basis:
+	return Basis.from_euler(Vector3(-pitch(), 0.0, 0.0))
 
 
 func setup(p_arena_size: Vector2, p_focus: Vector3 = Vector3.ZERO) -> void:
@@ -77,44 +87,92 @@ func set_side_insets(left_px: float, right_px: float) -> void:
 		_reframe()
 
 
-## Rest-pose framing for a visible canvas of `vis` (canvas pixels):
-## x = ortho size, y = view-space height of the board centre, z = horizontal
-## offset (world units, + = right) of the board centre from the screen centre.
-static func compute_framing(board: Vector2, vis: Vector2, side_room: float, top_room: float, insets: Vector2 = Vector2.ZERO) -> Vector3:
-	var p := deg_to_rad(PITCH_DEG)
-	var top_frac := HUD_TOP / maxf(1.0, vis.y)
-	var bottom_frac := HUD_BOTTOM / maxf(1.0, vis.y)
-	var depth := board.y * sin(p)  # board's on-screen height in view units
-	var size_h := depth / maxf(0.2, 1.0 - top_frac - bottom_frac)
-	var size_wall := (depth + top_room) / maxf(0.2, 1.0 - bottom_frac)
-	# Width: the board plus room on each side must fit between the insets. A
-	# side covered by UI only needs the rim's room, not the trainer's.
-	var room_l := side_room if insets.x <= 0.0 else INSET_ROOM
-	var room_r := side_room if insets.y <= 0.0 else INSET_ROOM
-	var avail := maxf(1.0, vis.x - insets.x - insets.y)
-	var size_w := (board.x + room_l + room_r) * vis.y / avail
-	var s := maxf(maxf(size_h, size_wall), size_w)
-	# Board centre's height in view space: centred in the free band, but never
-	# so high that the back wall leaves the screen.
-	var lo := -s * (0.5 - bottom_frac) + depth * 0.5
-	var hi := minf(s * (0.5 - top_frac) - depth * 0.5, s * 0.5 - depth * 0.5 - top_room)
-	# Horizontal: centred, then shifted just enough to clear the insets.
-	var ppu := vis.y / s
-	var half_px := board.x * 0.5 * ppu
-	var cx := vis.x * 0.5
-	cx = minf(cx, vis.x - insets.y - room_r * ppu - half_px)
-	cx = maxf(cx, insets.x + room_l * ppu + half_px)
-	return Vector3(s, (lo + hi) * 0.5, (cx - vis.x * 0.5) / ppu)
+## The rest pose (camera transform) that frames `board` (world units, centred
+## on `p_focus`) for a visible canvas of `vis` pixels with side `insets`.
+static func compute_rest(board: Vector2, vis: Vector2, insets: Vector2 = Vector2.ZERO, p_focus: Vector3 = Vector3.ZERO) -> Transform3D:
+	vis = Vector2(maxf(vis.x, 64.0), maxf(vis.y, 64.0))
+	var room := Vector2(SIDE_ROOM if insets.x <= 0.0 else INSET_ROOM, SIDE_ROOM if insets.y <= 0.0 else INSET_ROOM)
+	var corners := _framed_corners(board, room, p_focus)
+	var allowed := Rect2(insets.x, HUD_TOP + BAND_PAD, maxf(32.0, vis.x - insets.x - insets.y), maxf(32.0, vis.y - HUD_TOP - HUD_BOTTOM - BAND_PAD * 2.0))
+	# Bisection on the distance: the closest camera whose framed board fits.
+	var lo := 2.0
+	var hi := 600.0
+	for _i in 48:
+		var mid := (lo + hi) * 0.5
+		var r := _bounds(_placed(corners, vis, allowed, p_focus, mid), corners, vis)
+		if _fits(r, allowed):
+			hi = mid
+		else:
+			lo = mid
+	return _placed(corners, vis, allowed, p_focus, hi)
+
+
+## Board corners that must stay in the allowed area: the floor plus the side room.
+static func _framed_corners(board: Vector2, room: Vector2, p_focus: Vector3) -> PackedVector3Array:
+	var h := board * 0.5
+	var c := Vector3(p_focus.x, 0.0, p_focus.z)
+	return PackedVector3Array([
+		c + Vector3(-h.x - room.x, 0.0, -h.y), c + Vector3(h.x + room.y, 0.0, -h.y),
+		c + Vector3(-h.x - room.x, 0.0, h.y), c + Vector3(h.x + room.y, 0.0, h.y),
+	])
+
+
+## Camera at `dist` from the focus along the view axis, shifted across the
+## view so the framed board sits centred between the bands and (if it can)
+## centred on the screen, else just clear of the insets.
+static func _placed(corners: PackedVector3Array, vis: Vector2, allowed: Rect2, p_focus: Vector3, dist: float) -> Transform3D:
+	var b := rest_basis()
+	var origin := Vector3(p_focus.x, 0.0, p_focus.z) + b.z * dist
+	var k := tan(deg_to_rad(FOV_DEG) * 0.5)
+	for _i in 8:
+		var xf := Transform3D(b, origin)
+		var r := _bounds(xf, corners, vis)
+		var want_x := clampf(vis.x * 0.5, allowed.position.x + r.size.x * 0.5, allowed.end.x - r.size.x * 0.5)
+		if r.size.x > allowed.size.x:
+			want_x = allowed.get_center().x
+		var want := Vector2(want_x, allowed.get_center().y)
+		var err := want - r.get_center()
+		if err.length() < 0.01:
+			break
+		# pixels per world unit across the view at the board's depth
+		var ppu := vis.y * 0.5 / (dist * k)
+		origin += -b.x * (err.x / ppu) + b.y * (err.y / ppu)
+	return Transform3D(b, origin)
+
+
+static func _bounds(xf: Transform3D, pts: PackedVector3Array, vis: Vector2) -> Rect2:
+	var r := Rect2(project(xf, FOV_DEG, vis, pts[0]), Vector2.ZERO)
+	for i in range(1, pts.size()):
+		r = r.expand(project(xf, FOV_DEG, vis, pts[i]))
+	return r
+
+
+static func _fits(r: Rect2, allowed: Rect2) -> bool:
+	return r.position.x >= allowed.position.x - 0.01 and r.end.x <= allowed.end.x + 0.01 and r.position.y >= allowed.position.y - 0.01 and r.end.y <= allowed.end.y + 0.01
+
+
+## Canvas position of world point `p` for a camera at `xf` (KEEP_HEIGHT
+## perspective with a vertical field of view of `fov_deg`), the same mapping
+## as Camera3D.unproject_position().
+static func project(xf: Transform3D, fov_deg: float, vis: Vector2, p: Vector3) -> Vector2:
+	var v := xf.affine_inverse() * p
+	var k := tan(deg_to_rad(fov_deg) * 0.5)
+	var depth := maxf(-v.z, 1e-4)
+	var aspect := vis.x / maxf(1.0, vis.y)
+	var nx := v.x / (depth * k * aspect)
+	var ny := v.y / (depth * k)
+	return Vector2((nx + 1.0) * 0.5 * vis.x, (1.0 - ny) * 0.5 * vis.y)
 
 
 func _reframe() -> void:
 	var vis := get_viewport().get_visible_rect().size
-	var f := compute_framing(arena_size, vis, margin.x, margin.y, side_insets)
-	_rest_size = f.x
-	var back := Vector3(0.0, sin(pitch()), cos(pitch()))
-	var up := Vector3(0.0, cos(pitch()), -sin(pitch()))
-	_rest_position = focus + back * DISTANCE - up * f.y - Vector3.RIGHT * f.z
+	_rest = compute_rest(arena_size, vis, side_insets, focus)
 	_apply()
+
+
+## The camera's rest pose (no shake, kick or zoom punch).
+func rest_transform() -> Transform3D:
+	return _rest
 
 
 func add_trauma(amount: float) -> void:
@@ -129,8 +187,8 @@ func kick(dir: Vector2, amount: float) -> void:
 	_kicks.append({"offset": dir.normalized() * amount * Settings.screen_shake, "t": 0.0})
 
 
-## Briefly zoom in by `amount` (fraction of the ortho size, e.g. 0.04) and
-## ease back over ~PUNCH_TIME seconds.
+## Briefly zoom in by `amount` (fraction of the field of view, e.g. 0.04)
+## and ease back over ~PUNCH_TIME seconds.
 func zoom_punch(amount: float) -> void:
 	if amount <= 0.0:
 		return
@@ -169,8 +227,8 @@ func _apply() -> void:
 	var punch := 0.0
 	for pu in _punches:
 		punch += float(pu["amount"]) * _envelope(float(pu["t"]), PUNCH_RISE, PUNCH_TIME)
-	position = _rest_position + Vector3(nudge.x, 0.0, nudge.y)
-	size = _rest_size * (1.0 - clampf(punch, 0.0, 0.3))
+	transform = Transform3D(_rest.basis, _rest.origin + Vector3(nudge.x, 0.0, nudge.y))
+	fov = FOV_DEG * (1.0 - clampf(punch, 0.0, 0.3))
 	if _trauma <= 0.0:
 		h_offset = 0.0
 		v_offset = 0.0
@@ -181,32 +239,35 @@ func _apply() -> void:
 
 
 ## World point on the ground plane (y = 0) under a screen position (canvas
-## coordinates, as from Viewport.get_mouse_position()). Uses the camera's rest
+## coordinates, as from Viewport.get_mouse_position()). Exact for the rest
 ## pose, so shake, kicks and zoom punches never move the aimed cell.
 func ground_point(screen_pos: Vector2) -> Vector3:
-	var vis := get_viewport().get_visible_rect().size
+	return ground_point_for(_rest, get_viewport().get_visible_rect().size, screen_pos)
+
+
+static func ground_point_for(xf: Transform3D, vis: Vector2, screen_pos: Vector2) -> Vector3:
+	var k := tan(deg_to_rad(FOV_DEG) * 0.5)
 	var aspect := vis.x / maxf(1.0, vis.y)
-	var n := Vector2(screen_pos.x / maxf(1.0, vis.x) - 0.5, 0.5 - screen_pos.y / maxf(1.0, vis.y))
-	var right := Vector3.RIGHT
-	var up := Vector3(0.0, cos(pitch()), -sin(pitch()))
-	var dir := Vector3(0.0, -sin(pitch()), -cos(pitch()))
-	var from := _rest_position + right * (n.x * _rest_size * aspect) + up * (n.y * _rest_size)
-	var t := -from.y / dir.y
-	return from + dir * t
+	var nx := screen_pos.x / maxf(1.0, vis.x) * 2.0 - 1.0
+	var ny := 1.0 - screen_pos.y / maxf(1.0, vis.y) * 2.0
+	var b := xf.basis
+	var dir := -b.z + b.x * (nx * k * aspect) + b.y * (ny * k)
+	if dir.y > -1e-5:
+		# At or above the horizon (never on screen with this pitch): clamp far away.
+		dir.y = -1e-5
+	return xf.origin + dir * (-xf.origin.y / dir.y)
 
 
-## Screen rectangle (canvas pixels) covered by the board's floor at rest.
+## Canvas position of a world point at the rest pose.
+func rest_unproject(p: Vector3) -> Vector2:
+	return project(_rest, FOV_DEG, get_viewport().get_visible_rect().size, p)
+
+
+## Screen rectangle (canvas pixels) covered by the board's floor at rest:
+## the bounding box of its four corners (the front edge is the widest).
 func board_screen_rect() -> Rect2:
 	var vis := get_viewport().get_visible_rect().size
-	var a := _rest_unproject(Vector3(-arena_size.x * 0.5, 0.0, -arena_size.y * 0.5) + Vector3(focus.x, 0.0, focus.z), vis)
-	var b := _rest_unproject(Vector3(arena_size.x * 0.5, 0.0, arena_size.y * 0.5) + Vector3(focus.x, 0.0, focus.z), vis)
-	return Rect2(a, b - a)
-
-
-func _rest_unproject(p: Vector3, vis: Vector2) -> Vector2:
-	var aspect := vis.x / maxf(1.0, vis.y)
-	var up := Vector3(0.0, cos(pitch()), -sin(pitch()))
-	var rel := p - _rest_position
-	var nx := rel.x / (_rest_size * aspect)
-	var ny := rel.dot(up) / _rest_size
-	return Vector2((nx + 0.5) * vis.x, (0.5 - ny) * vis.y)
+	var h := arena_size * 0.5
+	var c := Vector3(focus.x, 0.0, focus.z)
+	var pts := PackedVector3Array([c + Vector3(-h.x, 0.0, -h.y), c + Vector3(h.x, 0.0, -h.y), c + Vector3(-h.x, 0.0, h.y), c + Vector3(h.x, 0.0, h.y)])
+	return _bounds(_rest, pts, vis)

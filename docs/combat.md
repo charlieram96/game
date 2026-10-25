@@ -24,9 +24,11 @@ Presentation is in `scripts/combat/view/`.
   interpolates between ticks.
 * The arena is a **flat plane**. Positions are `Vector2(x = east, y =
   south)` in world units (1 unit = 1 logical cell = 24 sprite pixels). The
-  orthographic camera is pitched 54 deg and never rotates. Sprites are
-  stretched by 1/cos(pitch) so they keep their proportions. The camera can't
-  affect ranges, distances or hits.
+  perspective camera is pitched 48 deg with a narrow 25 deg field of view and
+  never rotates; the back row looks a little smaller than the front row, but
+  drags are mapped back to the ground exactly. Sprites are stretched by
+  1/cos(pitch) so they keep their proportions. The camera can't affect
+  ranges, distances or hits.
 * **Collision is exact:** circles move through a rectangle with circle and
   box obstacles using swept Minkowski tests. Fast dashes and projectiles
   can't tunnel.

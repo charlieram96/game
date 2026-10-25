@@ -1,0 +1,55 @@
+{
+ "asset": "assets/environments/textures/arena_banner_gold.png",
+ "source_image": "r0_gpt-image-2_9d58371e8876_0.png",
+ "generation": {
+  "model": "openai/gpt-image-2",
+  "prompt": "A single hanging cloth banner for a cozy fantasy arena, seen perfectly straight on (flat front view, no perspective, no folds toward the viewer), in crisp, hand-placed pixel art: a limited palette, clean outlines one pixel wide that are never pure black, soft key light from the upper left, a short wooden rod across the top, a woven border and a swallowtail hem at the bottom. The banner fills the picture from top to bottom with a narrow margin. Flat solid magenta (#FF00FF) background with no shadow, wall or scenery. No text, letters, numbers or watermark. Subject: The arena's own banner: mustard-gold cloth with a plum border, showing three stacked round standing stones under a rising sun with short rays, in the middle of the banner. This is an original design for an original game. It must not resemble or reference any character, creature, logo or artwork from existing games, anime, films or other franchises.",
+  "params": {
+   "n": 2,
+   "aspect_ratio": "2:3",
+   "quality": "medium"
+  },
+  "references": [],
+  "usage": {
+   "prompt_tokens": 402,
+   "completion_tokens": 2744,
+   "total_tokens": 3146,
+   "cost": 0.08433,
+   "is_byok": false,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   },
+   "cost_details": {
+    "upstream_inference_cost": 0.08433,
+    "upstream_inference_prompt_cost": 0.00201,
+    "upstream_inference_completions_cost": 0.08232
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0,
+    "image_tokens": 2744
+   }
+  },
+  "seconds": 26.5,
+  "created": "2026-10-25T04:48:56Z",
+  "index": 0
+ },
+ "pixelize": {
+  "brief": "arena_banner_gold",
+  "height": 97,
+  "width": 62,
+  "outline": false,
+  "ramps": [
+   "cloth_mustard",
+   "cloth_plum",
+   "cloth_cream",
+   "gold",
+   "stone",
+   "wood",
+   "ink"
+  ],
+  "tolerance": 48.0,
+  "opaque": false,
+  "despeckle": false
+ },
+ "installed": "2026-10-25T04:50:04Z"
+}
