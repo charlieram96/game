@@ -1,5 +1,7 @@
-# Tests every push, builds the web version, and publishes it to GitHub Pages
-# from the default branch (enable Pages -> Source: "GitHub Actions" once).
+# Tests every push and builds the web version. Publishing it to GitHub Pages
+# from the default branch is opt-in: enable Pages (Source: "GitHub Actions")
+# and set the repository variable DEPLOY_PAGES to "true". (Vercel serves the
+# committed public/ folder instead; see README.)
 # Desktop builds run on manual dispatch and on version tags (v*).
 name: CI
 
@@ -83,14 +85,14 @@ jobs:
           path: build/dist/*
           if-no-files-found: error
       - name: Prepare Pages site
-        if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        if: vars.DEPLOY_PAGES == 'true' && github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
         uses: actions/upload-pages-artifact@v3
         with:
           path: build/web-dist
 
   pages:
     needs: build
-    if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    if: vars.DEPLOY_PAGES == 'true' && github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
     runs-on: ubuntu-latest
     permissions:
       pages: write

@@ -89,9 +89,10 @@ Gamepads work for both players.
   `build/dist/wildbound-web.zip` and tick *This file will be played in the
   browser*. Use a 1280×720 viewport with fullscreen enabled. No
   SharedArrayBuffer option is needed.
-- **GitHub Pages**: the CI workflow (`.github/workflows/ci.yml`) runs the tests,
-  builds the web version and deploys it from the default branch. Enable it once
-  under *Settings → Pages → Source: GitHub Actions*.
+- **GitHub Pages**: the CI workflow (`.github/workflows/ci.yml`) runs the tests
+  and builds the web version on every push. To also deploy it from the default
+  branch, enable *Settings → Pages → Source: GitHub Actions* and add the
+  repository variable `DEPLOY_PAGES` = `true`.
 - **Any static web server**: serve the files in `public/` (or `build/web-dist/`).
 
 The web build is about 15 MB. The engine and game data are gzipped and
