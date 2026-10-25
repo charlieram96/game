@@ -81,6 +81,10 @@ Gamepads work for both players.
 
 **Web (easiest for friends).** You can host the web build in any of these ways:
 
+- **Vercel**: import this GitHub repository as a new project and deploy. No
+  settings are needed: `vercel.json` tells Vercel there is no build step and
+  to serve `public/`, the ready-built web version committed with the code.
+  `tools/export.sh web` refreshes `public/`; commit and push it to redeploy.
 - **itch.io**: create a project and set *Kind of project* to **HTML**. Upload
   `build/dist/wildbound-web.zip` and tick *This file will be played in the
   browser*. Use a 1280×720 viewport with fullscreen enabled. No
@@ -88,7 +92,7 @@ Gamepads work for both players.
 - **GitHub Pages**: the CI workflow (`.github/workflows/ci.yml`) runs the tests,
   builds the web version and deploys it from the default branch. Enable it once
   under *Settings → Pages → Source: GitHub Actions*.
-- **Any static web server**: serve the files in `build/web-dist/`.
+- **Any static web server**: serve the files in `public/` (or `build/web-dist/`).
 
 The web build is about 15 MB. The engine and game data are gzipped and
 decompressed in the browser. It needs a desktop or mobile browser with

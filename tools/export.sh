@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Exports Wildbound into build/ and collects shareable archives in build/dist/.
+# The web export is also copied to public/, the static site Vercel serves.
 #   tools/export.sh            # web + windows + linux + macos
 #   tools/export.sh web linux  # just these
 # Needs Godot 4.7.x with export templates installed (GODOT=/path/to/godot to override).
@@ -26,6 +27,10 @@ for t in "${targets[@]}"; do
 		rm -rf build/web
 		export_preset Web build/web/index.html
 		python3 tools/package_web.py build/web build/web-dist
+		# public/ is the committed copy that static hosts (Vercel) serve as-is.
+		find public -mindepth 1 ! -name .gdignore -delete 2>/dev/null || true
+		mkdir -p public && touch public/.gdignore
+		cp build/web-dist/* public/
 		;;
 	windows)
 		rm -rf build/windows
