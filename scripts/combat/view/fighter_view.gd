@@ -160,6 +160,7 @@ func update_view(alpha: float, delta: float) -> void:
 	sprite.speed_scale = 0.0 if f.hitstop > 0 else 1.0
 	# Ground ring = stamina gauge + facing notch + the aimed dash's cost.
 	_ring_mat.set_shader_parameter("fill", f.stamina_ratio())
+	_ring_mat.set_shader_parameter("surge", f.surge / SurgeSystem.PER_STAGE)
 	_ring_mat.set_shader_parameter("facing_angle", atan2(f.facing.y, f.facing.x))
 	var low := f.stamina < f.stats.dash.min_cost()
 	_ring_mat.set_shader_parameter("gauge_color", Color(1.0, 0.45, 0.35) if low else team_color.lightened(0.35))

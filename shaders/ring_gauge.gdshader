@@ -1,7 +1,8 @@
 // Ground ring under a creature: team colour + an angular stamina gauge,
 // a facing notch (aim direction) and dash-cost tick marks. While a dash is
 // aimed, the stretch it would spend blinks (or, if stamina is short, the
-// missing stretch blinks red).
+// missing stretch blinks red). Four Surge pips sit on the near (south) arc
+// of the outer ring: gold per banked stage, dim while the next one fills.
 shader_type spatial;
 render_mode unshaded, cull_disabled, depth_draw_never, blend_mix;
 
@@ -18,6 +19,9 @@ uniform float pixel_grid = 48.0;
 uniform float spend_from = 0.0;
 uniform float spend_to = -1.0;
 uniform vec4 spend_color : source_color = vec4(1.0, 0.98, 0.88, 1.0);
+// Surge banked, in stages (0..4, fractional).
+uniform float surge = 0.0;
+uniform vec4 surge_color : source_color = vec4(1.0, 0.72, 0.2, 1.0);
 
 void fragment() {
 	vec2 p = (floor((UV - 0.5) * pixel_grid) + 0.5) / pixel_grid * 2.0;
@@ -40,6 +44,18 @@ void fragment() {
 		t = 1.0 - t;
 		vec3 col = team_color.rgb;
 		float a = opacity * (0.75 + 0.25 * pulse);
+		if (outer > 0.5) {
+			// Surge pips, left to right on screen, centred on south (+Z).
+			for (int i = 0; i < 4; i++) {
+				float centre = PI * 0.5 + (1.5 - float(i)) * 0.42;
+				float da = abs(mod(ang - centre + PI, TAU) - PI);
+				if (da < 0.17) {
+					float level = clamp(surge - float(i), 0.0, 1.0);
+					col = da > 0.13 ? team_color.rgb * 0.25 : (level >= 1.0 ? surge_color.rgb * 1.25 : mix(team_color.rgb * 0.35, surge_color.rgb * 0.55, level));
+					a = max(a, opacity);
+				}
+			}
+		}
 		if (gauge > 0.5) {
 			col = t <= fill ? gauge_color.rgb : empty_color.rgb;
 			if (spend_to >= 0.0 && t > spend_from && t <= spend_to) {
